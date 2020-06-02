@@ -1,6 +1,6 @@
 {
   "name": "CoCreate-dnd.js",
-  "description": "a seamless multi-iframe and nested-iframe drag and drop"
+  "description": "a seamless multi-iframe and nested-iframe drag and drop",
   "version": "0.7.0",
   "main": "index.js",
   "license": "MIT",
