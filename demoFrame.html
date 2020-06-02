@@ -1,0 +1,101 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoCreate-dnd.js</title>
+  <style>
+    .sortable-item {
+      background-color: white;
+      border-bottom: 1px solid gray;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2px 10px;
+      cursor: pointer;
+    }
+
+
+    .sortable-item .fa-arrows-alt {
+      cursor: all-scroll;
+    }
+
+    .sortable-item.layer-hidden {
+      opacity: .5;
+    }
+
+    .myinline {
+      display: inline-block;
+    }
+
+    /* dnd specic */
+
+    [data-CoC-draggable] {
+      cursor: pointer;
+    }
+
+    *[data-CoC-draggable],
+    *[data-CoC-droppable],
+    *[data-CoC-hoverable] {
+      outline: 1px dashed gray;
+    }
+
+
+
+    *[CoC-hovered=true] {
+      outline: 2px solid blue
+    }
+
+    /* must be defined after CoC-hovered because of css specificity to show selected with higher priority */
+
+    *[CoC-selected=true] {
+      outline: 3px solid green;
+    }
+
+    *[CoC-dragging=true] {
+      outline: 3px solid red;
+    }
+
+
+    /* dnd specic */
+
+    /*general*/
+
+    .block {
+      border: 1px solid blue;
+      padding: 5px;
+      margin: 15px;
+    }
+
+    /*general*/
+  </style>
+
+
+</head>
+
+<body>
+
+
+
+
+
+  <div data-CoC-droppable="true" data-group_name="a">
+    <div data-CoC-draggable="true" class="block myinline">iframe block 1</div>
+    <div data-CoC-draggable="true" class="block myinline">iframe block 2</div>
+    <div data-CoC-draggable="true" class="block myinline">iframe block 3</div>
+    <div data-CoC-draggable="true" class="block">iframe block 4</div>
+    <div data-CoC-draggable="true" class="block">iframe block 5</div>
+    <div data-CoC-draggable="true" class="block">iframe block 6</div>
+    <div data-CoC-draggable="true" class="block myinline">iframe block 7</div>
+    <div data-CoC-draggable="true" class="block myinline">iframe block 8</div>
+    <div data-CoC-draggable="true" class="block myinline">iframe block 9</div>
+  </div>
+
+
+
+
+</body>
+
+</html>

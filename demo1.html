@@ -1,0 +1,144 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoCreate-dnd.js</title>
+  <style>
+    .sortable-item {
+      background-color: white;
+      border-bottom: 1px solid gray;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2px 10px;
+      cursor: pointer;
+    }
+
+
+    .sortable-item .fa-arrows-alt {
+      cursor: all-scroll;
+    }
+
+    .sortable-item.layer-hidden {
+      opacity: .5;
+    }
+
+    .myinline {
+      display: inline-block;
+    }
+
+    /* dnd specic */
+
+    [data-CoC-cloneable],
+    [data-CoC-draggable] {
+      cursor: pointer;
+    }
+
+    [data-CoC-cloneable],
+    [data-CoC-draggable],
+    [data-CoC-droppable],
+    [data-CoC-hoverable] {
+      outline: 1px dashed gray;
+    }
+
+
+
+    *[CoC-hovered=true] {
+      outline: 2px solid blue
+    }
+
+    /* must be defined after CoC-hovered because of css specificity to show selected with higher priority */
+
+    *[CoC-selected=true] {
+      outline: 3px solid green;
+    }
+
+    *[CoC-dragging=true] {
+      outline: 3px solid red;
+    }
+
+
+    /* dnd specic */
+
+    /*general*/
+
+    .block {
+      border: 1px solid blue;
+      padding: 5px;
+      margin: 15px;
+    }
+
+    /*general*/
+  </style>
+
+
+</head>
+
+<body>
+
+
+  <!--draggables -->
+  <ul id="dragitemslistcontainer">
+    <li id="header" data-CoC-cloneable="true" data-insert-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
+      </i>
+      <p>Header</p>
+    </li>
+    <li id="span" data-CoC-cloneable="true" data-insert-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
+      </i>
+      <p>Span</p>
+    </li>
+    <li id="li" data-CoC-cloneable="true" data-insert-html='<li droppable="true" class="CoC-droppable">this is a Li</li>"><i class="fa fa-header'>
+      </i>
+      <p>Li</p>
+    </li>
+    <li id="chart-image" data-CoC-cloneable="true" data-insert-html="<img droppable='true' class='CoC-droppable' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
+      <i class="fa fa-bar-chart"></i>
+      <p>Chart Image</p>
+    </li>
+    <li id="login-from" data-CoC-cloneable="true" data-insert-html='<div droppable="true" class="CoC-droppable" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
+      <i class="fa fa-sign-in"></i>
+      <p>Login Form</p>
+    </li>
+    <li id="login-from" data-CoC-cloneable="true">
+      <i class="fa fa-sign-in"></i>
+      <p>it will be cloned and droped as itself because it doesn't have data-insert-html </p>
+    </li>
+  </ul>
+
+
+
+  <div data-CoC-droppable="true">
+    <div data-CoC-draggable="true" class="block myinline">example block 1</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 2</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 3</div>
+    <div data-CoC-draggable="true" class="block">example block 4</div>
+    <div data-CoC-draggable="true" class="block">example block 5</div>
+    <div data-CoC-draggable="true" class="block">example block 6</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 7</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 8</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 9</div>
+  </div>
+
+  <iframe src="demoFrame.html" id="client" frameborder="0" width="100%" height="100%"></iframe>
+
+  <div data-CoC-droppable="true" data-group_name="b">
+    <div data-CoC-draggable="true" class="block myinline">example block 1</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 2</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 3</div>
+    <div data-CoC-draggable="true" class="block">example block 4</div>
+    <div data-CoC-draggable="true" class="block">example block 5</div>
+    <div data-CoC-draggable="true" class="block">example block 6</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 7</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 8</div>
+    <div data-CoC-draggable="true" class="block myinline">example block 9</div>
+  </div>
+
+
+  <script src="../dist/demo1.js"></script>
+
+</body>
+
+</html>
