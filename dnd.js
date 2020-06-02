@@ -1,7 +1,7 @@
 import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs } from '../util/common'
-import selectorUtil from '../util/selectorUtil';
+import selectorUtil from './util/selectorUtil';
 import VirtualDnd from '../CoCreate-dnd.js/virtualDnd';
-import '../util/onClickLeftEvent';
+import './util/onClickLeftEvent';
 import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from '../util/variables.js'
 
 
