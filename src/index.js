@@ -1,8 +1,9 @@
-import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs } from '../util/common'
+import './util/iframe';
+import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs } from './util/common'
 import selectorUtil from './util/selectorUtil';
-import VirtualDnd from '../CoCreate-dnd.js/virtualDnd';
+import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
-import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from '../util/variables.js'
+import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from './util/variables.js'
 
 
 
@@ -237,22 +238,27 @@ export default function dnd(window, document, options) {
 
 
   options.iframes.forEach(frame => {
-    frame.addEventListener('load', () => {
-      let rect = frame.getBoundingClientRect();
-      let ref = { x: rect.left, y: rect.top, frame, window: frame.contentWindow, document: frame.contentDocument, isIframe: true }
-      dndReady(ref.document)
-      ref.document.addEventListener('touchstart', wrapper(touchstart, ref))
-      ref.document.addEventListener('touchend', wrapper(touchend, ref))
-      ref.document.addEventListener('touchmove', wrapper(touchmove, ref))
-      // touch
-      // mouse
-      ref.document.addEventListener('mousedown', wrapper(mousedown, ref))
-      ref.document.addEventListener('mouseup', wrapper(mouseup, ref))
-      ref.document.addEventListener('mousemove', wrapper(mousemove, ref))
-      // mouse
-      // listen for click
-      ref.document.addEventListener('CoCreateClickLeft', wrapper(CoCreateClickLeft, ref))
-    })
+    // frame.addEventListener('load', () => {
+    let rect = frame.getBoundingClientRect();
+    let ref = { x: rect.left, y: rect.top, frame, window: frame.contentWindow, document: frame.contentDocument, isIframe: true }
+    dndReady(ref.document)
+
+    //touch
+    ref.document.addEventListener('touchstart', wrapper(touchstart, ref))
+    ref.document.addEventListener('touchend', wrapper(touchend, ref))
+    ref.document.addEventListener('touchmove', wrapper(touchmove, ref))
+    // touch
+
+    // mouse
+    ref.document.addEventListener('mousedown', wrapper(mousedown, ref))
+    ref.document.addEventListener('mouseup', wrapper(mouseup, ref))
+    ref.document.addEventListener('mousemove', wrapper(mousemove, ref))
+    // mouse
+
+    // listen for click
+    ref.document.addEventListener('CoCreateClickLeft', wrapper(CoCreateClickLeft, ref))
+
+    // })
   })
 
 
@@ -277,3 +283,12 @@ function wrapper(func, ref) {
     func.apply(this, [e, ref])
   }
 }
+
+
+// init
+window.addEventListener('load', () => {
+
+  dnd(window, document, {
+    iframes: Object.values(window.iframes.guests).map(o => o.frame)
+  })
+})

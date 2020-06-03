@@ -1,5 +1,5 @@
 import eventUtil from './eventUtil';
-import { closestChild } from './util';
+import { closestChild } from './util/common';
 import selectorUtil from './util/selectorUtil';
 
 let topleft = ['left', 'top'];
