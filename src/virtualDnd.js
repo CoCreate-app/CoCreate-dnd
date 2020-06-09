@@ -1,6 +1,6 @@
 import eventUtil from './eventUtil';
 import { closestChild } from './util/common';
-import selectorUtil from './util/selectorUtil';
+import cssPath from './util/cssPath';
 
 let topleft = ['left', 'top'];
 
@@ -49,20 +49,13 @@ export default function virtualDnd() {
           throw 'dnd cancelled, you can\'t dnd from parent to its children.'
 
         // #broadcast
-
-        // broadcast the object inside the domEditor
-        // it's serializable
-        // domEditor({
-        //   obj: selectorUtil.cssPath(this.dropedEl),
-        //   method: 'insertAdjacentElement',
-        //   value: { param1: [this.position, selectorUtil.cssPath(this.dragedEl)] }
-        // });
-        console.log({
-          comment: 'dragEnd',
-          obj: this.id ? this.id : selectorUtil.cssPath(this.dropedEl),
+        let broadcast = {
+          target: this.id ? this.id : cssPath(this.dropedEl),
           method: 'insertAdjacentElement',
-          value: { param1: [this.position, selectorUtil.cssPath(this.dragedEl)] }
-        })
+          value: [this.position, cssPath(this.dragedEl)]
+        };
+        console.log('dnd Object',broadcast)
+        // CoCreate.sendMessage(broadcast)
         this.id = null;
         this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
 
@@ -81,6 +74,7 @@ export default function virtualDnd() {
       evnt.dispatch('dragEnd', { e, ref })
     }
   }
+
 
   this.dragOver =
     (e, el, ref) => {

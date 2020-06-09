@@ -1,6 +1,6 @@
 import './util/iframe';
 import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs } from './util/common'
-import selectorUtil from './util/selectorUtil';
+import cssPath from './util/cssPath';
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
 import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from './util/variables.js'
@@ -27,7 +27,7 @@ export default function dnd(window, document, options) {
       onRemove: (lastEl) => {
         console.log({
           comment: 'onUnselect',
-          obj: selectorUtil.cssPath(lastEl),
+          obj: cssPath(lastEl),
           method: 'removeAttribute',
         });
 
@@ -36,7 +36,7 @@ export default function dnd(window, document, options) {
       onAdd: (el) => {
         console.log({
           comment: 'onSelect',
-          obj: selectorUtil.cssPath(el),
+          obj: cssPath(el),
           method: 'setAttribute',
           value: ['id']
         })

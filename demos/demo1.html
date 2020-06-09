@@ -137,8 +137,6 @@
     <div data-CoC-draggable="true" class="block myinline">example block 9</div>
   </div>
 
-
-  <script src="../dist/dnd.js"></script>
   <script>
     var config = {
       apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
@@ -146,10 +144,20 @@
       organization_Id: '5de0387b12e200ea63204d6c'
     }
   </script>
-
-  <script src="https://server.cocreate.app/CoCreateJS/dist/CoCreate.min.js"></script>
+  <!--<script src="https://server.cocreate.app/CoCreateJS/dist/CoCreate.min.js"></script>-->
+  <script src="../dist/dnd.js"></script>
+  <script src="domEditor.js"></script>
   <script>
-    socket.on('receiveMessage', function(data) { console.log("recivedCLiente ", data) })
+    /*
+        socket.on('receiveMessage', function(data) { //   console.log("recivedCLiente ", data);
+          console.log('broadcasteddddddddd', data)
+          debugger;
+          data.target = document.querySelector(data.target)
+          data.value[1] = document.querySelector(data.value[1]);
+          domEditor(data);
+        })
+
+        */
   </script>
 </body>
 
