@@ -58,7 +58,7 @@ export default function virtualDnd() {
 
         ondrop(this.dropedEl, this.position, this.dragedEl);
         console.log('dnd Object', broadcast)
-        // CoCreate.sendMessage(broadcast)
+        CoCreate.sendMessage(broadcast)
         this.id = null;
         this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
 
