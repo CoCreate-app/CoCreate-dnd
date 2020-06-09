@@ -1,6 +1,7 @@
 import eventUtil from './eventUtil';
 import { closestChild } from './util/common';
 import cssPath from './util/cssPath';
+import ondrop from './ondrop';
 
 let topleft = ['left', 'top'];
 
@@ -54,7 +55,9 @@ export default function virtualDnd() {
           method: 'insertAdjacentElement',
           value: [this.position, cssPath(this.dragedEl)]
         };
-        console.log('dnd Object',broadcast)
+
+        ondrop(this.dropedEl, this.position, this.dragedEl);
+        console.log('dnd Object', broadcast)
         // CoCreate.sendMessage(broadcast)
         this.id = null;
         this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
