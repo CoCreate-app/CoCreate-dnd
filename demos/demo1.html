@@ -147,10 +147,12 @@
   </script>
   <script src="https://server.cocreate.app/js/CoCreate.min.js"></script>
   <script src="../dist/dnd.js"></script>
-  <script src="domEditor.js"></script>
+  <script src="../../CoCreate-domEditor.js/domEditor.js"></script>
+  <script src="../../CoCreate-cssPath.js/cssPath.js"></script>
+
   <script>
     socket.on('receiveMessage', function(data) { //   console.log("recivedCLiente ", data);
-      console.log('broadcasteddddddddd', data)
+      console.log('broadcast data', data)
 
       data.target = document.querySelector(data.target)
       data.value[1] = document.querySelector(data.value[1]);

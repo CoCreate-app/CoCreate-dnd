@@ -1,7 +1,7 @@
 import eventUtil from './eventUtil';
 import { closestChild } from './util/common';
-import cssPath from './util/cssPath';
-import ondrop from './ondrop';
+
+
 
 let topleft = ['left', 'top'];
 
@@ -56,7 +56,18 @@ export default function virtualDnd() {
           value: [this.position, cssPath(this.dragedEl)]
         };
 
-        ondrop(this.dropedEl, this.position, this.dragedEl);
+        // dispatch gloval events
+        const event = new CustomEvent('dndsuccess', {
+          bubbles: true,
+          details: {
+            position: this.position,
+            dragedEl: this.dragedEl,
+            dropedEl: this.dropedEl
+          }
+        });
+        this.dropedEl.dispatchEvent(event, { bubbles: true })
+
+        // ondrop(this.dropedEl, this.position, this.dragedEl);
         console.log('dnd Object', broadcast)
         CoCreate.sendMessage(broadcast)
         this.id = null;

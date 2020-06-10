@@ -1,6 +1,6 @@
 import './util/iframe';
 import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs } from './util/common'
-import cssPath from './util/cssPath';
+
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
 import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from './util/variables.js'
@@ -66,14 +66,16 @@ export default function dnd(window, document, options) {
   })
   dnd.on('dragEnd', (data) => {
     myDropMarker.hide()
-    ghost.hide(data.ref)
+    if (ghost)
+      ghost.hide(data.ref)
 
   })
   dnd.on('dragOver', (data) => {
     myDropMarker.draw(data.el, data.closestEl, data.orientation, !data.hasChild, data.ref);
     hoverBoxMarker.draw(data.el)
     tagNameTooltip.draw(data.el, data.ref)
-    ghost.draw(data.e, data.ref)
+    if (ghost)
+      ghost.draw(data.e, data.ref)
   })
 
   let startGroup;
