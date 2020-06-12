@@ -59,7 +59,7 @@ export default function virtualDnd() {
         // dispatch gloval events
         const event = new CustomEvent('dndsuccess', {
           bubbles: true,
-          details: {
+          detail: {
             position: this.position,
             dragedEl: this.dragedEl,
             dropedEl: this.dropedEl
