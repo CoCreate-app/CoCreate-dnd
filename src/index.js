@@ -295,3 +295,14 @@ window.addEventListener('load', () => {
       iframes: Object.values(window.iframes.guests).map(o => o.frame)
     })
 })
+
+// init elements js
+let dom = new domElements();
+dom.element('default', {
+  selector: ['body .dnd, body .dnd *, body .sortable *, body .sortable'],
+  draggable: 'true',
+  droppable: 'true',
+  hoverable: 'true',
+  selectable: 'true',
+  editable: 'true',
+});
