@@ -1,2 +1,3 @@
-node_modules
-dist
+# ignore  app.js
+app.js
+package-lock.json
