@@ -110,7 +110,7 @@
 
 
 
-  <div data-CoC-droppable="true">
+  <div data-CoC-droppable="true" class="dnd">
     <div data-CoC-draggable="true" class="block myinline">example block 1</div>
     <div data-CoC-draggable="true" class="block myinline">example block 2</div>
     <div data-CoC-draggable="true" class="block myinline">example block 3</div>
@@ -125,22 +125,51 @@
   <iframe src="demo1Frame.html" id="client" frameborder="0" width="100%" height="100%"></iframe>
   <iframe src="demo1Frame.html" id="client2" frameborder="0" width="100%" height="100%"></iframe>
 
-  <div data-CoC-droppable="true">
-    <div data-CoC-draggable="true" class="block myinline">example block 1</div>
-    <div data-CoC-draggable="true" class="block myinline">example block 2</div>
-    <div data-CoC-draggable="true" class="block myinline">example block 3</div>
-    <div data-CoC-draggable="true" class="block">example block 4</div>
-    <div data-CoC-draggable="true" class="block">example block 5</div>
-    <div data-CoC-draggable="true" class="block">example block 6</div>
-    <div data-CoC-draggable="true" class="block myinline">example block 7</div>
-    <div data-CoC-draggable="true" class="block myinline">example block 8</div>
-    <div data-CoC-draggable="true" class="block myinline">example block 9</div>
+  <div class="dnd">
+    <div class="block myinline">example block 1</div>
+    <div class="block myinline">example block 2</div>
+    <div class="block myinline">example block 3</div>
+    <div class="block">example block 4</div>
+    <div class="block">example block 5</div>
+    <div class="block">example block 6</div>
+    <div class="block myinline">example block 7</div>
+    <div class="block myinline">example block 8</div>
+    <div class="block myinline">example block 9</div>
   </div>
 
 
-  <script src="../dist/dnd.js"></script>
-  <script src="demo1.js"></script>
 
+
+  <script>
+    var config = {
+      apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
+      securityKey: 'f26baf68-e3a9-45fc-effe-502e47116265',
+      organization_Id: '5de0387b12e200ea63204d6c'
+    }
+  </script>
+  <script src="https: //server.cocreate.app/js/CoCreate.min.js"></script>
+  <script src="../../CoCreate-domEditor.js/domEditor.js"></script>
+  <script src="../../CoCreate-elements.js/elements.js"></script>
+  <script src="../../CoCreate-cssPath.js/cssPath.js"></script>
+  <script src="../dist/dnd.js"></script>
+
+  <script>
+    CoCreateSocket.listen('sendMessage', function(data) {
+      console.log('broadcast dataaaaaaaaaaa', data);
+      // data.target = document.querySelector(`[${data.target}]`);
+      // data.value[1] = document.querySelector(`[${data.value[1]}]`);
+      // domEditor(data);
+    })
+
+    // by cssPath
+    // socket.on('receiveMessage', function(data) { //   console.log("recivedCLiente ", data);
+    //   console.log('broadcast data', data)
+
+    //   data.target = document.querySelector(data.target)
+    //   data.value[1] = document.querySelector(data.value[1]);
+    //   domEditor(data);
+    // })
+  </script>
 </body>
 
 </html>

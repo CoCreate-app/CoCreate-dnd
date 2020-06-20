@@ -1,6 +1,6 @@
 import './util/iframe';
 import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs } from './util/common'
-import selectorUtil from './util/selectorUtil';
+
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
 import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from './util/variables.js'
@@ -27,7 +27,7 @@ export default function dnd(window, document, options) {
       onRemove: (lastEl) => {
         console.log({
           comment: 'onUnselect',
-          obj: selectorUtil.cssPath(lastEl),
+          obj: cssPath(lastEl),
           method: 'removeAttribute',
         });
 
@@ -36,7 +36,7 @@ export default function dnd(window, document, options) {
       onAdd: (el) => {
         console.log({
           comment: 'onSelect',
-          obj: selectorUtil.cssPath(el),
+          obj: cssPath(el),
           method: 'setAttribute',
           value: ['id']
         })
@@ -66,14 +66,16 @@ export default function dnd(window, document, options) {
   })
   dnd.on('dragEnd', (data) => {
     myDropMarker.hide()
-    ghost.hide(data.ref)
+    if (ghost)
+      ghost.hide(data.ref)
 
   })
   dnd.on('dragOver', (data) => {
     myDropMarker.draw(data.el, data.closestEl, data.orientation, !data.hasChild, data.ref);
     hoverBoxMarker.draw(data.el)
     tagNameTooltip.draw(data.el, data.ref)
-    ghost.draw(data.e, data.ref)
+    if (ghost)
+      ghost.draw(data.e, data.ref)
   })
 
   let startGroup;
@@ -287,8 +289,22 @@ function wrapper(func, ref) {
 
 // init
 window.addEventListener('load', () => {
+  // only run if it's the host but not iframe
+  if (window.location === window.parent.location)
+    dnd(window, document, {
+      iframes: Object.values(window.iframes.guests).map(o => o.frame)
+    })
+  // init elements js
+  dom.element('default', {
+    selector: [' body .sortable *, body .sortable'],
+    draggable: 'true',
+    droppable: 'true',
+    hoverable: 'true',
+    selectable: 'true',
+    editable: 'true',
+  });
 
-  dnd(window, document, {
-    iframes: Object.values(window.iframes.guests).map(o => o.frame)
-  })
+  dom.element('default', {
+    selector: ['body .dnd, body .dnd *'],
+  });
 })

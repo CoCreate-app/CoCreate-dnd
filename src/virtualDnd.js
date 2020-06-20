@@ -1,6 +1,7 @@
 import eventUtil from './eventUtil';
 import { closestChild } from './util/common';
-import selectorUtil from './util/selectorUtil';
+
+
 
 let topleft = ['left', 'top'];
 
@@ -49,20 +50,28 @@ export default function virtualDnd() {
           throw 'dnd cancelled, you can\'t dnd from parent to its children.'
 
         // #broadcast
-
-        // broadcast the object inside the domEditor
-        // it's serializable
-        // domEditor({
-        //   obj: selectorUtil.cssPath(this.dropedEl),
-        //   method: 'insertAdjacentElement',
-        //   value: { param1: [this.position, selectorUtil.cssPath(this.dragedEl)] }
-        // });
-        console.log({
-          comment: 'dragEnd',
-          obj: this.id ? this.id : selectorUtil.cssPath(this.dropedEl),
+        let broadcast = {
+          target: this.dropedEl.getAttribute('data-element_id'),
           method: 'insertAdjacentElement',
-          value: { param1: [this.position, selectorUtil.cssPath(this.dragedEl)] }
-        })
+          value: [this.position, this.dragedEl.getAttribute('data-element_id')]
+        };
+
+        // dispatch gloval events
+        const event = new CustomEvent('dndsuccess', {
+          bubbles: true,
+          detail: {
+            position: this.position,
+            dragedEl: this.dragedEl,
+            dropedEl: this.dropedEl
+          }
+        });
+        this.dropedEl.dispatchEvent(event, { bubbles: true })
+
+        // ondrop(this.dropedEl, this.position, this.dragedEl);
+        console.log('dnd Object', broadcast)
+        // CoCreate.sendMessage(broadcast)
+        CoCreate.sendMessage(broadcast)
+
         this.id = null;
         this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
 
@@ -81,6 +90,7 @@ export default function virtualDnd() {
       evnt.dispatch('dragEnd', { e, ref })
     }
   }
+
 
   this.dragOver =
     (e, el, ref) => {
