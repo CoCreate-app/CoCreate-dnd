@@ -294,15 +294,17 @@ window.addEventListener('load', () => {
     dnd(window, document, {
       iframes: Object.values(window.iframes.guests).map(o => o.frame)
     })
-})
+  // init elements js
+  dom.element('default', {
+    selector: [' body .sortable *, body .sortable'],
+    draggable: 'true',
+    droppable: 'true',
+    hoverable: 'true',
+    selectable: 'true',
+    editable: 'true',
+  });
 
-// init elements js
-let dom = new domElements();
-dom.element('default', {
-  selector: ['body .dnd, body .dnd *, body .sortable *, body .sortable'],
-  draggable: 'true',
-  droppable: 'true',
-  hoverable: 'true',
-  selectable: 'true',
-  editable: 'true',
-});
+  dom.element('default', {
+    selector: ['body .dnd, body .dnd *'],
+  });
+})

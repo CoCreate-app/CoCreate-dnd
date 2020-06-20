@@ -51,9 +51,9 @@ export default function virtualDnd() {
 
         // #broadcast
         let broadcast = {
-          target: this.id ? this.id : cssPath(this.dropedEl),
+          target: this.dropedEl.getAttribute('data-element_id'),
           method: 'insertAdjacentElement',
-          value: [this.position, cssPath(this.dragedEl)]
+          value: [this.position, this.dragedEl.getAttribute('data-element_id')]
         };
 
         // dispatch gloval events
@@ -69,7 +69,9 @@ export default function virtualDnd() {
 
         // ondrop(this.dropedEl, this.position, this.dragedEl);
         console.log('dnd Object', broadcast)
+        // CoCreate.sendMessage(broadcast)
         CoCreate.sendMessage(broadcast)
+
         this.id = null;
         this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
 
