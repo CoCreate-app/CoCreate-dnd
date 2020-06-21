@@ -289,11 +289,7 @@ function wrapper(func, ref) {
 
 // init
 window.addEventListener('load', () => {
-  // only run if it's the host but not iframe
-  if (window.location === window.parent.location)
-    dnd(window, document, {
-      iframes: Object.values(window.iframes.guests).map(o => o.frame)
-    })
+
   // init elements js
   dom.element('default', {
     selector: [' body .sortable *, body .sortable'],
@@ -307,4 +303,11 @@ window.addEventListener('load', () => {
   dom.element('default', {
     selector: ['body .dnd, body .dnd *'],
   });
+
+  // only run if it's the host but not iframe
+  if (window.location === window.parent.location)
+    dnd(window, document, {
+      iframes: Object.values(window.iframes.guests).map(o => o.frame)
+    })
+
 })
