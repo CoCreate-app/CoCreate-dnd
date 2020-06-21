@@ -25,21 +25,21 @@ export default function dnd(window, document, options) {
 
     selectBoxMarker: new boxMarker("CoC-selected", 2, {
       onRemove: (lastEl) => {
-        console.log({
-          comment: 'onUnselect',
-          obj: cssPath(lastEl),
-          method: 'removeAttribute',
-        });
-
+        // console.log({
+        //   comment: 'onUnselect',
+        //   obj: cssPath(lastEl),
+        //   method: 'removeAttribute',
+        // });
+        
         lastEl.removeAttribute('data-selected_users')
       },
       onAdd: (el) => {
-        console.log({
-          comment: 'onSelect',
-          obj: cssPath(el),
-          method: 'setAttribute',
-          value: ['id']
-        })
+        // console.log({
+        //   comment: 'onSelect',
+        //   obj: cssPath(el),
+        //   method: 'setAttribute',
+        //   value: ['id']
+        // })
         el.setAttribute('data-selected_users', 'id')
       }
     })
