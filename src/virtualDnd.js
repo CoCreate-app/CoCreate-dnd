@@ -51,10 +51,11 @@ export default function virtualDnd() {
 
         // #broadcast
         let broadcast = {
-          target: this.dropedEl.getAttribute('data-element_id'),
+          target: this.dropedEl,
           method: 'insertAdjacentElement',
-          value: [this.position, this.dragedEl.getAttribute('data-element_id')]
+          value: [this.position, this.dragedEl]
         };
+
 
         // dispatch gloval events
         const event = new CustomEvent('dndsuccess', {
@@ -67,13 +68,16 @@ export default function virtualDnd() {
         });
         this.dropedEl.dispatchEvent(event, { bubbles: true })
 
-        // ondrop(this.dropedEl, this.position, this.dragedEl);
+
+        domEditor(broadcast)
+        broadcast.target = broadcast.target.getAttribute('data-element_id');
+        broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
         console.log('dnd Object', broadcast)
-        // CoCreate.sendMessage(broadcast)
         CoCreate.sendMessage(broadcast)
 
         this.id = null;
-        this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
+
+        // this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
 
       }
     }
