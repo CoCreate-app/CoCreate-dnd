@@ -287,12 +287,11 @@ function wrapper(func, ref) {
 }
 
 
-// init
-window.addEventListener('load', () => {
+window.initdnd = () => {
 
   // init elements js
   dom.element('default', {
-    selector: [' body .sortable *, body .sortable'],
+    selector: ['.sortable *, .sortable'],
     draggable: 'true',
     droppable: 'true',
     hoverable: 'true',
@@ -301,13 +300,15 @@ window.addEventListener('load', () => {
   });
 
   dom.element('default', {
-    selector: ['body .dnd, body .dnd *'],
+    selector: ['.dnd, .dnd *'],
   });
-
   // only run if it's the host but not iframe
   if (window.location === window.parent.location)
     dnd(window, document, {
       iframes: Object.values(window.iframes.guests).map(o => o.frame)
     })
 
-})
+
+};
+// init
+window.addEventListener('load', window.initdnd)
