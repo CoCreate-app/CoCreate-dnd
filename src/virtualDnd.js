@@ -73,7 +73,13 @@ export default function virtualDnd() {
         broadcast.target = broadcast.target.getAttribute('data-element_id');
         broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
         console.log('dnd Object', broadcast)
-        CoCreate.sendMessage(broadcast)
+
+        CoCreate.sendMessage({
+          emit: {
+            message: 'sendMessage',
+            data: broadcast
+          }
+        })
 
         this.id = null;
 
