@@ -76,6 +76,7 @@ export default function virtualDnd() {
 
         CoCreate.sendMessage({
           emit: {
+            broadcast_sender: true,
             message: 'sendMessage',
             data: broadcast
           }
