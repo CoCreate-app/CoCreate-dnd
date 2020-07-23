@@ -131,8 +131,9 @@ export default function dnd(window, document, options) {
     let onEl = target; // dev
     if (consolePrintedEl != target) { // dev
       // dev
-      console.log("you are on: \n", onEl, "\nDroping in: \n", target);
-      consolePrintedEl = target;
+      let el = getCoc(target, droppable);
+      console.log("you are on: \n", onEl, "\nDroping in: \n", el);
+      consolePrintedEl = el;
     }
 
     let el = getCoc(target, droppable);
