@@ -11,7 +11,7 @@ import { droppable, draggable, selectable, hoverable, name, cloneable, data_inse
 
 
 export default function dnd(window, document, options) {
-
+  console.log('dnd is loading', window.location.pathname)
   options = Object.assign({
 
     tagNameTooltip: new boxMarkerTooltip((el) => {
@@ -129,14 +129,14 @@ export default function dnd(window, document, options) {
     if (startGroup && startGroup != getGroupName(target)) return;
     if (!target || !isDraging) return; // it's out of iframe
     let onEl = target; // dev
+    let el = getCoc(target, droppable);
     if (consolePrintedEl != target) { // dev
       // dev
-      let el = getCoc(target, droppable);
       console.log("you are on: \n", onEl, "\nDroping in: \n", el);
       consolePrintedEl = el;
     }
 
-    let el = getCoc(target, droppable);
+
     // todo:
     if (!el || !isDraging) return;
     dnd.dragOver({ x, y }, el, ref)
@@ -344,12 +344,21 @@ window.initdnd = () => {
     selector: ['.dnd, .dnd *'],
   });
   // only run if it's the host but not iframe
-  if (window.location === window.parent.location)
-    dnd(window, document, {
-      iframes: Object.values(window.iframes.guests).map(o => o.frame)
-    })
+  // if (window.location === window.parent.location)
 
+  dnd(window, document, {
+    iframes: Object.values(window.iframes.guests).map(o => o.frame)
+  })
+  console.log('dnd is loaded', window.location.pathname)
 
 };
 // init
-window.addEventListener('load', window.initdnd)
+// let canvasWindow = document.getElementById('canvas').contentWindow;
+// console.log('zzzzzzzzzzzzzzzz', window.location.pathname, canvasWindow)
+// canvasWindow.addEventListener('load', )
+window.addEventListener('load', () => {
+
+
+  window.initdnd()
+
+});

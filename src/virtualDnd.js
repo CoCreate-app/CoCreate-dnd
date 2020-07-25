@@ -1,6 +1,6 @@
 import eventUtil from './eventUtil';
 import { closestChild } from './util/common';
-
+import { exclude } from './util/variables'
 
 
 let topleft = ['left', 'top'];
@@ -10,7 +10,7 @@ export default function virtualDnd() {
   this.dropedEl;
   this.position;
   this.id;
-
+  this.type;
 
   let evnt = new eventUtil();
 
@@ -74,6 +74,7 @@ export default function virtualDnd() {
         broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
         console.log('dnd Object', broadcast)
 
+        console.log('sending object from ', window.location.pathname)
         CoCreate.sendMessage({
           emit: {
             broadcast_sender: true,
@@ -97,7 +98,7 @@ export default function virtualDnd() {
         this.dragedEl.removeAttribute('CoC-dragging')
       // greenDropMarker.hide()
       // dfonclk.onInactive(e.target)
-      console.log('dnd completed')
+      console.log('dnd completed', 'type:', this.type, 'position:', this.position)
       evnt.dispatch('dragEnd', { e, ref })
     }
   }
@@ -115,16 +116,33 @@ export default function virtualDnd() {
         // tagNameTooltip.draw(el)
         this.position = topleft.includes(orientation) ? "afterbegin" : "beforeend";
         this.dropedEl = el;
+        this.type = "normal"
+
+
       }
       else {
         // find closest child and put outside the child element on top or bottom relating to that child,
         let [orientation, closestEl] = closestChild([e.x, e.y], el.children);
-        evnt.dispatch('dragOver', { e, el, closestEl, orientation, hasChild: el.children.length, ref })
+
         // greenDropMarker.draw(el, closestEl, orientation, false);
         // hoverBoxMarker.draw(el)
         // tagNameTooltip.draw(el)
+        if (closestEl.getAttribute('data-coc-exclude') == 'true') {
+          this.dropedEl = closestEl.parentElement;
+          // only to get orientation
+          let [orientation2, closestEl2] = closestChild([e.x, e.y], [this.dropedEl]);
+          orientation = orientation2;
+        }
+        else
+          this.dropedEl = closestEl;
+
+        evnt.dispatch('dragOver', { e, el, closestEl, orientation, hasChild: el.children.length, ref })
+
         this.position = topleft.includes(orientation) ? "beforebegin" : "afterend";
-        this.dropedEl = closestEl;
+
+
+        this.type = "children"
+
       }
     }
 }
