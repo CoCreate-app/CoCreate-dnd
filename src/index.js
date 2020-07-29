@@ -109,7 +109,7 @@ export default function dnd(window, document, options) {
     isDraging = true;
     hoverBoxMarker.hide();
     tagNameTooltip.hide();
-    dnd.dragStart(e, el, null, ref);
+    dnd.dragStart(e, el, null, ref, att);
   }
 
   function end(e, ref) {
@@ -239,9 +239,8 @@ export default function dnd(window, document, options) {
 
 
 
-
   options.iframes.forEach(frame => {
-    // frame.addEventListener('load', () => {
+
     let rect = frame.getBoundingClientRect();
     let ref = { x: rect.left, y: rect.top, frame, window: frame.contentWindow, document: frame.contentDocument, isIframe: true }
     dndReady(ref.document)
@@ -261,7 +260,7 @@ export default function dnd(window, document, options) {
     // listen for click
     ref.document.addEventListener('CoCreateClickLeft', wrapper(CoCreateClickLeft, ref))
 
-    // })
+
   })
 
 
@@ -331,18 +330,18 @@ window.initdnd = () => {
 
 
   // init elements js
-  dom.element('default', {
-    selector: ['.sortable *, .sortable'],
-    draggable: 'true',
-    droppable: 'true',
-    hoverable: 'true',
-    selectable: 'true',
-    editable: 'true',
-  });
+  // dom.element('default', {
+  //   selector: ['.sortable *, .sortable'],
+  //   draggable: 'true',
+  //   droppable: 'true',
+  //   hoverable: 'true',
+  //   selectable: 'true',
+  //   editable: 'true',
+  // });
 
-  dom.element('default', {
-    selector: ['.dnd, .dnd *'],
-  });
+  // dom.element('default', {
+  //   selector: ['.dnd, .dnd *'],
+  // });
   // only run if it's the host but not iframe
   // if (window.location === window.parent.location)
 

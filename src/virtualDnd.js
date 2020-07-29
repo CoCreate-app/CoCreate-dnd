@@ -2,6 +2,20 @@ import eventUtil from './eventUtil';
 import { closestChild } from './util/common';
 import { exclude } from './util/variables'
 
+function UUID(length = 10) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+
+  var d = new Date().toTimeString();
+  var random = d.replace(/[\W_]+/g, "").substr(0, 6);
+  result += random;
+  return result;
+}
 
 let topleft = ['left', 'top'];
 
@@ -19,7 +33,7 @@ export default function virtualDnd() {
     evnt.on.apply(evnt, arguments);
   }
 
-  this.dragStart = (e, el, id, ref) => {
+  this.dragStart = (e, el, id, ref, dropType) => {
     // #broadcast
     // domEditor({
     //   obj: selectorUtil.cssPath( this.dropedEl),
@@ -27,6 +41,7 @@ export default function virtualDnd() {
     //   value: { param1: [this.position, selectorUtil.cssPath(this.dragedEl)] }
     // });
     this.id = id;
+    this.dropType = dropType;
     console.log({
       comment: 'dragStart',
     })
@@ -48,9 +63,15 @@ export default function virtualDnd() {
         // parent can't be draged into children
         if (this.dragedEl.contains(this.dropedEl))
           throw 'dnd cancelled, you can\'t dnd from parent to its children.'
+        dom.element('default', {
+          target: this.dragedEl,
+          idGenerator: () => UUID(12),
+
+        });
 
         // #broadcast
         let broadcast = {
+          dropType: this.dropType,
           target: this.dropedEl,
           method: 'insertAdjacentElement',
           value: [this.position, this.dragedEl]
@@ -69,15 +90,20 @@ export default function virtualDnd() {
         this.dropedEl.dispatchEvent(event, { bubbles: true })
 
 
-        domEditor(broadcast)
+        // domEditor(broadcast)
         broadcast.target = broadcast.target.getAttribute('data-element_id');
-        broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
+        if (this.dropType !== 'data-CoC-cloneable')
+          broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
+        else
+          broadcast.value[1] = broadcast.value[1].outerHTML;
+
         console.log('dnd Object', broadcast)
 
         console.log('sending object from ', window.location.pathname)
         CoCreate.sendMessage({
+          broadcast_sender: true,
+          rooms: '',
           emit: {
-            broadcast_sender: true,
             message: 'sendMessage',
             data: broadcast
           }
