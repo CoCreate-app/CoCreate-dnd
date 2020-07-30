@@ -90,7 +90,7 @@ export default function virtualDnd() {
         this.dropedEl.dispatchEvent(event, { bubbles: true })
 
 
-        // domEditor(broadcast)
+        domEditor(broadcast)
         broadcast.target = broadcast.target.getAttribute('data-element_id');
         if (this.dropType !== 'data-CoC-cloneable')
           broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
