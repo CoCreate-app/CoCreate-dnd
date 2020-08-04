@@ -71,7 +71,6 @@ export default function virtualDnd() {
 
         // #broadcast
         let broadcast = {
-          dropType: this.dropType,
           target: this.dropedEl,
           method: 'insertAdjacentElement',
           value: [this.position, this.dragedEl]
@@ -90,7 +89,7 @@ export default function virtualDnd() {
         this.dropedEl.dispatchEvent(event, { bubbles: true })
 
 
-        domEditor(broadcast)
+        // domEditor(broadcast)
         broadcast.target = broadcast.target.getAttribute('data-element_id');
         if (this.dropType !== 'data-CoC-cloneable')
           broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
@@ -100,14 +99,45 @@ export default function virtualDnd() {
         console.log('dnd Object', broadcast)
 
         console.log('sending object from ', window.location.pathname)
-        CoCreate.sendMessage({
-          broadcast_sender: true,
-          rooms: '',
-          emit: {
-            message: 'sendMessage',
-            data: broadcast
-          }
-        })
+
+        if (this.dropType === 'data-CoC-cloneable') {
+          dom.element('default', {
+            target: broadcast.draggedEl,
+            draggable: 'true',
+            droppable: 'true',
+            hoverable: 'true',
+            selectable: 'true',
+            editable: 'true',
+          });
+
+
+          CoCreate.sendMessage({
+            broadcast_sender: true,
+            rooms: '',
+            emit: {
+              message: 'dndNewElement',
+              data: broadcast
+            }
+          })
+          CoCreate.sendMessage({
+            broadcast_sender: true,
+            rooms: '',
+            emit: {
+              message: 'vdomNewElement',
+              data: broadcast
+            }
+          })
+
+        }
+        else
+          CoCreate.sendMessage({
+            broadcast_sender: true,
+            rooms: '',
+            emit: {
+              message: 'domEditor',
+              data: broadcast
+            }
+          })
 
         this.id = null;
 
