@@ -1,5 +1,5 @@
 import eventUtil from './eventUtil';
-import { closestChild } from './util/common';
+import { closestChild, parse } from './util/common';
 import { exclude } from './util/variables'
 
 function UUID(length = 10) {
@@ -93,8 +93,55 @@ export default function virtualDnd() {
         broadcast.target = broadcast.target.getAttribute('data-element_id');
         if (this.dropType !== 'data-CoC-cloneable')
           broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
-        else
-          broadcast.value[1] = broadcast.value[1].outerHTML;
+        else {
+          let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
+
+          dom.element(
+            [{
+                type: 'default',
+                selector: ['body, body *'],
+                draggable: 'false',
+                droppable: 'true',
+                hoverable: 'true',
+                selectable: 'true',
+                editable: 'true',
+                // toolbar: { 'test': 'testing this' },
+              },
+              {
+                type: 'body',
+                selector: ['body, body'],
+                draggable: 'false',
+              },
+              {
+                type: 'form',
+                selector: ['form'],
+                editable: 'true'
+              },
+              {
+                type: 'input',
+                selector: 'input',
+                editable: 'false'
+              },
+              {
+                type: 'textarea',
+                selector: 'textarea',
+                editable: 'false'
+              },
+              {
+                type: 'select',
+                selector: 'select',
+                editable: 'false'
+              },
+              {
+                type: 'h1',
+                selector: 'h1',
+                draggable: 'true',
+              }
+            ], { context: clonedEl }
+          )
+
+          broadcast.value[1] = clonedEl.innerHTML;
+        }
 
         console.log('dnd Object', broadcast)
 
