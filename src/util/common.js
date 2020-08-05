@@ -269,8 +269,8 @@ export function ghostEffect(el, ref) {
       frameRect = { top: 0, left: 0 }
 
 
-    this.cloneEl.style.top = frameRect.top + e.y - (rect.height + marginTop + marginBottom) / 2;
-    this.cloneEl.style.left = frameRect.left + e.x - (rect.width + marginLeft + marginRight) / 2;
+    this.cloneEl.style.top = frameRect.top + e.y - (rect.height + marginTop + marginBottom) / 2 + 'px';
+    this.cloneEl.style.left = frameRect.left + e.x - (rect.width + marginLeft + marginRight) / 2 + 'px';
   }
 
   this.hide = (ref) => {

@@ -62,6 +62,7 @@ export default function dnd(window, document, options) {
     // data.ref
     ghost = new ghostEffect(data.el, { document });
     ghost.start()
+    ghost.draw(data.e, data.ref)
 
   })
   dnd.on('dragEnd', (data) => {
