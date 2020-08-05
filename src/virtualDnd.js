@@ -94,52 +94,10 @@ export default function virtualDnd() {
         if (this.dropType !== 'data-CoC-cloneable')
           broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
         else {
-          let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
-
+          let clonedEl = parse('<body>' + broadcast.value[1].outerHTML + '</body>');
           dom.element(
-            [{
-                type: 'default',
-                selector: ['body, body *'],
-                draggable: 'false',
-                droppable: 'true',
-                hoverable: 'true',
-                selectable: 'true',
-                editable: 'true',
-                // toolbar: { 'test': 'testing this' },
-              },
-              {
-                type: 'body',
-                selector: ['body, body'],
-                draggable: 'false',
-              },
-              {
-                type: 'form',
-                selector: ['form'],
-                editable: 'true'
-              },
-              {
-                type: 'input',
-                selector: 'input',
-                editable: 'false'
-              },
-              {
-                type: 'textarea',
-                selector: 'textarea',
-                editable: 'false'
-              },
-              {
-                type: 'select',
-                selector: 'select',
-                editable: 'false'
-              },
-              {
-                type: 'h1',
-                selector: 'h1',
-                draggable: 'true',
-              }
-            ], { context: clonedEl }
+            elementConfig, { context: clonedEl }
           )
-
           broadcast.value[1] = clonedEl.innerHTML;
         }
 
