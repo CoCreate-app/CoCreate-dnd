@@ -275,8 +275,8 @@ function dndReady(document) {
   })
   // disable selection
   document.addEventListener('selectstart', (e) => {
-    let [el, att] = getCocs(e.target, [draggable, cloneable])
-    if (el) e.preventDefault();
+    let result = getCocs(e.target, [draggable, cloneable])
+    if (result) e.preventDefault();
   })
 }
 
