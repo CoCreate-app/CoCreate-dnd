@@ -1,4 +1,5 @@
 export const droppable = "data-CoC-droppable";
+export const exclude = "data-CoC-exclude";
 export const draggable = "data-CoC-draggable";
 export const cloneable = "data-CoC-cloneable";
 export const selectable = "data-CoC-selectable";

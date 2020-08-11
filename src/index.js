@@ -11,7 +11,7 @@ import { droppable, draggable, selectable, hoverable, name, cloneable, data_inse
 
 
 export default function dnd(window, document, options) {
-
+  console.log('dnd is loading', window.location.pathname)
   options = Object.assign({
 
     tagNameTooltip: new boxMarkerTooltip((el) => {
@@ -62,6 +62,7 @@ export default function dnd(window, document, options) {
     // data.ref
     ghost = new ghostEffect(data.el, { document });
     ghost.start()
+    ghost.draw(data.e, data.ref)
 
   })
   dnd.on('dragEnd', (data) => {
@@ -109,7 +110,7 @@ export default function dnd(window, document, options) {
     isDraging = true;
     hoverBoxMarker.hide();
     tagNameTooltip.hide();
-    dnd.dragStart(e, el, null, ref);
+    dnd.dragStart(e, el, null, ref, att);
   }
 
   function end(e, ref) {
@@ -129,13 +130,14 @@ export default function dnd(window, document, options) {
     if (startGroup && startGroup != getGroupName(target)) return;
     if (!target || !isDraging) return; // it's out of iframe
     let onEl = target; // dev
+    let el = getCoc(target, droppable);
     if (consolePrintedEl != target) { // dev
       // dev
-      console.log("you are on: \n", onEl, "\nDroping in: \n", target);
-      consolePrintedEl = target;
+      console.log("you are on: \n", onEl, "\nDroping in: \n", el);
+      consolePrintedEl = el;
     }
 
-    let el = getCoc(target, droppable);
+
     // todo:
     if (!el || !isDraging) return;
     dnd.dragOver({ x, y }, el, ref)
@@ -238,9 +240,8 @@ export default function dnd(window, document, options) {
 
 
 
-
   options.iframes.forEach(frame => {
-    // frame.addEventListener('load', () => {
+
     let rect = frame.getBoundingClientRect();
     let ref = { x: rect.left, y: rect.top, frame, window: frame.contentWindow, document: frame.contentDocument, isIframe: true }
     dndReady(ref.document)
@@ -260,7 +261,7 @@ export default function dnd(window, document, options) {
     // listen for click
     ref.document.addEventListener('CoCreateClickLeft', wrapper(CoCreateClickLeft, ref))
 
-    // })
+
   })
 
 
@@ -274,8 +275,8 @@ function dndReady(document) {
   })
   // disable selection
   document.addEventListener('selectstart', (e) => {
-    let [el, att] = getCocs(e.target, [draggable, cloneable])
-    if (el) e.preventDefault();
+    let result = getCocs(e.target, [draggable, cloneable])
+    if (result) e.preventDefault();
   })
 }
 
@@ -330,25 +331,59 @@ window.initdnd = () => {
 
 
   // init elements js
-  dom.element('default', {
-    selector: ['.sortable *, .sortable'],
-    draggable: 'true',
-    droppable: 'true',
-    hoverable: 'true',
-    selectable: 'true',
-    editable: 'true',
-  });
+  // dom.element('default', {
+  //   selector: ['.sortable *, .sortable'],
+  //   draggable: 'true',
+  //   droppable: 'true',
+  //   hoverable: 'true',
+  //   selectable: 'true',
+  //   editable: 'true',
+  // });
 
-  dom.element('default', {
-    selector: ['.dnd, .dnd *'],
-  });
+  // dom.element('default', {
+  //   selector: ['.dnd, .dnd *'],
+  // });
   // only run if it's the host but not iframe
-  if (window.location === window.parent.location)
-    dnd(window, document, {
-      iframes: Object.values(window.iframes.guests).map(o => o.frame)
-    })
+  // if (window.location === window.parent.location)
 
+  dnd(window, document, {
+    iframes: Object.values(window.iframes.guests).map(o => o.frame)
+  })
+  console.log('dnd is loaded', window.location.pathname)
+
+  function parse(text) {
+    let doc = new DOMParser().parseFromString(text, 'text/html');
+    if (doc.head.children[0])
+      return doc.head.children[0];
+    else
+      return doc.body.children[0];
+  }
+
+
+  CoCreateSocket.listen('dndNewElement', function(data) {
+    // resolving the element_id to real element in the clinet
+    console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
+    data.target = document.querySelector(`[data-element_id=${data.target}]`);
+
+    let newElement = parse(data.value[1]);
+    if (data.target.classList.contains('vdom-item') && window.vdomObject)
+      data.value[1] = window.vdomObject.renderNew([newElement]);
+    else
+      data.value[1] = newElement;
+
+    console.log('with object: ', data, window.location.pathname)
+    // passing it to domEditor
+    domEditor(data);
+  })
 
 };
 // init
-window.addEventListener('load', window.initdnd)
+// let canvasWindow = document.getElementById('canvas').contentWindow;
+// console.log('zzzzzzzzzzzzzzzz', window.location.pathname, canvasWindow)
+// canvasWindow.addEventListener('load', )
+window.addEventListener('load', () => {
+
+
+  window.initdnd()
+
+});

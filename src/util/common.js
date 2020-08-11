@@ -1,25 +1,5 @@
 import { group_name } from './variables';
 
-// export function createBlockMarker(border = "2px solid blue") {
-//   let marker = document.createElement("div");
-//   marker.id = "block-marker";
-//   marker.style.backgroundColor = "transparent";
-//   marker.style.position = "absolute";
-//   marker.style.display = "none";
-//   marker.style.border = border;
-//   marker.style.pointerEvents = 'none';
-//   return marker;
-// }
-
-// return droppable-candidate element or false if no candidate found
-export function getDropable(el) {
-  do {
-    if (el.getAttribute('droppable')) return el;
-    el = el.parentElement;
-    if (!el) return false;
-  } while (true);
-}
-
 
 export function getCoc(el, att) {
   if (!el.tagName)
@@ -289,8 +269,8 @@ export function ghostEffect(el, ref) {
       frameRect = { top: 0, left: 0 }
 
 
-    this.cloneEl.style.top = frameRect.top + e.y - (rect.height + marginTop + marginBottom) / 2;
-    this.cloneEl.style.left = frameRect.left + e.x - (rect.width + marginLeft + marginRight) / 2;
+    this.cloneEl.style.top = frameRect.top + e.y - (rect.height + marginTop + marginBottom) / 2 + 'px';
+    this.cloneEl.style.left = frameRect.left + e.x - (rect.width + marginLeft + marginRight) / 2 + 'px';
   }
 
   this.hide = (ref) => {
