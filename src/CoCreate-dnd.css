@@ -1,0 +1,26 @@
+    [data-CoC-cloneable],
+    [data-CoC-draggable] {
+      cursor: pointer;
+    }
+
+    [data-CoC-cloneable],
+    [data-CoC-draggable],
+    [data-CoC-droppable],
+    [data-CoC-hoverable] {
+      outline: 1px dashed gray;
+    }
+
+    *[CoC-hovered=true] {
+      outline: 2px solid blue
+    }
+
+    /* must be defined after CoC-hovered because of css specificity to show selected with higher priority */
+
+    *[CoC-selected=true] {
+      outline: 3px solid green;
+    }
+
+    *[CoC-dragging=true] {
+      outline: 3px solid red;
+    }
+    
