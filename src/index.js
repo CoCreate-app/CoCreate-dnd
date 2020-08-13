@@ -193,7 +193,6 @@ export default function dnd(window, document, options) {
 
   }
   let mousemove = (e, ref) => {
-    console.log('mouse over')
     let el = getCoc(e.target, hoverable);
 
     if (!el) {
