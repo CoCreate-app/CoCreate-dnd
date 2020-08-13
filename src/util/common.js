@@ -248,11 +248,11 @@ export function ghostEffect(el, ref) {
 
 
 
-    this.cloneEl.style.visibility = 'visible';
+    
   }
 
   this.draw = (e, ref) => {
-
+    this.cloneEl.style.visibility = 'visible';
     let rect = this.cloneEl.getBoundingClientRect();
     let { marginTop, marginBottom, marginLeft, marginRight } = computeStyles(this.cloneEl, [
 
