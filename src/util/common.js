@@ -274,7 +274,7 @@ export function ghostEffect(el, ref) {
   }
 
   this.hide = (ref) => {
-    this.cloneEl.style.visibility = 'hidden';
+    this.cloneEl.remove()
     // ref.document.getElementById('ghost-effect').remove()
     // ref.document.removeEventListener('mousemove', this.effectCb)
   }
