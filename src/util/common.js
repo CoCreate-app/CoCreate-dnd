@@ -151,9 +151,13 @@ export function dropMarker(options) {
   this.draw = function(parent, el, orientation, isInside, ref) {
     marker.style.display = "block";
 
-
-
     let rect = el.getBoundingClientRect();
+    if(!rect.width && !rect.height)
+    {
+      rect = parent.getBoundingClientRect();
+      orientation = "top"
+    }
+    
     switch (orientation) {
       case 'top':
       case 'bottom':
