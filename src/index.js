@@ -140,7 +140,7 @@ export default function dnd(window, document, options) {
 
     // todo:
     if (!el || !isDraging) return;
-    dnd.dragOver({ x, y }, el, ref)
+    dnd.dragOver({ x, y, target: el }, el, ref)
 
   }
 

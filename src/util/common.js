@@ -273,9 +273,10 @@ export function ghostEffect(el, ref) {
     else
       frameRect = { top: 0, left: 0 }
 
-
-    this.wrapper.style.top = frameRect.top + e.y - (rect.height + marginTop + marginBottom) / 2 + 'px';
-    this.wrapper.style.left = frameRect.left + e.x - (rect.width + marginLeft + marginRight) / 2 + 'px';
+    // let targetRect = e.target.getBoundingClientRect();
+    
+    this.wrapper.style.top = frameRect.top + e.y - 15   + 'px';
+    this.wrapper.style.left = frameRect.left + e.x - 15  + 'px';
   }
 
   this.hide = (ref) => {
