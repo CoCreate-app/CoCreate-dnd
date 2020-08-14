@@ -232,7 +232,10 @@ export function ghostEffect(el, ref) {
 
   this.start = () => {
     this.cloneEl = el.cloneNode(true);
+    let cloneElStyle = window.getComputedStyle(this.cloneEl)
     this.wrapper = document.createElement('div');
+    this.wrapper.style.height = cloneElStyle.height;
+    this.wrapper.style.width = cloneElStyle.width;
     this.wrapper.append(this.cloneEl);
     this.wrapper.style.display = 'none';
     ref.document.body.append(this.wrapper)
