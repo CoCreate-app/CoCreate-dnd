@@ -1,13 +1,43 @@
 import './util/iframe';
-import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs } from './util/common'
+import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs, distanceToChildTopBottom } from './util/common'
 
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
 import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from './util/variables.js'
 
+ let ref = { x: 0, y: 0, window, document, isIframe: false, }
+  let lastScrollingElement;
+  let onElement;
+  let lastOnElement;
+  let mouse;
+   let interval;
+    function activateScroll(parent, orientation, callback)
+    {
+       console.log('scrolling')
+      lastScrollingElement = parent;
+      interval = setInterval(()=>{
+        if(orientation === 'top')
+          parent.scrollBy(0,-1);
+        else
+          parent.scrollBy(0,1);
+        lastOnElement = onElement;
+        onElement = document.elementFromPoint(mouse.x, mouse.y)
+        if(onElement  )
+        {
+          callback({x:mouse.x, y:mouse.y, target:onElement});
+          // trigger 
+        }
+        
+        
+      }, 20)
+       
+    }
+    
+    function deactivateScroll(){
 
-
-
+      console.log('scrolling disabled')
+      clearInterval(interval);
+    }
 
 
 export default function dnd(window, document, options) {
@@ -50,7 +80,7 @@ export default function dnd(window, document, options) {
   let isDraging = false;
   let consolePrintedEl = null; // dev only
   //// defining events
-
+    let isActive = undefined;
   dndReady(document)
 
   let dnd = new VirtualDnd();
@@ -87,6 +117,7 @@ export default function dnd(window, document, options) {
     let [el, att] = getCocs(e.target, [cloneable, draggable])
 
     if (!el) return;
+    
 
     if (att == cloneable) {
       let html = el.getAttribute(data_insert_html);
@@ -120,22 +151,75 @@ export default function dnd(window, document, options) {
     myDropMarker.hide();
     hoverBoxMarker.hide();
     tagNameTooltip.hide();
+        isActive = false;
+    deactivateScroll()
     isDraging = false;
-
 
   }
 
-  function move({ x, y, target }, ref) {
+    
+  function move({ x, y, target }, ref, stopScroll) {
 
     if (startGroup && startGroup != getGroupName(target)) return;
     if (!target || !isDraging) return; // it's out of iframe
     let onEl = target; // dev
     let el = getCoc(target, droppable);
-    if (consolePrintedEl != target) { // dev
-      // dev
-      console.log("you are on: \n", onEl, "\nDroping in: \n", el);
-      consolePrintedEl = el;
+    // if (consolePrintedEl != target) { // dev
+    //   // dev
+    //   console.log("you are on: \n", onEl, "\nDroping in: \n", el);
+    //   consolePrintedEl = el;
+    // }
+
+    // check if element parent has scroll and scroll it
+      let autoScrollThreshold = 20;
+    let parent = el.parentElement;
+    let hasHorizontalScrollbar = parent.scrollWidth > parent.clientWidth;
+    let hasVerticalScrollbar = parent.scrollHeight > parent.clientHeight;
+    
+   
+
+    
+
+    if(hasVerticalScrollbar && !stopScroll )
+    {
+      
+      
+      // let scrollWidth = parent.offsetWidth - parent.clientWidth; // is scroll active
+     let [orientation, closestDistance] = distanceToChildTopBottom([x,y], parent);
+     if(closestDistance < autoScrollThreshold   )
+     {
+    // console.log(orientation, closestDistance)
+      // parent.style.scrollBehavior = 'smooth';
+          mouse = {x,y}
+          if(!isActive)
+          {
+            isActive= true; 
+            activateScroll(parent, orientation, (e)=> move(e,  ref, true))
+          }
+          else if(isActive && lastScrollingElement !== parent)
+          {
+            deactivateScroll()
+            activateScroll(parent, orientation, (e)=> move(e,  ref, true))
+          }
+        
+      
+      
+     }
+     else if(isActive)
+     {
+       isActive = false;
+       deactivateScroll()
+     }
+      
     }
+    else if(hasHorizontalScrollbar)
+    {
+      let scrollHeight = parent.offsetHeight - parent.clientHeight;
+    }
+    
+
+
+
 
 
     // todo:
@@ -218,7 +302,7 @@ export default function dnd(window, document, options) {
   }
 
 
-  let ref = { x: 0, y: 0, window, document, isIframe: false, }
+ 
   // touch
   document.addEventListener('touchstart', wrapper(touchstart, ref))
   document.addEventListener('touchend', wrapper(touchend, ref))

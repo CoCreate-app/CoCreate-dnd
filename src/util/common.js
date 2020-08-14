@@ -345,7 +345,10 @@ export function closestChild(p, children) {
 
 
 let orientations = ['left', 'top', 'right', 'bottom']
-
+/**
+ *  p [x,y]
+ *  child element
+ */
 export function distanceToChild(p, child) {
   let rect = child.getBoundingClientRect();
 
@@ -368,6 +371,32 @@ export function distanceToChild(p, child) {
     if (distance < closestDistance) {
       closestDistance = distance;
       orientation = orientations[i];
+    }
+  })
+  return [orientation, closestDistance]
+}
+
+
+
+export function distanceToChildTopBottom(p, child) {
+  let rect = child.getBoundingClientRect();
+
+
+  let line2 = { p1: [rect.top, rect.left, ], p2: [rect.top, rect.right, ] }
+  let line4 = { p1: [rect.bottom, rect.left, ], p2: [rect.bottom, rect.right, ] }
+
+
+  let distances = [
+    pDistance(p[0], p[1], line2.p1[1], line2.p1[0], line2.p2[1], line2.p2[0]),
+    pDistance(p[0], p[1], line4.p1[1], line4.p1[0], line4.p2[1], line4.p2[0])
+  ];
+
+  let orientation;
+  let closestDistance = Infinity;
+  distances.forEach((distance, i) => {
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      orientation = ['top', 'bottom'][i];
     }
   })
   return [orientation, closestDistance]
