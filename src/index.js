@@ -290,43 +290,43 @@ function wrapper(func, ref) {
 window.initdnd = () => {
 
 
-  if (!document.querySelector('#dnd-style')) {
-    let dndStyle = document.createElement('style');
-    dndStyle.id = "dnd-style";
-    dndStyle.innerHTML = `    /* dnd specic */
+//   if (!document.querySelector('#dnd-style')) {
+//     let dndStyle = document.createElement('style');
+//     dndStyle.id = "dnd-style";
+//     dndStyle.innerHTML = `    /* dnd specic */
 
-    [data-CoC-cloneable],
-    [data-CoC-draggable] {
-      cursor: pointer;
-    }
+//     [data-CoC-cloneable],
+//     [data-CoC-draggable] {
+//       cursor: pointer;
+//     }
 
-    [data-CoC-cloneable],
-    [data-CoC-draggable],
-    [data-CoC-droppable],
-    [data-CoC-hoverable] {
-      outline: 1px dashed gray;
-    }
-
-
-
-    *[CoC-hovered=true] {
-      outline: 2px solid blue
-    }
-
-    /* must be defined after CoC-hovered because of css specificity to show selected with higher priority */
-
-    *[CoC-selected=true] {
-      outline: 3px solid green;
-    }
-
-    *[CoC-dragging=true] {
-      outline: 3px solid red;
-    }
+//     [data-CoC-cloneable],
+//     [data-CoC-draggable],
+//     [data-CoC-droppable],
+//     [data-CoC-hoverable] {
+//       outline: 1px dashed gray;
+//     }
 
 
-    /* dnd specic */`
-    document.head.append(dndStyle)
-  }
+
+//     *[CoC-hovered=true] {
+//       outline: 2px solid blue
+//     }
+
+//     /* must be defined after CoC-hovered because of css specificity to show selected with higher priority */
+
+//     *[CoC-selected=true] {
+//       outline: 3px solid green;
+//     }
+
+//     *[CoC-dragging=true] {
+//       outline: 3px solid red;
+//     }
+
+
+//     /* dnd specic */`
+//     document.head.append(dndStyle)
+//   }
 
 
   // init elements js
