@@ -16,7 +16,7 @@ export default function dnd(window, document, options) {
 
     tagNameTooltip: new boxMarkerTooltip((el) => {
       let name = el.getAttribute(name);
-      return name ? name : el.tagName;
+      return name ? name : false;
     }, window),
 
     myDropMarker: new dropMarker(),
@@ -289,7 +289,8 @@ function wrapper(func, ref) {
 
 window.initdnd = () => {
 
-
+let allimages = document.querySelectorAll('img');
+allimages.forEach(el =>{ el.ondragstart = function() { return false; }} );
 //   if (!document.querySelector('#dnd-style')) {
 //     let dndStyle = document.createElement('style');
 //     dndStyle.id = "dnd-style";

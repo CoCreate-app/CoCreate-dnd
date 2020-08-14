@@ -74,8 +74,10 @@ export function boxMarkerTooltip(callback, referenceWindow, options) {
   document.body.append(tagBox);
   this.obj = tagBox;
   this.draw = function(el, ref) {
+    let name = callback(el);
+    if(!name) return;
+    tagBox.innerHTML = name;
     tagBox.style.display = "block";
-    tagBox.innerHTML = callback(el);
     let { height, paddingTop, paddingBottom } = computeStyles(tagBox, [
       "height",
       "paddingTop",
