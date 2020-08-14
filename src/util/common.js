@@ -22,7 +22,7 @@ export function getCocs(el, attList) {
       if (el.getAttribute(att) == "true") return [el, att];
     }
     el = el.parentElement;
-    if (!el) return false;
+    if (!el) return [false,false];
   } while (true);
 }
 
