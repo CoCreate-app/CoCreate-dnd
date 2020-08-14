@@ -232,28 +232,28 @@ export function ghostEffect(el, ref) {
 
   this.start = () => {
     this.cloneEl = el.cloneNode(true);
+    this.wrapper = document.createElement('div');
+    this.wrapper.append(this.cloneEl);
+    this.wrapper.style.display = 'none';
+    ref.document.body.append(this.wrapper)
 
-    this.cloneEl.style.visibility = 'hidden';
-    ref.document.body.append(this.cloneEl)
+    this.wrapper.style.pointerEvents = 'none';
+    this.wrapper.style.overflow = 'hidden'
+    this.wrapper.style.textOverflow = 'ellipsis'
+    this.wrapper.style.whiteSpace = 'nowrap'
 
-    this.cloneEl.style.pointerEvents = 'none';
-    this.cloneEl.style.overflow = 'hidden'
-    this.cloneEl.style.textOverflow = 'ellipsis'
-    this.cloneEl.style.whiteSpace = 'nowrap'
-
-    this.cloneEl.style.opacity = '0.8';
-    this.cloneEl.style.position = 'fixed';
-    this.cloneEl.style.Zindex = '2000';
-    this.cloneEl.id = 'ghost-effect';
+    this.wrapper.style.opacity = '0.5';
+    this.wrapper.style.position = 'fixed';
+    this.wrapper.style.Zindex = '2000';
+    this.wrapper.id = 'ghost-effect';
 
 
-
-    
   }
 
   this.draw = (e, ref) => {
-    this.cloneEl.style.visibility = 'visible';
-    let rect = this.cloneEl.getBoundingClientRect();
+ 
+    this.wrapper.style.display = 'block';
+    let rect = this.wrapper.getBoundingClientRect();
     let { marginTop, marginBottom, marginLeft, marginRight } = computeStyles(this.cloneEl, [
 
       'marginTop',
@@ -269,12 +269,12 @@ export function ghostEffect(el, ref) {
       frameRect = { top: 0, left: 0 }
 
 
-    this.cloneEl.style.top = frameRect.top + e.y - (rect.height + marginTop + marginBottom) / 2 + 'px';
-    this.cloneEl.style.left = frameRect.left + e.x - (rect.width + marginLeft + marginRight) / 2 + 'px';
+    this.wrapper.style.top = frameRect.top + e.y - (rect.height + marginTop + marginBottom) / 2 + 'px';
+    this.wrapper.style.left = frameRect.left + e.x - (rect.width + marginLeft + marginRight) / 2 + 'px';
   }
 
   this.hide = (ref) => {
-    this.cloneEl.remove()
+    this.wrapper.remove()
     // ref.document.getElementById('ghost-effect').remove()
     // ref.document.removeEventListener('mousemove', this.effectCb)
   }
