@@ -377,7 +377,115 @@ export function distanceToChild(p, child) {
 }
 
 export function autoScroller(){
+  this.lastScrollingElement;
+  this.onElement;
+  this.mouse;
+  this.speed = 12;
+  this.interval;
+  this.isActive;
   
+ this.calculateScroll =  function calculateScroll({x, y, element,  onMouseScrollMove }){
+    let hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+    let hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
+    
+    let horScrollThreshold = element.clientWidth / 4;
+    let verScrollThreshold = element.clientHeight / 4;
+    
+    if((hasVerticalScrollbar || hasHorizontalScrollbar) )
+    {
+    
+      this.mouse = {x,y}
+     let [orientation, closestDistance] = distanceToChild([x,y], element);
+     let condition;
+     switch(orientation)
+     {
+       case 'top':
+       case 'bottom':
+         this.speed = ( verScrollThreshold / closestDistance)  * 12;
+         condition = closestDistance < verScrollThreshold;
+         break;
+       case 'left':
+       case 'right':
+         this.speed = ( horScrollThreshold / closestDistance)  * 12;
+           condition = closestDistance < horScrollThreshold;
+         break;
+     }
+    
+
+      
+      // let scrollWidth = element.offsetWidth - element.clientWidth; // is scroll active
+     if(condition)
+     {
+          if(!this.isActive)
+          {
+            this.isActive= true; 
+            this.activateScroll(element, orientation, onMouseScrollMove)
+          }
+          else if(this.isActive && this.lastScrollingElement !== element)
+          {
+            this.deactivateScroll()
+            this.activateScroll(element, orientation, onMouseScrollMove)
+          }
+        
+     }
+     else if(this.isActive)
+     {
+       this.isActive = false;
+       this.deactivateScroll()
+     }
+      
+    }
+   
   
-  
+}
+   
+   
+   
+   
+     this.activateScroll =   function activateScroll(element, orientation, callback)
+    {
+       console.log('scrolling')
+      this.lastScrollingElement = element;
+      this.interval = setInterval(()=>{
+        switch(orientation)
+        {
+          case 'top':
+          element.scrollBy(0,-this.speed);
+          break;
+          case 'bottom':
+          element.scrollBy(0,this.speed);
+          break;
+          case 'left':
+          element.scrollBy(-this.speed,0);
+          break;
+          case 'right':
+          element.scrollBy(this.speed,0);
+          break;
+            
+        }
+
+   
+        this.onElement = document.elementFromPoint(this.mouse.x, this.mouse.y)
+        if(this.onElement  )
+        {
+          callback({x:this.mouse.x, y:this.mouse.y, target:this.onElement});
+         
+        }
+        
+        
+      }, 10)
+       
+    }
+    
+    this.deactivateScroll = function deactivateScroll(){
+
+      console.log('scrolling disabled')
+      clearInterval(this.interval);
+    }
+
+
+   
+   
+   
+   
 }

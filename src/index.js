@@ -1,63 +1,17 @@
 import './util/iframe';
-import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs,distanceToChild } from './util/common'
+import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs,distanceToChild, autoScroller } from './util/common'
 
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
 import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from './util/variables.js'
 
  let ref = { x: 0, y: 0, window, document, isIframe: false, }
-  let lastScrollingElement;
-  let onElement;
-
-  let mouse;
-  let speed = 12;
-   let interval;
-    function activateScroll(parent, orientation, callback)
-    {
-       console.log('scrolling')
-      lastScrollingElement = parent;
-      interval = setInterval(()=>{
-        switch(orientation)
-        {
-          case 'top':
-          parent.scrollBy(0,-speed);
-          break;
-          case 'bottom':
-          parent.scrollBy(0,speed);
-          break;
-          case 'left':
-          parent.scrollBy(-speed,0);
-          break;
-          case 'right':
-          parent.scrollBy(speed,0);
-          break;
-            
-        }
-
-   
-        onElement = document.elementFromPoint(mouse.x, mouse.y)
-        if(onElement  )
-        {
-          callback({x:mouse.x, y:mouse.y, target:onElement});
-         
-        }
-        
-        
-      }, 2)
-       
-    }
-    
-    function deactivateScroll(){
-
-      console.log('scrolling disabled')
-      clearInterval(interval);
-    }
-
 
 export default function dnd(window, document, options) {
   console.log('dnd is loading', window.location.pathname)
+   
   options = Object.assign({
-
+    scroller: new autoScroller(),
     tagNameTooltip: new boxMarkerTooltip((el) => {
       let name = el.getAttribute(name);
       return name ? name : false;
@@ -90,7 +44,7 @@ export default function dnd(window, document, options) {
 
   }, options)
   // weird bug: dropMarker override the imported dropMarker in the above
-  let { myDropMarker, selectBoxMarker, hoverBoxMarker, tagNameTooltip } = options;
+  let { myDropMarker, selectBoxMarker, hoverBoxMarker, tagNameTooltip, scroller } = options;
   let isDraging = false;
   let consolePrintedEl = null; // dev only
   //// defining events
@@ -166,12 +120,12 @@ export default function dnd(window, document, options) {
     hoverBoxMarker.hide();
     tagNameTooltip.hide();
         isActive = false;
-    deactivateScroll()
+    scroller.deactivateScroll()
     isDraging = false;
 
   }
 
-    
+  
   function move({ x, y, target }, ref, stopScroll) {
 
     if (startGroup && startGroup != getGroupName(target)) return;
@@ -187,64 +141,16 @@ export default function dnd(window, document, options) {
     // check if element parent has scroll and scroll it
       
     let parent = el.parentElement;
-    let hasHorizontalScrollbar = parent.scrollWidth > parent.clientWidth;
-    let hasVerticalScrollbar = parent.scrollHeight > parent.clientHeight;
-    
-   
-if(!stopScroll)
-{
-  
-    let horScrollThreshold = parent.clientWidth / 4;
-    let verScrollThreshold = parent.clientHeight / 4;
-    
-    if((hasVerticalScrollbar || hasHorizontalScrollbar) )
-    {
-    
-      mouse = {x,y}
-     let [orientation, closestDistance] = distanceToChild([x,y], parent);
-     let condition;
-     switch(orientation)
-     {
-       case 'top':
-       case 'bottom':
-         speed = ( verScrollThreshold / closestDistance)  * 4;
-         condition = closestDistance < verScrollThreshold;
-         break;
-       case 'left':
-       case 'right':
-         speed = ( horScrollThreshold / closestDistance)  * 4;
-           condition = closestDistance < horScrollThreshold;
-         break;
-     }
-    
 
+   
+    if(!stopScroll)
+    {
       
-      // let scrollWidth = parent.offsetWidth - parent.clientWidth; // is scroll active
-     if(condition)
-     {
-          if(!isActive)
-          {
-            isActive= true; 
-            activateScroll(parent, orientation, (e)=> move(e,  ref, true))
-          }
-          else if(isActive && lastScrollingElement !== parent)
-          {
-            deactivateScroll()
-            activateScroll(parent, orientation, (e)=> move(e,  ref, true))
-          }
-        
-     }
-     else if(isActive)
-     {
-       isActive = false;
-       deactivateScroll()
-     }
-      
+      scroller.calculateScroll({
+        x,y,element: parent, onMouseScrollMove: (e)=> move(e,  ref, true)
+      })
+
     }
-   
-    
-}
-   
 
 
 
