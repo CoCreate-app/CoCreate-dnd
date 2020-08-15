@@ -1,5 +1,5 @@
 import './util/iframe';
-import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs, distanceToChildTopBottom } from './util/common'
+import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs,distanceToChild } from './util/common'
 
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
@@ -8,28 +8,42 @@ import { droppable, draggable, selectable, hoverable, name, cloneable, data_inse
  let ref = { x: 0, y: 0, window, document, isIframe: false, }
   let lastScrollingElement;
   let onElement;
-  let lastOnElement;
+
   let mouse;
+  let speed = 12;
    let interval;
     function activateScroll(parent, orientation, callback)
     {
        console.log('scrolling')
       lastScrollingElement = parent;
       interval = setInterval(()=>{
-        if(orientation === 'top')
-          parent.scrollBy(0,-1);
-        else
-          parent.scrollBy(0,1);
-        lastOnElement = onElement;
+        switch(orientation)
+        {
+          case 'top':
+          parent.scrollBy(0,-speed);
+          break;
+          case 'bottom':
+          parent.scrollBy(0,speed);
+          break;
+          case 'left':
+          parent.scrollBy(-speed,0);
+          break;
+          case 'right':
+          parent.scrollBy(speed,0);
+          break;
+            
+        }
+
+   
         onElement = document.elementFromPoint(mouse.x, mouse.y)
         if(onElement  )
         {
           callback({x:mouse.x, y:mouse.y, target:onElement});
-          // trigger 
+         
         }
         
         
-      }, 20)
+      }, 2)
        
     }
     
@@ -171,26 +185,43 @@ export default function dnd(window, document, options) {
     // }
 
     // check if element parent has scroll and scroll it
-      let autoScrollThreshold = 20;
+      
     let parent = el.parentElement;
     let hasHorizontalScrollbar = parent.scrollWidth > parent.clientWidth;
     let hasVerticalScrollbar = parent.scrollHeight > parent.clientHeight;
     
    
-
+if(!stopScroll)
+{
+  
+    let horScrollThreshold = parent.clientWidth / 4;
+    let verScrollThreshold = parent.clientHeight / 4;
+    
+    if((hasVerticalScrollbar || hasHorizontalScrollbar) )
+    {
+    
+      mouse = {x,y}
+     let [orientation, closestDistance] = distanceToChild([x,y], parent);
+     let condition;
+     switch(orientation)
+     {
+       case 'top':
+       case 'bottom':
+         speed = ( verScrollThreshold / closestDistance)  * 4;
+         condition = closestDistance < verScrollThreshold;
+         break;
+       case 'left':
+       case 'right':
+         speed = ( horScrollThreshold / closestDistance)  * 4;
+           condition = closestDistance < horScrollThreshold;
+         break;
+     }
     
 
-    if(hasVerticalScrollbar && !stopScroll )
-    {
-      
       
       // let scrollWidth = parent.offsetWidth - parent.clientWidth; // is scroll active
-     let [orientation, closestDistance] = distanceToChildTopBottom([x,y], parent);
-     if(closestDistance < autoScrollThreshold   )
+     if(condition)
      {
-    // console.log(orientation, closestDistance)
-      // parent.style.scrollBehavior = 'smooth';
-          mouse = {x,y}
           if(!isActive)
           {
             isActive= true; 
@@ -202,8 +233,6 @@ export default function dnd(window, document, options) {
             activateScroll(parent, orientation, (e)=> move(e,  ref, true))
           }
         
-      
-      
      }
      else if(isActive)
      {
@@ -212,11 +241,10 @@ export default function dnd(window, document, options) {
      }
       
     }
-    else if(hasHorizontalScrollbar)
-    {
-      let scrollHeight = parent.offsetHeight - parent.clientHeight;
-    }
+   
     
+}
+   
 
 
 
