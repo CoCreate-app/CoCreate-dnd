@@ -444,7 +444,7 @@ export function autoScroller(){
    
      this.activateScroll =   function activateScroll(element, orientation, callback)
     {
-       console.log('scrolling')
+      // console.log('scrolling')
       this.lastScrollingElement = element;
       this.interval = setInterval(()=>{
         switch(orientation)
@@ -479,7 +479,7 @@ export function autoScroller(){
     
     this.deactivateScroll = function deactivateScroll(){
 
-      console.log('scrolling disabled')
+      // console.log('scrolling disabled')
       clearInterval(this.interval);
     }
 
