@@ -303,16 +303,23 @@ export default function dnd(window, document, options) {
 
 
   })
-
+  // document.addEventListener('dragend', () => {
+  //     myDropMarker.hide()
+  //   if (ghost)
+  //     ghost.hide(ref)
+  //     isDraging = false;
+  // })
 
 }
 
 
 function dndReady(document) {
   // disable native drag
-  document.addEventListener('dragstart', () => {
+  document.addEventListener('dragstart', (e) => {
+    e.preventDefault();
     return false;
   })
+
   // disable selection
   document.addEventListener('selectstart', (e) => {
     let result = getCocs(e.target, [draggable, cloneable])
