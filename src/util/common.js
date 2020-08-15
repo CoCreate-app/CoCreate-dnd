@@ -33,9 +33,9 @@ export function getGroupName(el) {
     el = el.parentElement;
   do {
     let groupName = el.getAttribute(group_name);
-    if (groupName) return groupName;
+    if (groupName) return [el,groupName];
     el = el.parentElement;
-    if (!el) return "";
+    if (!el) return [null, undefined];
   } while (true);
 }
 

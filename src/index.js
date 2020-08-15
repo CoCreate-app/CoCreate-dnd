@@ -99,8 +99,8 @@ export default function dnd(window, document, options) {
 
 
     // get group
-    startGroup = getGroupName(el)
-
+    let groupResult = getGroupName(el)
+    startGroup = groupResult[1];
 
 
     ref.document.body.style.cursor = 'crosshair !important'
@@ -125,10 +125,27 @@ export default function dnd(window, document, options) {
 
   }
 
-  
   function move({ x, y, target }, ref, stopScroll) {
+  
 
-    if (startGroup && startGroup != getGroupName(target)) return;
+
+    if( isDraging )
+    {
+      let [groupEl, groupname] = getGroupName(target);
+      if ( startGroup &&  groupname && startGroup !== groupname )
+        do{
+          let groupResult = getGroupName(groupEl);
+          if(!groupResult[0]) return; // or return
+          groupEl = groupResult[0].parentElement;
+          groupname = groupResult[1];
+          if ( startGroup === groupname ){
+             target = groupResult[0];
+             break;
+          }
+          
+        }while(true)
+    }
+    // if (startGroup && startGroup != getGroupName(target)) return;
     if (!target || !isDraging) return; // it's out of iframe
     let onEl = target; // dev
     let el = getCoc(target, droppable);
@@ -138,8 +155,7 @@ export default function dnd(window, document, options) {
     //   consolePrintedEl = el;
     // }
 
-    // check if element parent has scroll and scroll it
-      
+    if (!el || !isDraging) return;
     let parent = el.parentElement;
 
    
@@ -157,7 +173,7 @@ export default function dnd(window, document, options) {
 
 
     // todo:
-    if (!el || !isDraging) return;
+    
     dnd.dragOver({ x, y, target: el }, el, ref)
 
   }
