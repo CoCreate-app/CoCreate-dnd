@@ -72,17 +72,7 @@ export default function dnd(window, document, options) {
     myDropMarker.draw(data.el, data.closestEl, data.orientation, !data.hasChild, data.ref);
     hoverBoxMarker.draw(data.el)
     tagNameTooltip.draw(data.el, data.ref)
-     if (ghost)
-     {
-       let {x,y} =data.e;
-        if( isDraging )
-          ghost.draw({x,y}, ref)
-        else 
-        {
-          ghost.hide(data.ref)
-          myDropMarker.hide()
-        }
-     }
+
 
   })
 
@@ -139,6 +129,8 @@ export default function dnd(window, document, options) {
 
     if( isDraging )
     {
+       if (ghost)
+        ghost.draw({x,y}, ref);
       // skip group names 
       let [groupEl, groupname] = getGroupName(target);
       if ( startGroup &&  groupname && startGroup !== groupname )
@@ -154,7 +146,10 @@ export default function dnd(window, document, options) {
           
         }while(true)
     }
-
+    else{
+       if (ghost)
+        ghost.hide( ref);
+    }
 
     if (!target) return; // it's out of iframe if this is multi frame
     
