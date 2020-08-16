@@ -376,11 +376,11 @@ export function distanceToChild(p, child) {
   return [orientation, closestDistance]
 }
 
-export function autoScroller(){
+export function autoScroller({speed, threshold}){
   this.lastScrollingElement;
   this.onElement;
   this.mouse;
-  this.speed = 12;
+  this.speed;
   this.interval;
   this.isActive;
   
@@ -392,8 +392,8 @@ export function autoScroller(){
     let hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
     let hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
     
-    let horScrollThreshold = element.clientWidth / 4;
-    let verScrollThreshold = element.clientHeight / 4;
+    let horScrollThreshold = element.clientWidth / threshold;
+    let verScrollThreshold = element.clientHeight / threshold;
     
     if((hasVerticalScrollbar || hasHorizontalScrollbar) )
     {
@@ -405,12 +405,12 @@ export function autoScroller(){
      {
        case 'top':
        case 'bottom':
-         this.speed = ( verScrollThreshold / closestDistance)  * 12;
+         this.speed = ( verScrollThreshold / closestDistance)  * speed;
          condition = closestDistance < verScrollThreshold;
          break;
        case 'left':
        case 'right':
-         this.speed = ( horScrollThreshold / closestDistance)  * 12;
+         this.speed = ( horScrollThreshold / closestDistance)  * speed;
            condition = closestDistance < horScrollThreshold;
          break;
      }
@@ -482,14 +482,10 @@ export function autoScroller(){
     }
     
     this.deactivateScroll = function deactivateScroll(){
-
       // console.log('scrolling disabled')
       clearInterval(this.interval);
     }
 
 
-   
-   
-   
    
 }

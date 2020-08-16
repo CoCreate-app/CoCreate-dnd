@@ -11,7 +11,7 @@ export default function dnd(window, document, options) {
   console.log('dnd is loading', window.location.pathname)
    
   options = Object.assign({
-    scroller: new autoScroller(),
+    scroller: new autoScroller({speed: 12, threshold: 4}),
     tagNameTooltip: new boxMarkerTooltip((el) => {
       let name = el.getAttribute(name);
       return name ? name : false;
@@ -48,7 +48,7 @@ export default function dnd(window, document, options) {
   let isDraging = false;
   let consolePrintedEl = null; // dev only
   //// defining events
-    let isActive = undefined;
+
   dndReady(document)
 
   let dnd = new VirtualDnd();
@@ -56,8 +56,6 @@ export default function dnd(window, document, options) {
   dnd.on('dragStart', (data) => {
     selectBoxMarker.hide()
     myDropMarker.hide();
-
-    // data.ref
     ghost = new ghostEffect(data.el, { document });
     ghost.start()
 
@@ -70,9 +68,21 @@ export default function dnd(window, document, options) {
 
   })
   dnd.on('dragOver', (data) => {
+    // it will always run when mouse or touch moves
     myDropMarker.draw(data.el, data.closestEl, data.orientation, !data.hasChild, data.ref);
     hoverBoxMarker.draw(data.el)
     tagNameTooltip.draw(data.el, data.ref)
+     if (ghost)
+     {
+       let {x,y} =data.e;
+        if( isDraging )
+          ghost.draw({x,y}, ref)
+        else 
+        {
+          ghost.hide(data.ref)
+          myDropMarker.hide()
+        }
+     }
 
   })
 
@@ -118,7 +128,6 @@ export default function dnd(window, document, options) {
     myDropMarker.hide();
     hoverBoxMarker.hide();
     tagNameTooltip.hide();
-        isActive = false;
     scroller.deactivateScroll()
     isDraging = false;
 
@@ -130,9 +139,7 @@ export default function dnd(window, document, options) {
 
     if( isDraging )
     {
-      if (ghost)
-      ghost.draw({x,y,target}, ref)
-      
+      // skip group names 
       let [groupEl, groupname] = getGroupName(target);
       if ( startGroup &&  groupname && startGroup !== groupname )
         do{
@@ -147,12 +154,7 @@ export default function dnd(window, document, options) {
           
         }while(true)
     }
-    else
-    {
-      if (ghost)
-        ghost.hide(ref)
-      return;
-    }
+
 
     if (!target) return; // it's out of iframe if this is multi frame
     
