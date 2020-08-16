@@ -153,8 +153,9 @@ export default function dnd(window, document, options) {
         ghost.hide(ref)
       return;
     }
-    // if (startGroup && startGroup != getGroupName(target)) return;
-    if (!target) return; // it's out of iframe
+
+    if (!target) return; // it's out of iframe if this is multi frame
+    
     let onEl = target; // dev
     let el = getCoc(target, droppable);
     // if (consolePrintedEl != target) { // dev
@@ -304,12 +305,7 @@ export default function dnd(window, document, options) {
 
 
   })
-  // document.addEventListener('dragend', () => {
-  //     myDropMarker.hide()
-  //   if (ghost)
-  //     ghost.hide(ref)
-  //     isDraging = false;
-  // })
+
 
 }
 
@@ -338,8 +334,7 @@ function wrapper(func, ref) {
 
 window.initdnd = () => {
 
-let allimages = document.querySelectorAll('img');
-allimages.forEach(el =>{ el.ondragstart = function() { return false; }} );
+
 //   if (!document.querySelector('#dnd-style')) {
 //     let dndStyle = document.createElement('style');
 //     dndStyle.id = "dnd-style";
@@ -379,19 +374,7 @@ allimages.forEach(el =>{ el.ondragstart = function() { return false; }} );
 //   }
 
 
-  // init elements js
-  // dom.element('default', {
-  //   selector: ['.sortable *, .sortable'],
-  //   draggable: 'true',
-  //   droppable: 'true',
-  //   hoverable: 'true',
-  //   selectable: 'true',
-  //   editable: 'true',
-  // });
 
-  // dom.element('default', {
-  //   selector: ['.dnd, .dnd *'],
-  // });
   // only run if it's the host but not iframe
   // if (window.location === window.parent.location)
 
@@ -426,13 +409,7 @@ allimages.forEach(el =>{ el.ondragstart = function() { return false; }} );
   })
 
 };
-// init
-// let canvasWindow = document.getElementById('canvas').contentWindow;
-// console.log('zzzzzzzzzzzzzzzz', window.location.pathname, canvasWindow)
-// canvasWindow.addEventListener('load', )
+
 window.addEventListener('load', () => {
-
-
   window.initdnd()
-
 });
