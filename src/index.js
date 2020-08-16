@@ -165,7 +165,7 @@ export default function dnd(window, document, options) {
     if (!el || !isDraging) return;
     let parent = el.parentElement;
 
-   
+   scroller.update(x,y)
     if(!stopScroll)
     {
       

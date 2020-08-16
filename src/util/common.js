@@ -384,6 +384,10 @@ export function autoScroller(){
   this.interval;
   this.isActive;
   
+  this.update = function(x,y){
+    this.mouse = {x,y};
+  }
+  
  this.calculateScroll =  function calculateScroll({x, y, element,  onMouseScrollMove }){
     let hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
     let hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
