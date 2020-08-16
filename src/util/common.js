@@ -253,7 +253,7 @@ export function ghostEffect(el, ref) {
 
     this.wrapper.style.opacity = '0.5';
     this.wrapper.style.position = 'fixed';
-    this.wrapper.style.Zindex = '2000';
+    this.wrapper.style.Zindex = '20000';
     this.wrapper.id = 'ghost-effect';
 
 
@@ -283,10 +283,8 @@ export function ghostEffect(el, ref) {
     this.wrapper.style.left = frameRect.left + e.x - 15  + 'px';
   }
 
-  this.hide = (ref) => {
+  this.hide = () => {
     this.wrapper.remove()
-    // ref.document.getElementById('ghost-effect').remove()
-    // ref.document.removeEventListener('mousemove', this.effectCb)
   }
 }
 
@@ -376,6 +374,60 @@ export function distanceToChild(p, child) {
   return [orientation, closestDistance]
 }
 
+
+export function distanceToChildLeftRight(p, child) {
+  let rect = child.getBoundingClientRect();
+
+  let line1 = { p1: [rect.top, rect.left, ], p2: [rect.bottom, rect.left] }
+  let line3 = { p1: [rect.top, rect.right, ], p2: [rect.bottom, rect.right, ] }
+
+
+
+  let distances = [
+    pDistance(p[0], p[1], line1.p1[1], line1.p1[0], line1.p2[1], line1.p2[0]),
+    pDistance(p[0], p[1], line3.p1[1], line3.p1[0], line3.p2[1], line3.p2[0]),
+  ];
+
+  let orientation;
+  let closestDistance = Infinity;
+  distances.forEach((distance, i) => {
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      orientation = ['left', 'right'][i];
+    }
+  })
+  return [orientation, closestDistance]
+}
+
+export function distanceToChildTopBottom(p, child) {
+  let rect = child.getBoundingClientRect();
+
+
+  let line2 = { p1: [rect.top, rect.left, ], p2: [rect.top, rect.right, ] }
+
+  let line4 = { p1: [rect.bottom, rect.left, ], p2: [rect.bottom, rect.right, ] }
+
+
+  let distances = [
+
+    pDistance(p[0], p[1], line2.p1[1], line2.p1[0], line2.p2[1], line2.p2[0]),
+
+    pDistance(p[0], p[1], line4.p1[1], line4.p1[0], line4.p2[1], line4.p2[0])
+  ];
+
+  let orientation;
+  let closestDistance = Infinity;
+  distances.forEach((distance, i) => {
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      orientation = ['top', 'bottom'][i];
+    }
+  })
+  return [orientation, closestDistance]
+}
+
+
+
 export function autoScroller({speed, threshold}){
   this.lastScrollingElement;
   this.onElement;
@@ -388,18 +440,26 @@ export function autoScroller({speed, threshold}){
     this.mouse = {x,y};
   }
   
- this.calculateScroll =  function calculateScroll({x, y, element,  onMouseScrollMove }){
+ this.calculateScroll =  function ({ x,y, element,  onMouseScrollMove }){
+  // console.log('scrolling in ', element)
     let hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
     let hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
     
     let horScrollThreshold = element.clientWidth / threshold;
     let verScrollThreshold = element.clientHeight / threshold;
     
-    if((hasVerticalScrollbar || hasHorizontalScrollbar) )
+    let [orientation, closestDistance] = [];
+    if(hasVerticalScrollbar)
+      [orientation, closestDistance] = distanceToChildTopBottom([x,y], element);
+    else if (hasHorizontalScrollbar)
+      [orientation, closestDistance] = distanceToChildLeftRight([x,y], element);
+    
+    if(orientation)
     {
     
-      this.mouse = {x,y}
-     let [orientation, closestDistance] = distanceToChild([x,y], element);
+              
+     
+         
      let condition;
      switch(orientation)
      {
@@ -408,10 +468,11 @@ export function autoScroller({speed, threshold}){
          this.speed = ( verScrollThreshold / closestDistance)  * speed;
          condition = closestDistance < verScrollThreshold;
          break;
+         
        case 'left':
        case 'right':
          this.speed = ( horScrollThreshold / closestDistance)  * speed;
-           condition = closestDistance < horScrollThreshold;
+         condition = closestDistance < horScrollThreshold;
          break;
      }
     
@@ -446,24 +507,28 @@ export function autoScroller({speed, threshold}){
    
    
    
-     this.activateScroll =   function activateScroll(element, orientation, callback)
+     this.activateScroll =   function (element, orientation, callback)
     {
-      // console.log('scrolling')
+      console.log('scrolling')
       this.lastScrollingElement = element;
       this.interval = setInterval(()=>{
         switch(orientation)
         {
           case 'top':
           element.scrollBy(0,-this.speed);
+          console.log('top')
           break;
           case 'bottom':
           element.scrollBy(0,this.speed);
+          console.log('bottom')
           break;
           case 'left':
           element.scrollBy(-this.speed,0);
+          console.log('left')
           break;
           case 'right':
           element.scrollBy(this.speed,0);
+          console.log('right')
           break;
             
         }
@@ -481,8 +546,8 @@ export function autoScroller({speed, threshold}){
        
     }
     
-    this.deactivateScroll = function deactivateScroll(){
-      // console.log('scrolling disabled')
+    this.deactivateScroll = function (){
+      console.log('scrolling disabled')
       clearInterval(this.interval);
     }
 
