@@ -151,9 +151,10 @@ export default function dnd(window, document, options) {
     {
       if (ghost)
         ghost.hide(ref)
+      return;
     }
     // if (startGroup && startGroup != getGroupName(target)) return;
-    if (!target || !isDraging) return; // it's out of iframe
+    if (!target) return; // it's out of iframe
     let onEl = target; // dev
     let el = getCoc(target, droppable);
     // if (consolePrintedEl != target) { // dev
@@ -163,18 +164,18 @@ export default function dnd(window, document, options) {
     // }
 
     if (!el || !isDraging) return;
-    let parent = el.parentElement;
 
-   scroller.update(x,y)
+
+
     if(!stopScroll)
     {
       
       scroller.calculateScroll({
-        x,y,element: parent, onMouseScrollMove: (e)=> move(e,  ref, true)
+        x,y,element: el.parentElement, onMouseScrollMove: (e)=> move(e,  ref, true)
       })
-
+      
     }
-
+    scroller.update(x,y)
 
 
 
