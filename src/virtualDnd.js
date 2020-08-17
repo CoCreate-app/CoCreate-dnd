@@ -77,16 +77,7 @@ export default function virtualDnd() {
         };
 
 
-        // dispatch gloval events
-        const event = new CustomEvent('dndsuccess', {
-          bubbles: true,
-          detail: {
-            position: this.position,
-            dragedEl: this.dragedEl,
-            dropedEl: this.dropedEl
-          }
-        });
-        this.dropedEl.dispatchEvent(event, { bubbles: true })
+
 
 
         // domEditor(broadcast)
@@ -133,6 +124,8 @@ export default function virtualDnd() {
             }
           })
 
+          
+
         }
         else
           CoCreate.sendMessage({
@@ -146,7 +139,16 @@ export default function virtualDnd() {
 
         this.id = null;
 
-        // this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
+        // dispatch gloval events
+        const event = new CustomEvent('dndsuccess', {
+          bubbles: true,
+          detail: {
+            position: this.position,
+            dragedEl: this.dragedEl,
+            dropedEl: this.dropedEl
+          }
+        });
+        this.dropedEl.dispatchEvent(event, { bubbles: true })
 
       }
     }
