@@ -2,6 +2,44 @@ import eventUtil from './eventUtil';
 import { closestChild, parse } from './util/common';
 import { exclude } from './util/variables'
 
+let elementConfig = [{
+    displayname: 'default',
+    selector: ['body, body *'],
+    draggable: 'true',
+    droppable: 'true',
+    hoverable: 'true',
+    selectable: 'true',
+    editable: 'true',
+    // toolbar: { 'test': 'testing this' },
+  },
+  {
+    displayname: 'body',
+    selector: ['body, body'],
+    draggable: 'false',
+  },
+  {
+    displayname: 'form',
+    selector: ['form'],
+    editable: 'true'
+  },
+  {
+    displayname: 'input',
+    selector: 'input',
+    editable: 'false'
+  },
+  {
+    displayname: 'textarea',
+    selector: 'textarea',
+    editable: 'false'
+  },
+  {
+    displayname: 'select',
+    selector: 'select',
+    editable: 'false'
+  },
+];
+
+
 function UUID(length = 10) {
   var result = '';
   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -85,7 +123,7 @@ export default function virtualDnd() {
         if (this.dropType !== 'data-CoC-cloneable')
           broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
         else {
-          let clonedEl = parse('<body>' + broadcast.value[1].outerHTML + '</body>');
+          let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
           dom.element(
             elementConfig, { context: clonedEl }
           )
