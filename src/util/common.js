@@ -57,28 +57,38 @@ export function randomId() {
 
 
 export function boxMarkerTooltip(callback, referenceWindow, options) {
+ 
   options = Object.assign({ borderSize: 2 }, options)
+  let tagBox;
+  tagBox = document.createElement("div");
+    if(window.parent !== window)
+   {
+     
+    
+    tagBox.id = "tagBox";
+    tagBox.style.backgroundColor = "blue";
+    tagBox.style.color = "white";
+    tagBox.style.position = "absolute";
+    tagBox.style.zIndex = "99999";
+    tagBox.style.padding = "2px 10px";
+    tagBox.style.fontSize = "10px";
+    tagBox.style.display = "none";
+    tagBox.style.pointerEvents = 'none';
+  
+  
+    document.body.append(tagBox);
+    this.obj = tagBox;
+   }
 
-  let tagBox = document.createElement("div");
-  tagBox.id = "tagBox";
-  tagBox.style.backgroundColor = "blue";
-  tagBox.style.color = "white";
-  tagBox.style.position = "absolute";
-  tagBox.style.zIndex = "99999";
-  tagBox.style.padding = "2px 10px";
-  tagBox.style.fontSize = "10px";
-  tagBox.style.display = "none";
-  tagBox.style.pointerEvents = 'none';
-
-
-  document.body.append(tagBox);
-  this.obj = tagBox;
   this.draw = function(el, ref) {
+    if(window.parent === window)
+      return;
+      
     let name = callback(el);
     if(!name) return;
     tagBox.innerHTML = name;
     tagBox.style.display = "block";
-    let { height, paddingTop, paddingBottom } = computeStyles(tagBox, [
+    let { height } = computeStyles(tagBox, [
       "height",
       "paddingTop",
       "paddingBottom",
@@ -92,7 +102,7 @@ export function boxMarkerTooltip(callback, referenceWindow, options) {
       frameRect = { top: 0, left: 0 }
 
     tagBox.style.top = frameRect.top +
-      rect.top - options.borderSize + referenceWindow.scrollY - height - paddingTop - paddingBottom + "px";
+      rect.top - options.borderSize + referenceWindow.scrollY - height + "px";
     tagBox.style.left = frameRect.left + rect.left - options.borderSize + window.scrollX + "px";
   };
 
