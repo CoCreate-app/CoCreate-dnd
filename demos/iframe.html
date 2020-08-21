@@ -4,7 +4,16 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
   <title>CoCreate-dnd.js</title>
+  <meta name="description" content="Utility first css framework, design faster and improve on your css by using native inline styles as classes. No learning curve, use what you already know" />
+  <meta name="keywords" content="helper classes, utility classes, css framework, css library, inline style classes" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- CoCreate CSS -->
+  <link rel="stylesheet" href="https://server.cocreate.app/css/CoCreate.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../CoCreate-vdom/src/CoCreate-vdom.css" type="text/css" />
+  <link rel="stylesheet" href="../../CoCreate-dnd/src/CoCreate-dnd.css" type="text/css" />
   <style>
     .sortable-item {
       background-color: white;
@@ -30,36 +39,6 @@
       display: inline-block;
     }
 
-    /* dnd specic */
-
-    [data-CoC-draggable] {
-      cursor: pointer;
-    }
-
-    *[data-CoC-draggable],
-    *[data-CoC-droppable],
-    *[data-CoC-hoverable] {
-      outline: 1px dashed gray;
-    }
-
-
-
-    *[CoC-hovered=true] {
-      outline: 2px solid blue
-    }
-
-    /* must be defined after CoC-hovered because of css specificity to show selected with higher priority */
-
-    *[CoC-selected=true] {
-      outline: 3px solid green;
-    }
-
-    *[CoC-dragging=true] {
-      outline: 3px solid red;
-    }
-
-
-    /* dnd specic */
 
     /*general*/
 
