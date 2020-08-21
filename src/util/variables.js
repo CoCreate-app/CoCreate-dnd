@@ -5,6 +5,6 @@ export const cloneable = "data-CoC-cloneable";
 export const selectable = "data-CoC-selectable";
 export const editable = "data-CoC-editable";
 export const hoverable = "data-CoC-hoverable";
-export const name = "data-CoC-name";
+export const dndname = "data-CoC-name";
 export const group_name = "data-group_name";
 export const data_insert_html = "data-insert-html";

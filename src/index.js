@@ -3,7 +3,7 @@ import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupN
 
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
-import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from './util/variables.js'
+import { droppable, draggable, selectable, hoverable, dndname, cloneable, data_insert_html } from './util/variables.js'
 
  let ref = { x: 0, y: 0, window, document, isIframe: false, }
 
@@ -13,8 +13,13 @@ export default function dnd(window, document, options) {
   options = Object.assign({
     scroller: new autoScroller({speed: 12, threshold: 4}),
     tagNameTooltip: new boxMarkerTooltip((el) => {
-      let name = el.getAttribute(name);
-      return name ? name : false;
+      let name = el.getAttribute(dndname);
+      if(name === null)
+        return false;
+      else if(name === "")
+        return el.tagName;
+      else 
+        return name;
     }, window),
 
     myDropMarker: new dropMarker(),
