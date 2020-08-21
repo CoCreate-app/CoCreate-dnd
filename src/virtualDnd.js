@@ -114,66 +114,84 @@ export default function virtualDnd() {
           value: [this.position, this.dragedEl]
         };
 
+        function runToBroadcast(context, dropType) {
+          let CoCreate = context.CoCreate;
+          domEditor({context: context.document ,...broadcast})
+
+          broadcast.target = broadcast.target.getAttribute('data-element_id');
+          if (dropType !== 'data-CoC-cloneable')
+            broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
+          else {
+            let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
+            dom.element(
+              elementConfig, { context: clonedEl }
+            )
+            broadcast.value[1] = clonedEl.innerHTML;
+          }
 
 
 
+          if (dropType === 'data-CoC-cloneable') {
+            dom.element('default', {
+              target: broadcast.draggedEl,
+              draggable: 'true',
+              droppable: 'true',
+              hoverable: 'true',
+              selectable: 'true',
+              editable: 'true',
+            });
 
-        // domEditor(broadcast)
-        broadcast.target = broadcast.target.getAttribute('data-element_id');
-        if (this.dropType !== 'data-CoC-cloneable')
-          broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
-        else {
-          let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
-          dom.element(
-            elementConfig, { context: clonedEl }
-          )
-          broadcast.value[1] = clonedEl.innerHTML;
+
+            CoCreate.sendMessage({
+              broadcast_sender: false,
+              rooms: '',
+              emit: {
+                message: 'dndNewElement',
+                data: broadcast
+              }
+            })
+            CoCreate.sendMessage({
+          
+              rooms: '',
+              emit: {
+                message: 'vdomNewElement',
+                data: broadcast
+              }
+            })
+
+
+
+          }
+          else
+            CoCreate.sendMessage({
+              broadcast_sender: false,
+              rooms: '',
+              emit: {
+                message: 'domEditor',
+                data: broadcast
+              }
+            })
+
         }
+
+
+        if (this.dragedEl.ownerDocument !== this.dropedEl.ownerDocument) 
+          runToBroadcast(window.iframes.guests.canvas.window, this.dropType);
+        else
+          runToBroadcast(window, this.dropType)
+
+
+
+
+
+
 
         console.log('dnd Object', broadcast)
 
         console.log('sending object from ', window.location.pathname)
 
-        if (this.dropType === 'data-CoC-cloneable') {
-          dom.element('default', {
-            target: broadcast.draggedEl,
-            draggable: 'true',
-            droppable: 'true',
-            hoverable: 'true',
-            selectable: 'true',
-            editable: 'true',
-          });
 
 
-          CoCreate.sendMessage({
-            broadcast_sender: true,
-            rooms: '',
-            emit: {
-              message: 'dndNewElement',
-              data: broadcast
-            }
-          })
-          CoCreate.sendMessage({
-            broadcast_sender: true,
-            rooms: '',
-            emit: {
-              message: 'vdomNewElement',
-              data: broadcast
-            }
-          })
-
-          
-
-        }
-        else
-          CoCreate.sendMessage({
-            broadcast_sender: true,
-            rooms: '',
-            emit: {
-              message: 'domEditor',
-              data: broadcast
-            }
-          })
 
         this.id = null;
 
