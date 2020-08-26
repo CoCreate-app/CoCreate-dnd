@@ -1,0 +1,127 @@
+/*global dom*/
+/*global CoCreate*/
+
+
+let elementConfig = [{
+    displayname: 'default',
+    selector: ['body, body *'],
+    draggable: 'true',
+    droppable: 'true',
+    hoverable: 'true',
+    selectable: 'true',
+    editable: 'true',
+    // toolbar: { 'test': 'testing this' },
+  },
+  {
+    displayname: 'body',
+    selector: ['body, body'],
+    draggable: 'false',
+  },
+  {
+    displayname: 'form',
+    selector: ['form'],
+    editable: 'true'
+  },
+  {
+    displayname: 'input',
+    selector: 'input',
+    editable: 'false'
+  },
+  {
+    displayname: 'textarea',
+    selector: 'textarea',
+    editable: 'false'
+  },
+  {
+    displayname: 'select',
+    selector: 'select',
+    editable: 'false'
+  },
+];
+
+
+function parse(text) {
+  let doc = new DOMParser().parseFromString(text, 'text/html');
+  if (doc.head.children[0])
+    return doc.head.children[0];
+  else
+    return doc.body.children[0];
+}
+
+document.addEventListener('dndsuccess',(e)=>{
+     let {dropedEl, dragedEl, position, dropType} = e.detail;
+  let CoCreate;
+  let Document;
+  if (dragedEl.ownerDocument !== dropedEl.ownerDocument) {
+    let windowObject = window.iframes.guests.canvas.window;
+    CoCreate = windowObject.CoCreate;
+    Document = windowObject.document;
+  }
+  else
+  {
+    CoCreate = window.CoCreate;
+    Document = window.document;
+  }
+  
+ 
+     let broadcast = {
+      target: dropedEl,
+      method: 'insertAdjacentElement',
+      value: [position, dragedEl]
+    };
+        
+
+      broadcast.target = broadcast.target.getAttribute('data-element_id');
+      if (dropType !== 'data-CoC-cloneable')
+        broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
+      else {
+        let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
+        dom.element(
+          elementConfig, { context: clonedEl }
+        )
+        broadcast.value[1] = clonedEl.innerHTML;
+      }
+
+
+  if (dropType === 'data-CoC-cloneable') {
+        dom.element('default', {
+          target: broadcast.draggedEl,
+          draggable: 'true',
+          droppable: 'true',
+          hoverable: 'true',
+          selectable: 'true',
+          editable: 'true',
+        });
+
+
+        CoCreate.sendMessage({
+          broadcast_sender: false,
+          rooms: '',
+          emit: {
+            message: 'dndNewElement',
+            data: broadcast
+          }
+        })
+        CoCreate.sendMessage({
+      
+          rooms: '',
+          emit: {
+            message: 'vdomNewElement',
+            data: broadcast
+          }
+        })
+
+
+
+      }
+      else
+        CoCreate.sendMessage({
+          broadcast_sender: false,
+          rooms: '',
+          emit: {
+            message: 'domEditor',
+            data: broadcast
+          }
+        })
+
+})

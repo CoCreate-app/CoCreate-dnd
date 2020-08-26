@@ -113,75 +113,7 @@ export default function virtualDnd() {
           method: 'insertAdjacentElement',
           value: [this.position, this.dragedEl]
         };
-
-        function runToBroadcast(context, dropType) {
-          let CoCreate = context.CoCreate;
-          domEditor({context: context.document ,...broadcast})
-
-          broadcast.target = broadcast.target.getAttribute('data-element_id');
-          if (dropType !== 'data-CoC-cloneable')
-            broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
-          else {
-            let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
-            dom.element(
-              elementConfig, { context: clonedEl }
-            )
-            broadcast.value[1] = clonedEl.innerHTML;
-          }
-
-
-
-          if (dropType === 'data-CoC-cloneable') {
-            dom.element('default', {
-              target: broadcast.draggedEl,
-              draggable: 'true',
-              droppable: 'true',
-              hoverable: 'true',
-              selectable: 'true',
-              editable: 'true',
-            });
-
-
-            CoCreate.sendMessage({
-              broadcast_sender: false,
-              rooms: '',
-              emit: {
-                message: 'dndNewElement',
-                data: broadcast
-              }
-            })
-            CoCreate.sendMessage({
-          
-              rooms: '',
-              emit: {
-                message: 'vdomNewElement',
-                data: broadcast
-              }
-            })
-
-
-
-          }
-          else
-            CoCreate.sendMessage({
-              broadcast_sender: false,
-              rooms: '',
-              emit: {
-                message: 'domEditor',
-                data: broadcast
-              }
-            })
-
-        }
-
-
-        if (this.dragedEl.ownerDocument !== this.dropedEl.ownerDocument) 
-          runToBroadcast(window.iframes.guests.canvas.window, this.dropType);
-        else
-          runToBroadcast(window, this.dropType)
-
-
-
+        domEditor(broadcast)
 
 
 
@@ -201,7 +133,8 @@ export default function virtualDnd() {
           detail: {
             position: this.position,
             dragedEl: this.dragedEl,
-            dropedEl: this.dropedEl
+            dropedEl: this.dropedEl,
+            dropType: this.dropType
           }
         });
         this.dropedEl.dispatchEvent(event, { bubbles: true })
