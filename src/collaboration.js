@@ -1,43 +1,9 @@
 /*global dom*/
 /*global CoCreate*/
+/*global elementConfig*/
+/*global DOMParser*/
 
 
-let elementConfig = [{
-    displayname: 'default',
-    selector: ['body, body *'],
-    draggable: 'true',
-    droppable: 'true',
-    hoverable: 'true',
-    selectable: 'true',
-    editable: 'true',
-    // toolbar: { 'test': 'testing this' },
-  },
-  {
-    displayname: 'body',
-    selector: ['body, body'],
-    draggable: 'false',
-  },
-  {
-    displayname: 'form',
-    selector: ['form'],
-    editable: 'true'
-  },
-  {
-    displayname: 'input',
-    selector: 'input',
-    editable: 'false'
-  },
-  {
-    displayname: 'textarea',
-    selector: 'textarea',
-    editable: 'false'
-  },
-  {
-    displayname: 'select',
-    selector: 'select',
-    editable: 'false'
-  },
-];
 
 
 function parse(text) {
