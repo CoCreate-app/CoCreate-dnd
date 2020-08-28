@@ -1,9 +1,9 @@
 import './util/iframe';
-import { dropMarker, boxMarker, boxMarkerTooltip, getCoc, ghostEffect, getGroupName, parse, getCocs,distanceToChild, autoScroller } from './util/common'
+import { dropMarker, getCoc, ghostEffect, getGroupName, parse, getCocs,distanceToChild, autoScroller } from './util/common'
 
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
-import { droppable, draggable, selectable, hoverable, dndname, cloneable, data_insert_html } from './util/variables.js'
+import { droppable, draggable, dndname, cloneable, data_insert_html } from './util/variables.js'
 
  let ref = { x: 0, y: 0, window, document, isIframe: false, }
 
@@ -12,44 +12,14 @@ export default function dnd(window, document, options) {
    
   options = Object.assign({
     scroller: new autoScroller({speed: 12, threshold: 4}),
-    tagNameTooltip: new boxMarkerTooltip((el) => {
-      let name = el.getAttribute(dndname);
-      if(name === null)
-        return false;
-      else if(name === "")
-        return el.tagName;
-      else 
-        return name;
-    }, window),
+
 
     myDropMarker: new dropMarker(),
 
-    hoverBoxMarker: new boxMarker("CoC-hovered", 1),
-
-    selectBoxMarker: new boxMarker("CoC-selected", 2, {
-      onRemove: (lastEl) => {
-        // console.log({
-        //   comment: 'onUnselect',
-        //   obj: cssPath(lastEl),
-        //   method: 'removeAttribute',
-        // });
-
-        lastEl.removeAttribute('data-selected_users')
-      },
-      onAdd: (el) => {
-        // console.log({
-        //   comment: 'onSelect',
-        //   obj: cssPath(el),
-        //   method: 'setAttribute',
-        //   value: ['id']
-        // })
-        el.setAttribute('data-selected_users', 'id')
-      }
-    })
 
   }, options)
   // weird bug: dropMarker override the imported dropMarker in the above
-  let { myDropMarker, selectBoxMarker, hoverBoxMarker, tagNameTooltip, scroller } = options;
+  let { myDropMarker, scroller } = options;
   let isDraging = false;
   let consolePrintedEl = null; // dev only
   //// defining events
@@ -59,7 +29,7 @@ export default function dnd(window, document, options) {
   let dnd = new VirtualDnd();
   let ghost;
   dnd.on('dragStart', (data) => {
-    selectBoxMarker.hide()
+  
     myDropMarker.hide();
     ghost = new ghostEffect(data.el, { document });
     ghost.start()
@@ -75,8 +45,8 @@ export default function dnd(window, document, options) {
   dnd.on('dragOver', (data) => {
     // it will always run when mouse or touch moves
     myDropMarker.draw(data.el, data.closestEl, data.orientation, !data.hasChild, data.ref);
-    hoverBoxMarker.draw(data.el)
-    tagNameTooltip.draw(data.el, data.ref)
+
+  
    
 
   })
@@ -111,8 +81,8 @@ export default function dnd(window, document, options) {
 
 
     isDraging = true;
-    hoverBoxMarker.hide();
-    tagNameTooltip.hide();
+  
+
     dnd.dragStart(e, el, null, ref, att);
   }
 
@@ -121,8 +91,8 @@ export default function dnd(window, document, options) {
 
     dnd.dragEnd(e);
     myDropMarker.hide();
-    hoverBoxMarker.hide();
-    tagNameTooltip.hide();
+   
+ 
     scroller.deactivateScroll()
     isDraging = false;
 
@@ -245,17 +215,7 @@ export default function dnd(window, document, options) {
 
   }
   let mousemove = (e, ref) => {
-    let el = getCoc(e.target, hoverable);
 
-    if (!el) {
-      tagNameTooltip.hide(el);
-      hoverBoxMarker.hide(el);
-    }
-    else {
-      hoverBoxMarker.draw(el);
-      tagNameTooltip.draw(el, ref);
-
-    }
 
     move(e, ref)
 
@@ -265,7 +225,7 @@ export default function dnd(window, document, options) {
     // todo: not working!?
     let el = getCoc(e.target, selectable);
     if (!el) return;
-    selectBoxMarker.draw(el);
+  
 
   }
 
