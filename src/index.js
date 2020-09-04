@@ -1,5 +1,5 @@
 import './util/iframe';
-import { dropMarker, getCoc, ghostEffect, getGroupName, parse, getCocs, distanceToChild, autoScroller } from './util/common'
+import { dropMarker, getCoc, ghostEffect, getGroupName, parse, getCocs, distanceToChild, autoScroller, Context } from './util/common'
 
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
@@ -55,7 +55,7 @@ export default function dnd(window, document, options) {
 
   function start(e, ref) {
 
-
+    let zzz =2;
     let [el, att] = getCocs(e.target, [cloneable, draggable])
 
     if (!el) return;
@@ -359,24 +359,42 @@ window.initdnd = () => {
   }
 
 
-  CoCreateSocket.listen('dndNewElement', function(data) {
-    // resolving the element_id to real element in the clinet
-    console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
-    data.target = document.querySelector(`[data-element_id=${data.target}]`);
+  // CoCreateSocket.listen('dndNewElement', function(data) {
+  //   // resolving the element_id to real element in the clinet
+  //   console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
+  //   data.target = document.querySelector(`[data-element_id=${data.target}]`);
 
-    let newElement = parse(data.value[1]);
-    if (data.target.classList.contains('vdom-item') && window.vdomObject)
-      data.value[1] = window.vdomObject.renderNew([newElement]);
-    else
-      data.value[1] = newElement;
+  //   let newElement = parse(data.value[1]);
+  //   if (data.target.classList.contains('vdom-item') && window.vdomObject)
+  //     data.value[1] = window.vdomObject.renderNew([newElement]);
+  //   else
+  //     data.value[1] = newElement;
 
-    console.log('with object: ', data, window.location.pathname)
-    // passing it to domEditor
-    domEditor(data);
-  })
+  //   console.log('with object: ', data, window.location.pathname)
+  //   // passing it to domEditor
+  //   domEditor(data);
+  // })
 
 };
 
 window.addEventListener('load', () => {
   window.initdnd()
 });
+
+
+window.initSortable = function({target, droppable, draggable, cloneable, handle}){
+
+  if(droppable)
+    target.querySelectorAll(droppable).forEach(el => {
+       Context.setContext(el, 'data-CoC-droppable', true)
+    })
+  if(draggable)
+    target.querySelectorAll(draggable).forEach(el => {
+       Context.setContext(el, 'data-CoC-draggable', true)
+    })
+  
+  if(cloneable)
+    target.querySelectorAll(cloneable).forEach(el => {
+       Context.setContext(el, 'data-CoC-cloneable', true)  
+    })
+}
