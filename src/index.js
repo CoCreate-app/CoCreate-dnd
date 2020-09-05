@@ -322,8 +322,31 @@ window.addEventListener("load", () => {
   window.init();
 });
 
-window.initDnd = function ({ target, drop, drag, clone, handle, group }) {
+window.initDnd = function ({
+  target,
+  drop,
+  drag,
+  clone,
+  handle,
+  group,
+  exclude,
+}) {
   if (group) context.setContext(target, vars.group_name, group);
+
+  if (exclude) {
+    try {
+      let excludeEls = target.querySelectorAll(exclude);
+      excludeEls.forEach((el) => {
+        context.setContext(el, vars.exclude, true);
+      });
+    } catch (err) {
+      if (err instanceof HTMLElement) {
+        let error = "Dnd Sortable: exclude must be valid selector";
+        console.error(error);
+      }
+      throw err;
+    }
+  }
 
   if (drop)
     target.querySelectorAll(drop).forEach((el) => {
@@ -356,8 +379,24 @@ window.initSortable = function ({
   nested = false,
   handle,
   group,
+  exclude,
 }) {
   if (group) context.setContext(target, vars.group_name, group);
+  if (exclude) {
+    try {
+      let excludeEls = target.querySelectorAll(exclude);
+      excludeEls.forEach((el) => {
+        context.setContext(el, vars.exclude, true);
+      });
+    } catch (err) {
+      if (err instanceof HTMLElement) {
+        let error = "Dnd Sortable: exclude must be valid selector";
+        console.error(error);
+      }
+      throw err;
+    }
+  }
+
   if (!(target instanceof HTMLElement)) {
     let error = "Dnd Sortable: Please provide a valid element";
     throw error;
