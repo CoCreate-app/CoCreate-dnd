@@ -13,14 +13,8 @@ import {
 
 import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
-import {
-  droppable,
-  draggable,
-  dndname,
-  cloneable,
-  handleable,
-  data_insert_html,
-} from "./util/variables.js";
+import * as vars from "./util/variables.js";
+
 
 let ref = { x: 0, y: 0, window, document, isIframe: false };
 
@@ -68,25 +62,25 @@ export default function dnd(window, document, options) {
   let startGroup;
 
   function start(e, ref) {
-    let [el, att] = getCocs(e.target, [cloneable, draggable, handleable]);
+    let [el, att] = getCocs(e.target, [vars.cloneable, vars.draggable, vars.handleable]);
 
     if (!el) return;
 
     switch (att) {
-      case cloneable:
-        let html = el.getAttribute(data_insert_html);
+      case vars.cloneable:
+        let html = el.getAttribute(vars.data_insert_html);
         if (html) {
           el = parse(html);
           if (!el) return;
         } else el = el.cloneNode(true);
         break;
-      case draggable:
-        let hasHandle = context.getContext(el, handleable);
+      case vars.draggable:
+        let hasHandle = context.getContext(el, vars.handleable);
         if (hasHandle) return;
         break;
 
       default:
-        el = getCoc(el, draggable);
+        el = getCoc(el, vars.draggable);
     }
 
     // get group
@@ -134,7 +128,7 @@ export default function dnd(window, document, options) {
     if (!target) return; // it's out of iframe if this is multi frame
 
     let onEl = target; // dev
-    let el = getCoc(target, droppable);
+    let el = getCoc(target, vars.droppable);
     // if (consolePrintedEl != target) { // dev
     //   // dev
     //   console.log("you are on: \n", onEl, "\nDroping in: \n", el);
@@ -258,7 +252,7 @@ function dndReady(document) {
 
   // disable selection
   document.addEventListener("selectstart", (e) => {
-    let result = getCocs(e.target, [draggable, cloneable]);
+    let result = getCocs(e.target, [vars.draggable, vars.cloneable]);
     if (result) e.preventDefault();
   });
 }
@@ -333,16 +327,16 @@ window.initDnd = function ({
 }) {
   if (droppable)
     target.querySelectorAll(droppable).forEach((el) => {
-      context.setContext(el, "data-CoC-droppable", true);
+      context.setContext(el, vars.droppable, true);
     });
   if (draggable)
     target.querySelectorAll(draggable).forEach((el) => {
-      context.setContext(el, "data-CoC-draggable", true);
+      context.setContext(el, vars.draggable, true);
     });
 
   if (cloneable)
     target.querySelectorAll(cloneable).forEach((el) => {
-      context.setContext(el, "data-CoC-cloneable", true);
+      context.setContext(el, vars.cloneable, true);
     });
 };
 
@@ -350,9 +344,9 @@ function addNestedAttribute(el, cloneable) {
   if (!el.children.length) return;
   Array.from(el.children).forEach((el) => {
     addNestedAttribute(el);
-    context.setContext(el, "data-CoC-droppable", true);
-    context.setContext(el, "data-CoC-draggable", true);
-    if (cloneable) context.setContext(el, "data-CoC-cloneable", true);
+    context.setContext(el, vars.droppable, true);
+    context.setContext(el, vars.draggable, true);
+    if (cloneable) context.setContext(el, vars.cloneable, true);
   });
 }
 
@@ -383,17 +377,17 @@ window.initSortable = function ({
   if (nested) {
     addNestedAttribute(target, cloneable);
   } else {
-    context.setContext(target, "data-CoC-droppable", true);
+    context.setContext(target, vars.droppable, true);
     if (target.children.length)
       Array.from(target.children).forEach((el) => {
-        context.setContext(el, "data-CoC-draggable", true);
-        if (cloneable) context.setContext(el, "data-CoC-cloneable", true);
+        context.setContext(el, vars.draggable, true);
+        if (cloneable) context.setContext(el, vars.cloneable, true);
         try {
           let handleEls = el.querySelectorAll(handle);
           if (handle && handleEls.length) {
-            context.setContext(el, "data-CoC-handle", true);
+            context.setContext(el, vars.handleable, true);
             handleEls.forEach((el) => {
-              context.setContext(el, "data-CoC-handle", true);
+              context.setContext(el, vars.handleable, true);
             });
           }
         } catch (err) {
