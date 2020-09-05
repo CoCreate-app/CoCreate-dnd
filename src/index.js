@@ -319,21 +319,7 @@ window.initdnd = () => {
     else return doc.body.children[0];
   }
 
-  // CoCreateSocket.listen('dndNewElement', function(data) {
-  //   // resolving the element_id to real element in the clinet
-  //   console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
-  //   data.target = document.querySelector(`[data-element_id=${data.target}]`);
 
-  //   let newElement = parse(data.value[1]);
-  //   if (data.target.classList.contains('vdom-item') && window.vdomObject)
-  //     data.value[1] = window.vdomObject.renderNew([newElement]);
-  //   else
-  //     data.value[1] = newElement;
-
-  //   console.log('with object: ', data, window.location.pathname)
-  //   // passing it to domEditor
-  //   domEditor(data);
-  // })
 };
 
 window.addEventListener("load", () => {
