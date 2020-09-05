@@ -1,35 +1,22 @@
 import { group_name } from "./variables";
-import context from "./context";
-let Context = new context();
+import domContext from "./domContext";
+let context = new domContext();
 
-export {Context}; 
+export {context}; 
 export function getCoc(el, att) {
-  let cEl = Context.getContext(el, att);
+  if (!el.tagName) el = el.parentElement;
+  let cEl = context.getContext(el, att);
   if (cEl) return cEl;
 
-  if (!el.tagName) el = el.parentElement;
-  do {
-    if (el.tagName == "IFRAME") return false;
-    if (el.getAttribute(att) == "true") return el;
-    el = el.parentElement;
-    if (!el) return false;
-  } while (true);
+
+
 }
 
 export function getCocs(el, attList) {
-  let cEl = Context.getContexts(el, attList);
+    if (!el.tagName) el = el.parentElement;
+  let cEl = context.getContexts(el, attList);
   if (cEl)  return cEl;
  
-
-  if (!el.tagName) el = el.parentElement;
-  do {
-    if (el.tagName == "IFRAME") return false;
-    for (let att of attList) {
-      if (el.getAttribute(att) == "true") return [el, att];
-    }
-    el = el.parentElement;
-    if (!el) return [false, false];
-  } while (true);
 }
 
 export function getGroupName(el) {

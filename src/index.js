@@ -1,9 +1,9 @@
 import './util/iframe';
-import { dropMarker, getCoc, ghostEffect, getGroupName, parse, getCocs, distanceToChild, autoScroller, Context } from './util/common'
+import { dropMarker, getCoc, ghostEffect, getGroupName, parse, getCocs, distanceToChild, autoScroller, context } from './util/common'
 
 import VirtualDnd from './virtualDnd';
 import './util/onClickLeftEvent';
-import { droppable, draggable, dndname, cloneable, data_insert_html } from './util/variables.js'
+import { droppable, draggable, dndname, cloneable, handleable, data_insert_html } from './util/variables.js'
 
 let ref = { x: 0, y: 0, window, document, isIframe: false, }
 
@@ -55,22 +55,34 @@ export default function dnd(window, document, options) {
 
   function start(e, ref) {
 
-    let zzz =2;
-    let [el, att] = getCocs(e.target, [cloneable, draggable])
+    let [el, att] = getCocs(e.target, [cloneable, draggable, handleable])
 
     if (!el) return;
 
 
-    if (att == cloneable) {
-      let html = el.getAttribute(data_insert_html);
-      if (html) {
-        el = parse(html);
-        if (!el) return;
-      }
-      else
-        el = el.cloneNode(true);
-    }
 
+
+    
+    switch(att){
+      case cloneable:
+        let html = el.getAttribute(data_insert_html);
+        if (html) {
+          el = parse(html);
+          if (!el) return;
+        }
+        else
+          el = el.cloneNode(true);
+        break;
+      case draggable: 
+        let handle = el.querySelector(`[${handleable}="true"]`)
+        if(el.contains(handle))
+         return;
+        break;
+        
+      default:
+        el = getCoc(el, draggable)
+      
+    }
 
     // get group
     let groupResult = getGroupName(el)
@@ -386,15 +398,15 @@ window.initSortable = function({target, droppable, draggable, cloneable, handle}
 
   if(droppable)
     target.querySelectorAll(droppable).forEach(el => {
-       Context.setContext(el, 'data-CoC-droppable', true)
+       context.setContext(el, 'data-CoC-droppable', true)
     })
   if(draggable)
     target.querySelectorAll(draggable).forEach(el => {
-       Context.setContext(el, 'data-CoC-draggable', true)
+       context.setContext(el, 'data-CoC-draggable', true)
     })
   
   if(cloneable)
     target.querySelectorAll(cloneable).forEach(el => {
-       Context.setContext(el, 'data-CoC-cloneable', true)  
+       context.setContext(el, 'data-CoC-cloneable', true)  
     })
 }
