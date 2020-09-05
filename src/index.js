@@ -81,8 +81,8 @@ export default function dnd(window, document, options) {
         } else el = el.cloneNode(true);
         break;
       case draggable:
-        let handle = el.querySelector(`[${handleable}="true"]`);
-        if (el.contains(handle)) return;
+        let hasHandle = context.getContext(el, handleable);
+        if (hasHandle) return;
         break;
 
       default:
@@ -198,11 +198,11 @@ export default function dnd(window, document, options) {
   let mousemove = (e, ref) => {
     move(e, ref);
   };
-  let CoCreateClickLeft = (e) => {
-    // todo: not working!?
-    let el = getCoc(e.target, selectable);
-    if (!el) return;
-  };
+  // let CoCreateClickLeft = (e) => {
+  //   // todo: not working!?
+  //   let el = getCoc(e.target, selectable);
+  //   if (!el) return;
+  // };
 
   // touch
   document.addEventListener("touchstart", wrapper(touchstart, ref));
@@ -215,7 +215,7 @@ export default function dnd(window, document, options) {
   document.addEventListener("mousemove", wrapper(mousemove, ref));
   // mouse
   // listen for click
-  document.addEventListener("CoCreateClickLeft", CoCreateClickLeft);
+  // document.addEventListener("CoCreateClickLeft", CoCreateClickLeft);
 
   options.iframes.forEach((frame) => {
     let rect = frame.getBoundingClientRect();
@@ -259,7 +259,7 @@ function dndReady(document) {
   // disable selection
   document.addEventListener("selectstart", (e) => {
     let result = getCocs(e.target, [draggable, cloneable]);
-    if (result[0]) e.preventDefault();
+    if (result) e.preventDefault();
   });
 }
 
@@ -269,7 +269,7 @@ function wrapper(func, ref) {
   };
 }
 
-window.initdnd = () => {
+window.init = () => {
   //   if (!document.querySelector('#dnd-style')) {
   //     let dndStyle = document.createElement('style');
   //     dndStyle.id = "dnd-style";
@@ -318,15 +318,13 @@ window.initdnd = () => {
     if (doc.head.children[0]) return doc.head.children[0];
     else return doc.body.children[0];
   }
-
-
 };
 
 window.addEventListener("load", () => {
-  window.initdnd();
+  window.init();
 });
 
-window.initSortable = function ({
+window.initDnd = function ({
   target,
   droppable,
   draggable,
@@ -346,4 +344,65 @@ window.initSortable = function ({
     target.querySelectorAll(cloneable).forEach((el) => {
       context.setContext(el, "data-CoC-cloneable", true);
     });
+};
+
+function addNestedAttribute(el, cloneable) {
+  if (!el.children.length) return;
+  Array.from(el.children).forEach((el) => {
+    addNestedAttribute(el);
+    context.setContext(el, "data-CoC-droppable", true);
+    context.setContext(el, "data-CoC-draggable", true);
+    if (cloneable) context.setContext(el, "data-CoC-cloneable", true);
+  });
+}
+
+window.initSortable = function ({
+  target,
+  cloneable = false,
+  nested = false,
+  handle,
+}) {
+  if (!(target instanceof HTMLElement)) {
+    let error = "Dnd Sortable: Please provide a valid element";
+    throw error;
+    console.error(error);
+  }
+
+  if (typeof cloneable != "boolean") {
+    let error = "Dnd Sortable: please provide valid data type for cloneable";
+    throw error;
+    console.error(error);
+  }
+
+  if (typeof nested != "boolean") {
+    let error = "Dnd Sortable: please provide valid data type for nested";
+    throw error;
+    console.error(error);
+  }
+
+  if (nested) {
+    addNestedAttribute(target, cloneable);
+  } else {
+    context.setContext(target, "data-CoC-droppable", true);
+    if (target.children.length)
+      Array.from(target.children).forEach((el) => {
+        context.setContext(el, "data-CoC-draggable", true);
+        if (cloneable) context.setContext(el, "data-CoC-cloneable", true);
+        try {
+          let handleEls = el.querySelectorAll(handle);
+          if (handle && handleEls.length) {
+            context.setContext(el, "data-CoC-handle", true);
+            handleEls.forEach((el) => {
+              context.setContext(el, "data-CoC-handle", true);
+            });
+          }
+        } catch (err) {
+          if (err instanceof DOMException) {
+            let error = "Dnd Sortable: handle must be a valid selector";
+            console.error(error);
+            throw error;
+          }
+        }
+      });
+  }
 };
