@@ -16,7 +16,6 @@ import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
 
-
 let ref = { x: 0, y: 0, window, document, isIframe: false };
 
 export default function dnd(window, document, options) {
@@ -63,7 +62,11 @@ export default function dnd(window, document, options) {
   let startGroup;
 
   function start(e, ref) {
-    let [el, att] = getCocs(e.target, [vars.cloneable, vars.draggable, vars.handleable]);
+    let [el, att] = getCocs(e.target, [
+      vars.cloneable,
+      vars.draggable,
+      vars.handleable,
+    ]);
 
     if (!el) return;
 
@@ -319,13 +322,9 @@ window.addEventListener("load", () => {
   window.init();
 });
 
-window.initDnd = function ({
-  target,
-  drop,
-  drag,
-  clone,
-  handle,
-}) {
+window.initDnd = function ({ target, drop, drag, clone, handle, group }) {
+  if (group) context.setContext(target, vars.group_name, group);
+
   if (drop)
     target.querySelectorAll(drop).forEach((el) => {
       context.setContext(el, vars.droppable, true);
@@ -356,7 +355,9 @@ window.initSortable = function ({
   cloneable = false,
   nested = false,
   handle,
+  group,
 }) {
+  if (group) context.setContext(target, vars.group_name, group);
   if (!(target instanceof HTMLElement)) {
     let error = "Dnd Sortable: Please provide a valid element";
     throw error;
