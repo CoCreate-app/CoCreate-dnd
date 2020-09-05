@@ -331,36 +331,44 @@ window.initDnd = function ({
   group,
   exclude,
 }) {
-  if (group) context.setContext(target, vars.group_name, group);
+  try {
+    if (group) context.setContext(target, vars.group_name, group);
 
-  if (exclude) {
-    try {
-      let excludeEls = target.querySelectorAll(exclude);
-      excludeEls.forEach((el) => {
-        context.setContext(el, vars.exclude, true);
-      });
-    } catch (err) {
-      if (err instanceof HTMLElement) {
-        let error = "Dnd Sortable: exclude must be valid selector";
-        console.error(error);
+    if (exclude) {
+      try {
+        let excludeEls = target.querySelectorAll(exclude);
+        excludeEls.forEach((el) => {
+          context.setContext(el, vars.exclude, true);
+        });
+      } catch (err) {
+        if (err instanceof HTMLElement) {
+          let error = "Dnd Sortable: exclude must be valid selector";
+          console.error(error);
+        }
+        throw err;
       }
-      throw err;
     }
+
+    if (drop)
+      target.querySelectorAll(drop).forEach((el) => {
+        context.setContext(el, vars.droppable, true);
+      });
+    if (drag)
+      target.querySelectorAll(drag).forEach((el) => {
+        context.setContext(el, vars.draggable, true);
+      });
+
+    if (clone)
+      target.querySelectorAll(clone).forEach((el) => {
+        context.setContext(el, vars.cloneable, true);
+      });
+  } catch (err) {
+    if (err instanceof DOMException) {
+      let error = "Dnd Sortable: handle must be a valid selector";
+      console.error(error);
+      throw err;
+    } else throw err;
   }
-
-  if (drop)
-    target.querySelectorAll(drop).forEach((el) => {
-      context.setContext(el, vars.droppable, true);
-    });
-  if (drag)
-    target.querySelectorAll(drag).forEach((el) => {
-      context.setContext(el, vars.draggable, true);
-    });
-
-  if (clone)
-    target.querySelectorAll(clone).forEach((el) => {
-      context.setContext(el, vars.cloneable, true);
-    });
 };
 
 function addNestedAttribute(el, cloneable) {
@@ -389,11 +397,11 @@ window.initSortable = function ({
         context.setContext(el, vars.exclude, true);
       });
     } catch (err) {
-      if (err instanceof HTMLElement) {
+      if (err instanceof DOMException) {
         let error = "Dnd Sortable: exclude must be valid selector";
         console.error(error);
-      }
-      throw err;
+        throw error;
+      } else throw err;
     }
   }
 
@@ -436,7 +444,7 @@ window.initSortable = function ({
             let error = "Dnd Sortable: handle must be a valid selector";
             console.error(error);
             throw error;
-          }
+          } else throw err;
         }
       });
   }
