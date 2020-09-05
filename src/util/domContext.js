@@ -29,7 +29,8 @@ export default function context(html) {
       for (let attributeName of attributeNames) {
         if (meta && meta[attributeName]) return [el, attributeName];
         if (el.tagName == "IFRAME") return false;
-        if (el.getAttribute(attributeName) == "true") return [el, attributeName];
+        if (el.getAttribute(attributeName) == "true")
+          return [el, attributeName];
       }
 
       el = el.parentElement;
