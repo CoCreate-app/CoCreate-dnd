@@ -1,3 +1,4 @@
+/*global HTMLElement*/
 import "./util/iframe";
 import {
   dropMarker,
@@ -320,22 +321,22 @@ window.addEventListener("load", () => {
 
 window.initDnd = function ({
   target,
-  droppable,
-  draggable,
-  cloneable,
+  drop,
+  drag,
+  clone,
   handle,
 }) {
-  if (droppable)
-    target.querySelectorAll(droppable).forEach((el) => {
+  if (drop)
+    target.querySelectorAll(drop).forEach((el) => {
       context.setContext(el, vars.droppable, true);
     });
-  if (draggable)
-    target.querySelectorAll(draggable).forEach((el) => {
+  if (drag)
+    target.querySelectorAll(drag).forEach((el) => {
       context.setContext(el, vars.draggable, true);
     });
 
-  if (cloneable)
-    target.querySelectorAll(cloneable).forEach((el) => {
+  if (clone)
+    target.querySelectorAll(clone).forEach((el) => {
       context.setContext(el, vars.cloneable, true);
     });
 };
