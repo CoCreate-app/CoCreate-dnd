@@ -240,10 +240,10 @@ export default function dnd(window, document, options) {
     // mouse
 
     // listen for click
-    ref.document.addEventListener(
-      "CoCreateClickLeft",
-      wrapper(CoCreateClickLeft, ref)
-    );
+    // ref.document.addEventListener(
+    //   "CoCreateClickLeft",
+    //   wrapper(CoCreateClickLeft, ref)
+    // );
   });
 }
 
