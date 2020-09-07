@@ -273,15 +273,15 @@ window.init = () => {
   //     dndStyle.id = "dnd-style";
   //     dndStyle.innerHTML = `    /* dnd specic */
 
-  //     [data-CoC-cloneable],
-  //     [data-CoC-draggable] {
+  //     [data-cloneable],
+  //     [data-draggable] {
   //       cursor: pointer;
   //     }
 
-  //     [data-CoC-cloneable],
-  //     [data-CoC-draggable],
-  //     [data-CoC-droppable],
-  //     [data-CoC-hoverable] {
+  //     [data-cloneable],
+  //     [data-draggable],
+  //     [data-droppable],
+  //     [data-hoverable] {
   //       outline: 1px dashed gray;
   //     }
 

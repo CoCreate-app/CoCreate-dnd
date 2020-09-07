@@ -57,7 +57,7 @@ document.addEventListener('dndsuccess',(e)=>{
         
 
       broadcast.target = broadcast.target.getAttribute('data-element_id');
-      if (dropType !== 'data-CoC-cloneable')
+      if (dropType !== 'data-cloneable')
         broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
       else {
         let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
@@ -68,7 +68,7 @@ document.addEventListener('dndsuccess',(e)=>{
       }
 
 
-  if (dropType === 'data-CoC-cloneable') {
+  if (dropType === 'data-cloneable') {
         dom.element('default', {
           target: broadcast.draggedEl,
           draggable: 'true',
