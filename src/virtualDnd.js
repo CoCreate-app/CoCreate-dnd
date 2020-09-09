@@ -145,6 +145,7 @@ export default function virtualDnd() {
       console.error(e)
     }
     finally {
+      if(!this.type) return;
       this.position = null;
       if (this.dragedEl)
         this.dragedEl.removeAttribute('CoC-dragging')
