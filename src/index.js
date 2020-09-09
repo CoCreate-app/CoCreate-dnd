@@ -62,14 +62,15 @@ export default function dnd(window, document, options) {
   let startGroup;
 
   function start(e, ref) {
-    let [el, att] = getCocs(e.target, [
+    let r = getCocs(e.target, [
       vars.cloneable,
       vars.draggable,
       vars.handleable,
     ]);
-
-    if (!el) return;
-
+    
+     if(!Array.isArray(r)) return;  
+    let [el, att] = r;
+    
     switch (att) {
       case vars.cloneable:
         let html = el.getAttribute(vars.data_insert_html);
@@ -256,8 +257,9 @@ function dndReady(document) {
 
   // disable selection
   document.addEventListener("selectstart", (e) => {
-    let result = getCocs(e.target, [vars.draggable, vars.cloneable]);
-    if (result) e.preventDefault();
+    let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
+    if(!Array.isArray(r)) return;
+    e.preventDefault();
   });
 }
 
