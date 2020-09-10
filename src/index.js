@@ -9,7 +9,7 @@ import {
   getCocs,
   distanceToChild,
   autoScroller,
-  context,
+  dndContext as context,
 } from "./util/common";
 
 import VirtualDnd from "./virtualDnd";
