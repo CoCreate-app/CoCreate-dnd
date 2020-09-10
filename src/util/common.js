@@ -1,16 +1,16 @@
 import { group_name } from "./variables";
 import domContext from "./domContext";
-let context = new domContext();
+let dndContext = new domContext();
 
-export { context };
+export { dndContext };
 export function getCoc(el, att) {
   if (!el.tagName) el = el.parentElement;
-  return context.getContext(el, att);
+  return dndContext.getContext(el, att);
 }
 
 export function getCocs(el, attList) {
   if (!el.tagName) el = el.parentElement;
-  return context.getContexts(el, attList);
+  return dndContext.getContexts(el, attList);
 }
 
 export function getGroupName(el) {
