@@ -28,7 +28,7 @@ export default function context(html) {
 
       for (let attributeName of attributeNames) {
         if (meta && meta[attributeName]) return [el, attributeName];
-        if (el.tagName == "IFRAME") return [undefined,undefined];
+        if (el.tagName == "IFRAME") return undefined;
         if (el.getAttribute(attributeName) == "true")
           return [el, attributeName];
       }
@@ -36,7 +36,7 @@ export default function context(html) {
       el = el.parentElement;
     } while (el);
 
-    return [undefined,undefined];
+    return undefined;
   };
 
   this.setContext = function (el, att, value) {
