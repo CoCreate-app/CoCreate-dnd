@@ -121,33 +121,11 @@
   </script>
   <script defer src="https://server.cocreate.app/js/CoCreate.min.js"></script>
   <script defer src="../../CoCreate-utilities/CoCreate-tooltip.js"></script>
-  <script defer src="../../CoCreate-domEditor/src/domEditor.js"></script>
   <script defer src="../../CoCreate-utilities/CoCreate-boxmarker.js"></script>
-  <!--<script defer src="../../CoCreate-domEditor/src/element-config.js"></script>-->
-  <script defer src="../dist/dnd.js"></script>
-  <script defer src="../src/collaboration.js"></script>
 
-  <script>
-    // CoCreateSocket.listen('sendMessage', function(data) {
+  <script defer src="../../dist/CoCreate-dnd.js"></script>
+  <script defer src="../../dist/CoCreate-dnd-collaboration.js"></script>
 
-    //   console.log('yeassss ', data)
-    //   // resolving the element_id to real element in the clinet
-    //   data.target = document.querySelector(`[data-element_id=${data.target}]`);
-    //   data.value[1] = document.querySelector(`[data-element_id=${data.value[1]}]`);
-
-    //   // passing it to domEditor
-    //   domEditor(data);
-    // })
-
-    // by cssPath
-    // socket.on('receiveMessage', function(data) { //   console.log("recivedCLiente ", data);
-    //   console.log('broadcast data', data)
-
-    //   data.target = document.querySelector(data.target)
-    //   data.value[1] = document.querySelector(data.value[1]);
-    //   domEditor(data);
-    // })
-  </script>
 </body>
 
 </html>
