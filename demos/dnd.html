@@ -52,13 +52,13 @@
 <body>
 
 
-  <!--draggables -->
-  <ul id="dragitemslistcontainer">
-    <li id="header" data-cloneable="true" data-insert-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
+  <!-- Container and elements intialized with cloneable class and data-cloneable attribute -->
+  <ul class="cloneable">
+    <li id="header" data-insert-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
       </i>
       <p>Header</p>
     </li>
-    <li id="span" data-cloneable="true" data-insert-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
+    <li id="span" data-insert-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
       </i>
       <p>Span</p>
     </li>
@@ -81,8 +81,8 @@
   </ul>
 
 
-
-  <div data-element_id="id1" data-droppable="true" class="dnd">
+  <!-- Container and elements intialized with attributtes -->
+  <div data-element_id="id1" data-droppable="true">
     <div data-element_id="id2" data-draggable="true" class="block myinline">example block 1</div>
     <div data-element_id="id3" data-draggable="true" class="block myinline">example block 2</div>
     <div data-element_id="id4" data-draggable="true" class="block myinline">example block 3</div>
@@ -96,17 +96,19 @@
 
   <iframe src="iframe.html" id="client" frameborder="0" width="100%" height="100%"></iframe>
   <iframe src="iframe.html" id="client2" frameborder="0" width="100%" height="100%"></iframe>
-
-  <div class="dnd">
-    <div class="block myinline">example block 1</div>
-    <div class="block myinline">example block 2</div>
-    <div class="block myinline">example block 3</div>
-    <div class="block">example block 4</div>
-    <div class="block">example block 5</div>
-    <div class="block">example block 6</div>
-    <div class="block myinline">example block 7</div>
-    <div class="block myinline">example block 8</div>
-    <div class="block myinline">example block 9</div>
+ 
+  <!-- Container intialized with class sortable -->
+  <div class="sortable">
+    sortable
+    <div data-element_id="sortable1" class="block myinline">example block 1</div>
+    <div data-element_id="sortable2" class="block myinline">example block 2</div>
+    <div data-element_id="sortable3" class="block myinline">example block 3</div>
+    <div data-element_id="sortable4" class="block">example block 4</div>
+    <div data-element_id="sortable5" class="block">example block 5</div>
+    <div data-element_id="sortable6" class="block">example block 6</div>
+    <div data-element_id="sortable7" class="block myinline">example block 7</div>
+    <div data-element_id="sortable8" class="block myinline">example block 8</div>
+    <div data-element_id="sortable9" class="block myinline">example block 9</div>
   </div>
 
 
@@ -123,10 +125,8 @@
   <script defer src="../../CoCreate-utilities/CoCreate-tooltip.js"></script>
   <script defer src="../../CoCreate-utilities/CoCreate-boxmarker.js"></script>
 
-  <script defer src="../../dist/runtime.js"></script>
-  <script defer src="../../dist/CoCreate-dnd.js"></script>
-
-
+  <script defer src="../dist/CoCreate-dnd.js"></script>
+ 
 </body>
 
 </html>
