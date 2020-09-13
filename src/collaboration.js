@@ -23,7 +23,20 @@ window.addEventListener("load", () => {
 
 });
 
+function UUID(length = 10) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+
+  var d = new Date().toTimeString();
+  var random = d.replace(/[\W_]+/g, "").substr(0, 6);
+  result += random;
+  return result;
+}
 
 function parse(text) {
   let doc = new DOMParser().parseFromString(text, 'text/html');
@@ -60,10 +73,12 @@ document.addEventListener('dndsuccess',(e)=>{
       if (dropType !== 'data-cloneable')
         broadcast.value[1] = broadcast.value[1].getAttribute('data-element_id');
       else {
+        if(!broadcast.value[1].getAttribute('data-element_id'))
+          broadcast.value[1].setAttribute('data-element_id', UUID() )
         let clonedEl = parse('<div>' + broadcast.value[1].outerHTML + '</div>');
-        dom.element(
-          elementConfig, { context: clonedEl }
-        )
+        // dom.element(
+        //   elementConfig, { context: clonedEl }
+        // )
         broadcast.value[1] = clonedEl.innerHTML;
       }
 
