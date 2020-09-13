@@ -434,8 +434,8 @@ window.initSortable = function ({
     context.setContext(target, vars.droppable, true);
     if (target.children.length)
       Array.from(target.children).forEach((el) => {
-        context.setContext(el, vars.draggable, true);
         if (cloneable) context.setContext(el, vars.cloneable, true);
+        else context.setContext(el, vars.draggable, true);
         try {
           let handleEls = el.querySelectorAll(handle);
           if (handle && handleEls.length) {
