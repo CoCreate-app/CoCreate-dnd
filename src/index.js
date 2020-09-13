@@ -1,4 +1,6 @@
 /*global HTMLElement*/
+import "./collaboration.js"
+import dndConfig from "./dnd-config.js"
 import "./util/iframe";
 import {
   dropMarker,
@@ -322,6 +324,7 @@ window.init = () => {
 
 window.addEventListener("load", () => {
   window.init();
+  dndConfig()
 });
 
 window.initDnd = function ({
