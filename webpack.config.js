@@ -10,14 +10,14 @@ module.exports = {
 
   // Path to your entry point. From this file Webpack will begin his work
   entry: {
-    'CoCreate-builder': './src/index.js',
+    'CoCreate-dnd': './src/index.js',
   },
 
   // Path and filename of your result bundle.
   // Webpack will bundle all JavaScript into this file
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'dnd.js'
+    filename: isProduction ? "CoCreate-dnd.min.js" : "CoCreate-dnd.js",
   },
 
   // Default mode for Webpack is production.
