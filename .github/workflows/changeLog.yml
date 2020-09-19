@@ -28,6 +28,12 @@ jobs:
           author: "true"
           base: "HISTORY.md"
           unreleased: "true"
-
+          breakingLabels: "Versioning - BREAKING"
+          enhancementLabels: "Type - Enhancement, Type - Feature"
+          bugLabels: "Type - Fix, Bug - Fixed"
+          deprecatedLabels: "Type - Deprecated"
+          removedLabels: "Type - Removal"
+          securityLabels: "Security Fix"
+          excludeLabels: "Skip-Changelog"
        
 
