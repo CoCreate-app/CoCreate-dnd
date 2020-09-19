@@ -1,14 +1,12 @@
-
 name: CI
-
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
   create:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   changelog:
@@ -17,9 +15,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
         with:
-          user: "hssngl"
+          user: "CoCreate-app"
           project: "CoCreate-dnd"
-          repo: "CoCreate/CoCreate-dnd"
+          repo: "CoCreate-app/CoCreate-dnd"
           token: ${{ secrets.GITHUB }}
           pullRequests: "true"
           prWoLabels: "true"
@@ -35,5 +33,3 @@ jobs:
           removedLabels: "Type - Removal"
           securityLabels: "Security Fix"
           excludeLabels: "Skip-Changelog"
-       
-
