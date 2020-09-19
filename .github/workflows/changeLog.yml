@@ -19,7 +19,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+      - name: create commit
+        id: commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: master
+          commit_message: "Automatic changelog update"
+          file_pattern: "CHANGELOG.md"
       # - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
       #   with:
       #     user: "CoCreate-app"
