@@ -6,7 +6,7 @@ import './util/onClickLeftEvent';
 import { droppable, draggable, selectable, hoverable, name, cloneable, data_insert_html } from './util/variables.js'
 
  let ref = { x: 0, y: 0, window, document, isIframe: false, }
-
+let zz =34324;
 export default function dnd(window, document, options) {
   console.log('dnd is loading', window.location.pathname)
    
