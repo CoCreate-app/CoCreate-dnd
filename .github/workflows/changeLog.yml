@@ -12,24 +12,31 @@ jobs:
   changelog:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
-        with:
-          user: "CoCreate-app"
-          project: "CoCreate-dnd"
-          repo: "CoCreate-app/CoCreate-dnd"
-          token: ${{ secrets.GITHUB }}
-          pullRequests: "true"
-          prWoLabels: "true"
-          issues: "true"
-          issuesWoLabels: "true"
-          author: "true"
-          base: "HISTORY.md"
-          unreleased: "true"
-          breakingLabels: "Versioning - BREAKING"
-          enhancementLabels: "Type - Enhancement, Type - Feature"
-          bugLabels: "Type - Fix, Bug - Fixed"
-          deprecatedLabels: "Type - Deprecated"
-          removedLabels: "Type - Removal"
-          securityLabels: "Security Fix"
-          excludeLabels: "Skip-Changelog"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+      #   with:
+      #     user: "CoCreate-app"
+      #     project: "CoCreate-dnd"
+      #     repo: "CoCreate-app/CoCreate-dnd"
+      #     token: ${{ secrets.GITHUB }}
+      #     pullRequests: "true"
+      #     prWoLabels: "true"
+      #     issues: "true"
+      #     issuesWoLabels: "true"
+      #     author: "true"
+      #     base: "HISTORY.md"
+      #     unreleased: "true"
+      #     breakingLabels: "Versioning - BREAKING"
+      #     enhancementLabels: "Type - Enhancement, Type - Feature"
+      #     bugLabels: "Type - Fix, Bug - Fixed"
+      #     deprecatedLabels: "Type - Deprecated"
+      #     removedLabels: "Type - Removal"
+      #     securityLabels: "Security Fix"
+      #     excludeLabels: "Skip-Changelog"
