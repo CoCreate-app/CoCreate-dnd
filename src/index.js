@@ -48,7 +48,7 @@ export default function dnd(window, document, options) {
   let isDraging = false;
   let consolePrintedEl = null; // dev only
   //// defining events
-
+  let aa ="343";
   dndReady(document)
 
   let dnd = new VirtualDnd();
