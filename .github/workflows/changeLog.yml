@@ -17,7 +17,17 @@ jobs:
       - uses: actions/checkout@v2
       - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: ./CHANGELOG.md
+          user: "hssngl"
+          project: "CoCreate-dnd"
+          repo: "CoCreate/CoCreate-dnd"
+          token: ${{ secrets.SERVICE_PERSONAL_ACCESS_TOKEN }}
+          pullRequests: "true"
+          prWoLabels: "true"
+          issues: "true"
+          issuesWoLabels: "true"
+          author: "true"
+          base: "HISTORY.md"
+          unreleased: "true"
+
        
 
