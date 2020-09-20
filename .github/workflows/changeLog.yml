@@ -36,7 +36,7 @@ jobs:
       #     excludeLabels: "Skip-Changelog"
 
       - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v2
+        uses: cycjimmy/semantic-release-action@v2.5
         with:
           branch: master
           extra_plugins: |
