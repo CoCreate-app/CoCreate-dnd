@@ -25,7 +25,7 @@ import {
 } from "./util/variables.js";
 
 let ref = { x: 0, y: 0, window, document, isIframe: false };
-let zz = 343334343433;
+let zz = 343343433;
 export default function dnd(window, document, options) {
   console.log("dnd is loading", window.location.pathname);
 
