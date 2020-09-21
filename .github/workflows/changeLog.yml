@@ -3,11 +3,8 @@ name: CI
 on:
   release:
   push:
-    branches: [master]
   pull_request:
-    branches: [master]
   create:
-    branches: [master]
 
 jobs:
   changelog:
@@ -26,10 +23,5 @@ jobs:
 
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v2
-        with:
-          extra_plugins: |
-            @semantic-release/changelog
-            @semantic-release/git
-          branch: master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
