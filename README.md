@@ -3,7 +3,7 @@
 ![GitHub](https://img.shields.io/github/license/CoCreate-app/CoCreate-boilerplate) 
 ![GitHub labels](https://img.shields.io/github/labels/CoCreate-app/CoCreate-boilerplate/help%20wanted)
 
-# CoCreate-dnd here
+# CoCreate-dnd
 A simple HTML5 and pure javascript component. Easy configuration using data-attributes and highly styleable.
 
 ![CoCreate](https://cdn.cocreate.app/logo.png)
@@ -51,3 +51,5 @@ We encourage contribution to our libraries (you might even score some nifty swag
 
 # License
 [The MIT License (MIT)](https://github.com/CoCreate-app/CoCreate-dnd/blob/master/LICENSE)
+
+here
