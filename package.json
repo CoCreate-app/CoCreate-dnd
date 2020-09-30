@@ -1,6 +1,6 @@
 {
   "name": "@cocreate-app/dnd",
-  "description": "a seamless multi-iframe and nested-iframe drag and drop",
+  "description": "a seamless multi-iframe drag and drop utility",
   "version": "0.9.0",
   "main": "src/index.js",
   "license": "MIT",

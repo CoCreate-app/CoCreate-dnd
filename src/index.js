@@ -1,6 +1,6 @@
 /*global HTMLElement*/
-import "./collaboration.js"
-import dndConfig from "./dnd-config.js"
+import "./collaboration.js";
+import dndConfig from "./dnd-config.js";
 import "./util/iframe";
 import {
   dropMarker,
@@ -69,10 +69,10 @@ export default function dnd(window, document, options) {
       vars.draggable,
       vars.handleable,
     ]);
-    
-     if(!Array.isArray(r)) return;  
+
+    if (!Array.isArray(r)) return;
     let [el, att] = r;
-    
+
     switch (att) {
       case vars.cloneable:
         let html = el.getAttribute(vars.data_insert_html);
@@ -89,13 +89,11 @@ export default function dnd(window, document, options) {
       default:
         el = getCoc(el, vars.draggable);
     }
-
     // get group
     let groupResult = getGroupName(el);
     startGroup = groupResult[1];
 
     ref.document.body.style.cursor = "crosshair !important";
-
     isDraging = true;
 
     dnd.dragStart(e, el, null, ref, att);
@@ -260,7 +258,7 @@ function dndReady(document) {
   // disable selection
   document.addEventListener("selectstart", (e) => {
     let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
-    if(!Array.isArray(r)) return;
+    if (!Array.isArray(r)) return;
     e.preventDefault();
   });
 }
@@ -324,7 +322,7 @@ window.init = () => {
 
 window.addEventListener("load", () => {
   window.init();
-  dndConfig()
+  dndConfig();
 });
 
 window.initElement = function ({
