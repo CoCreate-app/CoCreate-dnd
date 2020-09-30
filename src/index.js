@@ -327,11 +327,11 @@ window.addEventListener("load", () => {
   dndConfig()
 });
 
-window.initDnd = function ({
+window.initElement = function ({
   target,
-  drop,
-  drag,
-  clone,
+  dropable,
+  draggable,
+  cloneable,
   handle,
   group,
   exclude,
@@ -354,17 +354,17 @@ window.initDnd = function ({
       }
     }
 
-    if (drop)
-      target.querySelectorAll(drop).forEach((el) => {
+    if (dropable)
+      target.querySelectorAll(dropable).forEach((el) => {
         context.setContext(el, vars.droppable, true);
       });
-    if (drag)
-      target.querySelectorAll(drag).forEach((el) => {
+    if (draggable)
+      target.querySelectorAll(draggable).forEach((el) => {
         context.setContext(el, vars.draggable, true);
       });
 
-    if (clone)
-      target.querySelectorAll(clone).forEach((el) => {
+    if (cloneable)
+      target.querySelectorAll(cloneableg).forEach((el) => {
         context.setContext(el, vars.cloneable, true);
       });
   } catch (err) {
@@ -386,7 +386,7 @@ function addNestedAttribute(el, cloneable) {
   });
 }
 
-window.initSortable = function ({
+window.initContainer = function ({
   target,
   cloneable = false,
   nested = false,
