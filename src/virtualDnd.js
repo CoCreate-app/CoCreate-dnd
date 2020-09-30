@@ -125,8 +125,6 @@ export default function virtualDnd() {
 
 
 
-        this.id = null;
-
         // dispatch gloval events
         const event = new CustomEvent('dndsuccess', {
           bubbles: true,
