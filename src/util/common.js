@@ -1,8 +1,18 @@
 import { group_name } from "./variables";
 import domContext from "./domContext";
-let dndContext = new domContext();
+
+//find the global context
+let parentWindow = window;
+while (parentWindow !== window.parent) parentWindow = window.parent;
+let dndContext;
+if (!parentWindow.dndContext) {
+  dndContext = new domContext();
+  parentWindow.dndContext = dndContext;
+} else dndContext = parentWindow.dndContext;
+
 
 export { dndContext };
+
 export function getCoc(el, att) {
   if (!el.tagName) el = el.parentElement;
   return dndContext.getContext(el, att);
