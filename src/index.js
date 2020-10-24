@@ -308,7 +308,9 @@ window.init = () => {
   //   }
 
   // only run if it's the host but not iframe
-  // if (window.location === window.parent.location)
+  if (window.parent == window)
+    return;
+    
 
   dnd(window, document, {
     iframes: Object.values(window.iframes.guests).map((o) => o.frame),
@@ -354,7 +356,7 @@ window.initElement = function ({
       }
     }
 
-    if (dropable)
+    if (dropable )
       target.querySelectorAll(dropable).forEach((el) => {
         context.setContext(el, vars.droppable, true);
       });
@@ -410,7 +412,7 @@ window.initContainer = function ({
     }
   }
 
-  if (!(target instanceof HTMLElement)) {
+  if (!target.tagName) {
     let error = "Dnd Sortable: Please provide a valid element";
     throw error;
     console.error(error);
