@@ -308,7 +308,7 @@ window.init = () => {
   //   }
 
   // only run if it's the host but not iframe
-  if (window.parent == window)
+  if (window.parent !== window)
     return;
     
 
