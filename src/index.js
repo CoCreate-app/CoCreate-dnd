@@ -11,7 +11,7 @@ import {
   getCocs,
   distanceToChild,
   autoScroller,
-  dndContext as context,
+ 
 } from "./util/common";
 
 import VirtualDnd from "./virtualDnd";
@@ -19,7 +19,10 @@ import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
 
 let ref = { x: 0, y: 0, window, document, isIframe: false };
-
+let beforeDndSuccessHooks = [];
+function beforeDndSuccess(){
+  beforeDndSuccessHooks.forEach(hook => hook.apply(null, arguments))
+}
 export default function dnd(window, document, options) {
   console.log("dnd is loading", window.location.pathname);
 
@@ -39,7 +42,7 @@ export default function dnd(window, document, options) {
 
   dndReady(document);
 
-  let dnd = new VirtualDnd();
+  let dnd = new VirtualDnd(beforeDndSuccess);
   let ghost;
   dnd.on("dragStart", (data) => {
     myDropMarker.hide();
@@ -82,7 +85,7 @@ export default function dnd(window, document, options) {
         } else el = el.cloneNode(true);
         break;
       case vars.draggable:
-        let hasHandle = context.getContext(el, vars.handleable);
+        let hasHandle =  el.getHiddenAttribute(vars.handleable)
         if (hasHandle) return;
         break;
 
@@ -329,6 +332,56 @@ window.addEventListener("load", () => {
   dndConfig()
 });
 
+// window.initElement = function ({
+//   target,
+//   dropable,
+//   draggable,
+//   cloneable,
+//   handle,
+//   group,
+//   exclude,
+// }) {
+//   try {
+//     if (group) context.setContext(target, vars.group_name, group);
+
+//     if (exclude) {
+//       try {
+//         let excludeEls = target.querySelectorAll(exclude);
+//         excludeEls.forEach((el) => {
+//           context.setContext(el, vars.exclude, true);
+//         });
+//       } catch (err) {
+//         if (err instanceof HTMLElement) {
+//           let error = "Dnd Sortable: exclude must be valid selector";
+//           console.error(error);
+//         }
+//         throw err;
+//       }
+//     }
+
+//     if (dropable )
+//       target.querySelectorAll(dropable).forEach((el) => {
+//         context.setContext(el, vars.droppable, true);
+//       });
+//     if (draggable)
+//       target.querySelectorAll(draggable).forEach((el) => {
+//         context.setContext(el, vars.draggable, true);
+//       });
+
+//     if (cloneable)
+//       target.querySelectorAll(cloneableg).forEach((el) => {
+//         context.setContext(el, vars.cloneable, true);
+//       });
+//   } catch (err) {
+//     if (err instanceof DOMException) {
+//       let error = "Dnd Sortable: handle must be a valid selector";
+//       console.error(error);
+//       throw err;
+//     } else throw err;
+//   }
+// };
+
+
 window.initElement = function ({
   target,
   dropable,
@@ -337,15 +390,19 @@ window.initElement = function ({
   handle,
   group,
   exclude,
+  beforeDndSuccess
 }) {
   try {
-    if (group) context.setContext(target, vars.group_name, group);
+    if(typeof beforeDndSuccess == 'function')
+      beforeDndSuccessHooks.push(beforeDndSuccess)
+    if (group) target.setHiddenAttribute(vars.group_name, group)
 
     if (exclude) {
       try {
         let excludeEls = target.querySelectorAll(exclude);
         excludeEls.forEach((el) => {
-          context.setContext(el, vars.exclude, true);
+          el.setHiddenAttribute(vars.exclude, true)
+          
         });
       } catch (err) {
         if (err instanceof HTMLElement) {
@@ -358,16 +415,18 @@ window.initElement = function ({
 
     if (dropable )
       target.querySelectorAll(dropable).forEach((el) => {
-        context.setContext(el, vars.droppable, true);
+            el.setHiddenAttribute(vars.droppable, true)
+
       });
     if (draggable)
       target.querySelectorAll(draggable).forEach((el) => {
-        context.setContext(el, vars.draggable, true);
+          el.setHiddenAttribute(vars.draggable, true)
+  
       });
 
     if (cloneable)
-      target.querySelectorAll(cloneableg).forEach((el) => {
-        context.setContext(el, vars.cloneable, true);
+      target.querySelectorAll(cloneable).forEach((el) => {
+          el.setHiddenAttribute(vars.cloneable, true)
       });
   } catch (err) {
     if (err instanceof DOMException) {
@@ -382,11 +441,80 @@ function addNestedAttribute(el, cloneable) {
   if (!el.children.length) return;
   Array.from(el.children).forEach((el) => {
     addNestedAttribute(el);
-    context.setContext(el, vars.droppable, true);
-    context.setContext(el, vars.draggable, true);
-    if (cloneable) context.setContext(el, vars.cloneable, true);
+    el.setHiddenAttribute(vars.exclude, true)
+    el.setHiddenAttribute(vars.draggable, true)
+    if (cloneable) el.setHiddenAttribute(vars.cloneable, true)
   });
 }
+
+// window.initContainer = function ({
+//   target,
+//   cloneable = false,
+//   nested = false,
+//   handle,
+//   group,
+//   exclude,
+// }) {
+//   if (group) context.setContext(target, vars.group_name, group);
+//   if (exclude) {
+//     try {
+//       let excludeEls = target.querySelectorAll(exclude);
+//       excludeEls.forEach((el) => {
+//         context.setContext(el, vars.exclude, true);
+//       });
+//     } catch (err) {
+//       if (err instanceof DOMException) {
+//         let error = "Dnd Sortable: exclude must be valid selector";
+//         console.error(error);
+//         throw error;
+//       } else throw err;
+//     }
+//   }
+
+//   if (!target.tagName) {
+//     let error = "Dnd Sortable: Please provide a valid element";
+//     throw error;
+//     console.error(error);
+//   }
+
+//   if (typeof cloneable != "boolean") {
+//     let error = "Dnd Sortable: please provide valid data type for cloneable";
+//     throw error;
+//     console.error(error);
+//   }
+
+//   if (typeof nested != "boolean") {
+//     let error = "Dnd Sortable: please provide valid data type for nested";
+//     throw error;
+//     console.error(error);
+//   }
+
+//   if (nested) {
+//     addNestedAttribute(target, cloneable);
+//   } else {
+//     context.setContext(target, vars.droppable, true);
+//     if (target.children.length)
+//       Array.from(target.children).forEach((el) => {
+//         if (cloneable) context.setContext(el, vars.cloneable, true);
+//         else context.setContext(el, vars.draggable, true);
+//         try {
+//           let handleEls = el.querySelectorAll(handle);
+//           if (handle && handleEls.length) {
+//             context.setContext(el, vars.handleable, true);
+//             handleEls.forEach((el) => {
+//               context.setContext(el, vars.handleable, true);
+//             });
+//           }
+//         } catch (err) {
+//           if (err instanceof DOMException) {
+//             let error = "Dnd Sortable: handle must be a valid selector";
+//             console.error(error);
+//             throw error;
+//           } else throw err;
+//         }
+//       });
+//   }
+// };
 
 window.initContainer = function ({
   target,
@@ -396,12 +524,12 @@ window.initContainer = function ({
   group,
   exclude,
 }) {
-  if (group) context.setContext(target, vars.group_name, group);
+  if (group)  target.setHiddenAttribute(vars.group_name, group)
   if (exclude) {
     try {
       let excludeEls = target.querySelectorAll(exclude);
       excludeEls.forEach((el) => {
-        context.setContext(el, vars.exclude, true);
+        el.setHiddenAttribute(vars.exclude, true)
       });
     } catch (err) {
       if (err instanceof DOMException) {
@@ -414,36 +542,37 @@ window.initContainer = function ({
 
   if (!target.tagName) {
     let error = "Dnd Sortable: Please provide a valid element";
-    throw error;
     console.error(error);
+    throw error;
   }
 
   if (typeof cloneable != "boolean") {
     let error = "Dnd Sortable: please provide valid data type for cloneable";
-    throw error;
     console.error(error);
+    throw error;
   }
 
   if (typeof nested != "boolean") {
     let error = "Dnd Sortable: please provide valid data type for nested";
-    throw error;
     console.error(error);
+    throw error;
   }
 
   if (nested) {
     addNestedAttribute(target, cloneable);
   } else {
-    context.setContext(target, vars.droppable, true);
+       target.setHiddenAttribute(vars.droppable, true)
+
     if (target.children.length)
       Array.from(target.children).forEach((el) => {
-        if (cloneable) context.setContext(el, vars.cloneable, true);
-        else context.setContext(el, vars.draggable, true);
+        if (cloneable)        el.setHiddenAttribute(vars.cloneable, true)
+        else el.setHiddenAttribute(vars.draggable, true)
         try {
           let handleEls = el.querySelectorAll(handle);
           if (handle && handleEls.length) {
-            context.setContext(el, vars.handleable, true);
+            el.setHiddenAttribute(vars.draggable, true)
             handleEls.forEach((el) => {
-              context.setContext(el, vars.handleable, true);
+              el.setHiddenAttribute(vars.draggable, true)
             });
           }
         } catch (err) {

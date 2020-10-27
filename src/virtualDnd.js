@@ -2,44 +2,6 @@ import eventUtil from './eventUtil';
 import { closestChild, parse } from './util/common';
 import { exclude } from './util/variables'
 
-let elementConfig = [{
-    displayname: 'default',
-    selector: ['body, body *'],
-    draggable: 'true',
-    droppable: 'true',
-    hoverable: 'true',
-    selectable: 'true',
-    editable: 'true',
-    // toolbar: { 'test': 'testing this' },
-  },
-  {
-    displayname: 'body',
-    selector: ['body, body'],
-    draggable: 'false',
-  },
-  {
-    displayname: 'form',
-    selector: ['form'],
-    editable: 'true'
-  },
-  {
-    displayname: 'input',
-    selector: 'input',
-    editable: 'false'
-  },
-  {
-    displayname: 'textarea',
-    selector: 'textarea',
-    editable: 'false'
-  },
-  {
-    displayname: 'select',
-    selector: 'select',
-    editable: 'false'
-  },
-];
-
-
 function UUID(length = 10) {
   var result = '';
   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -57,7 +19,7 @@ function UUID(length = 10) {
 
 let topleft = ['left', 'top'];
 
-export default function virtualDnd() {
+export default function virtualDnd(beforeDndSuccess) {
   this.dragedEl;
   this.dropedEl;
   this.position;
@@ -71,7 +33,7 @@ export default function virtualDnd() {
     evnt.on.apply(evnt, arguments);
   }
 
-  this.dragStart = (e, el, id, ref, dropType) => {
+  this.dragStart = (e, el, id, ref, dropType, ) => {
     // #broadcast
     // domEditor({
     //   obj: selectorUtil.cssPath( this.dropedEl),
@@ -124,18 +86,42 @@ export default function virtualDnd() {
 
 
 
+        // get iframe path
+       let path = [];
+        const {cssPath, findIframeFromElement, getTopMostWindow} = window.cc;
+        let topWindow = getTopMostWindow()
+        let iframeElement = findIframeFromElement(topWindow, this.dropedEl)
+        let p = cssPath(iframeElement);
+        if(p)
+        path.unshift(p)
+        
+        //todo: support for nested iframe
+        // while(iframeElement !== findIframeFromElement(topWindow,iframeElement))
+        // {
+        //   iframeElement = findIframeFromElement(topWindow,iframeElement);
+        //   path.unshift(cssPath(iframeElement))
+        // }
+          
+        let detail = {
+            position: this.position,
+            dragedEl: this.dragedEl,
+            dropedEl: this.dropedEl,
+            dropType: this.dropType,
+            path
+          };
+          
+          beforeDndSuccess(detail);
 
         // dispatch gloval events
         const event = new CustomEvent('dndsuccess', {
           bubbles: true,
-          detail: {
-            position: this.position,
-            dragedEl: this.dragedEl,
-            dropedEl: this.dropedEl,
-            dropType: this.dropType
-          }
+          detail 
         });
-        this.dropedEl.dispatchEvent(event, { bubbles: true })
+        
+   
+        
+        window.document.body.dispatchEvent(event, { bubbles: true })
+        // this.dropedEl.dispatchEvent(event, { bubbles: true })
 
       }
     }

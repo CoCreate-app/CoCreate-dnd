@@ -1,5 +1,5 @@
 import { group_name } from "./variables";
-import domContext from "./domContext";
+import domContext from "./domContext2";
 
 //find the global context
 let parentWindow = window;
