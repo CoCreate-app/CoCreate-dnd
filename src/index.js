@@ -293,6 +293,16 @@ function wrapper(func, ref) {
 }
 
 window.init = () => {
+    if (!document.querySelector('#dnd-style')) {
+      let dndStyle = document.createElement('style');
+      dndStyle.id = "dnd-style";
+      dndStyle.innerHTML = `    /* dnd specic */
+       [data-draggable="true"], [data-cloneable="true"]  {
+         touch-action: none;
+       }
+      /* dnd specic */`
+      document.head.append(dndStyle)
+    }
 
 
   // only run if it's the host but not iframe
