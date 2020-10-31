@@ -180,7 +180,7 @@ export default function dnd(window, document, options) {
     let touch = e.touches[0];
     let x = touch.clientX;
     let y = touch.clientY;
-    let el = document.elementFromPoint(x, y);
+    let el = ref.document.elementFromPoint(x, y);
     if (!el) return; // it's out of iframe
 
     // sending object representing an event data
