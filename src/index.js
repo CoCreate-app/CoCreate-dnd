@@ -378,14 +378,14 @@ window.initElement = function ({
       });
     if (draggable)
       target.querySelectorAll(draggable).forEach((el) => {
-          el.style.touchAction = 'none'
+          // el.style.touchAction = 'none'
           el.setHiddenAttribute(vars.draggable, 'true')
   
       });
 
     if (cloneable)
       target.querySelectorAll(cloneable).forEach((el) => {
-          el.style.touchAction = 'none'
+          // el.style.touchAction = 'none'
           el.setHiddenAttribute(vars.cloneable, 'true')
       });
   } catch (err) {
@@ -402,7 +402,7 @@ function addNestedAttribute(el, cloneable) {
   Array.from(el.children).forEach((el) => {
     addNestedAttribute(el);
     el.setHiddenAttribute(vars.exclude, 'true')
-    el.style.touchAction = 'none'
+    // el.style.touchAction = 'none'
     el.setHiddenAttribute(vars.draggable, 'true')
     if (cloneable) el.setHiddenAttribute(vars.cloneable, 'true')
   });
@@ -460,20 +460,20 @@ window.initContainer = function ({
       Array.from(target.children).forEach((el) => {
         if (cloneable) 
         {
-          el.style.touchAction = 'none'
+          // el.style.touchAction = 'none'
           el.setHiddenAttribute(vars.cloneable, 'true')
         }
         else {
-          el.style.touchAction = 'none'
+          // el.style.touchAction = 'none'
           el.setHiddenAttribute(vars.draggable, 'true') 
         }
         try {
           let handleEls = el.querySelectorAll(handle);
           if (handle && handleEls.length) {
-            el.style.touchAction = 'none'
+            // el.style.touchAction = 'none'
             el.setHiddenAttribute(vars.draggable, 'true')
             handleEls.forEach((el) => {
-              el.style.touchAction = 'none'
+              // el.style.touchAction = 'none'
               el.setHiddenAttribute(vars.draggable, 'true')
             });
           }
