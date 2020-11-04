@@ -189,7 +189,7 @@ export function dropMarker(options) {
           "px";
         break;
       default:
-        // console.log(orientation)
+        
         throw new Error("one type of orientation must be specified");
     }
     // marker.style.transition = "all 0.2s ease-in-out";
@@ -402,7 +402,7 @@ export function autoScroller({ speed, threshold }) {
   };
 
   this.calculateScroll = function ({ x, y, element, onMouseScrollMove }) {
-    // console.log('scrolling in ', element)
+    
     let hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
     let hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
 
@@ -454,25 +454,25 @@ export function autoScroller({ speed, threshold }) {
   };
 
   this.activateScroll = function (element, orientation, callback) {
-    // console.log('scrolling')
+    
     this.lastScrollingElement = element;
     this.interval = setInterval(() => {
       switch (orientation) {
         case "top":
           element.scrollBy(0, -this.speed);
-          // console.log('top')
+          
           break;
         case "bottom":
           element.scrollBy(0, this.speed);
-          // console.log('bottom')
+          
           break;
         case "left":
           element.scrollBy(-this.speed, 0);
-          // console.log('left')
+          
           break;
         case "right":
           element.scrollBy(this.speed, 0);
-          // console.log('right')
+          
           break;
       }
 
@@ -484,7 +484,7 @@ export function autoScroller({ speed, threshold }) {
   };
 
   this.deactivateScroll = function () {
-    // console.log('scrolling disabled')
+    
     clearInterval(this.interval);
   };
 }

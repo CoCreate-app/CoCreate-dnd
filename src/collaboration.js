@@ -32,7 +32,7 @@ window.addEventListener("load", () => {
         }
       }
 
-      console.log("with object: ", data, window.location.pathname);
+      // console.log("with object: ", data, window.location.pathname);
       // passing it to domEditor
 
       domEditor(data);

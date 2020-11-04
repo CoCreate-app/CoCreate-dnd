@@ -28,7 +28,7 @@ function beforeDndSuccess(){
   return {}
 }
 export default function dnd(window, document, options) {
-  console.log("dnd is loading", window.location.pathname);
+  // console.log("dnd is loading", window.location.pathname);
 
   options = Object.assign(
     {
@@ -150,7 +150,7 @@ export default function dnd(window, document, options) {
     // }
     
     // if()
-    // console.log('touchccccc', target)
+    
     if (!el || !isDraging) return;
 
     if (!stopScroll) {
@@ -168,17 +168,17 @@ export default function dnd(window, document, options) {
   }
 
   let touchstart = (e, ref) => {
-    console.log("touch start");
+    // console.log("touch start");
 
     start(e,ref);
   };
   let touchend = (e, ref) => {
 
-    console.log("touch end");
+    // console.log("touch end");
     end(e,ref);
   };
   let touchmove = (e, ref) => {
-    console.log("host touch move");
+    // console.log("host touch move");
 
    
     let touch = e.touches[0];
@@ -191,14 +191,14 @@ export default function dnd(window, document, options) {
     move({ x, y, target: el, isTouch: true }, ref);
   };
   let mousedown = (e, ref) => {
-    console.log("mouse down", e);
+    // console.log("mouse down", e);
 
     if (e.which != 1) return;
 
     start(e, ref);
   };
   let mouseup = (e, ref) => {
-    console.log("mouse up", e);
+    // console.log("mouse up", e);
     // todo: why would we check for hoverable and what do we do whith this?
     // let el = getCoc(e.target, hoverable)
     // if (!el) return;
@@ -315,7 +315,7 @@ window.init = () => {
   dnd(window, document, {
     iframes: Object.values(window.iframes.guests).map((o) => o.frame),
   });
-  console.log("dnd is loaded", window.location.pathname);
+  // console.log("dnd is loaded", window.location.pathname);
 
   function parse(text) {
     let doc = new DOMParser().parseFromString(text, "text/html");
