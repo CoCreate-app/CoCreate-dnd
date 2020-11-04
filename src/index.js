@@ -118,7 +118,7 @@ export default function dnd(window, document, options) {
     isDraging = false;
   }
 
-  function move({ x, y, target }, ref, stopScroll) {
+  function move({ x, y, target, isTouch }, ref, stopScroll) {
     if (ghost) ghost.draw({ x, y }, ref);
     scroller.update(x, y);
     if (isDraging) {
@@ -148,7 +148,9 @@ export default function dnd(window, document, options) {
     //   console.log("you are on: \n", onEl, "\nDroping in: \n", el);
     //   consolePrintedEl = el;
     // }
-
+    
+    // if()
+    // console.log('touchccccc', target)
     if (!el || !isDraging) return;
 
     if (!stopScroll) {
@@ -186,7 +188,7 @@ export default function dnd(window, document, options) {
     if (!el) return; // it's out of iframe
 
     // sending object representing an event data
-    move({ x, y, target: el }, ref);
+    move({ x, y, target: el, isTouch: true }, ref);
   };
   let mousedown = (e, ref) => {
     console.log("mouse down", e);
