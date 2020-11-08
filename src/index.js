@@ -48,7 +48,7 @@ export default function dnd(window, document, options) {
   let ghost;
   dnd.on("dragStart", (data) => {
     myDropMarker.hide();
-    ghost = new ghostEffect(data.el, { document });
+    ghost = new ghostEffect(data.e ,data.el, { document, window });
     ghost.start();
   });
   dnd.on("dragEnd", (data) => {

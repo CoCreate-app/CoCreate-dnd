@@ -10,17 +10,43 @@
       outline: 1px dashed gray;
     }
 
-    *[CoC-hovered=true] {
-      outline: 2px solid blue
-    }
+    /**[CoC-hovered=true] {*/
+    /*  outline: 2px solid blue*/
+    /*}*/
 
     /* must be defined after CoC-hovered because of css specificity to show selected with higher priority */
 
-    *[CoC-selected=true] {
-      outline: 3px solid green;
-    }
+    /**[CoC-selected=true] {*/
+    /*  outline: 3px solid green;*/
+    /*}*/
 
+  /*  *{*/
+      
+  /*-moz-transition: height 1s ease;*/
+  /*-webkit-transition: height 1s ease;*/
+  /*-o-transition: height 1s ease;*/
+  /*transition: height 2s ease;    }*/
+  
     *[CoC-dragging=true] {
       outline: 3px solid red;
+      /*height:0px!important;*/
+      /*overflow:hidden;*/
+      
     }
     
+    #dropMarker{
+      background-color:green;
+      position :absolute;
+      display:none;
+      z-index:100;
+    }
+    #ghostEffect{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    whiteSpace: nowrap;
+    opacity: 0.5;
+    position: fixed;
+    z-index: 100;
+    border: 1px solid grey;
+      
+    }

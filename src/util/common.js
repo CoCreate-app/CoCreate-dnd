@@ -10,7 +10,6 @@ if (!parentWindow.dndContext) {
   parentWindow.dndContext = dndContext;
 } else dndContext = parentWindow.dndContext;
 
-
 export { dndContext };
 
 export function getCoc(el, att) {
@@ -51,10 +50,10 @@ let lasttransition = "none";
 export function dropMarker(options) {
   options = Object.assign({ borderSize: 2, dropMarkerMargin: 5 }, options);
   let marker = document.createElement("div");
-  marker.id = "marker";
-  marker.style.backgroundColor = "green";
-  marker.style.position = "absolute";
-  marker.style.display = "none";
+  marker.id = "dropMarker";
+  // marker.style.backgroundColor = "green";
+  // marker.style.position = "absolute";
+  // marker.style.display = "none";
   marker.style.pointerEvents = "none";
 
   this.lastOrigntaion = undefined;
@@ -179,28 +178,30 @@ export function parse(text) {
   else return doc.body.children[0];
 }
 
-export function ghostEffect(el, ref) {
+export function ghostEffect(elementEvent, el, ref) {
   this.effectCb;
-
+  
   this.start = () => {
     this.cloneEl = el.cloneNode(true);
+    let { width, height } = ref.window.getComputedStyle(el);
     let cloneElStyle = window.getComputedStyle(this.cloneEl);
     this.wrapper = document.createElement("div");
-    this.wrapper.style.height = cloneElStyle.height;
-    this.wrapper.style.width = cloneElStyle.width;
+
+    this.wrapper.style.height =  height;
+    this.wrapper.style.width =  width;
     this.wrapper.append(this.cloneEl);
     this.wrapper.style.display = "none";
     ref.document.body.append(this.wrapper);
 
     this.wrapper.style.pointerEvents = "none";
-    this.wrapper.style.overflow = "hidden";
-    this.wrapper.style.textOverflow = "ellipsis";
-    this.wrapper.style.whiteSpace = "nowrap";
+    // this.wrapper.style.overflow = "hidden";
+    // this.wrapper.style.textOverflow = "ellipsis";
+    // this.wrapper.style.whiteSpace = "nowrap";
 
-    this.wrapper.style.opacity = "0.5";
-    this.wrapper.style.position = "fixed";
-    this.wrapper.style.Zindex = "20000";
-    this.wrapper.id = "ghost-effect";
+    // this.wrapper.style.opacity = "0.5";
+    // this.wrapper.style.position = "fixed";
+    // this.wrapper.style.Zindex = "20000";
+    this.wrapper.id = "ghostEffect";
   };
 
   this.draw = (e, ref) => {
@@ -211,21 +212,23 @@ export function ghostEffect(el, ref) {
       marginBottom,
       marginLeft,
       marginRight,
+      width,
+      height,
     } = computeStyles(this.cloneEl, [
       "marginTop",
       "marginBottom",
       "marginLeft",
       "marginRight",
+      "width",
+      "height",
     ]);
 
     let frameRect;
     if (ref.frame) frameRect = ref.frame.getBoundingClientRect();
     else frameRect = { top: 0, left: 0 };
 
-    // let targetRect = e.target.getBoundingClientRect();
-
-    this.wrapper.style.top = frameRect.top + e.y - 15 + "px";
-    this.wrapper.style.left = frameRect.left + e.x - 15 + "px";
+    this.wrapper.style.top = frameRect.top + e.y - elementEvent.offsetY + "px";
+    this.wrapper.style.left = frameRect.left + e.x - elementEvent.offsetX + "px";
   };
 
   this.hide = () => {
