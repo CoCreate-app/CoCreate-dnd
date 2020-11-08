@@ -62,7 +62,7 @@ export default function virtualDnd(beforeDndSuccess) {
         // parent can't be draged into children
         if (this.dragedEl.contains(this.dropedEl))
           throw "dnd cancelled, you can't dnd from parent to its children.";
-
+        this.dragedEl.removeAttribute("CoC-dragging");
         let path = window.cc.getElementPath(this.dropedEl);
         // get iframe path
         // let path = [];
@@ -109,7 +109,6 @@ export default function virtualDnd(beforeDndSuccess) {
     } catch (e) {
       console.error(e);
     } finally {
-      if (this.dragedEl) this.dragedEl.removeAttribute("CoC-dragging");
       if (this.type) {
         this.position = null;
         console.log(
