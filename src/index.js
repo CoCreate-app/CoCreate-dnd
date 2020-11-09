@@ -87,7 +87,7 @@ export default function dnd(window, document, options) {
         } else el = el.cloneNode(true);
         break;
       case vars.draggable:
-        let hasHandle =  el.getHiddenAttribute(vars.handleable)
+        let hasHandle =  el.getAnyAttribute(vars.handleable)
         if (hasHandle) return;
         break;
 
