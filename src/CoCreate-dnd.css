@@ -19,7 +19,7 @@
       background-color:green;
       position :absolute;
       display:none;
-      z-index:100;
+      z-index:100000;
     }
     
     #ghostEffect{
@@ -28,6 +28,6 @@
       whiteSpace: nowrap;
       opacity: 0.5;
       position: fixed;
-      z-index: 100;
+      z-index: 100000;
       border: 1px solid grey;
     }
