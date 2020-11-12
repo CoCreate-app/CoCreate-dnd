@@ -54,6 +54,7 @@ export default function virtualDnd(beforeDndSuccess) {
 
   this.dragEnd = (e, ref) => {
     try {
+      this.dragedEl.removeAttribute("CoC-dragging");
       if (this.position) {
         if (this.dropedEl === this.dragedEl)
           throw "dnd cancelled. you can't dnd on the same element.";
@@ -62,7 +63,7 @@ export default function virtualDnd(beforeDndSuccess) {
         // parent can't be draged into children
         if (this.dragedEl.contains(this.dropedEl))
           throw "dnd cancelled, you can't dnd from parent to its children.";
-        this.dragedEl.removeAttribute("CoC-dragging");
+        
         let path = window.cc.getElementPath(this.dropedEl);
         // get iframe path
         // let path = [];
