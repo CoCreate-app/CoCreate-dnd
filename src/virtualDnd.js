@@ -54,7 +54,7 @@ export default function virtualDnd(beforeDndSuccess) {
 
   this.dragEnd = (e, ref) => {
     try {
-      this.dragedEl.removeAttribute("CoC-dragging");
+      if(this.dragedEl) this.dragedEl.removeAttribute("CoC-dragging");
       if (this.position) {
         if (this.dropedEl === this.dragedEl)
           throw "dnd cancelled. you can't dnd on the same element.";
