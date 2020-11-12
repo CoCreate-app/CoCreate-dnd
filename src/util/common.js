@@ -209,7 +209,7 @@ export function parse(text) {
 
 export function ghostEffect(elementEvent, el, ref) {
   this.effectCb;
-  
+  el.removeAttribute('CoC-dragging');
   this.start = () => {
     this.cloneEl = el.cloneNode(true);
     let { width, height } = ref.window.getComputedStyle(el);
