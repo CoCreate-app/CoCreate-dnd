@@ -1,6 +1,7 @@
 import { group_name } from "./variables";
 import domContext from "./domContext2";
-import initFunctionState from '../index'
+
+let initFunctionState = [];
 //find the global context
 let parentWindow = window;
 while (parentWindow !== window.parent) parentWindow = window.parent;
@@ -10,7 +11,7 @@ if (!parentWindow.dndContext) {
   parentWindow.dndContext = dndContext;
 } else dndContext = parentWindow.dndContext;
 
-export { dndContext };
+export { dndContext,initFunctionState };
 
 function checkInitFunction(element) {
   for (let state of initFunctionState) {

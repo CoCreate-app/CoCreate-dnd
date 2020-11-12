@@ -11,14 +11,14 @@ import {
   getCocs,
   distanceToChild,
   autoScroller,
- 
+ initFunctionState
 } from "./util/common";
 
 import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
 
-let initFunctionState = [];
+
 
 let ref = { x: 0, y: 0, window, document, isIframe: false };
 let beforeDndSuccessCallback;
