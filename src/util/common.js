@@ -13,9 +13,9 @@ if (!parentWindow.dndContext) {
 
 export { dndContext,initFunctionState };
 
-function checkInitFunction(element) {
+function checkInitFunction(element, request) {
   for (let state of initFunctionState) {
-    let r = state.onDndStart(element);
+    let r = state.onDnd(element,request);
     if (state.target.contains(element) && Array.isArray(r)) return r;
   }
 }
@@ -25,7 +25,7 @@ export function getCoc(el, att) {
   let r = dndContext.getContext(el, att);
   if(!r)
   {
-    let r2 = checkInitFunction(el);
+    let r2 = checkInitFunction(el,[att]);
     if(Array.isArray(r2) && att == r2[1])
     return r2[0]
     else 
@@ -41,7 +41,7 @@ export function getCocs(el, attList) {
   let r= dndContext.getContexts(el, attList);
     if(!Array.isArray(r))
   {
-    let r2 = checkInitFunction(el);
+    let r2 = checkInitFunction(el, attList);
     if(Array.isArray(r2) && attList.includes(r2[1]))
       return r2;
     else 

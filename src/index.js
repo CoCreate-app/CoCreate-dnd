@@ -72,8 +72,8 @@ export default function dnd(window, document, options) {
 
   function start(e, ref) {
     let r = getCocs(e.target, [
-      vars.cloneable,
       vars.draggable,
+      vars.cloneable,
       vars.handleable,
     ]);
     
@@ -319,15 +319,13 @@ window.addEventListener("load", () => {
 
 window.initFunction = function ({
   target,
-  onDndStart,
-  onDndMove,
-
+  onDnd,
   beforeDndSuccess,
 }) {
   if (typeof beforeDndSuccess == "function")
     beforeDndSuccessCallback = beforeDndSuccess;
 
-  initFunctionState.push({ target, onDndStart, onDndMove });
+  initFunctionState.push({ target, onDnd });
 };
 
 window.initElement = function ({
