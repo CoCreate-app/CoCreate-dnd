@@ -119,6 +119,8 @@ export default function dnd(window, document, options) {
   }
 
   function move({ x, y, target, isTouch }, ref, stopScroll) {
+    if( !isDraging ) return;
+    
     if (ghost) ghost.draw({ x, y }, ref);
     scroller.update(x, y);
     if (isDraging) {
@@ -151,7 +153,7 @@ export default function dnd(window, document, options) {
     
     // if()
     
-    if (!el || !isDraging) return;
+    if (!el) return;
 
     if (!stopScroll) {
       scroller.calculateScroll({
