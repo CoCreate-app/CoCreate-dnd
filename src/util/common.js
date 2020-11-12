@@ -1,6 +1,6 @@
 import { group_name } from "./variables";
 import domContext from "./domContext2";
-
+import initFunctionState from '../index'
 //find the global context
 let parentWindow = window;
 while (parentWindow !== window.parent) parentWindow = window.parent;
@@ -12,14 +12,42 @@ if (!parentWindow.dndContext) {
 
 export { dndContext };
 
+function checkInitFunction(element) {
+  for (let state of initFunctionState) {
+    let r = state.onDndStart(element);
+    if (state.target.contains(element) && Array.isArray(r)) return r;
+  }
+}
+  
 export function getCoc(el, att) {
   if (!el.tagName) el = el.parentElement;
-  return dndContext.getContext(el, att);
+  let r = dndContext.getContext(el, att);
+  if(!r)
+  {
+    let r2 = checkInitFunction(el);
+    if(Array.isArray(r2) && att == r2[1])
+    return r2[0]
+    else 
+    return;
+  }
+  else 
+  return r;
+
 }
 
 export function getCocs(el, attList) {
   if (!el.tagName) el = el.parentElement;
-  return dndContext.getContexts(el, attList);
+  let r= dndContext.getContexts(el, attList);
+    if(!Array.isArray(r))
+  {
+    let r2 = checkInitFunction(el);
+    if(Array.isArray(r2) && attList.includes(r2[1]))
+      return r2;
+    else 
+      return;
+  }
+  else 
+    return r;
 }
 
 export function getGroupName(el) {

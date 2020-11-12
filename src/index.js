@@ -18,6 +18,8 @@ import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
 
+let initFunctionState = [];
+
 let ref = { x: 0, y: 0, window, document, isIframe: false };
 let beforeDndSuccessCallback;
 function beforeDndSuccess(){
@@ -236,25 +238,35 @@ export default function dnd(window, document, options) {
       document: frame.contentDocument,
       isIframe: true,
     };
-    dndReady(ref.document);
 
-    //touch
-    ref.document.addEventListener("touchstart", wrapper(touchstart, ref));
-    ref.document.addEventListener("touchend", wrapper(touchend, ref));
-    ref.document.addEventListener("touchmove", wrapper(touchmove, ref));
-    // touch
 
-    // mouse
-    ref.document.addEventListener("mousedown", wrapper(mousedown, ref));
-    ref.document.addEventListener("mouseup", wrapper(mouseup, ref));
-    ref.document.addEventListener("mousemove", wrapper(mousemove, ref));
-    // mouse
+    ref.document.addEventListener("CoCreateHtmlTags-rendered", init);
+    init();
+    function init() {
+      dndReady(ref.document);
+      let callbacks = {
+        touchStart: touchstart,
+        touchend: touchend,
+        touchmove: touchmove,
+        mousedown: mousedown,
+        mouseup: mouseup,
+        mousemove: mousemove,
+      };
 
-    // listen for click
-    // ref.document.addEventListener(
-    //   "CoCreateClickLeft",
-    //   wrapper(CoCreateClickLeft, ref)
-    // );
+      function addNewListener(eventName) {
+        ref.document.body.removeEventListener(eventName, callbacks[eventName]);
+        callbacks[eventName] = wrapper(callbacks[eventName], ref);
+        ref.document.body.addEventListener(eventName, callbacks[eventName]);
+      }
+
+      addNewListener("touchStart");
+      addNewListener("touchend");
+      addNewListener("touchmove");
+
+      addNewListener("mousedown");
+      addNewListener("mouseup");
+      addNewListener("mousemove");
+    }
   });
 }
 
@@ -305,8 +317,18 @@ window.addEventListener("load", () => {
   dndConfig()
 });
 
+window.initFunction = function ({
+  target,
+  onDndStart,
+  onDndMove,
 
+  beforeDndSuccess,
+}) {
+  if (typeof beforeDndSuccess == "function")
+    beforeDndSuccessCallback = beforeDndSuccess;
 
+  initFunctionState.push({ target, onDndStart, onDndMove });
+};
 
 window.initElement = function ({
   target,
