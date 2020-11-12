@@ -126,7 +126,7 @@ export default function virtualDnd(beforeDndSuccess) {
 
   this.dragOver = (e, el, ref) => {
     // el is the element hovered
-
+    if (this.dragedEl) this.dragedEl.setAttribute("CoC-dragging", true);
     if (el.children.length === 0) {
       // place top or bottom inside the element
       let [orientation, closestEl] = closestChild([e.x, e.y], [el]);
@@ -178,7 +178,7 @@ export default function virtualDnd(beforeDndSuccess) {
 
       this.type = "children";
 
-      if (this.dragedEl) this.dragedEl.setAttribute("CoC-dragging", true);
+
     }
   };
 }
