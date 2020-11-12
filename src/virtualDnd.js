@@ -56,7 +56,7 @@ export default function virtualDnd(beforeDndSuccess) {
     try {
       if (this.position) {
         if (this.dropedEl === this.dragedEl)
-          throw "dnd cancelled. you can dnd on the same element.";
+          throw "dnd cancelled. you can't dnd on the same element.";
 
         // in future we should also disable hover and tag name in dragOver method
         // parent can't be draged into children
