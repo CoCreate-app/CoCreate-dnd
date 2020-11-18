@@ -11,44 +11,33 @@ if (!parentWindow.dndContext) {
   parentWindow.dndContext = dndContext;
 } else dndContext = parentWindow.dndContext;
 
-export { dndContext,initFunctionState };
+export { dndContext, initFunctionState };
 
 function checkInitFunction(element, request) {
   for (let state of initFunctionState) {
-    let r = state.onDnd(element,request);
+    let r = state.onDnd(element, request);
     if (state.target.contains(element) && Array.isArray(r)) return r;
   }
 }
-  
+
 export function getCoc(el, att) {
   if (!el.tagName) el = el.parentElement;
   let r = dndContext.getContext(el, att);
-  if(!r)
-  {
-    let r2 = checkInitFunction(el,[att]);
-    if(Array.isArray(r2) && att == r2[1])
-    return r2[0]
-    else 
-    return;
-  }
-  else 
-  return r;
-
+  if (!r) {
+    let r2 = checkInitFunction(el, [att]);
+    if (Array.isArray(r2) && att == r2[1]) return r2[0];
+    else return;
+  } else return r;
 }
 
 export function getCocs(el, attList) {
   if (!el.tagName) el = el.parentElement;
-  let r= dndContext.getContexts(el, attList);
-    if(!Array.isArray(r))
-  {
+  let r = dndContext.getContexts(el, attList);
+  if (!Array.isArray(r)) {
     let r2 = checkInitFunction(el, attList);
-    if(Array.isArray(r2) && attList.includes(r2[1]))
-      return r2;
-    else 
-      return;
-  }
-  else 
-    return r;
+    if (Array.isArray(r2) && attList.includes(r2[1])) return r2;
+    else return;
+  } else return r;
 }
 
 export function getGroupName(el) {
@@ -189,7 +178,6 @@ export function dropMarker(options) {
           "px";
         break;
       default:
-        
         throw new Error("one type of orientation must be specified");
     }
     // marker.style.transition = "all 0.2s ease-in-out";
@@ -209,15 +197,15 @@ export function parse(text) {
 
 export function ghostEffect(elementEvent, el, ref) {
   this.effectCb;
-  el.removeAttribute('CoC-dragging');
+  el.removeAttribute("CoC-dragging");
   this.start = () => {
     this.cloneEl = el.cloneNode(true);
     let { width, height } = ref.window.getComputedStyle(el);
     let cloneElStyle = window.getComputedStyle(this.cloneEl);
     this.wrapper = document.createElement("div");
 
-    this.wrapper.style.height =  height;
-    this.wrapper.style.width =  width;
+    this.wrapper.style.height = height;
+    this.wrapper.style.width = width;
     this.wrapper.append(this.cloneEl);
     this.wrapper.style.display = "none";
     ref.document.body.append(this.wrapper);
@@ -257,7 +245,8 @@ export function ghostEffect(elementEvent, el, ref) {
     else frameRect = { top: 0, left: 0 };
 
     this.wrapper.style.top = frameRect.top + e.y - elementEvent.offsetY + "px";
-    this.wrapper.style.left = frameRect.left + e.x - elementEvent.offsetX + "px";
+    this.wrapper.style.left =
+      frameRect.left + e.x - elementEvent.offsetX + "px";
   };
 
   this.hide = () => {
@@ -402,7 +391,6 @@ export function autoScroller({ speed, threshold }) {
   };
 
   this.calculateScroll = function ({ x, y, element, onMouseScrollMove }) {
-    
     let hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
     let hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
 
@@ -454,25 +442,24 @@ export function autoScroller({ speed, threshold }) {
   };
 
   this.activateScroll = function (element, orientation, callback) {
-    
     this.lastScrollingElement = element;
     this.interval = setInterval(() => {
       switch (orientation) {
         case "top":
           element.scrollBy(0, -this.speed);
-          
+
           break;
         case "bottom":
           element.scrollBy(0, this.speed);
-          
+
           break;
         case "left":
           element.scrollBy(-this.speed, 0);
-          
+
           break;
         case "right":
           element.scrollBy(this.speed, 0);
-          
+
           break;
       }
 
@@ -484,7 +471,6 @@ export function autoScroller({ speed, threshold }) {
   };
 
   this.deactivateScroll = function () {
-    
     clearInterval(this.interval);
   };
 }

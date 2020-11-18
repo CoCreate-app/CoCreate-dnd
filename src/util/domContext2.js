@@ -9,8 +9,7 @@ export default function context(html) {
    */
   this.getContext = function (el, attributeName) {
     do {
-  
-      if(el.getAnyAttribute(attributeName) == 'true') return el;
+      if (el.getAnyAttribute(attributeName) == "true") return el;
       el = el.parentElement;
     } while (el);
 
@@ -23,7 +22,7 @@ export default function context(html) {
   this.getContexts = function (el, attributeNames) {
     do {
       for (let attributeName of attributeNames) {
-        if (el.getAnyAttribute(attributeName) == 'true')
+        if (el.getAnyAttribute(attributeName) == "true")
           return [el, attributeName];
       }
 
@@ -34,6 +33,6 @@ export default function context(html) {
   };
 
   this.setContext = function (el, att, value) {
-    el.setHiddenAttribute( att, value)
+    el.setHiddenAttribute(att, value);
   };
 }
