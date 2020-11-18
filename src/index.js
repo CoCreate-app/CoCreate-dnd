@@ -20,13 +20,16 @@ import * as vars from "./util/variables.js";
 
 
 
-let ref = { x: 0, y: 0, window, document, isIframe: false };
+
 let beforeDndSuccessCallback;
 function beforeDndSuccess(){
   if(beforeDndSuccessCallback)
   return beforeDndSuccessCallback.apply(null, arguments)
   return {}
 }
+
+ let mousemove, mouseup, mousedown,touchstart, touchend, touchmove;
+
 export default function dnd(window, document, options) {
   // console.log("dnd is loading", window.location.pathname);
 
@@ -44,13 +47,13 @@ export default function dnd(window, document, options) {
   let consolePrintedEl = null; // dev only
   //// defining events
 
-  dndReady(document);
+ 
 
   let dnd = new VirtualDnd(beforeDndSuccess);
   let ghost;
   dnd.on("dragStart", (data) => {
     myDropMarker.hide();
-    ghost = new ghostEffect(data.e ,data.el, { document, window });
+    ghost = new ghostEffect(data.e ,data.el, { window,document  });
     ghost.start();
   });
   dnd.on("dragEnd", (data) => {
@@ -169,17 +172,17 @@ export default function dnd(window, document, options) {
     dnd.dragOver({ x, y, target: el }, el, ref);
   }
 
-  let touchstart = (e, ref) => {
+   touchstart = (e, ref) => {
     // console.log("touch start");
 
     start(e,ref);
   };
-  let touchend = (e, ref) => {
+   touchend = (e, ref) => {
 
     // console.log("touch end");
     end(e,ref);
   };
-  let touchmove = (e, ref) => {
+   touchmove = (e, ref) => {
     // console.log("host touch move");
 
    
@@ -192,14 +195,14 @@ export default function dnd(window, document, options) {
     // sending object representing an event data
     move({ x, y, target: el, isTouch: true }, ref);
   };
-  let mousedown = (e, ref) => {
+   mousedown = (e, ref) => {
     // console.log("mouse down", e);
 
     if (e.which != 1) return;
 
     start(e, ref);
   };
-  let mouseup = (e, ref) => {
+   mouseup = (e, ref) => {
     // console.log("mouse up", e);
     // todo: why would we check for hoverable and what do we do whith this?
     // let el = getCoc(e.target, hoverable)
@@ -210,7 +213,7 @@ export default function dnd(window, document, options) {
 
     end(e, ref);
   };
-  let mousemove = (e, ref) => {
+   mousemove = (e, ref) => {
     move(e, ref);
   };
   // let CoCreateClickLeft = (e) => {
@@ -218,120 +221,111 @@ export default function dnd(window, document, options) {
   //   let el = getCoc(e.target, selectable);
   //   if (!el) return;
   // };
-
-  // touch
-  document.addEventListener("touchstart", wrapper(touchstart, ref));
-  document.addEventListener("touchend", wrapper(touchend, ref));
-  document.addEventListener("touchmove", wrapper(touchmove, ref));
-  // touch
-  // mouse
-  document.addEventListener("mousedown", wrapper(mousedown, ref));
-  document.addEventListener("mouseup", wrapper(mouseup, ref));
-  document.addEventListener("mousemove", wrapper(mousemove, ref));
-  // mouse
-  // listen for click
-  // document.addEventListener("CoCreateClickLeft", CoCreateClickLeft);
-
-  options.iframes.forEach((frame) => {
-    let rect = frame.getBoundingClientRect();
-    let ref = {
-      x: rect.left,
-      y: rect.top,
-      frame,
-      window: frame.contentWindow,
-      document: frame.contentDocument,
-      isIframe: true,
-    };
+ 
 
 
-    ref.document.addEventListener("CoCreateHtmlTags-rendered", init);
-    init();
-    function init() {
-      dndReady(ref.document);
-      let callbacks = {
-        touchStart: touchstart,
-        touchend: touchend,
-        touchmove: touchmove,
-        mousedown: mousedown,
-        mouseup: mouseup,
-        mousemove: mousemove,
-      };
-
-      function addNewListener(eventName) {
-        ref.document.body.removeEventListener(eventName, callbacks[eventName]);
-        callbacks[eventName] = wrapper(callbacks[eventName], ref);
-        ref.document.body.addEventListener(eventName, callbacks[eventName]);
-      }
-
-      addNewListener("touchStart");
-      addNewListener("touchend");
-      addNewListener("touchmove");
-
-      addNewListener("mousedown");
-      addNewListener("mouseup");
-      addNewListener("mousemove");
-    }
-  });
 }
 
-function dndReady(document) {
-  // disable native drag
-  document.addEventListener("dragstart", (e) => {
-    e.preventDefault();
-    return false;
-  });
 
-  // disable selection
-  document.addEventListener("selectstart", (e) => {
-    let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
-    if(!Array.isArray(r)) return;
-    e.preventDefault();
-  });
-}
 
 function wrapper(func, ref) {
   return function (e) {
-
     func.apply(this, [e, ref]);
   };
 }
 
-window.init = () => {
-    if (!document.querySelector('#dnd-style')) {
-      let dndStyle = document.createElement('style');
+  
+
+const initIframe = ({ isIframe, frame, document, window}) => {
+  
+  
+
+  
+    let ref
+    if(isIframe)
+    {
+        let frameWindow = frame.contentWindow;
+      let frameDocument = frameWindow.document || frame.contentDocument
+         let rect = frame.getBoundingClientRect();
+     ref = {
+      x: rect.left,
+      y: rect.top,
+      frame,
+      window: frameWindow,
+      document: frameDocument,
+      isIframe: true,
+    };
+    }
+    else
+    {
+      ref = { x: 0, y: 0, window, document, isIframe: false };
+    }
+ 
+  if(ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
+  
+  
+  
+    if (!ref.document.querySelector('#dnd-style')) {
+      let dndStyle = ref.document.createElement('style');
       dndStyle.id = "dnd-style";
       dndStyle.innerHTML = `    /* dnd specic */
        [data-draggable="true"], [data-cloneable="true"]  {
          touch-action: none;
        }
       /* dnd specic */`
-      document.head.append(dndStyle)
+      ref.document.head.append(dndStyle)
     }
 
 
-  // only run if it's the host but not iframe
-  // if (window.parent !== window)
-  //   return;
+
+  ref.document.addEventListener("dragstart", (e) => {
+    e.preventDefault();
+    return false;
+  });
+
+  // disable selection
+  ref.document.addEventListener("selectstart", (e) => {
+    let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
+    if(!Array.isArray(r)) return;
+    e.preventDefault();
+  });
+  // touch
+  ref.document.addEventListener("touchstart", wrapper(touchstart, ref));
+  ref.document.addEventListener("touchend", wrapper(touchend, ref));
+  ref.document.addEventListener("touchmove", wrapper(touchmove, ref));
+  // touch
+  // mouse
+  ref.document.addEventListener("mousedown", wrapper(mousedown, ref));
+  ref.document.addEventListener("mouseup", wrapper(mouseup, ref));
+  ref.document.addEventListener("mousemove", wrapper(mousemove, ref));
+  // mouse
+  
     
 
-  dnd(window, document, {
-    iframes: Object.values(window.iframes.guests).map((o) => o.frame),
-  });
+}
+
+const init = () => {
+
+
+
+    
+
+  dnd(window, document);
   // console.log("dnd is loaded", window.location.pathname);
 
-  function parse(text) {
-    let doc = new DOMParser().parseFromString(text, "text/html");
-    if (doc.head.children[0]) return doc.head.children[0];
-    else return doc.body.children[0];
-  }
+  // function parse(text) {
+  //   let doc = new DOMParser().parseFromString(text, "text/html");
+  //   if (doc.head.children[0]) return doc.head.children[0];
+  //   else return doc.body.children[0];
+  // }
 };
 
 window.addEventListener("load", () => {
-  window.init();
+  init();
   dndConfig()
 });
-
-window.initFunction = function ({
+ 
+const initFunction = function ({
   target,
   onDnd,
   beforeDndSuccess,
@@ -342,7 +336,7 @@ window.initFunction = function ({
   initFunctionState.push({ target, onDnd });
 };
 
-window.initElement = function ({
+const initElement = function ({
   target,
   dropable,
   draggable,
@@ -411,7 +405,7 @@ function addNestedAttribute(el, cloneable) {
 }
 
 
-window.initContainer = function ({
+const initContainer = function ({
   target,
   cloneable = false,
   nested = false,
@@ -489,3 +483,5 @@ window.initContainer = function ({
       });
   }
 };
+
+window.CoCreateDnd = {initContainer,initElement, initFunction ,init , initIframe }
