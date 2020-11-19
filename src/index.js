@@ -216,12 +216,6 @@ export default function dnd(window, document, options) {
   // };
 }
 
-function wrapper(func, ref) {
-  return function (e) {
-    func.apply(this, [e, ref]);
-  };
-}
-
 const initIframe = ({ isIframe, frame, document, window }) => {
   let ref;
   if (isIframe) {
@@ -265,14 +259,33 @@ const initIframe = ({ isIframe, frame, document, window }) => {
     e.preventDefault();
   });
   // touch
-  ref.document.addEventListener("touchstart", wrapper(touchstart, ref));
-  ref.document.addEventListener("touchend", wrapper(touchend, ref));
-  ref.document.addEventListener("touchmove", wrapper(touchmove, ref));
+
+  ref.document.addEventListener("touchstart", function (e) {
+    e.preventDefault();
+    touchstart.apply(this, [e, ref]);
+  });
+  ref.document.addEventListener("touchend", function (e) {
+    e.preventDefault();
+    touchmove.apply(this, [e, ref]);
+  });
+  ref.document.addEventListener("touchmove", function (e) {
+    e.preventDefault();
+    touchend.apply(this, [e, ref]);
+  });
   // touch
   // mouse
-  ref.document.addEventListener("mousedown", wrapper(mousedown, ref));
-  ref.document.addEventListener("mouseup", wrapper(mouseup, ref));
-  ref.document.addEventListener("mousemove", wrapper(mousemove, ref));
+  ref.document.addEventListener("mousedown", function (e) {
+
+    mousedown.apply(this, [e, ref]);
+  });
+  ref.document.addEventListener("mouseup", function (e) {
+ 
+    mouseup.apply(this, [e, ref]);
+  });
+  ref.document.addEventListener("mousemove", function (e) {
+
+    mousemove.apply(this, [e, ref]);
+  });
   // mouse
 };
 
