@@ -1,4 +1,5 @@
 /*global HTMLElement*/
+/*global DOMException*/
 import "./collaboration.js";
 import dndConfig from "./dnd-config.js";
 import "./util/iframe";
@@ -18,6 +19,7 @@ import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
 
+let touchTimeout;
 let beforeDndSuccessCallback;
 function beforeDndSuccess() {
   if (beforeDndSuccessCallback)
@@ -27,194 +29,168 @@ function beforeDndSuccess() {
 
 let mousemove, mouseup, mousedown, touchstart, touchend, touchmove;
 
-export default function dnd(window, document, options) {
-  // console.log("dnd is loading", window.location.pathname);
+// export default function dndf(window, document, options) {
 
-  options = Object.assign(
-    {
-      scroller: new autoScroller({ speed: 12, threshold: 4 }),
+// }
 
-      myDropMarker: new dropMarker(),
-    },
-    options
+let options = {
+  scroller: new autoScroller({ speed: 12, threshold: 4 }),
+
+  myDropMarker: new dropMarker(),
+};
+
+//// defining events
+let { myDropMarker, scroller } = options;
+let dnd = new VirtualDnd(beforeDndSuccess);
+let ghost;
+dnd.on("dragStart", (data) => {
+  myDropMarker.hide();
+  ghost = new ghostEffect(data.e, data.el, { window, document });
+  ghost.start();
+});
+dnd.on("dragEnd", (data) => {
+  myDropMarker.hide();
+  if (ghost) ghost.hide(data.ref);
+});
+dnd.on("dragOver", (data) => {
+  // it will always run when mouse or touch moves
+  myDropMarker.draw(
+    data.el,
+    data.closestEl,
+    data.orientation,
+    !data.hasChild,
+    data.ref
   );
-  // weird bug: dropMarker override the imported dropMarker in the above
-  let { myDropMarker, scroller } = options;
-  let isDraging = false;
-  let consolePrintedEl = null; // dev only
-  //// defining events
+});
 
-  let dnd = new VirtualDnd(beforeDndSuccess);
-  let ghost;
-  dnd.on("dragStart", (data) => {
-    myDropMarker.hide();
-    ghost = new ghostEffect(data.e, data.el, { window, document });
-    ghost.start();
-  });
-  dnd.on("dragEnd", (data) => {
-    myDropMarker.hide();
-    if (ghost) ghost.hide(data.ref);
-  });
-  dnd.on("dragOver", (data) => {
-    // it will always run when mouse or touch moves
-    myDropMarker.draw(
-      data.el,
-      data.closestEl,
-      data.orientation,
-      !data.hasChild,
-      data.ref
-    );
-  });
+let startGroup;
+let isDraging = false;
+let consolePrintedEl = null; // dev only
 
-  let startGroup;
+function start(e, ref) {
+  let r = getCocs(e.target, [vars.draggable, vars.cloneable, vars.handleable]);
 
-  function start(e, ref) {
-    let r = getCocs(e.target, [
-      vars.draggable,
-      vars.cloneable,
-      vars.handleable,
-    ]);
+  if (!Array.isArray(r)) return;
+  let [el, att] = r;
 
-    if (!Array.isArray(r)) return;
-    let [el, att] = r;
 
-    switch (att) {
-      case vars.cloneable:
-        let html = el.getAttribute(vars.data_insert_html);
-        if (html) {
-          el = parse(html);
-          if (!el) return;
-        } else el = el.cloneNode(true);
-        break;
-      case vars.draggable:
-        let hasHandle = el.getAnyAttribute(vars.handleable);
-        if (hasHandle) return;
-        break;
+  
+  switch (att) {
+    case vars.cloneable:
+      let html = el.getAttribute(vars.data_insert_html);
+      if (html) {
+        el = parse(html);
+        if (!el) return;
+      } else el = el.cloneNode(true);
+      break;
+    case vars.draggable:
+      let hasHandle = el.getAnyAttribute(vars.handleable);
+      if (hasHandle) return;
+      break;
 
-      default:
-        el = getCoc(el, vars.draggable);
-    }
-
-    // get group
-    let groupResult = getGroupName(el);
-    startGroup = groupResult[1];
-
-    ref.document.body.style.cursor = "crosshair !important";
-
-    isDraging = true;
-
-    dnd.dragStart(e, el, null, ref, att);
+    default:
+      el = getCoc(el, vars.draggable);
   }
 
-  function end(e, ref) {
-    ref.document.body.style.cursor = "";
+  // get group
+  let groupResult = getGroupName(el);
+  startGroup = groupResult[1];
 
-    dnd.dragEnd(e);
-    myDropMarker.hide();
+  ref.document.body.style.cursor = "crosshair !important";
 
-    scroller.deactivateScroll();
-    isDraging = false;
-  }
+  isDraging = true;
 
-  function move({ x, y, target, isTouch }, ref, stopScroll) {
-    if (!isDraging) return;
-
-    if (ghost) ghost.draw({ x, y }, ref);
-    scroller.update(x, y);
-    if (isDraging) {
-      // skip group names
-      let [groupEl, groupname] = getGroupName(target);
-      if (startGroup && groupname && startGroup !== groupname)
-        do {
-          let groupResult = getGroupName(groupEl);
-          if (!groupResult[0]) return; // or return
-          groupEl = groupResult[0].parentElement;
-          groupname = groupResult[1];
-          if (startGroup === groupname) {
-            target = groupResult[0];
-            break;
-          }
-        } while (true);
-    } else {
-      if (ghost) ghost.hide();
-    }
-
-    if (!target) return; // it's out of iframe if this is multi frame
-
-    let onEl = target; // dev
-    let el = getCoc(target, vars.droppable);
-    // if (consolePrintedEl != target) { // dev
-    //   // dev
-    //   console.log("you are on: \n", onEl, "\nDroping in: \n", el);
-    //   consolePrintedEl = el;
-    // }
-
-    // if()
-
-    if (!el) return;
-
-    if (!stopScroll) {
-      scroller.calculateScroll({
-        x,
-        y,
-        element: el.parentElement,
-        onMouseScrollMove: (e) => move(e, ref, true),
-      });
-    }
-
-    // todo:
-
-    dnd.dragOver({ x, y, target: el }, el, ref);
-  }
-
-  touchstart = (e, ref) => {
-    // console.log("touch start");
-
-    start(e, ref);
-  };
-  touchend = (e, ref) => {
-    // console.log("touch end");
-    end(e, ref);
-  };
-  touchmove = (e, ref) => {
-    // console.log("host touch move");
-
-    let touch = e.touches[0];
-    let x = touch.clientX;
-    let y = touch.clientY;
-    let el = ref.document.elementFromPoint(x, y);
-    if (!el) return; // it's out of iframe
-
-    // sending object representing an event data
-    move({ x, y, target: el, isTouch: true }, ref);
-  };
-  mousedown = (e, ref) => {
-    // console.log("mouse down", e);
-
-    if (e.which != 1) return;
-
-    start(e, ref);
-  };
-  mouseup = (e, ref) => {
-    // console.log("mouse up", e);
-    // todo: why would we check for hoverable and what do we do whith this?
-    // let el = getCoc(e.target, hoverable)
-    // if (!el) return;
-    //
-
-    if (e.which != 1) return;
-
-    end(e, ref);
-  };
-  mousemove = (e, ref) => {
-    move(e, ref);
-  };
-  // let CoCreateClickLeft = (e) => {
-  //   // todo: not working!?
-  //   let el = getCoc(e.target, selectable);
-  //   if (!el) return;
-  // };
+  dnd.dragStart(e, el, null, ref, att);
 }
+
+function end(e, ref) {
+  ref.document.body.style.cursor = "";
+  isDraging = false;
+
+  dnd.dragEnd(e);
+  myDropMarker.hide();
+
+  scroller.deactivateScroll();
+  
+}
+
+function move({ x, y, target, isTouch }, ref, stopScroll) {
+  if (!isDraging) return;
+
+  if (ghost) ghost.draw({ x, y }, ref);
+  scroller.update(x, y);
+  if (isDraging) {
+    // skip group names
+    let [groupEl, groupname] = getGroupName(target);
+    if (startGroup && groupname && startGroup !== groupname)
+      do {
+        let groupResult = getGroupName(groupEl);
+        if (!groupResult[0]) return; // or return
+        groupEl = groupResult[0].parentElement;
+        groupname = groupResult[1];
+        if (startGroup === groupname) {
+          target = groupResult[0];
+          break;
+        }
+      } while (true);
+  } else {
+    if (ghost) ghost.hide();
+  }
+
+  if (!target) return; // it's out of iframe if this is multi frame
+
+  let onEl = target; // dev
+  let el = getCoc(target, vars.droppable);
+  // if (consolePrintedEl != target) { // dev
+  //   // dev
+  //   console.log("you are on: \n", onEl, "\nDroping in: \n", el);
+  //   consolePrintedEl = el;
+  // }
+
+  // if()
+
+  if (!el) return;
+
+  if (!stopScroll) {
+    scroller.calculateScroll({
+      x,
+      y,
+      element: el.parentElement,
+      onMouseScrollMove: (e) => move(e, ref, true),
+    });
+  }
+
+  // todo:
+
+  dnd.dragOver({ x, y, target: el }, el, ref);
+}
+
+mousedown = (e, ref) => {
+  // console.log("mouse down", e);
+
+  if (e.which != 1) return;
+
+  start(e, ref);
+};
+mouseup = (e, ref) => {
+  // console.log("mouse up", e);
+  // todo: why would we check for hoverable and what do we do whith this?
+  // let el = getCoc(e.target, hoverable)
+  // if (!el) return;
+  //
+
+  if (e.which != 1) return;
+
+  end(e, ref);
+};
+mousemove = (e, ref) => {
+  move(e, ref);
+};
+// let CoCreateClickLeft = (e) => {
+//   // todo: not working!?
+//   let el = getCoc(e.target, selectable);
+//   if (!el) return;
+// };
 
 const initIframe = ({ isIframe, frame, document, window }) => {
   let ref;
@@ -240,9 +216,9 @@ const initIframe = ({ isIframe, frame, document, window }) => {
     let dndStyle = ref.document.createElement("style");
     dndStyle.id = "dnd-style";
     dndStyle.innerHTML = `    /* dnd specic */
-       [data-draggable="true"], [data-cloneable="true"]  {
-         touch-action: none;
-       }
+      [data-draggable="true"], [data-cloneable="true"]  {
+        touch-action: none;
+      }
       /* dnd specic */`;
     ref.document.head.append(dndStyle);
   }
@@ -257,51 +233,82 @@ const initIframe = ({ isIframe, frame, document, window }) => {
     let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
     if (!Array.isArray(r)) return;
     e.preventDefault();
-  });
+  }, {passive: false});
   // touch
 
   ref.document.addEventListener("touchstart", function (e) {
-    e.preventDefault();
-    touchstart.apply(this, [e, ref]);
+    // console.log()
+    
+    if(touchTimeout)
+    clearTimeout(touchTimeout);
+    touchTimeout = setTimeout(() => {
+      console.log('touch start')
+      ref.document.body.style.touchAction = "none"
+      e.preventDefault();
+      start(e, ref);
+    }, 1000);
   });
   ref.document.addEventListener("touchend", function (e) {
+    ref.document.body.style.touchAction = "auto"  
+    if (!isDraging) {
+      if(touchTimeout)
+      clearTimeout(touchTimeout);
+      return;
+    }
+
     e.preventDefault();
-    touchmove.apply(this, [e, ref]);
-  });
+    end(e, ref);
+  }, {passive: false});
   ref.document.addEventListener("touchmove", function (e) {
-    e.preventDefault();
-    touchend.apply(this, [e, ref]);
-  });
+    
+  
+
+    if (!isDraging) {
+        if(touchTimeout)
+      clearTimeout(touchTimeout);
+      console.log('touch scroll')
+      return;
+    }
+
+   console.log('touch dnd') 
+  e.preventDefault();
+    // console.log("host touch move");
+
+    let touch = e.touches[0];
+    let x = touch.clientX;
+    let y = touch.clientY;
+    let el = ref.document.elementFromPoint(x, y);
+    if (!el) return; // it's out of iframe
+
+    // sending object representing an event data
+    move({ x, y, target: el, isTouch: true }, ref);
+  }, {passive: false});
   // touch
   // mouse
   ref.document.addEventListener("mousedown", function (e) {
-
     mousedown.apply(this, [e, ref]);
   });
   ref.document.addEventListener("mouseup", function (e) {
- 
     mouseup.apply(this, [e, ref]);
   });
   ref.document.addEventListener("mousemove", function (e) {
-
     mousemove.apply(this, [e, ref]);
   });
   // mouse
 };
 
-const init = () => {
-  dnd(window, document);
-  // console.log("dnd is loaded", window.location.pathname);
+// const init = () => {
+//   dnd(window, document);
+//   // console.log("dnd is loaded", window.location.pathname);
 
-  // function parse(text) {
-  //   let doc = new DOMParser().parseFromString(text, "text/html");
-  //   if (doc.head.children[0]) return doc.head.children[0];
-  //   else return doc.body.children[0];
-  // }
-};
+//   // function parse(text) {
+//   //   let doc = new DOMParser().parseFromString(text, "text/html");
+//   //   if (doc.head.children[0]) return doc.head.children[0];
+//   //   else return doc.body.children[0];
+//   // }
+// };
 
 window.addEventListener("load", () => {
-  init();
   dndConfig();
 });
 
@@ -458,6 +465,5 @@ window.CoCreateDnd = {
   initContainer,
   initElement,
   initFunction,
-  init,
   initIframe,
 };
