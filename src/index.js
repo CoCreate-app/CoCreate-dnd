@@ -191,7 +191,7 @@ mousemove = (e, ref) => {
 //   let el = getCoc(e.target, selectable);
 //   if (!el) return;
 // };
-
+let refs = new Map();
 const initIframe = ({ isIframe, frame, document, window }) => {
   let ref;
   if (isIframe) {
@@ -210,7 +210,10 @@ const initIframe = ({ isIframe, frame, document, window }) => {
     ref = { x: 0, y: 0, window, document, isIframe: false };
   }
 
-  if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
+  let mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte;
+  if(!refs.has(ref.window))
+  {
+    if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
 
   if (!ref.document.querySelector("#dnd-style")) {
     let dndStyle = ref.document.createElement("style");
@@ -236,7 +239,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
   }, {passive: false});
   // touch
 
-  ref.document.addEventListener("touchstart", function (e) {
+   touchstarte = function (e) {
     // console.log()
     
     if(touchTimeout)
@@ -247,8 +250,9 @@ const initIframe = ({ isIframe, frame, document, window }) => {
       e.preventDefault();
       start(e, ref);
     }, 1000);
-  });
-  ref.document.addEventListener("touchend", function (e) {
+  }
+
+     touchheade = function (e) {
     ref.document.body.style.touchAction = "auto"  
     if (!isDraging) {
       if(touchTimeout)
@@ -258,8 +262,9 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
     e.preventDefault();
     end(e, ref);
-  }, {passive: false});
-  ref.document.addEventListener("touchmove", function (e) {
+  }
+  
+     touchmovee = function (e) {
     
   
 
@@ -282,19 +287,50 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
     // sending object representing an event data
     move({ x, y, target: el, isTouch: true }, ref);
-  }, {passive: false});
+  };
+  
+     mousedowne = function (e) {
+    mousedown.apply(this, [e, ref]);
+  }
+  
+     mouseupe =  function (e) {
+    mouseup.apply(this, [e, ref]);
+  }
+   
+   mousemovee = function (e) {
+    mousemove.apply(this, [e, ref]);
+  };
+    refs.set(ref.window, {mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte})
+  }
+  else
+  {
+    ({mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte} = refs.get(ref.window));
+  }
+  
+  
+  ref.document.removeEventListener("touchstart", touchstarte);
+  ref.document.addEventListener("touchstart", touchstarte);
+
+  ref.document.removeEventListener("touchend",touchheade , {passive: false});
+  ref.document.addEventListener("touchend",touchheade , {passive: false});
+
+  ref.document.removeEventListener("touchmove", touchmovee, {passive: false});
+  ref.document.addEventListener("touchmove",touchmovee , {passive: false});
   // touch
   // mouse
-  ref.document.addEventListener("mousedown", function (e) {
-    mousedown.apply(this, [e, ref]);
-  });
-  ref.document.addEventListener("mouseup", function (e) {
-    mouseup.apply(this, [e, ref]);
-  });
-  ref.document.addEventListener("mousemove", function (e) {
-    mousemove.apply(this, [e, ref]);
-  });
+
+  ref.document.removeEventListener("mousedown", mousedowne);
+  ref.document.addEventListener("mousedown", mousedowne);
+
+  ref.document.removeEventListener("mouseup",mouseupe);
+  ref.document.addEventListener("mouseup",mouseupe);
+
+  
+  ref.document.removeEventListener("mousemove",mousemovee );
+  ref.document.addEventListener("mousemove",mousemovee );
   // mouse
+  
+
 };
 
 // const init = () => {
