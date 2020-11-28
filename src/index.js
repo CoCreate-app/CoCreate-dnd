@@ -34,7 +34,7 @@ let mousemove, mouseup, mousedown, touchstart, touchend, touchmove;
 // }
 
 let options = {
-  scroller: new autoScroller({ speed: 12, threshold: 4 }),
+  scroller: new autoScroller({ speed: 4, threshold: 3 }),
 
   myDropMarker: new dropMarker(),
 };
