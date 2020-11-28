@@ -25,7 +25,7 @@ window.addEventListener("load", () => {
         );
       }
 
-      data.value[1] = window.cc.parseTextToHtml(data.value[1]);
+      data.value[1] = CoCreateUtils.parseTextToHtml(data.value[1]);
       if (data.hiddenAttribute) {
         for (let [key, value] of Object.entries(data.hiddenAttribute)) {
           data.value[1].setHiddenAttribute(key, value);
@@ -50,7 +50,7 @@ document.addEventListener("dndsuccess", (e) => {
       : window.CoCreate;
 
   if (!dropedEl.getAttribute("data-element_id"))
-    dropedEl.setAttribute("data-element_id", window.cc.UUID());
+    dropedEl.setAttribute("data-element_id", CoCreateUtils.UUID());
 
   dropedEl = dropedEl.getAttribute("data-element_id");
 
@@ -75,7 +75,7 @@ document.addEventListener("dndsuccess", (e) => {
     });
   } else {
     if (!dragedEl.getAttribute("data-element_id"))
-      dragedEl.setAttribute("data-element_id", window.cc.UUID());
+      dragedEl.setAttribute("data-element_id",CoCreateUtils.UUID());
 
     dragedEl = dragedEl.getAttribute("data-element_id");
 
