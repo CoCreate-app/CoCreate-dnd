@@ -64,7 +64,7 @@ export default function virtualDnd(beforeDndSuccess) {
         if (this.dragedEl.contains(this.dropedEl))
           throw "dnd cancelled, you can't dnd from parent to its children.";
 
-        let path = window.cc.getElementPath(this.dropedEl);
+        let path = CoCreateUtils.getElementPath(this.dropedEl);
         // get iframe path
         // let path = [];
         //   const {cssPath, findIframeFromElement, getTopMostWindow} = window.cc;
