@@ -393,12 +393,15 @@ export function autoScroller({ speed, threshold }) {
 
     while (true) {
       if (
+        element&&
         element.tagName &&
         (element.scrollHeight > element.clientHeight ||
           element.scrollWidth > element.clientWidth)
       ) {
         break;
-      } else element = element.parentElement;
+      } else if(element.parentElement) element = element.parentElement;
+      else
+       break;
     }
 
     let hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
