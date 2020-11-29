@@ -94,7 +94,7 @@ export default function virtualDnd(beforeDndSuccess) {
 
         // dispatch gloval events
         const event = new CustomEvent("dndsuccess", {
-          bubbles: true,
+          bubbles: false,
           detail,
         });
 
@@ -104,8 +104,7 @@ export default function virtualDnd(beforeDndSuccess) {
           value: [detail.position, detail.dragedEl],
         };
         domEditor(broadcast);
-
-        window.document.body.dispatchEvent(event, { bubbles: true });
+        window.dispatchEvent(event, { bubbles: false });
       }
     } catch (e) {
       console.error(e);
