@@ -210,9 +210,6 @@ const initIframe = ({ isIframe, frame, document, window }) => {
     ref = { x: 0, y: 0, window, document, isIframe: false };
   }
 
-  let mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte;
-  if(!refs.has(ref.window))
-  {
     if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
 
   if (!ref.document.querySelector("#dnd-style")) {
@@ -238,6 +235,12 @@ const initIframe = ({ isIframe, frame, document, window }) => {
     e.preventDefault();
   }, {passive: false});
   // touch
+
+
+
+  let mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte;
+  if(!refs.has(ref.window))
+  {
 
    touchstarte = function (e) {
     // console.log()
