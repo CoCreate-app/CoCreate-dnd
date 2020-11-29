@@ -42,7 +42,7 @@ window.addEventListener("load", () => {
   });
 });
 
-document.addEventListener("dndsuccess", (e) => {
+window.addEventListener("dndsuccess", (e) => {
   let { dropedEl, dragedEl, position, dropType, path } = e.detail;
   let CoCreate =
     dragedEl.ownerDocument !== dropedEl.ownerDocument
