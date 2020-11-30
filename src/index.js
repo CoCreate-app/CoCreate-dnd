@@ -500,6 +500,13 @@ const initContainer = function ({
   }
 };
 
+export {  
+  initContainer,
+  initElement,
+  initFunction,
+  initIframe
+}
+
 window.CoCreateDnd = {
   initContainer,
   initElement,
