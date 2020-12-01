@@ -1,5 +1,5 @@
 /*global initContainer*/
-import {initContainer} from './index.js';
+import { initContainer } from "./index.js";
 export default function dndConfigs() {
   let sortables = document.querySelectorAll(".sortable");
 
