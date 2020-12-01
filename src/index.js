@@ -58,7 +58,7 @@ dnd.on("dragOver", (data) => {
     data.el,
     data.closestEl,
     data.orientation,
-    !data.hasChild,
+    !!data.hasChild,
     data.ref
   );
 });

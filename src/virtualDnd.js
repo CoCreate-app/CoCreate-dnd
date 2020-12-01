@@ -134,7 +134,7 @@ export default function virtualDnd(beforeDndSuccess) {
         el,
         closestEl,
         orientation,
-        hasChild: el.children.length,
+        hasChild: true,
         ref,
       });
       // greenDropMarker.draw(el, el, orientation, true);
@@ -167,7 +167,7 @@ export default function virtualDnd(beforeDndSuccess) {
         el,
         closestEl,
         orientation,
-        hasChild: el.children.length,
+        hasChild: false,
         ref,
       });
 
