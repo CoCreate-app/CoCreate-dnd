@@ -41,7 +41,6 @@ export default function context(html) {
         else {
           let r2 = this.checkInitFunction(el, attributeNames);
           if (Array.isArray(r2) && attributeNames.includes(r2[1])) return r2;
-          else return;
         }
       }
 
