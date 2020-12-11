@@ -348,6 +348,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 // };
 
 window.addEventListener("load", () => {
+  initIframe({ document, window });
   dndConfig();
 });
 
