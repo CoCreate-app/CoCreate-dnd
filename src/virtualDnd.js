@@ -118,8 +118,8 @@ export default function virtualDnd(beforeDndSuccess) {
           "position:",
           this.position
         );
-        evnt.dispatch("dragEnd", { e, ref });
       }
+        evnt.dispatch("dragEnd", { e, ref });
     }
   };
 
