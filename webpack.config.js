@@ -1,6 +1,8 @@
 // Webpack uses this to work with directories
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 let isProduction = process.env.NODE_ENV === 'production';
 
@@ -10,14 +12,18 @@ module.exports = {
 
   // Path to your entry point. From this file Webpack will begin his work
   entry: {
-    'CoCreate-dnd': './src/index.js',
+    'CoCreate-dnd': './src/CoCreate-dnd.js',
   },
 
-  // Path and filename of your result bundle.
+ // Path and filename of your result bundle.
   // Webpack will bundle all JavaScript into this file
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: isProduction ? "CoCreate-dnd.min.js" : "CoCreate-dnd.js",
+    filename: isProduction ? '[name].min.js' : '[name].js',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+    library: 'dnd',
+    globalObject: "this",
   },
 
   // Default mode for Webpack is production.
@@ -27,15 +33,16 @@ module.exports = {
   mode: isProduction ? 'production' : 'development',
   module: {
     rules: [{
-      test: /\.js$/,
-      exclude: /(node_modules)/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env']
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
         }
-      }
-    }]
+      },
+    ]
   },
 
   // add source map
@@ -50,4 +57,5 @@ module.exports = {
       },
     })],
   },
+
 };

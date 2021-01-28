@@ -28,7 +28,7 @@ export default function virtualDnd(beforeDndSuccess) {
 
   let evnt = new eventUtil();
 
-  this.on = function () {
+  this.on = function() {
     evnt.on.apply(evnt, arguments);
   };
 
@@ -103,12 +103,16 @@ export default function virtualDnd(beforeDndSuccess) {
           method: "insertAdjacentElement",
           value: [detail.position, detail.dragedEl],
         };
-        domEditor(broadcast);
+
+        this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
+        // domEditor(broadcast);
         window.dispatchEvent(event, { bubbles: false });
       }
-    } catch (e) {
+    }
+    catch (e) {
       console.error(e);
-    } finally {
+    }
+    finally {
       if (this.type) {
         this.position = null;
         console.log(
@@ -119,7 +123,7 @@ export default function virtualDnd(beforeDndSuccess) {
           this.position
         );
       }
-        evnt.dispatch("dragEnd", { e, ref });
+      evnt.dispatch("dragEnd", { e, ref });
     }
   };
 
@@ -140,12 +144,13 @@ export default function virtualDnd(beforeDndSuccess) {
       // greenDropMarker.draw(el, el, orientation, true);
       // hoverBoxMarker.draw(el)
       // tagNameTooltip.draw(el)
-      this.position = topleft.includes(orientation)
-        ? "afterbegin"
-        : "beforeend";
+      this.position = topleft.includes(orientation) ?
+        "afterbegin" :
+        "beforeend";
       this.dropedEl = el;
       this.type = "normal";
-    } else {
+    }
+    else {
       // find closest child and put outside the child element on top or bottom relating to that child,
       let [orientation, closestEl] = closestChild([e.x, e.y], el.children);
 
@@ -156,11 +161,11 @@ export default function virtualDnd(beforeDndSuccess) {
         this.dropedEl = closestEl.parentElement;
         // only to get orientation
         let [orientation2, closestEl2] = closestChild(
-          [e.x, e.y],
-          [this.dropedEl]
+          [e.x, e.y], [this.dropedEl]
         );
         orientation = orientation2;
-      } else this.dropedEl = closestEl;
+      }
+      else this.dropedEl = closestEl;
 
       evnt.dispatch("dragOver", {
         e,
@@ -171,9 +176,9 @@ export default function virtualDnd(beforeDndSuccess) {
         ref,
       });
 
-      this.position = topleft.includes(orientation)
-        ? "beforebegin"
-        : "afterend";
+      this.position = topleft.includes(orientation) ?
+        "beforebegin" :
+        "afterend";
 
       this.type = "children";
     }

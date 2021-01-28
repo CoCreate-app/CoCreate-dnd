@@ -348,6 +348,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 // };
 
 window.addEventListener("load", () => {
+  if(window.parent !== window) return;
   initIframe({ document, window });
   dndConfig();
 });
@@ -508,7 +509,9 @@ export {
   initIframe
 }
 
-window.CoCreateDnd = {
+
+
+export default {
   initContainer,
   initElement,
   initFunction,

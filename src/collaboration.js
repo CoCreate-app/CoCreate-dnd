@@ -6,6 +6,25 @@
 /*global CoCreateSocket*/
 
 window.addEventListener("load", () => {
+  CoCreateSocket.listen('domEditor', function(data) {
+		console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
+		// resolving the element_id to real element in the clinet
+		if (data.target) {
+			data.target = document.querySelector(`[data-element_id="${data.target}"]`);
+		}
+		if (data.value[1]) {
+			data.value[1] = document.querySelector(`[data-element_id="${data.value[1]}"]`);
+		}
+		if(!data.target)
+			return console.log('dnd error: draggble is null')
+		if(!data.value[1])
+			return console.log('dnd error: droppable is null')
+		// passing it to domEditor
+    let [position, el] = data.value
+    data.target.insertAdjacentElement(position, el)
+	})
+  
+  
   CoCreateSocket.listen("dndNewElement", function (data) {
     console.log(
       "raw object recieved: ",
@@ -34,8 +53,9 @@ window.addEventListener("load", () => {
 
       // console.log("with object: ", data, window.location.pathname);
       // passing it to domEditor
-
-      domEditor(data);
+         let [position, el] = data.value
+   data.target.insertAdjacentElement(position, el)
+      // domEditor(data);
     } catch (error) {
       console.error(error);
     }
