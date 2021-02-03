@@ -3,10 +3,10 @@
 /*global elementConfig*/
 /*global DOMParser*/
 /*global domEditor*/
-/*global CoCreateSocket*/
+/*global CoCreate.socket*/
 
 window.addEventListener("load", () => {
-  CoCreateSocket.listen('domEditor', function(data) {
+  CoCreate.socket.listen('domEditor', function(data) {
 		console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
 		// resolving the element_id to real element in the clinet
 		if (data.target) {
@@ -25,7 +25,7 @@ window.addEventListener("load", () => {
 	})
   
   
-  CoCreateSocket.listen("dndNewElement", function (data) {
+  CoCreate.socket.listen("dndNewElement", function (data) {
     console.log(
       "raw object recieved: ",
       data.target,
@@ -44,7 +44,7 @@ window.addEventListener("load", () => {
         );
       }
 
-      data.value[1] = CoCreateUtils.parseTextToHtml(data.value[1]);
+      data.value[1] = CoCreate.utils.parseTextToHtml(data.value[1]);
       if (data.hiddenAttribute) {
         for (let [key, value] of Object.entries(data.hiddenAttribute)) {
           data.value[1].setHiddenAttribute(key, value);
@@ -70,7 +70,7 @@ window.addEventListener("dndsuccess", (e) => {
       : window.CoCreate;
 
   if (!dropedEl.getAttribute("data-element_id"))
-    dropedEl.setAttribute("data-element_id", CoCreateUtils.UUID());
+    dropedEl.setAttribute("data-element_id", CoCreate.utils.UUID());
 
   dropedEl = dropedEl.getAttribute("data-element_id");
 
@@ -79,7 +79,7 @@ window.addEventListener("dndsuccess", (e) => {
 
     dragedEl = dragedEl.outerHTML;
 
-    CoCreate.sendMessage({
+    CoCreate.message.send({
       broadcast_sender: false,
       rooms: "",
       emit: {
@@ -95,11 +95,11 @@ window.addEventListener("dndsuccess", (e) => {
     });
   } else {
     if (!dragedEl.getAttribute("data-element_id"))
-      dragedEl.setAttribute("data-element_id",CoCreateUtils.UUID());
+      dragedEl.setAttribute("data-element_id",CoCreate.utils.UUID());
 
     dragedEl = dragedEl.getAttribute("data-element_id");
 
-    CoCreate.sendMessage({
+    CoCreate.message.send({
       broadcast_sender: true,
       rooms: "",
       emit: {
