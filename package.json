@@ -1,8 +1,25 @@
 {
   "name": "@cocreate/dnd",
-  "version": "1.0.0",
+  "version": "0.9.1",
   "description": "A simple dnd component in vanilla javascript. Easily configured using HTML5 data-attributes and/or JavaScript API.",
-  "keywords": ["dnd","cocreate","low-code-framework","no-code-framework","cocreatejs","cocreatejs-component","cocreate-framework","no-code","low-code","collaborative-framework","realtime","realtime-framework","collaboration","shared-editing","html5-framework","javascript-framework"],
+  "keywords": [
+    "dnd",
+    "cocreate",
+    "low-code-framework",
+    "no-code-framework",
+    "cocreatejs",
+    "cocreatejs-component",
+    "cocreate-framework",
+    "no-code",
+    "low-code",
+    "collaborative-framework",
+    "realtime",
+    "realtime-framework",
+    "collaboration",
+    "shared-editing",
+    "html5-framework",
+    "javascript-framework"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -32,7 +49,6 @@
     "webpack-cli": "^4.3.1",
     "webpack-log": "^3.0.1"
   },
-
   "dependencies": {
     "@cocreate/docs": "^1.0.3"
   }
