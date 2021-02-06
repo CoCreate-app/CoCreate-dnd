@@ -1,15 +1,26 @@
-/*global initSortable*/
-
+/*global initContainer*/
+import { initContainer } from "./index.js";
 export default function dndConfigs() {
-  let sortables = document.querySelectorAll(".sortable");
 
-  sortables.forEach((sortable) => {
-    initSortable({ target: sortable });
+
+
+  window.CoCreateObserver.add({
+    name: "dnd-config",
+    observe: ["childList"],
+    task: mutation => {
+       let sortables = document.querySelectorAll(".sortable");
+    
+      sortables.forEach((sortable) => {
+        initContainer({ target: sortable });
+      });
+    
+      let cloneables = document.querySelectorAll(".cloneable");
+    
+      cloneables.forEach((cloneable) => {
+        initContainer({ target: cloneable, cloneable: true });
+      });
+    },
   });
 
-  let cloneables = document.querySelectorAll(".cloneable");
 
-  cloneables.forEach((cloneable) => {
-    initSortable({ target: cloneable, cloneable: true });
-  });
 }

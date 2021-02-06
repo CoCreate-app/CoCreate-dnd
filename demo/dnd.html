@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
   <title>CoCreate-dnd.js</title>
   <meta name="description" content="Utility first css framework, design faster and improve on your css by using native inline styles as classes. No learning curve, use what you already know" />
   <meta name="keywords" content="helper classes, utility classes, css framework, css library, inline style classes" />
   <meta name="robots" content="index,follow" />
-
+  <link rel="stylesheet" href="https://server.cocreate.app/CoCreate-components/CoCreate-dnd/src/CoCreate-dnd.css" type="text/css" />
   <style>
     .sortable-item {
       background-color: white;
@@ -42,14 +42,15 @@
       padding: 5px;
       margin: 15px;
     }
+    
 
     /*general*/
   </style>
-
+  
 
 </head>
 
-<body>
+<body data-group_name="canvas">
 
 
   <!-- Container and elements intialized with cloneable class and data-cloneable attribute -->
@@ -81,12 +82,35 @@
   </ul>
 
 
-  <!-- Container and elements intialized with attributtes -->
+<div id="onConditionDnd">
+  <div>
+    start div 1
+  <div class="block myinline">example block 1</div>
+  <div class="block myinline">example block 2</div>
+  <div class="block myinline">example block 3</div>
+    end div 1
+    
+  </div>
+  
+    <div>
+      start div 2
+  <div class="block">example block 4</div>
+  <div class="block">example block 5</div>
+  <div class="block">example block 6</div>
+  end div 2
+    </div>
+  <div class="block myinline">example block 7</div>
+  <div class="block myinline">example block 8</div>
+  <div class="block myinline">example block 9</div>
+</div>
+
+
+
   <div data-element_id="id1" data-droppable="true">
     <div data-element_id="id2" data-draggable="true" class="block myinline">example block 1</div>
-    <div data-element_id="id3" data-draggable="true" class="block myinline">example block 2</div>
-    <div data-element_id="id4" data-draggable="true" class="block myinline">example block 3</div>
-    <div data-element_id="id5" data-draggable="true" class="block">example block 4</div>
+    <div  data-draggable="true" class="block myinline">example block 2</div>
+    <div  data-draggable="true" class="block myinline">example block 3</div>
+    <div  data-draggable="true" class="block">example block 4</div>
     <div data-element_id="id6" data-draggable="true" class="block">example block 5</div>
     <div data-element_id="id7" data-draggable="true" class="block">example block 6</div>
     <div data-element_id="id8" data-draggable="true" class="block myinline">example block 7</div>
@@ -94,7 +118,7 @@
     <div data-element_id="id10" data-draggable="true" class="block myinline">example block 9</div>
   </div>
 
-  <iframe src="iframe.html" id="client" frameborder="0" width="100%" height="100%"></iframe>
+
   <iframe src="iframe.html" id="client2" frameborder="0" width="100%" height="100%"></iframe>
  
   <!-- Container intialized with class sortable -->
@@ -122,11 +146,14 @@
     }
   </script>
   <script defer src="https://server.cocreate.app/js/CoCreate.min.js"></script>
-  <script defer src="../../CoCreate-utilities/CoCreate-tooltip.js"></script>
-  <script defer src="../../CoCreate-utilities/CoCreate-boxmarker.js"></script>
+  <!--<script defer src="../../CoCreate-utilities/CoCreate-tooltip.js"></script>-->
+  <!--<script defer src="../../CoCreate-utilities/CoCreate-boxmarker.js"></script>-->
+  <script defer src="https://server.cocreate.app/CoCreate-components/CoCreate-domReader/src/index.js"></script>
 
   <script defer src="../dist/CoCreate-dnd.js"></script>
- 
+  <script defer src="./initOnTimeCondition.js"></script>
+  
 </body>
 
 </html>
+ 

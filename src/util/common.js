@@ -1,8 +1,17 @@
 import { group_name } from "./variables";
-import domContext from "./domContext";
-let dndContext = new domContext();
+import domContext, { initFunctionState } from "./domContext2";
 
-export { dndContext };
+//find the global context
+let parentWindow = window;
+while (parentWindow !== window.parent) parentWindow = window.parent;
+let dndContext;
+if (!parentWindow.dndContext) {
+  dndContext = new domContext();
+  parentWindow.dndContext = dndContext;
+} else dndContext = parentWindow.dndContext;
+
+export { dndContext, initFunctionState };
+
 export function getCoc(el, att) {
   if (!el.tagName) el = el.parentElement;
   return dndContext.getContext(el, att);
@@ -41,10 +50,10 @@ let lasttransition = "none";
 export function dropMarker(options) {
   options = Object.assign({ borderSize: 2, dropMarkerMargin: 5 }, options);
   let marker = document.createElement("div");
-  marker.id = "marker";
-  marker.style.backgroundColor = "green";
-  marker.style.position = "absolute";
-  marker.style.display = "none";
+  marker.id = "dropMarker";
+  // marker.style.backgroundColor = "green";
+  // marker.style.position = "absolute";
+  // marker.style.display = "none";
   marker.style.pointerEvents = "none";
 
   this.lastOrigntaion = undefined;
@@ -151,7 +160,6 @@ export function dropMarker(options) {
           "px";
         break;
       default:
-        // console.log(orientation)
         throw new Error("one type of orientation must be specified");
     }
     // marker.style.transition = "all 0.2s ease-in-out";
@@ -169,28 +177,30 @@ export function parse(text) {
   else return doc.body.children[0];
 }
 
-export function ghostEffect(el, ref) {
+export function ghostEffect(elementEvent, el, ref) {
   this.effectCb;
-
+  el.removeAttribute("CoC-dragging");
   this.start = () => {
     this.cloneEl = el.cloneNode(true);
+    let { width, height } = ref.window.getComputedStyle(el);
     let cloneElStyle = window.getComputedStyle(this.cloneEl);
     this.wrapper = document.createElement("div");
-    this.wrapper.style.height = cloneElStyle.height;
-    this.wrapper.style.width = cloneElStyle.width;
+
+    this.wrapper.style.height = height;
+    this.wrapper.style.width = width;
     this.wrapper.append(this.cloneEl);
     this.wrapper.style.display = "none";
     ref.document.body.append(this.wrapper);
 
     this.wrapper.style.pointerEvents = "none";
-    this.wrapper.style.overflow = "hidden";
-    this.wrapper.style.textOverflow = "ellipsis";
-    this.wrapper.style.whiteSpace = "nowrap";
+    // this.wrapper.style.overflow = "hidden";
+    // this.wrapper.style.textOverflow = "ellipsis";
+    // this.wrapper.style.whiteSpace = "nowrap";
 
-    this.wrapper.style.opacity = "0.5";
-    this.wrapper.style.position = "fixed";
-    this.wrapper.style.Zindex = "20000";
-    this.wrapper.id = "ghost-effect";
+    // this.wrapper.style.opacity = "0.5";
+    // this.wrapper.style.position = "fixed";
+    // this.wrapper.style.Zindex = "20000";
+    this.wrapper.id = "ghostEffect";
   };
 
   this.draw = (e, ref) => {
@@ -201,21 +211,24 @@ export function ghostEffect(el, ref) {
       marginBottom,
       marginLeft,
       marginRight,
+      width,
+      height,
     } = computeStyles(this.cloneEl, [
       "marginTop",
       "marginBottom",
       "marginLeft",
       "marginRight",
+      "width",
+      "height",
     ]);
 
     let frameRect;
     if (ref.frame) frameRect = ref.frame.getBoundingClientRect();
     else frameRect = { top: 0, left: 0 };
 
-    // let targetRect = e.target.getBoundingClientRect();
-
-    this.wrapper.style.top = frameRect.top + e.y - 15 + "px";
-    this.wrapper.style.left = frameRect.left + e.x - 15 + "px";
+    this.wrapper.style.top = frameRect.top + e.y - elementEvent.offsetY + "px";
+    this.wrapper.style.left =
+      frameRect.left + e.x - elementEvent.offsetX + "px";
   };
 
   this.hide = () => {
@@ -304,8 +317,11 @@ export function distanceToChild(p, child) {
 export function distanceToChildLeftRight(p, child) {
   let rect = child.getBoundingClientRect();
 
-  let line1 = { p1: [rect.top, rect.left], p2: [rect.bottom, rect.left] };
-  let line3 = { p1: [rect.top, rect.right], p2: [rect.bottom, rect.right] };
+  let line1 = { p1: [rect.top, 0], p2: [rect.bottom, 0] };
+  let line3 = {
+    p1: [rect.top, child.clientWidth],
+    p2: [rect.bottom, child.clientWidth],
+  };
 
   let distances = [
     pDistance(p[0], p[1], line1.p1[1], line1.p1[0], line1.p2[1], line1.p2[0]),
@@ -326,9 +342,12 @@ export function distanceToChildLeftRight(p, child) {
 export function distanceToChildTopBottom(p, child) {
   let rect = child.getBoundingClientRect();
 
-  let line2 = { p1: [rect.top, rect.left], p2: [rect.top, rect.right] };
+  let line2 = { p1: [0, rect.left], p2: [0, rect.right] };
 
-  let line4 = { p1: [rect.bottom, rect.left], p2: [rect.bottom, rect.right] };
+  let line4 = {
+    p1: [child.clientHeight, rect.left],
+    p2: [child.clientHeight, rect.right],
+  };
 
   let distances = [
     pDistance(p[0], p[1], line2.p1[1], line2.p1[0], line2.p2[1], line2.p2[0]),
@@ -354,13 +373,23 @@ export function autoScroller({ speed, threshold }) {
   this.speed;
   this.interval;
   this.isActive;
-
   this.update = function (x, y) {
     this.mouse = { x, y };
   };
 
   this.calculateScroll = function ({ x, y, element, onMouseScrollMove }) {
-    // console.log('scrolling in ', element)
+    while (true) {
+      if (
+        element &&
+        element.tagName &&
+        (element.scrollHeight > element.clientHeight ||
+          element.scrollWidth > element.clientWidth)
+      ) {
+        break;
+      } else if (element.parentElement) element = element.parentElement;
+      else break;
+    }
+
     let hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
     let hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
 
@@ -384,65 +413,76 @@ export function autoScroller({ speed, threshold }) {
       switch (orientation) {
         case "top":
         case "bottom":
-          this.speed = (verScrollThreshold / closestDistance) * speed;
+          this.speed = (verScrollThreshold / (closestDistance + 1)) * speed;
           condition = closestDistance < verScrollThreshold;
           break;
 
         case "left":
         case "right":
-          this.speed = (horScrollThreshold / closestDistance) * speed;
+          this.speed = (horScrollThreshold / (closestDistance + 1)) * speed;
           condition = closestDistance < horScrollThreshold;
           break;
       }
 
-      // let scrollWidth = element.offsetWidth - element.clientWidth; // is scroll active
       if (condition) {
         if (!this.isActive) {
           this.isActive = true;
-          this.activateScroll(element, orientation, onMouseScrollMove);
+          this.__activateScroll(element, orientation, onMouseScrollMove);
         } else if (this.isActive && this.lastScrollingElement !== element) {
-          this.deactivateScroll();
-          this.activateScroll(element, orientation, onMouseScrollMove);
+          this.deactivateScroll(element);
+          this.__activateScroll(element, orientation, onMouseScrollMove);
         }
       } else if (this.isActive) {
+        console.log("no", orientation, element);
         this.isActive = false;
-        this.deactivateScroll();
+        this.deactivateScroll(element);
       }
     }
   };
+  // this.__scroll = function(element, s1 = 0, s2 = 0)
+  // {
+  //   for(let i = 0 ; i <= this.speed; i++)
+  //   {
+  //     element.scrollBy(s1, s2)
 
-  this.activateScroll = function (element, orientation, callback) {
-    // console.log('scrolling')
+  //   }
+  // }
+
+  this.__activateScroll = function (element, orientation, callback) {
+    // todo: when interval timeout is low and speed is hight scrollBy doesn't act
+    // retodo: give time to scrollBy equal to speed * 0.25 * timeout
+    element.style.scrollBehavior = "auto";
     this.lastScrollingElement = element;
     this.interval = setInterval(() => {
       switch (orientation) {
         case "top":
           element.scrollBy(0, -this.speed);
-          // console.log('top')
+
           break;
         case "bottom":
           element.scrollBy(0, this.speed);
-          // console.log('bottom')
+
           break;
         case "left":
           element.scrollBy(-this.speed, 0);
-          // console.log('left')
+
           break;
         case "right":
           element.scrollBy(this.speed, 0);
-          // console.log('right')
+
           break;
+        default:
       }
 
-      this.onElement = document.elementFromPoint(this.mouse.x, this.mouse.y);
-      if (this.onElement) {
-        callback({ x: this.mouse.x, y: this.mouse.y, target: this.onElement });
-      }
+      // this.onElement = document.elementFromPoint(this.mouse.x, this.mouse.y);
+      // if (this.onElement) {
+      //   callback({ x: this.mouse.x, y: this.mouse.y, target: this.onElement });
+      // }
     }, 10);
   };
 
-  this.deactivateScroll = function () {
-    // console.log('scrolling disabled')
+  this.deactivateScroll = function (element) {
+    if (element) element.style.scrollBehavior = "";
     clearInterval(this.interval);
   };
 }

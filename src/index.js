@@ -1,4 +1,5 @@
 /*global HTMLElement*/
+/*global DOMException*/
 import "./collaboration.js";
 import dndConfig from "./dnd-config.js";
 import "./util/iframe";
@@ -11,321 +12,355 @@ import {
   getCocs,
   distanceToChild,
   autoScroller,
-  dndContext as context,
+  initFunctionState,
 } from "./util/common";
 
 import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
 
-let ref = { x: 0, y: 0, window, document, isIframe: false };
+let touchTimeout;
+let beforeDndSuccessCallback;
+function beforeDndSuccess() {
+  if (beforeDndSuccessCallback)
+    return beforeDndSuccessCallback.apply(null, arguments);
+  return {};
+}
 
-export default function dnd(window, document, options) {
-  console.log("dnd is loading", window.location.pathname);
+let mousemove, mouseup, mousedown, touchstart, touchend, touchmove;
 
-  options = Object.assign(
-    {
-      scroller: new autoScroller({ speed: 12, threshold: 4 }),
+// export default function dndf(window, document, options) {
 
-      myDropMarker: new dropMarker(),
-    },
-    options
+// }
+
+let options = {
+  scroller: new autoScroller({ speed: 4, threshold: 3 }),
+
+  myDropMarker: new dropMarker(),
+};
+
+//// defining events
+let { myDropMarker, scroller } = options;
+let dnd = new VirtualDnd(beforeDndSuccess);
+let ghost;
+dnd.on("dragStart", (data) => {
+  myDropMarker.hide();
+  ghost = new ghostEffect(data.e, data.el, { window, document });
+  ghost.start();
+});
+dnd.on("dragEnd", (data) => {
+  myDropMarker.hide();
+  if (ghost) ghost.hide(data.ref);
+});
+dnd.on("dragOver", (data) => {
+  // it will always run when mouse or touch moves
+  myDropMarker.draw(
+    data.el,
+    data.closestEl,
+    data.orientation,
+    !!data.hasChild,
+    data.ref
   );
-  // weird bug: dropMarker override the imported dropMarker in the above
-  let { myDropMarker, scroller } = options;
-  let isDraging = false;
-  let consolePrintedEl = null; // dev only
-  //// defining events
+});
 
-  dndReady(document);
+let startGroup;
+let isDraging = false;
+let consolePrintedEl = null; // dev only
 
-  let dnd = new VirtualDnd();
-  let ghost;
-  dnd.on("dragStart", (data) => {
-    myDropMarker.hide();
-    ghost = new ghostEffect(data.el, { document });
-    ghost.start();
-  });
-  dnd.on("dragEnd", (data) => {
-    myDropMarker.hide();
-    if (ghost) ghost.hide(data.ref);
-  });
-  dnd.on("dragOver", (data) => {
-    // it will always run when mouse or touch moves
-    myDropMarker.draw(
-      data.el,
-      data.closestEl,
-      data.orientation,
-      !data.hasChild,
-      data.ref
-    );
-  });
+function start(e, ref) {
+  let r = getCocs(e.target, [vars.draggable, vars.cloneable, vars.handleable]);
 
-  let startGroup;
+  if (!Array.isArray(r)) return;
+  let [el, att] = r;
 
-  function start(e, ref) {
-    let r = getCocs(e.target, [
-      vars.cloneable,
-      vars.draggable,
-      vars.handleable,
-    ]);
 
-    if (!Array.isArray(r)) return;
-    let [el, att] = r;
+  
+  switch (att) {
+    case vars.cloneable:
+      let html = el.getAttribute(vars.data_insert_html);
+      if (html) {
+        el = parse(html);
+        if (!el) return;
+      } else el = el.cloneNode(true);
+      break;
+    case vars.draggable:
+      let hasHandle = el.getAnyAttribute(vars.handleable);
+      if (hasHandle) return;
+      break;
 
-    switch (att) {
-      case vars.cloneable:
-        let html = el.getAttribute(vars.data_insert_html);
-        if (html) {
-          el = parse(html);
-          if (!el) return;
-        } else el = el.cloneNode(true);
-        break;
-      case vars.draggable:
-        let hasHandle = context.getContext(el, vars.handleable);
-        if (hasHandle) return;
-        break;
-
-      default:
-        el = getCoc(el, vars.draggable);
-    }
-    // get group
-    let groupResult = getGroupName(el);
-    startGroup = groupResult[1];
-
-    ref.document.body.style.cursor = "crosshair !important";
-    isDraging = true;
-
-    dnd.dragStart(e, el, null, ref, att);
+    default:
+      el = getCoc(el, vars.draggable);
   }
 
-  function end(e, ref) {
-    ref.document.body.style.cursor = "";
+  // get group
+  let groupResult = getGroupName(el);
+  startGroup = groupResult[1];
 
-    dnd.dragEnd(e);
-    myDropMarker.hide();
+  ref.document.body.style.cursor = "crosshair !important";
 
-    scroller.deactivateScroll();
-    isDraging = false;
+  isDraging = true;
+
+  dnd.dragStart(e, el, null, ref, att);
+}
+
+function end(e, ref) {
+  ref.document.body.style.cursor = "";
+  isDraging = false;
+
+  dnd.dragEnd(e);
+  myDropMarker.hide();
+
+  scroller.deactivateScroll();
+  
+}
+
+function move({ x, y, target, isTouch }, ref, stopScroll) {
+  if (!isDraging) return;
+
+  if (ghost) ghost.draw({ x, y }, ref);
+  scroller.update(x, y);
+  if (isDraging) {
+    // skip group names
+    let [groupEl, groupname] = getGroupName(target);
+    if (startGroup && groupname && startGroup !== groupname)
+      do {
+        let groupResult = getGroupName(groupEl);
+        if (!groupResult[0]) return; // or return
+        groupEl = groupResult[0].parentElement;
+        groupname = groupResult[1];
+        if (startGroup === groupname) {
+          target = groupResult[0];
+          break;
+        }
+      } while (true);
+  } else {
+    if (ghost) ghost.hide();
   }
 
-  function move({ x, y, target }, ref, stopScroll) {
-    if (ghost) ghost.draw({ x, y }, ref);
-    scroller.update(x, y);
-    if (isDraging) {
-      // skip group names
-      let [groupEl, groupname] = getGroupName(target);
-      if (startGroup && groupname && startGroup !== groupname)
-        do {
-          let groupResult = getGroupName(groupEl);
-          if (!groupResult[0]) return; // or return
-          groupEl = groupResult[0].parentElement;
-          groupname = groupResult[1];
-          if (startGroup === groupname) {
-            target = groupResult[0];
-            break;
-          }
-        } while (true);
-    } else {
-      if (ghost) ghost.hide();
-    }
+  if (!target) return; // it's out of iframe if this is multi frame
 
-    if (!target) return; // it's out of iframe if this is multi frame
+  let onEl = target; // dev
+  let el = getCoc(target, vars.droppable);
+  // if (consolePrintedEl != target) { // dev
+  //   // dev
+  //   console.log("you are on: \n", onEl, "\nDroping in: \n", el);
+  //   consolePrintedEl = el;
+  // }
 
-    let onEl = target; // dev
-    let el = getCoc(target, vars.droppable);
-    // if (consolePrintedEl != target) { // dev
-    //   // dev
-    //   console.log("you are on: \n", onEl, "\nDroping in: \n", el);
-    //   consolePrintedEl = el;
-    // }
+  // if()
 
-    if (!el || !isDraging) return;
+  if (!el) return;
 
-    if (!stopScroll) {
-      scroller.calculateScroll({
-        x,
-        y,
-        element: el.parentElement,
-        onMouseScrollMove: (e) => move(e, ref, true),
-      });
-    }
-
-    // todo:
-
-    dnd.dragOver({ x, y, target: el }, el, ref);
+  if (!stopScroll) {
+    scroller.calculateScroll({
+      x,
+      y,
+      element: el.parentElement,
+      onMouseScrollMove: (e) => move(e, ref, true),
+    });
   }
 
-  let touchstart = (e, ref) => {
-    console.log("touch start");
-    start(e);
-  };
-  let touchend = (e, ref) => {
-    console.log("touch end");
-    end(e);
-  };
-  let touchmove = (e, ref) => {
-    console.log("host touch move");
+  // todo:
 
-    let touch = e.touches[0];
-    let x = touch.clientX;
-    let y = touch.clientY;
-    let el = document.elementFromPoint(x, y);
-    if (!el) return; // it's out of iframe
+  dnd.dragOver({ x, y, target: el }, el, ref);
+}
 
-    // sending object representing an event data
-    move({ x, y, target: el });
-  };
-  let mousedown = (e, ref) => {
-    console.log("mouse down", e);
+mousedown = (e, ref) => {
+  // console.log("mouse down", e);
 
-    if (e.which != 1) return;
+  if (e.which != 1) return;
 
-    start(e, ref);
-  };
-  let mouseup = (e, ref) => {
-    console.log("mouse up", e);
-    // todo: why would we check for hoverable and what do we do whith this?
-    // let el = getCoc(e.target, hoverable)
-    // if (!el) return;
-    //
+  start(e, ref);
+};
+mouseup = (e, ref) => {
+  // console.log("mouse up", e);
+  // todo: why would we check for hoverable and what do we do whith this?
+  // let el = getCoc(e.target, hoverable)
+  // if (!el) return;
+  //
 
-    if (e.which != 1) return;
+  if (e.which != 1) return;
 
-    end(e, ref);
-  };
-  let mousemove = (e, ref) => {
-    move(e, ref);
-  };
-  // let CoCreateClickLeft = (e) => {
-  //   // todo: not working!?
-  //   let el = getCoc(e.target, selectable);
-  //   if (!el) return;
-  // };
-
-  // touch
-  document.addEventListener("touchstart", wrapper(touchstart, ref));
-  document.addEventListener("touchend", wrapper(touchend, ref));
-  document.addEventListener("touchmove", wrapper(touchmove, ref));
-  // touch
-  // mouse
-  document.addEventListener("mousedown", wrapper(mousedown, ref));
-  document.addEventListener("mouseup", wrapper(mouseup, ref));
-  document.addEventListener("mousemove", wrapper(mousemove, ref));
-  // mouse
-  // listen for click
-  // document.addEventListener("CoCreateClickLeft", CoCreateClickLeft);
-
-  options.iframes.forEach((frame) => {
+  end(e, ref);
+};
+mousemove = (e, ref) => {
+  move(e, ref);
+};
+// let CoCreateClickLeft = (e) => {
+//   // todo: not working!?
+//   let el = getCoc(e.target, selectable);
+//   if (!el) return;
+// };
+let refs = new Map();
+const initIframe = ({ isIframe, frame, document, window }) => {
+  let ref;
+  if (isIframe) {
+    let frameWindow = frame.contentWindow;
+    let frameDocument = frameWindow.document || frame.contentDocument;
     let rect = frame.getBoundingClientRect();
-    let ref = {
+    ref = {
       x: rect.left,
       y: rect.top,
       frame,
-      window: frame.contentWindow,
-      document: frame.contentDocument,
+      window: frameWindow,
+      document: frameDocument,
       isIframe: true,
     };
-    dndReady(ref.document);
+  } else {
+    ref = { x: 0, y: 0, window, document, isIframe: false };
+  }
 
-    //touch
-    ref.document.addEventListener("touchstart", wrapper(touchstart, ref));
-    ref.document.addEventListener("touchend", wrapper(touchend, ref));
-    ref.document.addEventListener("touchmove", wrapper(touchmove, ref));
-    // touch
+    if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
 
-    // mouse
-    ref.document.addEventListener("mousedown", wrapper(mousedown, ref));
-    ref.document.addEventListener("mouseup", wrapper(mouseup, ref));
-    ref.document.addEventListener("mousemove", wrapper(mousemove, ref));
-    // mouse
+  if (!ref.document.querySelector("#dnd-style")) {
+    let dndStyle = ref.document.createElement("style");
+    dndStyle.id = "dnd-style";
+    dndStyle.innerHTML = `    /* dnd specic */
+      [data-draggable="true"], [data-cloneable="true"]  {
+        touch-action: none;
+      }
+      /* dnd specic */`;
+    ref.document.head.append(dndStyle);
+  }
 
-    // listen for click
-    // ref.document.addEventListener(
-    //   "CoCreateClickLeft",
-    //   wrapper(CoCreateClickLeft, ref)
-    // );
-  });
-}
-
-function dndReady(document) {
-  // disable native drag
-  document.addEventListener("dragstart", (e) => {
+  ref.document.addEventListener("dragstart", (e) => {
     e.preventDefault();
     return false;
   });
 
   // disable selection
-  document.addEventListener("selectstart", (e) => {
+  ref.document.addEventListener("selectstart", (e) => {
     let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
     if (!Array.isArray(r)) return;
     e.preventDefault();
-  });
-}
+  }, {passive: false});
+  // touch
 
-function wrapper(func, ref) {
-  return function (e) {
-    func.apply(this, [e, ref]);
-  };
-}
 
-window.init = () => {
-  //   if (!document.querySelector('#dnd-style')) {
-  //     let dndStyle = document.createElement('style');
-  //     dndStyle.id = "dnd-style";
-  //     dndStyle.innerHTML = `    /* dnd specic */
 
-  //     [data-cloneable],
-  //     [data-draggable] {
-  //       cursor: pointer;
-  //     }
+  let mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte;
+  if(!refs.has(ref.window))
+  {
 
-  //     [data-cloneable],
-  //     [data-draggable],
-  //     [data-droppable],
-  //     [data-hoverable] {
-  //       outline: 1px dashed gray;
-  //     }
-
-  //     *[CoC-hovered=true] {
-  //       outline: 2px solid blue
-  //     }
-
-  //     /* must be defined after CoC-hovered because of css specificity to show selected with higher priority */
-
-  //     *[CoC-selected=true] {
-  //       outline: 3px solid green;
-  //     }
-
-  //     *[CoC-dragging=true] {
-  //       outline: 3px solid red;
-  //     }
-
-  //     /* dnd specic */`
-  //     document.head.append(dndStyle)
-  //   }
-
-  // only run if it's the host but not iframe
-  // if (window.location === window.parent.location)
-
-  dnd(window, document, {
-    iframes: Object.values(window.iframes.guests).map((o) => o.frame),
-  });
-  console.log("dnd is loaded", window.location.pathname);
-
-  function parse(text) {
-    let doc = new DOMParser().parseFromString(text, "text/html");
-    if (doc.head.children[0]) return doc.head.children[0];
-    else return doc.body.children[0];
+   touchstarte = function (e) {
+    // console.log()
+    
+    if(touchTimeout)
+    clearTimeout(touchTimeout);
+    touchTimeout = setTimeout(() => {
+      console.log('touch start')
+      ref.document.body.style.touchAction = "none"
+      e.preventDefault();
+      start(e, ref);
+    }, 1000);
   }
+
+     touchheade = function (e) {
+    ref.document.body.style.touchAction = "auto"  
+    if (!isDraging) {
+      if(touchTimeout)
+      clearTimeout(touchTimeout);
+      return;
+    }
+
+    e.preventDefault();
+    end(e, ref);
+  }
+  
+     touchmovee = function (e) {
+    
+  
+
+    if (!isDraging) {
+        if(touchTimeout)
+      clearTimeout(touchTimeout);
+      console.log('touch scroll')
+      return;
+    }
+
+   console.log('touch dnd') 
+  e.preventDefault();
+    // console.log("host touch move");
+
+    let touch = e.touches[0];
+    let x = touch.clientX;
+    let y = touch.clientY;
+    let el = ref.document.elementFromPoint(x, y);
+    if (!el) return; // it's out of iframe
+
+    // sending object representing an event data
+    move({ x, y, target: el, isTouch: true }, ref);
+  };
+  
+     mousedowne = function (e) {
+    mousedown.apply(this, [e, ref]);
+  }
+  
+     mouseupe =  function (e) {
+    mouseup.apply(this, [e, ref]);
+  }
+   
+   mousemovee = function (e) {
+    mousemove.apply(this, [e, ref]);
+  };
+    refs.set(ref.window, {mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte})
+  }
+  else
+  {
+    ({mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte} = refs.get(ref.window));
+  }
+  
+  
+  ref.document.removeEventListener("touchstart", touchstarte);
+  ref.document.addEventListener("touchstart", touchstarte);
+
+  ref.document.removeEventListener("touchend",touchheade , {passive: false});
+  ref.document.addEventListener("touchend",touchheade , {passive: false});
+
+  ref.document.removeEventListener("touchmove", touchmovee, {passive: false});
+  ref.document.addEventListener("touchmove",touchmovee , {passive: false});
+  // touch
+  // mouse
+
+  ref.document.removeEventListener("mousedown", mousedowne);
+  ref.document.addEventListener("mousedown", mousedowne);
+
+  ref.document.removeEventListener("mouseup",mouseupe);
+  ref.document.addEventListener("mouseup",mouseupe);
+
+  
+  ref.document.removeEventListener("mousemove",mousemovee );
+  ref.document.addEventListener("mousemove",mousemovee );
+  // mouse
+  
+
 };
 
+// const init = () => {
+//   dnd(window, document);
+//   // console.log("dnd is loaded", window.location.pathname);
+
+//   // function parse(text) {
+//   //   let doc = new DOMParser().parseFromString(text, "text/html");
+//   //   if (doc.head.children[0]) return doc.head.children[0];
+//   //   else return doc.body.children[0];
+//   // }
+// };
+
 window.addEventListener("load", () => {
-  window.init();
+  if(window.parent !== window) return;
+  initIframe({ document, window });
   dndConfig();
 });
 
-window.initElement = function ({
+const initFunction = function ({ target, onDnd, beforeDndSuccess }) {
+  if (typeof beforeDndSuccess == "function")
+    beforeDndSuccessCallback = beforeDndSuccess;
+
+  initFunctionState.push({ target, onDnd });
+};
+
+const initElement = function ({
   target,
   dropable,
   draggable,
@@ -333,15 +368,18 @@ window.initElement = function ({
   handle,
   group,
   exclude,
+  beforeDndSuccess,
 }) {
   try {
-    if (group) context.setContext(target, vars.group_name, group);
+    if (typeof beforeDndSuccess == "function")
+      beforeDndSuccessCallback = beforeDndSuccess;
+    if (group) target.setHiddenAttribute(vars.group_name, group);
 
     if (exclude) {
       try {
         let excludeEls = target.querySelectorAll(exclude);
         excludeEls.forEach((el) => {
-          context.setContext(el, vars.exclude, true);
+          el.setHiddenAttribute(vars.exclude, "true");
         });
       } catch (err) {
         if (err instanceof HTMLElement) {
@@ -354,16 +392,18 @@ window.initElement = function ({
 
     if (dropable)
       target.querySelectorAll(dropable).forEach((el) => {
-        context.setContext(el, vars.droppable, true);
+        el.setHiddenAttribute(vars.droppable, "true");
       });
     if (draggable)
       target.querySelectorAll(draggable).forEach((el) => {
-        context.setContext(el, vars.draggable, true);
+        // el.style.touchAction = 'none'
+        el.setHiddenAttribute(vars.draggable, "true");
       });
 
     if (cloneable)
-      target.querySelectorAll(cloneableg).forEach((el) => {
-        context.setContext(el, vars.cloneable, true);
+      target.querySelectorAll(cloneable).forEach((el) => {
+        // el.style.touchAction = 'none'
+        el.setHiddenAttribute(vars.cloneable, "true");
       });
   } catch (err) {
     if (err instanceof DOMException) {
@@ -378,13 +418,14 @@ function addNestedAttribute(el, cloneable) {
   if (!el.children.length) return;
   Array.from(el.children).forEach((el) => {
     addNestedAttribute(el);
-    context.setContext(el, vars.droppable, true);
-    context.setContext(el, vars.draggable, true);
-    if (cloneable) context.setContext(el, vars.cloneable, true);
+    el.setHiddenAttribute(vars.exclude, "true");
+    // el.style.touchAction = 'none'
+    el.setHiddenAttribute(vars.draggable, "true");
+    if (cloneable) el.setHiddenAttribute(vars.cloneable, "true");
   });
 }
 
-window.initContainer = function ({
+const initContainer = function ({
   target,
   cloneable = false,
   nested = false,
@@ -392,12 +433,12 @@ window.initContainer = function ({
   group,
   exclude,
 }) {
-  if (group) context.setContext(target, vars.group_name, group);
+  if (group) target.setHiddenAttribute(vars.group_name, group);
   if (exclude) {
     try {
       let excludeEls = target.querySelectorAll(exclude);
       excludeEls.forEach((el) => {
-        context.setContext(el, vars.exclude, true);
+        el.setHiddenAttribute(vars.exclude, "true");
       });
     } catch (err) {
       if (err instanceof DOMException) {
@@ -408,38 +449,46 @@ window.initContainer = function ({
     }
   }
 
-  if (!(target instanceof HTMLElement)) {
+  if (!target.tagName) {
     let error = "Dnd Sortable: Please provide a valid element";
-    throw error;
     console.error(error);
+    throw error;
   }
 
   if (typeof cloneable != "boolean") {
     let error = "Dnd Sortable: please provide valid data type for cloneable";
-    throw error;
     console.error(error);
+    throw error;
   }
 
   if (typeof nested != "boolean") {
     let error = "Dnd Sortable: please provide valid data type for nested";
-    throw error;
     console.error(error);
+    throw error;
   }
 
   if (nested) {
     addNestedAttribute(target, cloneable);
   } else {
-    context.setContext(target, vars.droppable, true);
+    target.setHiddenAttribute(vars.droppable, "true");
+
     if (target.children.length)
       Array.from(target.children).forEach((el) => {
-        if (cloneable) context.setContext(el, vars.cloneable, true);
-        else context.setContext(el, vars.draggable, true);
+        if (cloneable) {
+          // el.style.touchAction = 'none'
+          el.setHiddenAttribute(vars.cloneable, "true");
+        } else {
+          // el.style.touchAction = 'none'
+          el.setHiddenAttribute(vars.draggable, "true");
+        }
         try {
           let handleEls = el.querySelectorAll(handle);
           if (handle && handleEls.length) {
-            context.setContext(el, vars.handleable, true);
+            // el.style.touchAction = 'none'
+            el.setHiddenAttribute(vars.draggable, "true");
             handleEls.forEach((el) => {
-              context.setContext(el, vars.handleable, true);
+              // el.style.touchAction = 'none'
+              el.setHiddenAttribute(vars.draggable, "true");
             });
           }
         } catch (err) {
@@ -451,4 +500,20 @@ window.initContainer = function ({
         }
       });
   }
+};
+
+export {  
+  initContainer,
+  initElement,
+  initFunction,
+  initIframe
+}
+
+
+
+export default {
+  initContainer,
+  initElement,
+  initFunction,
+  initIframe,
 };
