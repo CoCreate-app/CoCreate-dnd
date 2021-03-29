@@ -18,6 +18,9 @@ import {
 import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
+import './CoCreate-dnd.css';
+
+import './util/domReader';
 
 let touchTimeout;
 let beforeDndSuccessCallback;
@@ -122,8 +125,11 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
   if (isDraging) {
     // skip group names
     let [groupEl, groupname] = getGroupName(target);
-    if (startGroup && groupname && startGroup !== groupname)
-      do {
+    if (startGroup && groupname)
+    {
+        if( startGroup !== groupname)
+      {  
+        do {
         let groupResult = getGroupName(groupEl);
         if (!groupResult[0]) return; // or return
         groupEl = groupResult[0].parentElement;
@@ -133,14 +139,20 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
           break;
         }
       } while (true);
+        
+      }
+     
+    }
+    else if(startGroup !== groupname)
+      return;
   } else {
     if (ghost) ghost.hide();
   }
 
   if (!target) return; // it's out of iframe if this is multi frame
 
-  let onEl = target; // dev
   let el = getCoc(target, vars.droppable);
+  // let onEl = target; // dev
   // if (consolePrintedEl != target) { // dev
   //   // dev
   //   console.log("you are on: \n", onEl, "\nDroping in: \n", el);
@@ -353,9 +365,9 @@ window.addEventListener("load", () => {
   dndConfig();
 });
 
-const initFunction = function ({ target, onDnd, beforeDndSuccess }) {
-  if (typeof beforeDndSuccess == "function")
-    beforeDndSuccessCallback = beforeDndSuccess;
+const initFunction = function ({ target, onDnd, onDndSuccess }) {
+  if (typeof onDndSuccess == "function")
+    beforeDndSuccessCallback = onDndSuccess;
 
   initFunctionState.push({ target, onDnd });
 };
@@ -502,18 +514,27 @@ const initContainer = function ({
   }
 };
 
+
 export {  
   initContainer,
   initElement,
   initFunction,
   initIframe
-}
+};
 
-
-
-export default {
+let exp = {  
   initContainer,
   initElement,
   initFunction,
-  initIframe,
 };
+
+function init(params)
+{
+  let {mode}= params; 
+  delete params.mode;
+  if(! ['function', 'element', 'container'].includes(mode) )
+    throw new Error('invalid mode provided') 
+  let funcName ='init' + mode.charAt(0).toUpperCase() + mode.slice(1);
+  exp[funcName].apply(null, [params])
+}
+export default {initIframe, init};
