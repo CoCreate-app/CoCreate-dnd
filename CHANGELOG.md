@@ -1,3 +1,10 @@
+## [0.10.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.1...v0.10.2) (2021-03-30)
+
+
+### Bug Fixes
+
+* import from npm ([574f640](https://github.com/CoCreate-app/CoCreate-dnd/commit/574f6404b17fa8a32cf2a5a1fd472ee567b3a06f))
+
 ## [0.10.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.0...v0.10.1) (2021-03-30)
 
 
