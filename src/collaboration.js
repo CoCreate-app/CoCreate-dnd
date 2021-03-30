@@ -5,7 +5,7 @@
 /*global domEditor*/
 /*global CoCreate.socket*/
 
-import {socket, utils, message} from '../../../CoCreateJS/src';
+import {socket, utils, message} from '@cocreate/cocreatejs';
 
 function wrapper() {
 
