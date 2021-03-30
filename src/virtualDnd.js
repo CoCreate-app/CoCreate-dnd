@@ -1,7 +1,7 @@
 import eventUtil from "./eventUtil";
 import { closestChild, parse } from "./util/common";
 import { exclude } from "./util/variables";
-import { utils } from '@cocreate/cocreatejs';
+import utils from '@cocreate/utils';
 
 function UUID(length = 10) {
   var result = "";
