@@ -5,7 +5,8 @@
 /*global domEditor*/
 /*global CoCreate.socket*/
 
-import {socket, utils, message} from '@cocreate/cocreatejs';
+import utils from '@cocreate/utils';
+import message from '@cocreate/message';
 
 function wrapper() {
 
@@ -14,7 +15,7 @@ function wrapper() {
 
 
   window.addEventListener("load", () => {
-    socket.listen('domEditor', function(data) {
+    message.listen('domEditor', function(data) {
       console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
       // resolving the element_id to real element in the clinet
       if (data.target) {
@@ -33,7 +34,7 @@ function wrapper() {
     })
 
 
-    socket.listen("dndNewElement", function(data) {
+    message.listen("dndNewElement", function(data) {
       console.log(
         "raw object recieved: ",
         data.target,
