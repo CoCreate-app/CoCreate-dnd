@@ -1,3 +1,11 @@
+## [0.10.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.0...v0.10.1) (2021-03-30)
+
+
+### Bug Fixes
+
+* cocreatejs from npm ([7ac45a9](https://github.com/CoCreate-app/CoCreate-dnd/commit/7ac45a923e5fe2dfd6c9126ff1d1cab70c7dcad7))
+* Package Paths ([a992506](https://github.com/CoCreate-app/CoCreate-dnd/commit/a992506786785307da7fa547ca275b5db6d7e9d4))
+
 # [0.10.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.9.0...v0.10.0) (2021-03-29)
 
 

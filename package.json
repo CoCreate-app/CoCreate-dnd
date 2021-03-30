@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/dnd",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "A simple dnd component in vanilla javascript. Easily configured using HTML5 data-attributes and/or JavaScript API.",
   "keywords": [
     "dnd",
