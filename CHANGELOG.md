@@ -1,3 +1,10 @@
+## [0.10.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.3...v0.10.4) (2021-03-31)
+
+
+### Bug Fixes
+
+* remove yarn.lock and package-lock.json ([0c3df94](https://github.com/CoCreate-app/CoCreate-dnd/commit/0c3df94559bd3090520adeba3b225e0ff23c6204))
+
 ## [0.10.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.2...v0.10.3) (2021-03-30)
 
 
