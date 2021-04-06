@@ -13,17 +13,19 @@ import {
   distanceToChild,
   autoScroller,
   initFunctionState,
-} from "./util/common";
+}
+from "./util/common";
 
 import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
 import './CoCreate-dnd.css';
 
-import './util/domReader';
+import domReader from './util/domReader';
 
 let touchTimeout;
 let beforeDndSuccessCallback;
+
 function beforeDndSuccess() {
   if (beforeDndSuccessCallback)
     return beforeDndSuccessCallback.apply(null, arguments);
@@ -60,8 +62,7 @@ dnd.on("dragOver", (data) => {
   myDropMarker.draw(
     data.el,
     data.closestEl,
-    data.orientation,
-    !!data.hasChild,
+    data.orientation, !!data.hasChild,
     data.ref
   );
 });
@@ -77,14 +78,15 @@ function start(e, ref) {
   let [el, att] = r;
 
 
-  
+
   switch (att) {
     case vars.cloneable:
       let html = el.getAttribute(vars.data_insert_html);
       if (html) {
         el = parse(html);
         if (!el) return;
-      } else el = el.cloneNode(true);
+      }
+      else el = el.cloneNode(true);
       break;
     case vars.draggable:
       let hasHandle = el.getAnyAttribute(vars.handleable);
@@ -114,7 +116,7 @@ function end(e, ref) {
   myDropMarker.hide();
 
   scroller.deactivateScroll();
-  
+
 }
 
 function move({ x, y, target, isTouch }, ref, stopScroll) {
@@ -125,27 +127,26 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
   if (isDraging) {
     // skip group names
     let [groupEl, groupname] = getGroupName(target);
-    if (startGroup && groupname)
-    {
-        if( startGroup !== groupname)
-      {  
+    if (startGroup && groupname) {
+      if (startGroup !== groupname) {
         do {
-        let groupResult = getGroupName(groupEl);
-        if (!groupResult[0]) return; // or return
-        groupEl = groupResult[0].parentElement;
-        groupname = groupResult[1];
-        if (startGroup === groupname) {
-          target = groupResult[0];
-          break;
-        }
-      } while (true);
-        
+          let groupResult = getGroupName(groupEl);
+          if (!groupResult[0]) return; // or return
+          groupEl = groupResult[0].parentElement;
+          groupname = groupResult[1];
+          if (startGroup === groupname) {
+            target = groupResult[0];
+            break;
+          }
+        } while (true);
+
       }
-     
+
     }
-    else if(startGroup !== groupname)
+    else if (startGroup !== groupname)
       return;
-  } else {
+  }
+  else {
     if (ghost) ghost.hide();
   }
 
@@ -205,6 +206,8 @@ mousemove = (e, ref) => {
 // };
 let refs = new Map();
 const initIframe = ({ isIframe, frame, document, window }) => {
+
+
   let ref;
   if (isIframe) {
     let frameWindow = frame.contentWindow;
@@ -218,11 +221,12 @@ const initIframe = ({ isIframe, frame, document, window }) => {
       document: frameDocument,
       isIframe: true,
     };
-  } else {
+  }
+  else {
     ref = { x: 0, y: 0, window, document, isIframe: false };
   }
-
-    if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
+    domReader.register(ref.window)
+  if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
 
   if (!ref.document.querySelector("#dnd-style")) {
     let dndStyle = ref.document.createElement("style");
@@ -245,106 +249,104 @@ const initIframe = ({ isIframe, frame, document, window }) => {
     let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
     if (!Array.isArray(r)) return;
     e.preventDefault();
-  }, {passive: false});
+  }, { passive: false });
   // touch
 
 
 
-  let mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte;
-  if(!refs.has(ref.window))
-  {
+  let mousemovee, mouseupe, mousedowne, touchmovee, touchheade, touchstarte;
+  if (!refs.has(ref.window)) {
 
-   touchstarte = function (e) {
-    // console.log()
-    
-    if(touchTimeout)
-    clearTimeout(touchTimeout);
-    touchTimeout = setTimeout(() => {
-      console.log('touch start')
-      ref.document.body.style.touchAction = "none"
+    touchstarte = function(e) {
+      // console.log()
+
+      if (touchTimeout)
+        clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        console.log('touch start')
+        ref.document.body.style.touchAction = "none"
+        e.preventDefault();
+        start(e, ref);
+      }, 1000);
+    }
+
+    touchheade = function(e) {
+      ref.document.body.style.touchAction = "auto"
+      if (!isDraging) {
+        if (touchTimeout)
+          clearTimeout(touchTimeout);
+        return;
+      }
+
       e.preventDefault();
-      start(e, ref);
-    }, 1000);
-  }
-
-     touchheade = function (e) {
-    ref.document.body.style.touchAction = "auto"  
-    if (!isDraging) {
-      if(touchTimeout)
-      clearTimeout(touchTimeout);
-      return;
+      end(e, ref);
     }
 
-    e.preventDefault();
-    end(e, ref);
-  }
-  
-     touchmovee = function (e) {
-    
-  
+    touchmovee = function(e) {
 
-    if (!isDraging) {
-        if(touchTimeout)
-      clearTimeout(touchTimeout);
-      console.log('touch scroll')
-      return;
+
+
+      if (!isDraging) {
+        if (touchTimeout)
+          clearTimeout(touchTimeout);
+        console.log('touch scroll')
+        return;
+      }
+
+      console.log('touch dnd')
+      e.preventDefault();
+      // console.log("host touch move");
+
+      let touch = e.touches[0];
+      let x = touch.clientX;
+      let y = touch.clientY;
+      let el = ref.document.elementFromPoint(x, y);
+      if (!el) return; // it's out of iframe
+
+      // sending object representing an event data
+      move({ x, y, target: el, isTouch: true }, ref);
+    };
+
+    mousedowne = function(e) {
+      mousedown.apply(this, [e, ref]);
     }
 
-   console.log('touch dnd') 
-  e.preventDefault();
-    // console.log("host touch move");
+    mouseupe = function(e) {
+      mouseup.apply(this, [e, ref]);
+    }
 
-    let touch = e.touches[0];
-    let x = touch.clientX;
-    let y = touch.clientY;
-    let el = ref.document.elementFromPoint(x, y);
-    if (!el) return; // it's out of iframe
+    mousemovee = function(e) {
+      mousemove.apply(this, [e, ref]);
+    };
+    refs.set(ref.window, { mousemovee, mouseupe, mousedowne, touchmovee, touchheade, touchstarte })
+  }
+  else {
+    ({ mousemovee, mouseupe, mousedowne, touchmovee, touchheade, touchstarte } = refs.get(ref.window));
+  }
 
-    // sending object representing an event data
-    move({ x, y, target: el, isTouch: true }, ref);
-  };
-  
-     mousedowne = function (e) {
-    mousedown.apply(this, [e, ref]);
-  }
-  
-     mouseupe =  function (e) {
-    mouseup.apply(this, [e, ref]);
-  }
-   
-   mousemovee = function (e) {
-    mousemove.apply(this, [e, ref]);
-  };
-    refs.set(ref.window, {mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte})
-  }
-  else
-  {
-    ({mousemovee , mouseupe, mousedowne ,touchmovee, touchheade,touchstarte} = refs.get(ref.window));
-  }
-  
-  
+
   ref.document.removeEventListener("touchstart", touchstarte);
   ref.document.addEventListener("touchstart", touchstarte);
 
-  ref.document.removeEventListener("touchend",touchheade , {passive: false});
-  ref.document.addEventListener("touchend",touchheade , {passive: false});
+  ref.document.removeEventListener("touchend", touchheade, { passive: false });
+  ref.document.addEventListener("touchend", touchheade, { passive: false });
 
-  ref.document.removeEventListener("touchmove", touchmovee, {passive: false});
-  ref.document.addEventListener("touchmove",touchmovee , {passive: false});
+  ref.document.removeEventListener("touchmove", touchmovee, { passive: false });
+  ref.document.addEventListener("touchmove", touchmovee, { passive: false });
   // touch
   // mouse
 
   ref.document.removeEventListener("mousedown", mousedowne);
   ref.document.addEventListener("mousedown", mousedowne);
 
-  ref.document.removeEventListener("mouseup",mouseupe);
-  ref.document.addEventListener("mouseup",mouseupe);
+  ref.document.removeEventListener("mouseup", mouseupe);
+  ref.document.addEventListener("mouseup", mouseupe);
 
-  
-  ref.document.removeEventListener("mousemove",mousemovee );
-  ref.document.addEventListener("mousemove",mousemovee );
+
+  ref.document.removeEventListener("mousemove", mousemovee);
+  ref.document.addEventListener("mousemove", mousemovee);
   // mouse
-  
+
 
 };
 
@@ -360,19 +362,19 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 // };
 
 window.addEventListener("load", () => {
-  if(window.parent !== window) return;
+  if (window.parent !== window) return;
   initIframe({ document, window });
   dndConfig();
 });
 
-const initFunction = function ({ target, onDnd, onDndSuccess }) {
+const initFunction = function({ target, onDnd, onDndSuccess }) {
   if (typeof onDndSuccess == "function")
     beforeDndSuccessCallback = onDndSuccess;
 
   initFunctionState.push({ target, onDnd });
 };
 
-const initElement = function ({
+const initElement = function({
   target,
   dropable,
   draggable,
@@ -393,7 +395,8 @@ const initElement = function ({
         excludeEls.forEach((el) => {
           el.setHiddenAttribute(vars.exclude, "true");
         });
-      } catch (err) {
+      }
+      catch (err) {
         if (err instanceof HTMLElement) {
           let error = "Dnd Sortable: exclude must be valid selector";
           console.error(error);
@@ -417,12 +420,14 @@ const initElement = function ({
         // el.style.touchAction = 'none'
         el.setHiddenAttribute(vars.cloneable, "true");
       });
-  } catch (err) {
+  }
+  catch (err) {
     if (err instanceof DOMException) {
       let error = "Dnd Sortable: handle must be a valid selector";
       console.error(error);
       throw err;
-    } else throw err;
+    }
+    else throw err;
   }
 };
 
@@ -437,7 +442,7 @@ function addNestedAttribute(el, cloneable) {
   });
 }
 
-const initContainer = function ({
+const initContainer = function({
   target,
   cloneable = false,
   nested = false,
@@ -452,12 +457,14 @@ const initContainer = function ({
       excludeEls.forEach((el) => {
         el.setHiddenAttribute(vars.exclude, "true");
       });
-    } catch (err) {
+    }
+    catch (err) {
       if (err instanceof DOMException) {
         let error = "Dnd Sortable: exclude must be valid selector";
         console.error(error);
         throw error;
-      } else throw err;
+      }
+      else throw err;
     }
   }
 
@@ -481,7 +488,8 @@ const initContainer = function ({
 
   if (nested) {
     addNestedAttribute(target, cloneable);
-  } else {
+  }
+  else {
     target.setHiddenAttribute(vars.droppable, "true");
 
     if (target.children.length)
@@ -489,7 +497,8 @@ const initContainer = function ({
         if (cloneable) {
           // el.style.touchAction = 'none'
           el.setHiddenAttribute(vars.cloneable, "true");
-        } else {
+        }
+        else {
           // el.style.touchAction = 'none'
           el.setHiddenAttribute(vars.draggable, "true");
         }
@@ -503,38 +512,39 @@ const initContainer = function ({
               el.setHiddenAttribute(vars.draggable, "true");
             });
           }
-        } catch (err) {
+        }
+        catch (err) {
           if (err instanceof DOMException) {
             let error = "Dnd Sortable: handle must be a valid selector";
             console.error(error);
             throw error;
-          } else throw err;
+          }
+          else throw err;
         }
       });
   }
 };
 
 
-export {  
+export {
   initContainer,
   initElement,
   initFunction,
   initIframe
 };
 
-let exp = {  
+let exp = {
   initContainer,
   initElement,
   initFunction,
 };
 
-function init(params)
-{
-  let {mode}= params; 
+function init(params) {
+  let { mode } = params;
   delete params.mode;
-  if(! ['function', 'element', 'container'].includes(mode) )
-    throw new Error('invalid mode provided') 
-  let funcName ='init' + mode.charAt(0).toUpperCase() + mode.slice(1);
+  if (!['function', 'element', 'container'].includes(mode))
+    throw new Error('invalid mode provided')
+  let funcName = 'init' + mode.charAt(0).toUpperCase() + mode.slice(1);
   exp[funcName].apply(null, [params])
 }
-export default {initIframe, init};
+export default { initIframe, init };
