@@ -49,7 +49,7 @@ function context(state) {
 
 let state = new Map();
 let domContext = new context(state);
-
+window.domContext = domContext;
 
 function init() {
 
@@ -93,6 +93,7 @@ function register( window, context = domContext) {
 
   };
   htmlPrototype.setHiddenAttribute = function(attName, value) {
+    console.log('dnd domReader ', new Date().getSeconds()  + ' ' + new Date().getMilliseconds())
     context.setAttribute(this, attName, value);
   };
 

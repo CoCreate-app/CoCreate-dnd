@@ -491,7 +491,7 @@ const initContainer = function({
   }
   else {
     target.setHiddenAttribute(vars.droppable, "true");
-
+       console.log('dnd loaded target child', target.children)
     if (target.children.length)
       Array.from(target.children).forEach((el) => {
         if (cloneable) {
@@ -500,6 +500,7 @@ const initContainer = function({
         }
         else {
           // el.style.touchAction = 'none'
+            console.log('dnd loaded draggable',el)
           el.setHiddenAttribute(vars.draggable, "true");
         }
         try {
