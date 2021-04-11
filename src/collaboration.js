@@ -6,7 +6,7 @@
 /*global CoCreate.socket*/
 
 import utils from '@cocreate/utils';
-import message from '@cocreate/message';
+import message from '@cocreate/message-client';
 
 function wrapper() {
 
