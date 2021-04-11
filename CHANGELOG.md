@@ -1,3 +1,10 @@
+## [0.10.5](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.4...v0.10.5) (2021-04-07)
+
+
+### Bug Fixes
+
+* resolved bugs related to compiler. Currently in a good working state ([1989453](https://github.com/CoCreate-app/CoCreate-dnd/commit/1989453f455dd67698db95747c5bf930765f9180))
+
 ## [0.10.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.3...v0.10.4) (2021-03-31)
 
 
