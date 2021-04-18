@@ -9,7 +9,7 @@ A simple dnd component in vanilla javascript. Easily configured using HTML5 data
 
 ![CoCreate-dnd](https://cdn.cocreate.app/docs/CoCreate-dnd.gif)
 
-## [Docs & Demo](https://cocreate.app/docs/clone)
+## [Docs & Demo](https://cocreate.app/docs/dnd)
 
 For a complete guide and working demo refer to the [doumentation](https://cocreate.app/docs/dnd)
 
