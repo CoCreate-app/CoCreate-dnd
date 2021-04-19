@@ -1,3 +1,11 @@
+## [0.10.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.6...v0.10.7) (2021-04-19)
+
+
+### Bug Fixes
+
+* ci and build process ([361f5ed](https://github.com/CoCreate-app/CoCreate-dnd/commit/361f5ed31f024866b4f88a8668f45d30bde2d2a8))
+* npm publish and cdn deployment ([f27dd94](https://github.com/CoCreate-app/CoCreate-dnd/commit/f27dd94d56a7773ce904a77674b72ae859af7981))
+
 ## [0.10.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.5...v0.10.6) (2021-04-15)
 
 
