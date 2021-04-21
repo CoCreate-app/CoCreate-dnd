@@ -11,15 +11,7 @@
     <meta name="keywords" content="drag and drop, colaboration, dnd utility, drag and drop utility" />
     <meta name="robots" content="index,follow" />
     <!-- CoCreate CSS -->
-    <link rel="stylesheet" href="https://cdn.cocreate.app/latest/CoCreate.min.css" type="text/css" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" crossorigin="anonymous" />
-    <!-- Codemirror -->
-    <link rel="stylesheet" href="https://server.cocreate.app/CoCreate-plugins/CoCreate-codemirror/src/CoCreate-codemirror.css" type="text/css" />
-    <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css" async defer>
-    <!-- prism -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/themes/prism.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdn.cocreate.app/latest/CoCreate.min.css" type="text/css"/>
 </head>
 
 <body>
@@ -33,23 +25,35 @@
         <p class="max-width:500px margin:20px_10px">CoCreate-dnd javascript component. Easy configuration using data-attributes and highly styleable.</p>
         <div id="dnd-section" class="display:flex flex-wrap:wrap">
             <div class="flex-grow:1 width:300px padding:0px_10px margin:20px_0px">
-                <h2 class="border-bottom:1px_solid_lightgrey padding:5px_0px">Install</h2>
-                <pre><code class="language-javascript">npm install cocreate-dnd</code></pre>
+                <div>
+                   <h2 id="dnd-installation" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey padding:5px_0px">Install</h2>
+                   <a class="display:none" href="#dnd-installation"><i class="fas fa-link"></i></a>
+                </div>
+                <pre><code class="language-javascript">npm install @cocreate/cocreate-dnd</code></pre>
                 <p class="padding:10px_0px">Or you can use cdn link:</p>
-                <pre><code class="language-javascript">https://cdn.cocreate.app/CoCreate-dnd.min.js</code></pre>
+                <pre><code class="language-javascript">https://cdn.cocreate.app/latest/cocreate.min.js</code></pre>
                 <p class="padding:10px_0px">for styling please refer to #id-style</p>
 
-                <h2 class="border-bottom:1px_solid_lightgrey margin-top:80px padding:5px_0px">Usage</h2>
+                <div>
+                   <h2 id="dnd-usage" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:80px padding:5px_0px">Usage</h2>
+                   <a class="display:none" href="#dnd-usage"><i class="fas fa-link"></i></a>
+                </div>
                 <p class="padding:10px_0px">Dnd has high level initiator as well as a low level initiator, the concept of low level initializer is that any element can have some attributes to define the granular level of drag-and-drop, for example let's say we have a parent div
                     and inside this div we have a few h1 tag, if we want to make all h1 tags to be drag-and-dropable in the div element we have to make the div element a droppable element:</p>
                 
                 
-                <h3 class="border-bottom:1px_solid_lightgrey margin-top:40px padding:5px_0px">initContainer</h3>
+                <div>
+                   <h3 id="dnd-initContainer" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:40px padding:5px_0px">initContainer</h3>
+                   <a class="display:none" href="#dnd-initContainer"><i class="fas fa-link"></i></a>
+                </div>
                 <div class="">
                     <p class="padding:10px_0px">a high level initiator that make an element and its direct children draggable. For ease of use right out of the box we have defined a few defualts: <span class="cocreate-badge success">sortable</span> <span class="cocreate-badge success">cloneable</span></p>
                 </div>
                
-                <h4 class="margin-top:20px padding:5px_0px">sortable</h4>
+                <div>
+                   <h4 id="dnd-sortable" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">sortable</h4>
+                   <a class="display:none" href="#dnd-sortable"><i class="fas fa-link"></i></a>
+                </div>
                 <p class="padding:10px_0px"><code>class="sortable"</code> is an alias for <code>data-droppable="true"</code> with all direct children as <code>data-draggable="true"</code></p>
                 <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
                     <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" data-show="preview" data-hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px hidden" id="code" data-show="code" data-hide="preview"><i class="fas fa-code"></i></a>
@@ -76,7 +80,10 @@
 &lt;/div&gt;
                 </code></pre> </div>
 
-                <h4 class="margin-top:40px padding:5px_0px">cloneable</h4>
+                <div>
+                   <h4 id="dnd-cloneable" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:40px padding:5px_0px">cloneable</h4>
+                   <a class="display:none" href="#dnd-cloneable"><i class="fas fa-link"></i></a>
+                </div>
                 <p class="padding:10px_0px"><code>class="cloneable"</code> is an alias for <code>data-cloneable="true"</code> with all direct children as <code>data-draggable="true"</code></p>
                 <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
                     <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" data-show="preview" data-hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px hidden" id="code" data-show="code" data-hide="preview"><i class="fas fa-code"></i></a>
@@ -115,7 +122,10 @@ inintContainer({
     exclude: 
 })
                 </code></pre>
-                <h4 class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Properties</h4>
+                <div>
+                   <h4 id="dnd-properties" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Properties</h4>
+                   <a class="display:none" href="#dnd-properties"><i class="fas fa-link"></i></a>
+                </div>
                 <ul class="list-style-type:none ">
                     <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
                         <h4><span>target</span> <span class="cocreate-badge success">Element</span> <span class="cocreate-badge danger">required</span></h4>
@@ -143,7 +153,10 @@ inintContainer({
                     </li>
                 </ul>
                 
-                <h3 class="border-bottom:1px_solid_lightgrey margin-top:80px padding:5px_0px">initElement</h3>
+                <div>
+                   <h3 id="dnd-initElement" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:80px padding:5px_0px">initElement</h3>
+                   <a class="display:none" href="#dnd-initElement"><i class="fas fa-link"></i></a>
+                </div>
                 <div class="">
                     <p class="padding:10px_0px">a low level initiator that make an element and all decendent dnd candidate based on selector params. For ease of use right out of the box we have defined a few defualts: <span class="cocreate-badge success">data-droppable</span> <span class="cocreate-badge success">data-draggable</span> <span class="cocreate-badge success">data-exclude</span> <span class="cocreate-badge success">data-cloneable</span></p>
                 </div>
@@ -285,7 +298,11 @@ dndElement({
                 </p>
                 <p class="padding:10px_0px">
                 when found, all the direct children of the droppable will be searched and the nearest element with the nearest angle to the mouse pointer will be selected as a drop possition.</p>
-                <h2 class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Effects and Styles</h2>
+                <div>
+                   <h2 id="dnd-effect-and-style" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Effects and Styles</h2>
+                   <a class="display:none" href="#dnd-effect-and-style"><i class="fas fa-link"></i></a>
+                </div>
+
                 <p>UNAVAILABLE right now: CoCreate-dnd is packed with effects such as dropMarker and ghostEffect, to uses this effects, you can either define them in tag attributes or import them and use them as initiators</p>
                 <p>some of them enabled by default, you can enable or disable them by choice and even create a new customized one</p>
 
@@ -313,7 +330,11 @@ dndElement({
                         <p>during darg and drop, the dragged element can move over element by moving mouse</p>
                     </li>
                 </ul>
-                <h2 class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Events</h2>
+
+                <div>
+                   <h2 id="dnd-events" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">Events</h2>
+                   <a class="display:none" href="#dnd-events"><i class="fas fa-link"></i></a>
+                </div>
                 
                            
                    <ul class="list-style-type:none ">
@@ -333,8 +354,13 @@ dndElement({
                 
             </div>
             <div class="flex-grow:1 width:300px padding:0px_10px margin:20px_0px  border-bottom:1px_solid_lightgrey">
+                
                 <!-- SandBox -->
                 <h2 class="border-bottom:1px_solid_lightgrey padding:5px_0px">Demo</h2>
+                <div>
+                   <h2 id="dnd-demo" data-hover="display:block" data-target="" class="border-bottom:1px_solid_lightgrey padding:5px_0px">Demo</h2>
+                   <a class="display:none" href="#dnd-demo"><i class="fas fa-link"></i></a>
+                </div>
                 <div class="position:sticky top:0 padding:15px_0px height:100vh">
                     <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:100%" id="sandbox">
                         <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" data-show="preview" data-hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px hidden" id="code" data-show="code" data-hide="preview"><i class="fas fa-code"></i></a>
@@ -365,24 +391,7 @@ dndElement({
         }
     </script>
     <!--CoCreateJS-->
-    <script src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script>
-    <!-- CoCreate CodeMiirror -->
-    <script type="text/javascript" src="https://server.cocreate.app/CoCreate-plugins/CoCreate-codemirror/dist/CoCreate-codemirror.js" async></script>
-    <!-- Prism -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js"></script>
-    <script>
-        //     Prism.plugins.NormalizeWhitespace.setDefaults({
-        //         'remove-trailing': true,
-        //         'remove-indent': true,
-        //         'left-trim': true,
-        //         'right-trim': true,
-        //         /*'break-lines': 80,
-        //         'indent': 2,
-        //         'remove-initial-line-feed': false,
-        //         'tabs-to-spaces': 4,
-        //         'spaces-to-tabs': 4*/
-        //     });
-    </script>
+    <script src="https://cdn.cocreate.app/latest/CoCreate.min.js" ></script>
 </body>
 
 </html>

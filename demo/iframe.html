@@ -1,23 +1,19 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+ <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
-  <title>CoCreate-dnd.js</title>
   <meta name="description" content="Utility first css framework, design faster and improve on your css by using native inline styles as classes. No learning curve, use what you already know" />
   <meta name="keywords" content="helper classes, utility classes, css framework, css library, inline style classes" />
   <meta name="robots" content="index,follow" />
-
-  <!-- CoCreate CSS -->
-  <link rel="stylesheet" href="https://cdn.cocreate.app/latest/CoCreate.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../CoCreate-vdom/src/CoCreate-vdom.css" type="text/css" />
-  <link rel="stylesheet" href="../../CoCreate-dnd/src/CoCreate-dnd.css" type="text/css" />
   
-    <link rel=stylesheet href="https://server.cocreate.app/CoCreate-plugins/CoCreate-quill/demo/quill.css" async defer>
-    <link rel=stylesheet href="//cdn.quilljs.com/1.3.6/quill.snow.css" async defer>
-    <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.bubble.css">
+  <title>CoCreate-dnd | CoCreateJS</title>
+  
+  <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
+  
+  <!-- CoCreate CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.cocreate.app/latest/CoCreate.min.css" type="text/css"/>
 
   
   <style>
@@ -59,12 +55,7 @@
 
 
 </head>
-
 <body data-group_name="canvas">
-
-
-
-
 
   <div data-droppable="true" class="dnd">
     <div data-element_id="1234567890" data-collection="module_activities"  data-document_id="5ee3937ce3fc3a5b7493dc37" name="html" data-theme='bubble' class="quill bubble"></div>
@@ -85,14 +76,9 @@
       organization_Id: '5de0387b12e200ea63204d6c'
     }
   </script>
-  <script defer src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script>
-      <script type="text/javascript" src="https://server.cocreate.app/CoCreate-plugins/CoCreate-quill/dist/CoCreate-quill.js" async></script>
-
-
-  <script defer src="../dist/CoCreate-dnd.js"></script>
-  <script >    document.addEventListener("touchmove", (e)=>{
-      console.log('aaaaaaa', e.target)
-    });</script>
+  
+  <!-- CoCreate JS CDN -->
+  <script src="https://cdn.cocreate.app/latest/CoCreate.min.js" ></script>
+  
 </body>
-
 </html>
