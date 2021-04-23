@@ -1,3 +1,10 @@
+## [0.10.10](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.9...v0.10.10) (2021-04-23)
+
+
+### Bug Fixes
+
+* readme and documentation. Removed securitykeys ([456bc3d](https://github.com/CoCreate-app/CoCreate-dnd/commit/456bc3d067949025a6807eebb3e8014f4b68e76b))
+
 ## [0.10.9](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.8...v0.10.9) (2021-04-23)
 
 
