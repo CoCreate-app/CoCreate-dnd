@@ -19,7 +19,7 @@ from "./util/common";
 import VirtualDnd from "./virtualDnd";
 import "./util/onClickLeftEvent";
 import * as vars from "./util/variables.js";
-import './CoCreate-dnd.css';
+import './index.css';
 
 import domReader from './util/domReader';
 
