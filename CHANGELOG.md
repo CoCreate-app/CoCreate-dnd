@@ -1,3 +1,10 @@
+## [0.10.9](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.8...v0.10.9) (2021-04-23)
+
+
+### Bug Fixes
+
+* css file path ([cfb0756](https://github.com/CoCreate-app/CoCreate-dnd/commit/cfb07560ccaf8e1b2797358ea12d7c185e44e3cd))
+
 ## [0.10.8](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.7...v0.10.8) (2021-04-19)
 
 
