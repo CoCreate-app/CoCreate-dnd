@@ -1,83 +1,71 @@
 <html lang="en">
-
-<head>
- <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Utility first css framework, design faster and improve on your css by using native inline styles as classes. No learning curve, use what you already know" />
-  <meta name="keywords" content="helper classes, utility classes, css framework, css library, inline style classes" />
-  <meta name="robots" content="index,follow" />
+  <head>
+    <title>DND | CoCreateJS</title>
+    <!-- CoCreate Favicon -->
+    <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
+    <!-- CoCreate CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.css" type="text/css"/>
   
-  <title>CoCreate DND | CoCreateJS</title>
+    <style>
+      .sortable-item {
+        background-color: white;
+        border-bottom: 1px solid gray;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2px 10px;
+        cursor: pointer;
+      }
   
-  <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
+      .sortable-item .fa-arrows-alt {
+        cursor: all-scroll;
+      }
   
-  <!-- CoCreate CSS CDN -->
-  <link rel="stylesheet" href="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.css" type="text/css"/>
-
+      .sortable-item.layer-hidden {
+        opacity: .5;
+      }
   
-  <style>
-    .sortable-item {
-      background-color: white;
-      border-bottom: 1px solid gray;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2px 10px;
-      cursor: pointer;
-    }
-
-
-    .sortable-item .fa-arrows-alt {
-      cursor: all-scroll;
-    }
-
-    .sortable-item.layer-hidden {
-      opacity: .5;
-    }
-
-    .myinline {
-      display: inline-block;
-    }
-
-
-    /*general*/
-
-    .block {
-      border: 1px solid blue;
-      padding: 5px;
-      margin: 15px;
-    }
-
-    /*general*/
-  </style>
-
-
-</head>
-<body data-group_name="canvas">
-
-  <div data-droppable="true" class="dnd">
-    <div data-element_id="1234567890" data-collection="module_activities"  data-document_id="5ee3937ce3fc3a5b7493dc37" name="html" data-theme='bubble' class="quill bubble"></div>
-    <div data-draggable="true" class="block myinline">iframe block 1</div>
-    <div data-draggable="true" class="block myinline">iframe block 2</div>
-    <div data-draggable="true" class="block myinline">iframe block 3</div>
-    <div data-draggable="true" class="block">iframe block 4</div>
-    <div data-draggable="true" class="block">iframe block 5</div>
-    <div data-draggable="true" class="block">iframe block 6</div>
-    <div data-draggable="true" class="block myinline">iframe block 7</div>
-    <div data-draggable="true" class="block myinline">iframe block 8</div>
-    <div data-draggable="true" class="block myinline">iframe block 9</div>
-  </div>
-  <script>
-    var config = {
-      apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
-            organization_Id: '5de0387b12e200ea63204d6c'
-    }
-  </script>
+      .myinline {
+        display: inline-block;
+      }
   
- <!-- CoCreate JS CDN -->
-  <script src="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.js" ></script>
+      /*general*/
   
-</body>
+      .block {
+        border: 1px solid blue;
+        padding: 5px;
+        margin: 15px;
+      }
+  
+      /*general*/
+    </style>
+  </head>
+  <body data-group_name="canvas">
+  
+    <div data-droppable="true" class="dnd">
+      <div data-element_id="1234567890" data-collection="module_activities"  data-document_id="5ee3937ce3fc3a5b7493dc37" name="html" data-theme='bubble' class="quill bubble"></div>
+      <div data-draggable="true" class="block myinline">iframe block 1</div>
+      <div data-draggable="true" class="block myinline">iframe block 2</div>
+      <div data-draggable="true" class="block myinline">iframe block 3</div>
+      <div data-draggable="true" class="block">iframe block 4</div>
+      <div data-draggable="true" class="block">iframe block 5</div>
+      <div data-draggable="true" class="block">iframe block 6</div>
+      <div data-draggable="true" class="block myinline">iframe block 7</div>
+      <div data-draggable="true" class="block myinline">iframe block 8</div>
+      <div data-draggable="true" class="block myinline">iframe block 9</div>
+    </div>
+    
+    
+    <script>
+      var config = {
+        apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
+              organization_Id: '5de0387b12e200ea63204d6c'
+      }
+    </script>
+    
+   <!-- CoCreate JS CDN -->
+    <script src="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.js" ></script>
+    
+  </body>
 </html>

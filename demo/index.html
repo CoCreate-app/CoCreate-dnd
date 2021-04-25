@@ -1,155 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <meta name="description" content="Utility first css framework, design faster and improve on your css by using native inline styles as classes. No learning curve, use what you already know" />
-  <meta name="keywords" content="helper classes, utility classes, css framework, css library, inline style classes" />
-  <meta name="robots" content="index,follow" />
-  
-  <title>CoCreate DND | CoCreateJS</title>
-  
-  <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
-
-  <!-- CoCreate CSS CDN -->
-  <link rel="stylesheet" href="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.css" type="text/css"/>
-  
-  <style>
-    .sortable-item {
-      background-color: white;
-      border-bottom: 1px solid gray;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2px 10px;
-      cursor: pointer;
-    }
-
-    .sortable-item .fa-arrows-alt {
-      cursor: all-scroll;
-    }
-
-    .sortable-item.layer-hidden {
-      opacity: .5;
-    }
-
-    .myinline {
-      display: inline-block;
-    }
-
-    /*general*/
-
-    .block {
-      border: 1px solid blue;
-      padding: 5px;
-      margin: 15px;
-    }
+  <head>
+    <title>DND | CoCreateJS</title>
+    <!-- CoCreate Favicon -->
+    <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
+    <!-- CoCreate CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.css" type="text/css"/>
     
-
-    /*general*/
-  </style>
-
-</head>
-<body data-group_name="canvas">
-
-
-  <!-- Container and elements intialized with cloneable class and data-cloneable attribute -->
-  <ul class="cloneable">
-    <li id="header" data-insert-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
-      </i>
-      <p>Header</p>
-    </li>
-    <li id="span" data-insert-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
-      </i>
-      <p>Span</p>
-    </li>
-    <li id="li" data-cloneable="true" data-insert-html='<li droppable="true" class="CoC-droppable">this is a Li</li>"><i class="fa fa-header'>
-      </i>
-      <p>Li</p>
-    </li>
-    <li id="chart-image" data-cloneable="true" data-insert-html="<img droppable='true' class='CoC-droppable' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
-      <i class="fa fa-bar-chart"></i>
-      <p>Chart Image</p>
-    </li>
-    <li id="login-from" data-cloneable="true" data-insert-html='<div droppable="true" class="CoC-droppable" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
-      <i class="fa fa-sign-in"></i>
-      <p>Login Form</p>
-    </li>
-    <li id="login-from" data-cloneable="true">
-      <i class="fa fa-sign-in"></i>
-      <p>it will be cloned and droped as itself because it doesn't have data-insert-html </p>
-    </li>
-  </ul>
-
-
-<div id="onConditionDnd">
-  <div>
-    start div 1
-  <div class="block myinline">example block 1</div>
-  <div class="block myinline">example block 2</div>
-  <div class="block myinline">example block 3</div>
-    end div 1
-    
-  </div>
+    <style>
+      .sortable-item {
+        background-color: white;
+        border-bottom: 1px solid gray;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2px 10px;
+        cursor: pointer;
+      }
   
+      .sortable-item .fa-arrows-alt {
+        cursor: all-scroll;
+      }
+  
+      .sortable-item.layer-hidden {
+        opacity: .5;
+      }
+  
+      .myinline {
+        display: inline-block;
+      }
+  
+      /*general*/
+  
+      .block {
+        border: 1px solid blue;
+        padding: 5px;
+        margin: 15px;
+      }
+      
+    </style>
+  </head>
+  <body data-group_name="canvas">
+  
+  
+    <!-- Container and elements intialized with cloneable class and data-cloneable attribute -->
+    <ul class="cloneable">
+      <li id="header" data-insert-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
+        </i>
+        <p>Header</p>
+      </li>
+      <li id="span" data-insert-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
+        </i>
+        <p>Span</p>
+      </li>
+      <li id="li" data-cloneable="true" data-insert-html='<li droppable="true" class="CoC-droppable">this is a Li</li>"><i class="fa fa-header'>
+        </i>
+        <p>Li</p>
+      </li>
+      <li id="chart-image" data-cloneable="true" data-insert-html="<img droppable='true' class='CoC-droppable' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
+        <i class="fa fa-bar-chart"></i>
+        <p>Chart Image</p>
+      </li>
+      <li id="login-from" data-cloneable="true" data-insert-html='<div droppable="true" class="CoC-droppable" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
+        <i class="fa fa-sign-in"></i>
+        <p>Login Form</p>
+      </li>
+      <li id="login-from" data-cloneable="true">
+        <i class="fa fa-sign-in"></i>
+        <p>it will be cloned and droped as itself because it doesn't have data-insert-html </p>
+      </li>
+    </ul>
+  
+  
+  <div id="onConditionDnd">
     <div>
-      start div 2
-  <div class="block">example block 4</div>
-  <div class="block">example block 5</div>
-  <div class="block">example block 6</div>
-  end div 2
+      start div 1
+    <div class="block myinline">example block 1</div>
+    <div class="block myinline">example block 2</div>
+    <div class="block myinline">example block 3</div>
+      end div 1
+      
     </div>
-  <div class="block myinline">example block 7</div>
-  <div class="block myinline">example block 8</div>
-  <div class="block myinline">example block 9</div>
-</div>
-
-
-
-  <div data-element_id="id1" data-droppable="true">
-    <div data-element_id="id2" data-draggable="true" class="block myinline">example block 1</div>
-    <div  data-draggable="true" class="block myinline">example block 2</div>
-    <div  data-draggable="true" class="block myinline">example block 3</div>
-    <div  data-draggable="true" class="block">example block 4</div>
-    <div data-element_id="id6" data-draggable="true" class="block">example block 5</div>
-    <div data-element_id="id7" data-draggable="true" class="block">example block 6</div>
-    <div data-element_id="id8" data-draggable="true" class="block myinline">example block 7</div>
-    <div data-element_id="id9" data-draggable="true" class="block myinline">example block 8</div>
-    <div data-element_id="id10" data-draggable="true" class="block myinline">example block 9</div>
+    
+      <div>
+        start div 2
+    <div class="block">example block 4</div>
+    <div class="block">example block 5</div>
+    <div class="block">example block 6</div>
+    end div 2
+      </div>
+    <div class="block myinline">example block 7</div>
+    <div class="block myinline">example block 8</div>
+    <div class="block myinline">example block 9</div>
   </div>
-
-
-  <iframe src="iframe.html" id="client2" frameborder="0" width="100%" height="100%"></iframe>
- 
-  <!-- Container intialized with class sortable -->
-  <div class="sortable">
-    sortable
-    <div data-element_id="sortable1" class="block myinline">example block 1</div>
-    <div data-element_id="sortable2" class="block myinline">example block 2</div>
-    <div data-element_id="sortable3" class="block myinline">example block 3</div>
-    <div data-element_id="sortable4" class="block">example block 4</div>
-    <div data-element_id="sortable5" class="block">example block 5</div>
-    <div data-element_id="sortable6" class="block">example block 6</div>
-    <div data-element_id="sortable7" class="block myinline">example block 7</div>
-    <div data-element_id="sortable8" class="block myinline">example block 8</div>
-    <div data-element_id="sortable9" class="block myinline">example block 9</div>
-  </div>
-
-
-
-  <script>
-    var config = {
-      apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
-            organization_Id: '5de0387b12e200ea63204d6c'
-    }
-  </script>
   
-  <!-- CoCreate JS CDN -->
-  <script src="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.js" ></script>
   
-</body>
+  
+    <div data-element_id="id1" data-droppable="true">
+      <div data-element_id="id2" data-draggable="true" class="block myinline">example block 1</div>
+      <div  data-draggable="true" class="block myinline">example block 2</div>
+      <div  data-draggable="true" class="block myinline">example block 3</div>
+      <div  data-draggable="true" class="block">example block 4</div>
+      <div data-element_id="id6" data-draggable="true" class="block">example block 5</div>
+      <div data-element_id="id7" data-draggable="true" class="block">example block 6</div>
+      <div data-element_id="id8" data-draggable="true" class="block myinline">example block 7</div>
+      <div data-element_id="id9" data-draggable="true" class="block myinline">example block 8</div>
+      <div data-element_id="id10" data-draggable="true" class="block myinline">example block 9</div>
+    </div>
+  
+  
+    <iframe src="iframe.html" id="client2" frameborder="0" width="100%" height="100%"></iframe>
+   
+    <!-- Container intialized with class sortable -->
+    <div class="sortable">
+      sortable
+      <div data-element_id="sortable1" class="block myinline">example block 1</div>
+      <div data-element_id="sortable2" class="block myinline">example block 2</div>
+      <div data-element_id="sortable3" class="block myinline">example block 3</div>
+      <div data-element_id="sortable4" class="block">example block 4</div>
+      <div data-element_id="sortable5" class="block">example block 5</div>
+      <div data-element_id="sortable6" class="block">example block 6</div>
+      <div data-element_id="sortable7" class="block myinline">example block 7</div>
+      <div data-element_id="sortable8" class="block myinline">example block 8</div>
+      <div data-element_id="sortable9" class="block myinline">example block 9</div>
+    </div>
+  
+  
+  
+    <script>
+      var config = {
+        apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
+              organization_Id: '5de0387b12e200ea63204d6c'
+      }
+    </script>
+    
+    <!-- CoCreate JS CDN -->
+    <script src="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.js" ></script>
+    
+  </body>
 </html>
  
