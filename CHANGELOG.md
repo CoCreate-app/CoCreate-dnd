@@ -1,3 +1,10 @@
+## [0.10.11](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.10...v0.10.11) (2021-04-27)
+
+
+### Bug Fixes
+
+* Update to readme, demo, added cdn scripts ([d37bcb8](https://github.com/CoCreate-app/CoCreate-dnd/commit/d37bcb876400692719870dd43a80fe2e2f756db2))
+
 ## [0.10.10](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.9...v0.10.10) (2021-04-23)
 
 
