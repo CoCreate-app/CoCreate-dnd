@@ -1,6 +1,6 @@
 # CoCreate-dnd
 
-A simple dnd component in vanilla javascript. Easily configured using HTML5 data-attributes and/or JavaScript API. Take it for a spin in our [playground!](https://cocreate.app/docs/dnd)
+A collaborative js drag and drop component with iframe support. Great for sorting, cloning etc. Customizable using HTML5 data-attributes and/or JavaScript API. Take it for a spin in our [playground!](https://cocreate.app/docs/dnd)
 
 ![GitHub file size in bytes](https://img.shields.io/github/size/CoCreate-app/CoCreate-dnd/dist/CoCreate-dnd.min.js?label=minified%20size&style=for-the-badge)
 ![GitHub latest release](https://img.shields.io/github/v/release/CoCreate-app/CoCreate-dnd?style=for-the-badge)
