@@ -1,3 +1,10 @@
+## [0.10.12](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.11...v0.10.12) (2021-05-08)
+
+
+### Bug Fixes
+
+* add css auto parse and save to docs. ([c70db97](https://github.com/CoCreate-app/CoCreate-dnd/commit/c70db97b8ac7083d124b1e53c5c225703d364051))
+
 ## [0.10.11](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.10...v0.10.11) (2021-04-27)
 
 
