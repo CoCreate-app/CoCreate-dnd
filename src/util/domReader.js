@@ -78,7 +78,7 @@ function register( window, context = domContext) {
 
   
   // console.log('registering domReader for ', frame)
-  let htmlPrototype = window.HTMLElement.prototype;
+  let htmlPrototype = window.Element.prototype;
   
   if(htmlPrototype.setHiddenAttribute) return;
   // let nativeSetAttribute = htmlPrototype.setAttribute;

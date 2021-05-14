@@ -34,9 +34,10 @@ function beforeDndSuccess() {
 
 let mousemove, mouseup, mousedown, touchstart, touchend, touchmove;
 
-// export default function dndf(window, document, options) {
-
-// }
+window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+    domReader.register(window);
+});
 
 let options = {
   scroller: new autoScroller({ speed: 4, threshold: 3 }),
@@ -225,7 +226,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
   else {
     ref = { x: 0, y: 0, window, document, isIframe: false };
   }
-    domReader.register(ref.window)
+  domReader.register(ref.window)
   if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
 
   if (!ref.document.querySelector("#dnd-style")) {
@@ -491,7 +492,7 @@ const initContainer = function({
   }
   else {
     target.setHiddenAttribute(vars.droppable, "true");
-       console.log('dnd loaded target child', target.children)
+    console.log('dnd loaded target child', target.children)
     if (target.children.length)
       Array.from(target.children).forEach((el) => {
         if (cloneable) {
@@ -500,7 +501,7 @@ const initContainer = function({
         }
         else {
           // el.style.touchAction = 'none'
-            console.log('dnd loaded draggable',el)
+          console.log('dnd loaded draggable', el)
           el.setHiddenAttribute(vars.draggable, "true");
         }
         try {
@@ -546,6 +547,6 @@ function init(params) {
   if (!['function', 'element', 'container'].includes(mode))
     throw new Error('invalid mode provided')
   let funcName = 'init' + mode.charAt(0).toUpperCase() + mode.slice(1);
-  exp[funcName].apply(null, [params])
+  exp[funcName].apply(null, [params]);
 }
 export default { initIframe, init };
