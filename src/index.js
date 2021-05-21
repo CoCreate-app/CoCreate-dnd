@@ -1,6 +1,6 @@
 /*global HTMLElement*/
 /*global DOMException*/
-import "./collaboration.js";
+// import "./collaboration.js";
 import dndConfig from "./dnd-config.js";
 import "./util/iframe";
 import {
