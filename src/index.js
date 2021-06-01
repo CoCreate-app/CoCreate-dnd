@@ -35,8 +35,8 @@ function beforeDndSuccess() {
 let mousemove, mouseup, mousedown, touchstart, touchend, touchmove;
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');
-    domReader.register(window);
+  console.log('DOM fully loaded and parsed');
+  domReader.register(window);
 });
 
 let options = {
@@ -362,11 +362,12 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 //   // }
 // };
 
-window.addEventListener("load", () => {
-  if (window.parent !== window) return;
+// window.addEventListener("load", () => {
+if (window.parent === window) {
   initIframe({ document, window });
   dndConfig();
-});
+}
+// });
 
 const initFunction = function({ target, onDnd, onDndSuccess }) {
   if (typeof onDndSuccess == "function")
