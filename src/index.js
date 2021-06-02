@@ -169,7 +169,7 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
     scroller.calculateScroll({
       x,
       y,
-      element: el.parentElement,
+      element: el.parentElement ? el.parentElement : el,
       onMouseScrollMove: (e) => move(e, ref, true),
     });
   }
@@ -362,12 +362,12 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 //   // }
 // };
 
-// window.addEventListener("load", () => {
+window.addEventListener("load", () => {
 if (window.parent === window) {
   initIframe({ document, window });
   dndConfig();
 }
-// });
+});
 
 const initFunction = function({ target, onDnd, onDndSuccess }) {
   if (typeof onDndSuccess == "function")
