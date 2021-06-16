@@ -247,6 +247,8 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
   // disable selection
   ref.document.addEventListener("selectstart", (e) => {
+    if (e.target.getAttribute && e.target.hasAttribute('contenteditable') || e.target.parentElement.hasAttribute('contenteditable'))
+      return;
     let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
     if (!Array.isArray(r)) return;
     e.preventDefault();
@@ -363,10 +365,10 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 // };
 
 window.addEventListener("load", () => {
-if (window.parent === window) {
-  initIframe({ document, window });
-  dndConfig();
-}
+  if (window.parent === window) {
+    initIframe({ document, window });
+    dndConfig();
+  }
 });
 
 const initFunction = function({ target, onDnd, onDndSuccess }) {
