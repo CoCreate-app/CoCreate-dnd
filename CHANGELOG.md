@@ -1,3 +1,10 @@
+## [0.10.13](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.12...v0.10.13) (2021-06-16)
+
+
+### Bug Fixes
+
+* added header for seo ([f6dbe34](https://github.com/CoCreate-app/CoCreate-dnd/commit/f6dbe343107bc05139223e215c08ca356c7d6815))
+
 ## [0.10.12](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.11...v0.10.12) (2021-05-08)
 
 
