@@ -1,6 +1,6 @@
 /*global HTMLElement*/
 /*global DOMException*/
-// import "./collaboration.js";
+import "./collaboration.js";
 import dndConfig from "./dnd-config.js";
 import "./util/iframe";
 import {
@@ -34,10 +34,9 @@ function beforeDndSuccess() {
 
 let mousemove, mouseup, mousedown, touchstart, touchend, touchmove;
 
-window.addEventListener('DOMContentLoaded', (event) => {
-  console.log('DOM fully loaded and parsed');
-  domReader.register(window);
-});
+// export default function dndf(window, document, options) {
+
+// }
 
 let options = {
   scroller: new autoScroller({ speed: 4, threshold: 3 }),
@@ -169,7 +168,7 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
     scroller.calculateScroll({
       x,
       y,
-      element: el.parentElement ? el.parentElement : el,
+      element: el.parentElement,
       onMouseScrollMove: (e) => move(e, ref, true),
     });
   }
@@ -226,7 +225,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
   else {
     ref = { x: 0, y: 0, window, document, isIframe: false };
   }
-  domReader.register(ref.window)
+    domReader.register(ref.window)
   if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
 
   if (!ref.document.querySelector("#dnd-style")) {
@@ -247,8 +246,6 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
   // disable selection
   ref.document.addEventListener("selectstart", (e) => {
-    if (e.target.getAttribute && e.target.hasAttribute('contenteditable') || e.target.parentElement.hasAttribute('contenteditable'))
-      return;
     let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
     if (!Array.isArray(r)) return;
     e.preventDefault();
@@ -365,10 +362,9 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 // };
 
 window.addEventListener("load", () => {
-  if (window.parent === window) {
-    initIframe({ document, window });
-    dndConfig();
-  }
+  if (window.parent !== window) return;
+  initIframe({ document, window });
+  dndConfig();
 });
 
 const initFunction = function({ target, onDnd, onDndSuccess }) {
@@ -495,7 +491,7 @@ const initContainer = function({
   }
   else {
     target.setHiddenAttribute(vars.droppable, "true");
-    console.log('dnd loaded target child', target.children)
+       console.log('dnd loaded target child', target.children)
     if (target.children.length)
       Array.from(target.children).forEach((el) => {
         if (cloneable) {
@@ -504,7 +500,7 @@ const initContainer = function({
         }
         else {
           // el.style.touchAction = 'none'
-          console.log('dnd loaded draggable', el)
+            console.log('dnd loaded draggable',el)
           el.setHiddenAttribute(vars.draggable, "true");
         }
         try {
@@ -550,6 +546,6 @@ function init(params) {
   if (!['function', 'element', 'container'].includes(mode))
     throw new Error('invalid mode provided')
   let funcName = 'init' + mode.charAt(0).toUpperCase() + mode.slice(1);
-  exp[funcName].apply(null, [params]);
+  exp[funcName].apply(null, [params])
 }
 export default { initIframe, init };
