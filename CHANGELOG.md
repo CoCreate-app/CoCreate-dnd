@@ -1,3 +1,10 @@
+## [0.10.14](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.13...v0.10.14) (2021-06-20)
+
+
+### Bug Fixes
+
+* new mutaionObserver init function ([4e78865](https://github.com/CoCreate-app/CoCreate-dnd/commit/4e7886502e405919cf1d80af567d5a0a1943f4e4))
+
 ## [0.10.13](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.12...v0.10.13) (2021-06-16)
 
 
