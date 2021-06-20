@@ -8,10 +8,13 @@ export default function dndConfigs() {
 
   observer.init({
     name: "dnd-config",
-    observe: ["childList"],
-    	include: ".sortable, .cloneable",
+    observe: ["addedNodes"],
+
     callback: mutation => {
-       console.log('dnd domReader mutation ', new Date().getSeconds()  + ' ' + new Date().getMilliseconds())
+        // console.log('dnd domReader mutation ', new Date().getSeconds()  + ' ' + new Date().getMilliseconds())
+      let el = mutation.target;
+      el.classList.contains('sortable') &&
+      el.classList.contains('cloneable') &&
       init( mutation.target.parentElement.parentElement)
       // console.log('dnd config observer', mutation.target, mutation.target.parentElement, mutation)
     },
