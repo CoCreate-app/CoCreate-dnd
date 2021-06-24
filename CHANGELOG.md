@@ -1,3 +1,11 @@
+## [0.10.15](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.14...v0.10.15) (2021-06-24)
+
+
+### Bug Fixes
+
+* add method to turn on and off console.log while in development ([f36409c](https://github.com/CoCreate-app/CoCreate-dnd/commit/f36409c93adfc6a78fcf9d7cf08689f06e4a48d9))
+* update all [@cocreate](https://github.com/cocreate) to use latest versions ([8fa2484](https://github.com/CoCreate-app/CoCreate-dnd/commit/8fa2484fff91155a9a06e3b486b73747ce12000d))
+
 ## [0.10.14](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.13...v0.10.14) (2021-06-20)
 
 
