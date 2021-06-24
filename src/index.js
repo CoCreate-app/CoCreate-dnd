@@ -23,6 +23,8 @@ import './index.css';
 
 import domReader from './util/domReader';
 
+// const consoleMessage = CoCreate.utils.logger(off)
+
 let touchTimeout;
 let beforeDndSuccessCallback;
 
