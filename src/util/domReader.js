@@ -1,3 +1,6 @@
+import { logger } from '@cocreate/utils'
+let console = logger('off');
+
 /*global Element*/
 /*global HTMLElement*/
 

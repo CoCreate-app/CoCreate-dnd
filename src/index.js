@@ -22,8 +22,8 @@ import * as vars from "./util/variables.js";
 import './index.css';
 
 import domReader from './util/domReader';
-
-// const consoleMessage = CoCreate.utils.logger(off)
+import { logger } from '@cocreate/utils'
+let console = logger('off');
 
 let touchTimeout;
 let beforeDndSuccessCallback;
