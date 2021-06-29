@@ -1,3 +1,10 @@
+## [0.10.18](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.17...v0.10.18) (2021-06-29)
+
+
+### Bug Fixes
+
+* add logger utility ([ff5a475](https://github.com/CoCreate-app/CoCreate-dnd/commit/ff5a4754ddd317edd55963f0cacfa71e326418dc))
+
 ## [0.10.17](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.16...v0.10.17) (2021-06-25)
 
 
