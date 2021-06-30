@@ -1,3 +1,10 @@
+## [0.10.19](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.18...v0.10.19) (2021-06-30)
+
+
+### Bug Fixes
+
+* automated and manual workflows ([3230f08](https://github.com/CoCreate-app/CoCreate-dnd/commit/3230f08e48ef398dc8931387219f1e71df7dd9f7))
+
 ## [0.10.18](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.17...v0.10.18) (2021-06-29)
 
 
