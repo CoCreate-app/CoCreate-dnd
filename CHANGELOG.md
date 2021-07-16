@@ -1,3 +1,18 @@
+## [0.10.24](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.23...v0.10.24) (2021-07-14)
+
+
+### Bug Fixes
+
+* upgrade all packages ([9cda3f9](https://github.com/CoCreate-app/CoCreate-dnd/commit/9cda3f9cedbb2cbb1bf75fd799779eaccffca0f9))
+
+## [0.10.23](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.22...v0.10.23) (2021-07-13)
+
+
+### Bug Fixes
+
+* add yarn lockfile to git ignore ([c51e6fe](https://github.com/CoCreate-app/CoCreate-dnd/commit/c51e6fe1540af9a2bd8df30cdd76e15f636e5215))
+* remove yarn.lock ([6cd7ae7](https://github.com/CoCreate-app/CoCreate-dnd/commit/6cd7ae73c6a601afd43e60ecd6c50020718cd701))
+
 ## [0.10.22](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.21...v0.10.22) (2021-07-10)
 
 
