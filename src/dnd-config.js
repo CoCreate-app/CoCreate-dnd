@@ -5,46 +5,34 @@ import { logger } from '@cocreate/utils'
 let console = logger('off');
 
 
-export default function dndConfigs() {
 
 
 
+
+export default function init() {
   observer.init({
     name: "dnd-config",
-    observe: ["addedNodes"],
-
+    observe: ['addedNodes'],
+    target: '.sortable, .cloneable',
     callback: mutation => {
-        // console.log('dnd domReader mutation ', new Date().getSeconds()  + ' ' + new Date().getMilliseconds())
-      let el = mutation.target;
-      el.classList.contains('sortable') &&
-      el.classList.contains('cloneable') &&
-      init( mutation.target.parentElement.parentElement)
-      // console.log('dnd config observer', mutation.target, mutation.target.parentElement, mutation)
+     initElement( mutation.target, !!mutation.target.classList.contains('cloneable'));
     },
   });
 
-
-
-init(document)
-
+  let cloneables = document.querySelectorAll(".cloneable");
+  initElements(cloneables, true)
+  let sortables = document.querySelectorAll(".sortable");
+  initElements(sortables)
 
 }
 
 
-function init(el){
-   console.log('dnd domReader init ', new Date().getSeconds()  + ' ' + new Date().getMilliseconds())
-  let sortables = el.querySelectorAll(".sortable");
-  
-  sortables.forEach((sortable) => {
-    console.log('dnd config sortable', sortable)
-    initContainer({ target: sortable });
-  });
+function initElements(elements, cloneable) {
+  for (let el of elements)
+    initElement(el)
 
-  let cloneables = el.querySelectorAll(".cloneable");
+}
 
-  cloneables.forEach((cloneable) => {
-    console.log('dnd config cloneable',cloneable)
-    initContainer({ target: cloneable, cloneable: true });
-  });
-
+function initElement(el, cloneable = false) {
+  initContainer({ target:el, cloneable });
 }
