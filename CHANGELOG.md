@@ -1,3 +1,11 @@
+## [0.10.25](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.24...v0.10.25) (2021-07-17)
+
+
+### Bug Fixes
+
+* init and update demos scripts ([dc3eac1](https://github.com/CoCreate-app/CoCreate-dnd/commit/dc3eac1cbfb7aa4ccc0c9cd70d098d691c7f223a))
+* workflows ([b54201e](https://github.com/CoCreate-app/CoCreate-dnd/commit/b54201e2d5d05ccc3108ac58e0a312f15fc16a22))
+
 ## [0.10.24](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.23...v0.10.24) (2021-07-14)
 
 
