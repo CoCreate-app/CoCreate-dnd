@@ -1,3 +1,12 @@
+## [0.11.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.11.0...v0.11.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* remove data- from attributes ([178b77c](https://github.com/CoCreate-app/CoCreate-dnd/commit/178b77cdd1a4ce7321f0fd9bf2a32261fdbd6c24))
+* remove data- from fetch, pass and filter ([745f050](https://github.com/CoCreate-app/CoCreate-dnd/commit/745f050b54e2011a6a70bc6a4af8ed0be758f3b7))
+* update data-fullscreen to fullscreen ([ab2a7d2](https://github.com/CoCreate-app/CoCreate-dnd/commit/ab2a7d2471f0894e59eec47b9ee12aebc2bb5bd1))
+
 # [0.11.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.10.25...v0.11.0) (2021-07-28)
 
 
