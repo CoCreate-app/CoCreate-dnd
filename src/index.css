@@ -6,7 +6,7 @@
     [data-cloneable],
     [data-draggable],
     [data-droppable],
-    [data-hoverable] {
+    [hoverable] {
       outline: 1px dashed gray;
     }
 
