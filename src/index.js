@@ -179,12 +179,12 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
 
   dnd.dragOver({ x, y, target: el }, el, ref);
 }
-
+let justMousedDownEl;
 mousedown = (e, ref) => {
   // console.log("mouse down", e);
 
   if (e.which != 1) return;
-
+  justMousedDownEl = e.target;
   start(e, ref);
 };
 mouseup = (e, ref) => {
@@ -248,6 +248,9 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
   // disable selection
   ref.document.addEventListener("selectstart", (e) => {
+    if(justMousedDownEl.matches('[contenteditable], input, textarea')) {
+      return;
+    }
     let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
     if (!Array.isArray(r)) return;
     e.preventDefault();
@@ -266,6 +269,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
         clearTimeout(touchTimeout);
       touchTimeout = setTimeout(() => {
         console.log('touch start')
+    
         ref.document.body.style.touchAction = "none"
         e.preventDefault();
         start(e, ref);
@@ -294,7 +298,10 @@ const initIframe = ({ isIframe, frame, document, window }) => {
         console.log('touch scroll')
         return;
       }
-
+      
+      //check if touch works for     justMousedDownEl 
+      justMousedDownEl = e.target;
+      
       console.log('touch dnd')
       e.preventDefault();
       // console.log("host touch move");
