@@ -170,7 +170,7 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
     scroller.calculateScroll({
       x,
       y,
-      element: el.parentElement,
+      element: el.parentElement ? el.parentElement: el,
       onMouseScrollMove: (e) => move(e, ref, true),
     });
   }
