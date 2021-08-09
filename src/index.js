@@ -22,14 +22,15 @@ import * as vars from "./util/variables.js";
 import './index.css';
 
 import domReader from './util/domReader';
-import { logger } from '@cocreate/utils'
+import { logger } from '@cocreate/utils';
+// import text from '@cocreate/text';
 let console = logger('off');
 
 let touchTimeout;
 let beforeDndSuccessCallback;
 
 function beforeDndSuccess() {
-  if (beforeDndSuccessCallback)
+  if(beforeDndSuccessCallback)
     return beforeDndSuccessCallback.apply(null, arguments);
   return {};
 }
@@ -51,13 +52,13 @@ let { myDropMarker, scroller } = options;
 let dnd = new VirtualDnd(beforeDndSuccess);
 let ghost;
 dnd.on("dragStart", (data) => {
-  myDropMarker.hide();
-  ghost = new ghostEffect(data.e, data.el, { window, document });
-  ghost.start();
+    myDropMarker.hide();
+    ghost = new ghostEffect(data.e, data.el, { window, document });
+    ghost.start();
 });
 dnd.on("dragEnd", (data) => {
   myDropMarker.hide();
-  if (ghost) ghost.hide(data.ref);
+  if(ghost) ghost.hide(data.ref);
 });
 dnd.on("dragOver", (data) => {
   // it will always run when mouse or touch moves
@@ -76,23 +77,23 @@ let consolePrintedEl = null; // dev only
 function start(e, ref) {
   let r = getCocs(e.target, [vars.draggable, vars.cloneable, vars.handleable]);
 
-  if (!Array.isArray(r)) return;
+  if(!Array.isArray(r)) return;
   let [el, att] = r;
 
 
 
-  switch (att) {
+  switch(att) {
     case vars.cloneable:
       let html = el.getAttribute(vars.data_insert_html);
-      if (html) {
+      if(html) {
         el = parse(html);
-        if (!el) return;
+        if(!el) return;
       }
       else el = el.cloneNode(true);
       break;
     case vars.draggable:
       let hasHandle = el.getAnyAttribute(vars.handleable);
-      if (hasHandle) return;
+      if(hasHandle) return;
       break;
 
     default:
@@ -122,21 +123,21 @@ function end(e, ref) {
 }
 
 function move({ x, y, target, isTouch }, ref, stopScroll) {
-  if (!isDraging) return;
+  if(!isDraging) return;
 
-  if (ghost) ghost.draw({ x, y }, ref);
+  if(ghost) ghost.draw({ x, y }, ref);
   scroller.update(x, y);
-  if (isDraging) {
+  if(isDraging) {
     // skip group names
     let [groupEl, groupname] = getGroupName(target);
-    if (startGroup && groupname) {
-      if (startGroup !== groupname) {
+    if(startGroup && groupname) {
+      if(startGroup !== groupname) {
         do {
           let groupResult = getGroupName(groupEl);
-          if (!groupResult[0]) return; // or return
+          if(!groupResult[0]) return; // or return
           groupEl = groupResult[0].parentElement;
           groupname = groupResult[1];
-          if (startGroup === groupname) {
+          if(startGroup === groupname) {
             target = groupResult[0];
             break;
           }
@@ -145,14 +146,14 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
       }
 
     }
-    else if (startGroup !== groupname)
+    else if(startGroup !== groupname)
       return;
   }
   else {
-    if (ghost) ghost.hide();
+    if(ghost) ghost.hide();
   }
 
-  if (!target) return; // it's out of iframe if this is multi frame
+  if(!target) return; // it's out of iframe if this is multi frame
 
   let el = getCoc(target, vars.droppable);
   // let onEl = target; // dev
@@ -164,13 +165,13 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
 
   // if()
 
-  if (!el) return;
+  if(!el) return;
 
-  if (!stopScroll) {
+  if(!stopScroll) {
     scroller.calculateScroll({
       x,
       y,
-      element: el.parentElement ? el.parentElement: el,
+      element: el.parentElement ? el.parentElement : el,
       onMouseScrollMove: (e) => move(e, ref, true),
     });
   }
@@ -179,12 +180,39 @@ function move({ x, y, target, isTouch }, ref, stopScroll) {
 
   dnd.dragOver({ x, y, target: el }, el, ref);
 }
-let justMousedDownEl;
-mousedown = (e, ref) => {
-  // console.log("mouse down", e);
 
-  if (e.which != 1) return;
-  justMousedDownEl = e.target;
+mousedown = (e, ref) => {
+
+  // check if left click mouse 
+  if(e.which != 1) return;
+
+  // set 0.5 timeout for inputs and textarea and break it by moving the mouse
+  // let el = e.target;
+  // if(el.tagName ==="INPUT" || el.tagName ==="TEXTAREA") {
+
+  //   // if(el.matches('input, textarea')) {
+  //     // let id = setTimeout( function(){
+  //       if (el.selectionStart != el.selectionEnd) {
+  //         return;  
+  //       }
+  //       else
+  //         start(e, ref);
+
+  //     // }, 1000)
+
+  // }
+  // let id = setTimeout(()=>{
+  //     start(e, ref);
+
+  //   },500)
+  // todo: adding event to document should be better instead of el
+  // el.addEventListener('mousemove',()=>{
+  //   clearTimeout(id)
+  // })
+  // if (el.selectionStart != el.selectionEnd)
+  // return;  
+  // }
+  // else
   start(e, ref);
 };
 mouseup = (e, ref) => {
@@ -194,7 +222,7 @@ mouseup = (e, ref) => {
   // if (!el) return;
   //
 
-  if (e.which != 1) return;
+  if(e.which != 1) return;
 
   end(e, ref);
 };
@@ -211,7 +239,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
 
   let ref;
-  if (isIframe) {
+  if(isIframe) {
     let frameWindow = frame.contentWindow;
     let frameDocument = frameWindow.document || frame.contentDocument;
     let rect = frame.getBoundingClientRect();
@@ -227,10 +255,10 @@ const initIframe = ({ isIframe, frame, document, window }) => {
   else {
     ref = { x: 0, y: 0, window, document, isIframe: false };
   }
-    domReader.register(ref.window)
-  if (ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
+  domReader.register(ref.window)
+  if(ref.window.CoCreateDnd && ref.window.CoCreateDnd.hasInit) return;
 
-  if (!ref.document.querySelector("#dnd-style")) {
+  if(!ref.document.querySelector("#dnd-style")) {
     let dndStyle = ref.document.createElement("style");
     dndStyle.id = "dnd-style";
     dndStyle.innerHTML = `    /* dnd specic */
@@ -248,11 +276,18 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
   // disable selection
   ref.document.addEventListener("selectstart", (e) => {
-    if(justMousedDownEl.matches('[contenteditable], input, textarea')) {
+    let el = e.srcElement;
+    if(el.matches('[contenteditable]')) {
       return;
+      //   setTimeout( function(){
+      //   // let {start, end} = text.getSelections(el)
+      //   // if(start != end) 
+      //     return;        
+      //   }, 500)
     }
+
     let r = getCocs(e.target, [vars.draggable, vars.cloneable]);
-    if (!Array.isArray(r)) return;
+    if(!Array.isArray(r)) return;
     e.preventDefault();
   }, { passive: false });
   // touch
@@ -260,16 +295,16 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
 
   let mousemovee, mouseupe, mousedowne, touchmovee, touchheade, touchstarte;
-  if (!refs.has(ref.window)) {
+  if(!refs.has(ref.window)) {
 
     touchstarte = function(e) {
       // console.log()
 
-      if (touchTimeout)
+      if(touchTimeout)
         clearTimeout(touchTimeout);
       touchTimeout = setTimeout(() => {
         console.log('touch start')
-    
+
         ref.document.body.style.touchAction = "none"
         e.preventDefault();
         start(e, ref);
@@ -278,8 +313,8 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
     touchheade = function(e) {
       ref.document.body.style.touchAction = "auto"
-      if (!isDraging) {
-        if (touchTimeout)
+      if(!isDraging) {
+        if(touchTimeout)
           clearTimeout(touchTimeout);
         return;
       }
@@ -292,16 +327,13 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 
 
 
-      if (!isDraging) {
-        if (touchTimeout)
+      if(!isDraging) {
+        if(touchTimeout)
           clearTimeout(touchTimeout);
         console.log('touch scroll')
         return;
       }
-      
-      //check if touch works for     justMousedDownEl 
-      justMousedDownEl = e.target;
-      
+
       console.log('touch dnd')
       e.preventDefault();
       // console.log("host touch move");
@@ -310,7 +342,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
       let x = touch.clientX;
       let y = touch.clientY;
       let el = ref.document.elementFromPoint(x, y);
-      if (!el) return; // it's out of iframe
+      if(!el) return; // it's out of iframe
 
       // sending object representing an event data
       move({ x, y, target: el, isTouch: true }, ref);
@@ -371,13 +403,13 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 // };
 
 window.addEventListener("load", () => {
-  if (window.parent !== window) return;
+  if(window.parent !== window) return;
   initIframe({ document, window });
   dndConfig();
 });
 
 const initFunction = function({ target, onDnd, onDndSuccess }) {
-  if (typeof onDndSuccess == "function")
+  if(typeof onDndSuccess == "function")
     beforeDndSuccessCallback = onDndSuccess;
 
   initFunctionState.push({ target, onDnd });
@@ -394,19 +426,19 @@ const initElement = function({
   beforeDndSuccess,
 }) {
   try {
-    if (typeof beforeDndSuccess == "function")
+    if(typeof beforeDndSuccess == "function")
       beforeDndSuccessCallback = beforeDndSuccess;
-    if (group) target.setHiddenAttribute(vars.group_name, group);
+    if(group) target.setHiddenAttribute(vars.group_name, group);
 
-    if (exclude) {
+    if(exclude) {
       try {
         let excludeEls = target.querySelectorAll(exclude);
         excludeEls.forEach((el) => {
           el.setHiddenAttribute(vars.exclude, "true");
         });
       }
-      catch (err) {
-        if (err instanceof HTMLElement) {
+      catch(err) {
+        if(err instanceof HTMLElement) {
           let error = "Dnd Sortable: exclude must be valid selector";
           console.error(error);
         }
@@ -414,24 +446,24 @@ const initElement = function({
       }
     }
 
-    if (dropable)
+    if(dropable)
       target.querySelectorAll(dropable).forEach((el) => {
         el.setHiddenAttribute(vars.droppable, "true");
       });
-    if (draggable)
+    if(draggable)
       target.querySelectorAll(draggable).forEach((el) => {
         // el.style.touchAction = 'none'
         el.setHiddenAttribute(vars.draggable, "true");
       });
 
-    if (cloneable)
+    if(cloneable)
       target.querySelectorAll(cloneable).forEach((el) => {
         // el.style.touchAction = 'none'
         el.setHiddenAttribute(vars.cloneable, "true");
       });
   }
-  catch (err) {
-    if (err instanceof DOMException) {
+  catch(err) {
+    if(err instanceof DOMException) {
       let error = "Dnd Sortable: handle must be a valid selector";
       console.error(error);
       throw err;
@@ -441,13 +473,13 @@ const initElement = function({
 };
 
 function addNestedAttribute(el, cloneable) {
-  if (!el.children.length) return;
+  if(!el.children.length) return;
   Array.from(el.children).forEach((el) => {
     addNestedAttribute(el);
     el.setHiddenAttribute(vars.exclude, "true");
     // el.style.touchAction = 'none'
     el.setHiddenAttribute(vars.draggable, "true");
-    if (cloneable) el.setHiddenAttribute(vars.cloneable, "true");
+    if(cloneable) el.setHiddenAttribute(vars.cloneable, "true");
   });
 }
 
@@ -459,16 +491,16 @@ const initContainer = function({
   group,
   exclude,
 }) {
-  if (group) target.setHiddenAttribute(vars.group_name, group);
-  if (exclude) {
+  if(group) target.setHiddenAttribute(vars.group_name, group);
+  if(exclude) {
     try {
       let excludeEls = target.querySelectorAll(exclude);
       excludeEls.forEach((el) => {
         el.setHiddenAttribute(vars.exclude, "true");
       });
     }
-    catch (err) {
-      if (err instanceof DOMException) {
+    catch(err) {
+      if(err instanceof DOMException) {
         let error = "Dnd Sortable: exclude must be valid selector";
         console.error(error);
         throw error;
@@ -477,44 +509,44 @@ const initContainer = function({
     }
   }
 
-  if (!target.tagName) {
+  if(!target.tagName) {
     let error = "Dnd Sortable: Please provide a valid element";
     console.error(error);
     throw error;
   }
 
-  if (typeof cloneable != "boolean") {
+  if(typeof cloneable != "boolean") {
     let error = "Dnd Sortable: please provide valid data type for cloneable";
     console.error(error);
     throw error;
   }
 
-  if (typeof nested != "boolean") {
+  if(typeof nested != "boolean") {
     let error = "Dnd Sortable: please provide valid data type for nested";
     console.error(error);
     throw error;
   }
 
-  if (nested) {
+  if(nested) {
     addNestedAttribute(target, cloneable);
   }
   else {
     target.setHiddenAttribute(vars.droppable, "true");
-       console.log('dnd loaded target child', target.children)
-    if (target.children.length)
+    console.log('dnd loaded target child', target.children)
+    if(target.children.length)
       Array.from(target.children).forEach((el) => {
-        if (cloneable) {
+        if(cloneable) {
           // el.style.touchAction = 'none'
           el.setHiddenAttribute(vars.cloneable, "true");
         }
         else {
           // el.style.touchAction = 'none'
-            console.log('dnd loaded draggable',el)
+          console.log('dnd loaded draggable', el)
           el.setHiddenAttribute(vars.draggable, "true");
         }
         try {
           let handleEls = el.querySelectorAll(handle);
-          if (handle && handleEls.length) {
+          if(handle && handleEls.length) {
             // el.style.touchAction = 'none'
             el.setHiddenAttribute(vars.draggable, "true");
             handleEls.forEach((el) => {
@@ -523,8 +555,8 @@ const initContainer = function({
             });
           }
         }
-        catch (err) {
-          if (err instanceof DOMException) {
+        catch(err) {
+          if(err instanceof DOMException) {
             let error = "Dnd Sortable: handle must be a valid selector";
             console.error(error);
             throw error;
@@ -552,7 +584,7 @@ let exp = {
 function init(params) {
   let { mode } = params;
   delete params.mode;
-  if (!['function', 'element', 'container'].includes(mode))
+  if(!['function', 'element', 'container'].includes(mode))
     throw new Error('invalid mode provided')
   let funcName = 'init' + mode.charAt(0).toUpperCase() + mode.slice(1);
   exp[funcName].apply(null, [params])

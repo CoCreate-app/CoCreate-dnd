@@ -3,21 +3,6 @@ import { closestChild, parse } from "./util/common";
 import { exclude } from "./util/variables";
 import utils from '@cocreate/utils';
 
-function UUID(length = 10) {
-  var result = "";
-  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-
-  var d = new Date().toTimeString();
-  var random = d.replace(/[\W_]+/g, "").substr(0, 6);
-  result += random;
-  return result;
-}
-
 let topleft = ["left", "top"];
 
 export default function virtualDnd(beforeDndSuccess) {

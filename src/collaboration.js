@@ -7,6 +7,7 @@
 
 import utils from '@cocreate/utils';
 import message from '@cocreate/message-client';
+import uuid from '@cocreate/uuid';
 
 function wrapper() {
 
@@ -81,7 +82,7 @@ function wrapper() {
       window.CoCreate;
 
     if (!dropedEl.getAttribute("data-element_id"))
-      dropedEl.setAttribute("data-element_id", utils.UUID());
+      dropedEl.setAttribute("data-element_id", uuid.generate(6));
 
     dropedEl = dropedEl.getAttribute("data-element_id");
 
@@ -107,7 +108,7 @@ function wrapper() {
     }
     else {
       if (!dragedEl.getAttribute("data-element_id"))
-        dragedEl.setAttribute("data-element_id", utils.UUID());
+        dragedEl.setAttribute("data-element_id", uuid.generate(6));
 
       dragedEl = dragedEl.getAttribute("data-element_id");
 
