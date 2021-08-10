@@ -1,12 +1,6 @@
 /*global initContainer*/
 import { initContainer } from "./index.js";
 import observer from '@cocreate/observer';
-import { logger } from '@cocreate/utils'
-let console = logger('off');
-
-
-
-
 
 
 export default function init() {
