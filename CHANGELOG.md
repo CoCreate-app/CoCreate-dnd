@@ -1,3 +1,16 @@
+# [0.12.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.11.1...v0.12.0) (2021-08-10)
+
+
+### Bug Fixes
+
+* calculateScroll invokation ([e172c1d](https://github.com/CoCreate-app/CoCreate-dnd/commit/e172c1d2ae472599a340f276f442dfd3d0ead3c4))
+* replace UUID with @cocreate/uuid ([fc7e07d](https://github.com/CoCreate-app/CoCreate-dnd/commit/fc7e07ded7c88b63076abea92abaf58b5ccfc4a5))
+
+
+### Features
+
+* if element is a selection dnd false ([efbb624](https://github.com/CoCreate-app/CoCreate-dnd/commit/efbb624cbfb5ec3a467f322a0114e6d727c27c8d))
+
 ## [0.11.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.11.0...v0.11.1) (2021-08-02)
 
 
