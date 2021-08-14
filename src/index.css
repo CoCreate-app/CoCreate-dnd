@@ -1,11 +1,11 @@
-    [data-cloneable],
-    [data-draggable] {
+    [cloneable],
+    [draggable] {
       cursor: pointer;
     }
 
-    [data-cloneable],
-    [data-draggable],
-    [data-droppable],
+    [cloneable],
+    [draggable],
+    [droppable],
     [hoverable] {
       outline: 1px dashed gray;
     }

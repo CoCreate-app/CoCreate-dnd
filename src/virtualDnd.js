@@ -144,7 +144,7 @@ export default function virtualDnd(beforeDndSuccess) {
       // greenDropMarker.draw(el, closestEl, orientation, false);
       // hoverBoxMarker.draw(el)
       // tagNameTooltip.draw(el)
-      if (closestEl.getAttribute("data-exclude") == "true") {
+      if (closestEl.getAttribute("dnd-exclude") == "true") {
         this.dropedEl = closestEl.parentElement;
         // only to get orientation
         let [orientation2, closestEl2] = closestChild(

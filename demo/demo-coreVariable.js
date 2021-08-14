@@ -1,5 +1,5 @@
      dom.element([{
-            selector: '[data-group_name]',
+            selector: '[dnd-group-name]',
             droppable: 'true',
             // idGenerator: () => UUID(12),
           },

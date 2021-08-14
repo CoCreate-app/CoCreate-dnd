@@ -42,38 +42,66 @@
     </style>
 </head>
 
-<body data-group_name="canvas">
+<body dnd-group-name="canvas">
 
 
-    <!-- Container and elements intialized with cloneable class and data-cloneable attribute -->
+    <!-- Container and elements intialized with cloneable class and cloneable attribute -->
     <ul class="cloneable">
-        <li id="header" data-insert-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
+        <li id="header" cloneable-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
             </i>
             <p>Header</p>
         </li>
-        <li id="span" data-insert-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
+        <li id="span" cloneable-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
             </i>
             <p>Span</p>
         </li>
-        <li id="li" data-cloneable="true" data-insert-html='<li droppable="true" class="CoC-droppable">this is a Li</li>"><i class="fa fa-header'>
+        <li id="li" cloneable="true" cloneable-html='<li droppable="true" class="CoC-droppable">this is a Li</li>"><i class="fa fa-header'>
             </i>
             <p>Li</p>
         </li>
-        <li id="chart-image" data-cloneable="true" data-insert-html="<img droppable='true' class='CoC-droppable' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
+        <li id="chart-image" cloneable="true" cloneable-html="<img droppable='true' class='CoC-droppable' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
             <i class="fa fa-bar-chart"></i>
             <p>Chart Image</p>
         </li>
-        <li id="login-from" data-cloneable="true" data-insert-html='<div droppable="true" class="CoC-droppable" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
+        <li id="login-from" cloneable="true" cloneable-html='<div droppable="true" class="CoC-droppable" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
             <i class="fa fa-sign-in"></i>
             <p>Login Form</p>
         </li>
-        <li id="login-from" data-cloneable="true">
+        <li id="login-from" cloneable="true">
             <i class="fa fa-sign-in"></i>
-            <p>it will be cloned and droped as itself because it doesn't have data-insert-html </p>
+            <p>it will be cloned and droped as itself because it doesn't have cloneable-html </p>
         </li>
     </ul>
 
+-- iframe -->
+    <iframe src="iframe.html" id="client2" frameborder="0" width="100%" height="100%"></iframe>
 
+    <!-- Container intialized with class sortable -->
+    <div class="sortable">
+        sortable
+        <div data-element_id="sortable1" class="block myinline">sortable example block 1</div>
+        <div data-element_id="sortable2" class="block myinline">sortable example block 2</div>
+        <div data-element_id="sortable3" class="block myinline">sortable example block 3</div>
+        <div data-element_id="sortable4" class="block">sortable example block 4</div>
+        <div data-element_id="sortable5" class="block">sortable example block 5</div>
+        <div data-element_id="sortable6" class="block">sortable example block 6</div>
+        <div data-element_id="sortable7" class="block myinline">sortable example block 7</div>
+        <div data-element_id="sortable8" class="block myinline">sortable example block 8</div>
+        <div data-element_id="sortable9" class="block myinline">sortable example block 9</div>
+    </div>
+
+    <div data-element_id="id1" droppable="true">
+        <div data-element_id="id2" draggable="true" class="block myinline">draggable example block 1</div>
+        <div draggable="true" class="block myinline">draggable example block 2</div>
+        <div draggable="true" class="block myinline">draggable example block 3</div>
+        <div draggable="true" class="block">draggable example block 4</div>
+        <div data-element_id="id6" draggable="true" class="block">draggable example block 5</div>
+        <div data-element_id="id7" draggable="true" class="block">draggable example block 6</div>
+        <div data-element_id="id8" draggable="true" class="block myinline">draggable example block 7</div>
+        <div data-element_id="id9" draggable="true" class="block myinline">draggable example block 8</div>
+        <div data-element_id="id10" draggable="true" class="block myinline">draggable example block 9</div>
+    </div>
+    
     <div id="onConditionDnd">
         <div>
             start div 1
@@ -95,39 +123,6 @@
         <div class="block myinline">example block 8</div>
         <div class="block myinline">example block 9</div>
     </div>
-
-
-
-    <div data-element_id="id1" data-droppable="true">
-        <div data-element_id="id2" data-draggable="true" class="block myinline">example block 1</div>
-        <div data-draggable="true" class="block myinline">example block 2</div>
-        <div data-draggable="true" class="block myinline">example block 3</div>
-        <div data-draggable="true" class="block">example block 4</div>
-        <div data-element_id="id6" data-draggable="true" class="block">example block 5</div>
-        <div data-element_id="id7" data-draggable="true" class="block">example block 6</div>
-        <div data-element_id="id8" data-draggable="true" class="block myinline">example block 7</div>
-        <div data-element_id="id9" data-draggable="true" class="block myinline">example block 8</div>
-        <div data-element_id="id10" data-draggable="true" class="block myinline">example block 9</div>
-    </div>
-
-
-    <iframe src="iframe.html" id="client2" frameborder="0" width="100%" height="100%"></iframe>
-
-    <!-- Container intialized with class sortable -->
-    <div class="sortable">
-        sortable
-        <div data-element_id="sortable1" class="block myinline">example block 1</div>
-        <div data-element_id="sortable2" class="block myinline">example block 2</div>
-        <div data-element_id="sortable3" class="block myinline">example block 3</div>
-        <div data-element_id="sortable4" class="block">example block 4</div>
-        <div data-element_id="sortable5" class="block">example block 5</div>
-        <div data-element_id="sortable6" class="block">example block 6</div>
-        <div data-element_id="sortable7" class="block myinline">example block 7</div>
-        <div data-element_id="sortable8" class="block myinline">example block 8</div>
-        <div data-element_id="sortable9" class="block myinline">example block 9</div>
-    </div>
-
-
 
     <script>
         var config = {

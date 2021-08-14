@@ -44,31 +44,31 @@
   </head>
   <body>
   
-    <!-- Container and elements intialized with cloneable class and data-cloneable attribute -->
+    <!-- Container and elements intialized with cloneable class and cloneable attribute -->
     <ul class="cloneable">
-      <li id="header" data-insert-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
+      <li id="header" cloneable-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
         </i>
         <p>Header</p>
       </li>
-      <li id="span" data-insert-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
+      <li id="span" cloneable-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
         </i>
         <p>Span</p>
       </li>
-      <li id="li" data-cloneable="true" data-insert-html='<li droppable="true" class="CoC-droppable">this is a Li</li>"><i class="fa fa-header'>
+      <li id="li" cloneable="true" cloneable-html='<li droppable="true" class="CoC-droppable">this is a Li</li>"><i class="fa fa-header'>
         </i>
         <p>Li</p>
       </li>
-      <li id="chart-image" data-cloneable="true" data-insert-html="<img droppable='true' class='CoC-droppable' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
+      <li id="chart-image" cloneable="true" cloneable-html="<img droppable='true' class='CoC-droppable' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
         <i class="fa fa-bar-chart"></i>
         <p>Chart Image</p>
       </li>
-      <li id="login-from" data-cloneable="true" data-insert-html='<div droppable="true" class="CoC-droppable" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
+      <li id="login-from" cloneable="true" cloneable-html='<div droppable="true" class="CoC-droppable" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
         <i class="fa fa-sign-in"></i>
         <p>Login Form</p>
       </li>
-      <li id="login-from" data-cloneable="true">
+      <li id="login-from" cloneable="true">
         <i class="fa fa-sign-in"></i>
-        <p>it will be cloned and droped as itself because it doesn't have data-insert-html </p>
+        <p>it will be cloned and droped as itself because it doesn't have cloneable-html </p>
       </li>
     </ul>
   

@@ -220,7 +220,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
         let dndStyle = ref.document.createElement("style");
         dndStyle.id = "dnd-style";
         dndStyle.innerHTML = `    /* dnd specic */
-  [data-draggable="true"], [data-cloneable="true"]  {
+  [draggable="true"], [cloneable="true"]  {
     touch-action: none;
   }
   /* dnd specic */`;

@@ -86,7 +86,7 @@ function wrapper() {
 
     dropedEl = dropedEl.getAttribute("data-element_id");
 
-    if (dropType === "data-cloneable") {
+    if (dropType === "cloneable") {
       let hiddenAttribute = dragedEl.getAllHiddenAttribute();
 
       dragedEl = dragedEl.outerHTML;
