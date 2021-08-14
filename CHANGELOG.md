@@ -1,3 +1,13 @@
+## [0.12.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.12.0...v0.12.1) (2021-08-14)
+
+
+### Bug Fixes
+
+* remove data- from dnd attributes ([4341d0d](https://github.com/CoCreate-app/CoCreate-dnd/commit/4341d0dc31f6a884b6e060f4ad5b5be8f78a00e5))
+* remove domEditor commented code ([33ec7ec](https://github.com/CoCreate-app/CoCreate-dnd/commit/33ec7ec321e61f3375cc1cad5fc77ae28d39bbc9))
+* rename data-element_id to element_id ([fd8c21a](https://github.com/CoCreate-app/CoCreate-dnd/commit/fd8c21a6fc84bcb08522c68194cfc280ea2b0113))
+* update to  docs ([97dad70](https://github.com/CoCreate-app/CoCreate-dnd/commit/97dad70675d36cc2f13d228cef9a9a39ea1f2e95))
+
 # [0.12.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.11.1...v0.12.0) (2021-08-10)
 
 
