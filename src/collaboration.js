@@ -20,10 +20,10 @@ function wrapper() {
       console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
       // resolving the element_id to real element in the clinet
       if (data.target) {
-        data.target = document.querySelector(`[data-element_id="${data.target}"]`);
+        data.target = document.querySelector(`[element_id="${data.target}"]`);
       }
       if (data.value[1]) {
-        data.value[1] = document.querySelector(`[data-element_id="${data.value[1]}"]`);
+        data.value[1] = document.querySelector(`[element_id="${data.value[1]}"]`);
       }
       if (!data.target)
         return console.log('dnd error: draggble is null')
@@ -47,11 +47,11 @@ function wrapper() {
         if (data.path.length) {
           let iframe = document.querySelector(data.path[0]);
           let context = iframe.contentWindow.document || iframe.contentDocument;
-          data.target = context.querySelector(`[data-element_id=${data.target}]`);
+          data.target = context.querySelector(`[element_id=${data.target}]`);
         }
         else {
           data.target = document.querySelector(
-            `[data-element_id=${data.target}]`
+            `[element_id=${data.target}]`
           );
         }
 
@@ -81,10 +81,10 @@ function wrapper() {
       window.iframes.guests.canvas.window.CoCreate :
       window.CoCreate;
 
-    if (!dropedEl.getAttribute("data-element_id"))
-      dropedEl.setAttribute("data-element_id", uuid.generate(6));
+    if (!dropedEl.getAttribute("element_id"))
+      dropedEl.setAttribute("element_id", uuid.generate(6));
 
-    dropedEl = dropedEl.getAttribute("data-element_id");
+    dropedEl = dropedEl.getAttribute("element_id");
 
     if (dropType === "cloneable") {
       let hiddenAttribute = dragedEl.getAllHiddenAttribute();
@@ -107,10 +107,10 @@ function wrapper() {
       });
     }
     else {
-      if (!dragedEl.getAttribute("data-element_id"))
-        dragedEl.setAttribute("data-element_id", uuid.generate(6));
+      if (!dragedEl.getAttribute("element_id"))
+        dragedEl.setAttribute("element_id", uuid.generate(6));
 
-      dragedEl = dragedEl.getAttribute("data-element_id");
+      dragedEl = dragedEl.getAttribute("element_id");
 
       message.send({
         broadcast_sender: true,
