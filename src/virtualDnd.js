@@ -19,21 +19,8 @@ export default function virtualDnd(beforeDndSuccess) {
   };
 
   this.dragStart = (e, el, id, ref, dropType) => {
-    // #broadcast
-    // domEditor({
-    //   obj: selectorUtil.cssPath( this.dropedEl),
-    //   method: 'insertAdjacentElement',
-    //   value: { param1: [this.position, selectorUtil.cssPath(this.dragedEl)] }
-    // });
     this.id = id;
     this.dropType = dropType;
-    console.log({
-      comment: "dragStart",
-    });
-    // dfonclk.onActive(e.target)
-    // selectBoxMarker.hide(onRemove)
-    // greenDropMarker.hide();
-
     this.dragedEl = el;
     evnt.dispatch("dragStart", { e, el, ref });
   };
@@ -78,7 +65,7 @@ export default function virtualDnd(beforeDndSuccess) {
         if (beforeDndSuccess) result = beforeDndSuccess(detail);
         Object.assign(detail, result);
 
-        // dispatch gloval events
+        // dispatch global events
         const event = new CustomEvent("dndsuccess", {
           bubbles: false,
           detail,
@@ -92,7 +79,6 @@ export default function virtualDnd(beforeDndSuccess) {
 
 
         this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
-        // domEditor(broadcast);
         window.dispatchEvent(event, { bubbles: false });
       }
     }
@@ -128,9 +114,7 @@ export default function virtualDnd(beforeDndSuccess) {
         hasChild: true,
         ref,
       });
-      // greenDropMarker.draw(el, el, orientation, true);
-      // hoverBoxMarker.draw(el)
-      // tagNameTooltip.draw(el)
+
       this.position = topleft.includes(orientation) ?
         "afterbegin" :
         "beforeend";
@@ -141,9 +125,6 @@ export default function virtualDnd(beforeDndSuccess) {
       // find closest child and put outside the child element on top or bottom relating to that child,
       let [orientation, closestEl] = closestChild([e.x, e.y], el.children);
 
-      // greenDropMarker.draw(el, closestEl, orientation, false);
-      // hoverBoxMarker.draw(el)
-      // tagNameTooltip.draw(el)
       if (closestEl.getAttribute("dnd-exclude") == "true") {
         this.dropedEl = closestEl.parentElement;
         // only to get orientation

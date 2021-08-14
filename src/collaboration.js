@@ -1,6 +1,5 @@
 /*global dom*/
 /*global CoCreate*/
-/*global elementConfig*/
 /*global DOMParser*/
 /*global domEditor*/
 /*global CoCreate.socket*/
@@ -29,7 +28,6 @@ function wrapper() {
         return console.log('dnd error: draggble is null')
       if (!data.value[1])
         return console.log('dnd error: droppable is null')
-      // passing it to domEditor
       let [position, el] = data.value
       data.target.insertAdjacentElement(position, el)
     })
@@ -63,10 +61,8 @@ function wrapper() {
         }
 
         // console.log("with object: ", data, window.location.pathname);
-        // passing it to domEditor
         let [position, el] = data.value
         data.target.insertAdjacentElement(position, el)
-        // domEditor(data);
       }
       catch (error) {
         console.error(error);
