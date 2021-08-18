@@ -1,3 +1,10 @@
+# [0.13.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.12.1...v0.13.0) (2021-08-18)
+
+
+### Features
+
+* intuitively handle text selections or dragging ([b9ab9b2](https://github.com/CoCreate-app/CoCreate-dnd/commit/b9ab9b23537b8d42dfe902f9e6fad25164613d96))
+
 ## [0.12.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.12.0...v0.12.1) (2021-08-14)
 
 
