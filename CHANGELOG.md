@@ -1,3 +1,10 @@
+## [0.13.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.13.0...v0.13.1) (2021-08-19)
+
+
+### Bug Fixes
+
+* clean demo and test deployment ([d75bd53](https://github.com/CoCreate-app/CoCreate-dnd/commit/d75bd539f8b5e623c938fd07e4beae9c0ac94be9))
+
 # [0.13.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.12.1...v0.13.0) (2021-08-18)
 
 
