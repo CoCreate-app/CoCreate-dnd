@@ -244,7 +244,7 @@ const initIframe = ({ isIframe, frame, document, window }) => {
 				ref.document.body.style.touchAction = "none"
 				e.preventDefault();
 				startDnd(e, ref);
-			}, 400);
+			}, 200);
 		}
 
 		touchheade = function(e) {
