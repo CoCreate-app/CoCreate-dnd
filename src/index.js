@@ -171,7 +171,7 @@ mousedown = (e, ref) => {
 			return;
 		} 
 		else startDnd(e, ref);
-    }, 300);
+    }, 200);
 };
 
 mousemove = (e, ref) => {
