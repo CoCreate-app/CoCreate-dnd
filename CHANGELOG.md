@@ -1,3 +1,10 @@
+## [0.13.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.13.1...v0.13.2) (2021-08-20)
+
+
+### Performance Improvements
+
+* renamed start and end to dndStart and dndEnd ([33395b1](https://github.com/CoCreate-app/CoCreate-dnd/commit/33395b11582e67658f5d23741cf675d318446554))
+
 ## [0.13.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.13.0...v0.13.1) (2021-08-19)
 
 
