@@ -1,3 +1,10 @@
+## [0.13.5](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.13.4...v0.13.5) (2021-08-22)
+
+
+### Bug Fixes
+
+* removed data- from main-content, clone, filter-value_type ([f2cc8be](https://github.com/CoCreate-app/CoCreate-dnd/commit/f2cc8bea4fe01aec05c4107727e81ca718b4b9c6))
+
 ## [0.13.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.13.3...v0.13.4) (2021-08-22)
 
 
