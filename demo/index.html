@@ -39,11 +39,10 @@
 		</style>
 	</head>
 
-	<body dnd-group-name="canvas">
-
+	<body >
 
 		<!-- Container and elements intialized with cloneable class and cloneable attribute -->
-		<ul class="cloneable">
+		<ul class="cloneable" dnd-group-name="canvas">
 			<li id="header" cloneable-html='<h1 droppable="true" class="CoC-droppable">This is a Header</h1>"><i class="fa fa-header'>
 				</i>
 				<p>Header</p>
@@ -70,12 +69,10 @@
 			</li>
 		</ul>
 
-		-- iframe -->
-		<iframe src="iframe.html" id="client2" frameborder="0" width="100%" height="100%"></iframe>
+		<iframe src="iframe.html" id="client2" frameborder="1" width="100%" height="100%"></iframe>
 
 		<!-- Container intialized with class sortable -->
 		<div class="sortable">
-			sortable
 			<div element_id="sortable1" class="block myinline">sortable example block 1</div>
 			<div element_id="sortable2" class="block myinline">sortable example block 2</div>
 			<div element_id="sortable3" class="block myinline">sortable example block 3</div>
@@ -98,29 +95,6 @@
 			<div element_id="id9" draggable="true" class="block myinline">draggable example block 8</div>
 			<div element_id="id10" draggable="true" class="block myinline">draggable example block 9</div>
 		</div>
-
-		<div id="onConditionDnd">
-			<div>
-				start div 1
-				<div class="block myinline">example block 1</div>
-				<div class="block myinline">example block 2</div>
-				<div class="block myinline">example block 3</div>
-				end div 1
-
-			</div>
-
-			<div>
-				start div 2
-				<div class="block">example block 4</div>
-				<div class="block">example block 5</div>
-				<div class="block">example block 6</div>
-				end div 2
-			</div>
-			<div class="block myinline">example block 7</div>
-			<div class="block myinline">example block 8</div>
-			<div class="block myinline">example block 9</div>
-		</div>
-
 
 		<!--<script src="../dist/CoCreate-dnd.js" ></script>-->
 		<script src="../../../CoCreateJS/dist/CoCreate.js"></script>

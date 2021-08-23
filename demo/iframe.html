@@ -3,9 +3,7 @@
     <title>DND | CoCreateJS</title>
     <!-- CoCreate Favicon -->
     <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
-    <!-- CoCreate CSS CDN -->
-    <link rel="stylesheet" href="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.css" type="text/css"/>
-  
+
     <style>
       .sortable-item {
         background-color: white;
@@ -43,7 +41,7 @@
   </head>
   <body >
   
-    <div droppable="true" class="dnd">
+    <div droppable="true" class="sortable">
       <div element_id="1234567890" collection="module_activities"  document_id="5ee3937ce3fc3a5b7493dc37" name="html" data-theme='bubble' class="quill bubble"></div>
       <div draggable="true" class="block myinline">iframe block 1</div>
       <div draggable="true" class="block myinline">iframe block 2</div>
@@ -57,15 +55,8 @@
     </div>
     
     
-    <script>
-      var config = {
-        apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
-              organization_Id: '5de0387b12e200ea63204d6c'
-      }
-    </script>
-    
-   <!-- CoCreate JS CDN -->
-    <script src="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.js" ></script>
+		<!--<script src="../dist/CoCreate-dnd.js" ></script>-->
+		<script src="../../../CoCreateJS/dist/CoCreate.js"></script>
     
   </body>
 </html>

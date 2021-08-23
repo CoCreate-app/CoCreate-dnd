@@ -1,6 +1,5 @@
 // create a javascript-like event to be used in other classes
 
-
 export default function eventUtil() {
   this.listener = {}
 

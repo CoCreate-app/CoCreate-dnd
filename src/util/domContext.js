@@ -1,7 +1,18 @@
 // todo: jest support import/export
+
+let initFunctionState = [];
+export { initFunctionState };
 export default function context(html) {
   this.map = new Map();
 
+  this.checkInitFunction = function checkInitFunction(element, request) {
+    for (let state of initFunctionState) {
+      if (state.target.contains(element)) {
+        let r = state.onDnd(element, request);
+        if (Array.isArray(r)) return r;
+      }
+    }
+  };
   /**
    * @param el the element look for context
    *
@@ -9,10 +20,10 @@ export default function context(html) {
    */
   this.getContext = function (el, attributeName) {
     do {
-      let meta = this.map.get(el);
-      if (meta && meta[attributeName]) return el;
-      if (el.tagName == "IFRAME") return false;
-      if (el.getAttribute(attributeName) == "true") return el;
+      if (el.getAnyAttribute(attributeName) == "true") return el;
+      else {
+        if (this.checkInitFunction(el, [attributeName])) return el;
+      }
       el = el.parentElement;
     } while (el);
 
@@ -24,13 +35,13 @@ export default function context(html) {
    */
   this.getContexts = function (el, attributeNames) {
     do {
-      let meta = this.map.get(el);
-
       for (let attributeName of attributeNames) {
-        if (meta && meta[attributeName]) return [el, attributeName];
-        if (el.tagName == "IFRAME") return undefined;
-        if (el.getAttribute(attributeName) == "true")
+        if (el.getAnyAttribute(attributeName) == "true")
           return [el, attributeName];
+        else {
+          let r2 = this.checkInitFunction(el, attributeNames);
+          if (Array.isArray(r2) && attributeNames.includes(r2[1])) return r2;
+        }
       }
 
       el = el.parentElement;
@@ -40,13 +51,6 @@ export default function context(html) {
   };
 
   this.setContext = function (el, att, value) {
-    if (this.map.has(el)) {
-      let meta = this.map.get(el);
-      meta[att] = value;
-    } else {
-      this.map.set(el, {
-        [att]: value,
-      });
-    }
+    el.setHiddenAttribute(att, value);
   };
 }

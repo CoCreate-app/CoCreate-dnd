@@ -1,6 +1,6 @@
 
 import { group_name } from "./variables";
-import domContext, { initFunctionState } from "./domContext2";
+import domContext, { initFunctionState } from "./domContext";
 
 //find the global context
 let parentWindow = window;
