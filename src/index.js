@@ -183,13 +183,13 @@ function startEvent(e) {
 		} 
 		else startDnd(e);
     }, 200);
-    e.preventDefault();
 }
 
 function moveEvent(e) {
 	if(e.which > 1) return;
+	// if (e.touches)
+	// 	e.preventDefault();
 	move(e);
-	e.preventDefault();
 }
 
 function endEvent(e) {
@@ -197,7 +197,7 @@ function endEvent(e) {
 	// e.target.ownerDocument.body.style.touchAction = "auto"
 	endDnd(e);
 	clearTimeout(dragTimeout);
-	e.preventDefault();
+	// e.preventDefault();
 }
 
 function hasSelection(el) {
