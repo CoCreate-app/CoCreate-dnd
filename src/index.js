@@ -35,6 +35,9 @@ function initIframes(iframes) {
 function initIframe(iframe) {
 	let wnd = iframe.contentWindow;
 	initWindow(wnd);
+	
+	let iframes = wnd.document.querySelectorAll("iframe")
+	if (iframes) initIframes(iframes);
 }
 
 function initElements(elements, cloneable) {
@@ -174,7 +177,7 @@ function initEvents(wnd){
 	wnd.document.addEventListener("mousemove", moveEvent);
 	wnd.document.addEventListener("mouseup", endEvent);
 }
-// let isDragging = false;
+
 function startEvent(e) {
 	if(e.which > 1) return;
     dragTimeout = setTimeout(() => {
@@ -182,8 +185,8 @@ function startEvent(e) {
 			return;
 		} 
 		else startDnd(e);
-		// isDragging = true;
     }, 200);
+    // If preventDefault textselection does not work... If no preventDefault Iframe to Iframe does not work
    	e.preventDefault();
 }
 
@@ -209,56 +212,6 @@ function hasSelection(el) {
 		return true;
 	}
 }
-
-function init(params) {
-	let { mode } = params;
-	delete params.mode;
-	if(!['function', 'element', 'container'].includes(mode))
-		throw new Error('invalid mode provided');
-	let funcName = 'init' + mode.charAt(0).toUpperCase() + mode.slice(1);
-	exp[funcName].apply(null, [params]);
-}
-
-const initFunction = function({ target, onDnd, onDndSuccess }) {
-	if(typeof onDndSuccess == "function")
-		beforeDndSuccessCallback = onDndSuccess;
-	initFunctionState.push({ target, onDnd });
-};
-
-function beforeDndSuccess() {
-	if(beforeDndSuccessCallback)
-		return beforeDndSuccessCallback.apply(null, arguments);
-	return {};
-}
-
-let options = {
-	scroller: new autoScroll({ speed: 4, threshold: 3 }),
-	myDropMarker: new dropMarker(),
-};
-let { myDropMarker, scroller } = options;
-
-let dnd = new VirtualDnd(beforeDndSuccess);
-let ghost;
-
-dnd.on("dragStart", (data) => {
-	myDropMarker.hide();
-	ghost = new ghostEffect(data.e, data.el, { window, document });
-	ghost.start();
-});
-
-dnd.on("dragEnd", (data) => {
-	myDropMarker.hide();
-	if(ghost) ghost.hide(data.ref);
-});
-dnd.on("dragOver", (data) => {
-	// it will always run when mouse or touch moves
-	myDropMarker.draw(
-		data.el,
-		data.closestEl,
-		data.orientation, !!data.hasChild,
-		data.ref
-	);
-});
 
 let startGroup;
 let isDraging = false;
@@ -393,6 +346,56 @@ function endDnd(e) {
 	myDropMarker.hide();
 	scroller.deactivateScroll();
 }
+
+function init(params) {
+	let { mode } = params;
+	delete params.mode;
+	if(!['function', 'element', 'container'].includes(mode))
+		throw new Error('invalid mode provided');
+	let funcName = 'init' + mode.charAt(0).toUpperCase() + mode.slice(1);
+	exp[funcName].apply(null, [params]);
+}
+
+const initFunction = function({ target, onDnd, onDndSuccess }) {
+	if(typeof onDndSuccess == "function")
+		beforeDndSuccessCallback = onDndSuccess;
+	initFunctionState.push({ target, onDnd });
+};
+
+function beforeDndSuccess() {
+	if(beforeDndSuccessCallback)
+		return beforeDndSuccessCallback.apply(null, arguments);
+	return {};
+}
+
+let options = {
+	scroller: new autoScroll({ speed: 4, threshold: 3 }),
+	myDropMarker: new dropMarker(),
+};
+let { myDropMarker, scroller } = options;
+
+let dnd = new VirtualDnd(beforeDndSuccess);
+let ghost;
+
+dnd.on("dragStart", (data) => {
+	myDropMarker.hide();
+	ghost = new ghostEffect(data.e, data.el, { window, document });
+	ghost.start();
+});
+
+dnd.on("dragEnd", (data) => {
+	myDropMarker.hide();
+	if(ghost) ghost.hide(data.ref);
+});
+dnd.on("dragOver", (data) => {
+	// it will always run when mouse or touch moves
+	myDropMarker.draw(
+		data.el,
+		data.closestEl,
+		data.orientation, !!data.hasChild,
+		data.ref
+	);
+});
 
 function getGroupName(el) {
   if (!el.tagName) el = el.parentElement;
