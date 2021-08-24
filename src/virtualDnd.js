@@ -1,5 +1,5 @@
 import eventUtil from "./eventUtil";
-import { closestChild, parse } from "./util/common";
+import { pDistance } from "./util/common";
 import { exclude } from "./util/variables";
 import utils from '@cocreate/utils';
 
@@ -145,4 +145,48 @@ export default function virtualDnd(beforeDndSuccess) {
 			this.type = "children";
 		}
 	};
+}
+
+
+function closestChild(p, children) {
+	let closestDistance = Infinity;
+	let closestchild;
+	let topOrientation;
+	for(let child of children) {
+		if(child.classList.contains("hidden")) continue;
+		let [orientation, distance] = distanceToChild(p, child);
+		if(distance < closestDistance) {
+			closestDistance = distance;
+			closestchild = child;
+			topOrientation = orientation;
+		}
+	}
+	return [topOrientation, closestchild];
+}
+let orientations = ["left", "top", "right", "bottom"];
+
+function distanceToChild(p, child) {
+  let rect = child.getBoundingClientRect();
+
+  let line1 = { p1: [rect.top, rect.left], p2: [rect.bottom, rect.left] };
+  let line2 = { p1: [rect.top, rect.left], p2: [rect.top, rect.right] };
+  let line3 = { p1: [rect.top, rect.right], p2: [rect.bottom, rect.right] };
+  let line4 = { p1: [rect.bottom, rect.left], p2: [rect.bottom, rect.right] };
+
+  let distances = [
+    pDistance(p[0], p[1], line1.p1[1], line1.p1[0], line1.p2[1], line1.p2[0]),
+    pDistance(p[0], p[1], line2.p1[1], line2.p1[0], line2.p2[1], line2.p2[0]),
+    pDistance(p[0], p[1], line3.p1[1], line3.p1[0], line3.p2[1], line3.p2[0]),
+    pDistance(p[0], p[1], line4.p1[1], line4.p1[0], line4.p2[1], line4.p2[0]),
+  ];
+
+  let orientation;
+  let closestDistance = Infinity;
+  distances.forEach((distance, i) => {
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      orientation = orientations[i];
+    }
+  });
+  return [orientation, closestDistance];
 }
