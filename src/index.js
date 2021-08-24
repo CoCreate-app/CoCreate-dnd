@@ -157,9 +157,9 @@ function initWindow(wnd){
 			wnd.document.head.append(dndStyle);
 		}
 		initEvents(wnd);
-    	windows.set(wnd)
+    	windows.set(wnd);
 	}
-};
+}
 
 function initEvents(wnd){
 	wnd.document.addEventListener("dragstart", (e) => {
@@ -167,14 +167,14 @@ function initEvents(wnd){
 		return false;
 	});
 
-	wnd.document.addEventListener("touchstart", startEvent);
+	wnd.document.addEventListener("touchstart", startEvent, { passive: false });
 	wnd.document.addEventListener("touchmove", moveEvent, { passive: false });
 	wnd.document.addEventListener("touchend", endEvent, { passive: false });
  	wnd.document.addEventListener("mousedown", startEvent);
 	wnd.document.addEventListener("mousemove", moveEvent);
 	wnd.document.addEventListener("mouseup", endEvent);
 }
-
+// let isDragging = false;
 function startEvent(e) {
 	if(e.which > 1) return;
     dragTimeout = setTimeout(() => {
@@ -182,13 +182,16 @@ function startEvent(e) {
 			return;
 		} 
 		else startDnd(e);
+		// isDragging = true;
     }, 200);
+   	e.preventDefault();
 }
 
 function moveEvent(e) {
 	if(e.which > 1) return;
-	// if (e.touches)
-	// 	e.preventDefault();
+	if (e.target.getAttribute('coc-dragging') == 'true')
+		e.preventDefault();
+	// e.target.ownerDocument.body.style.touchAction = "none"
 	move(e);
 }
 
@@ -317,6 +320,9 @@ function move(e, stopScroll) {
 		x = touch.clientX;
 		y = touch.clientY;
 		target = e.target.ownerDocument.elementFromPoint(x, y)
+		if (!target)
+			target = e.target
+			// console.log(e.currentTarget)
 	} else {
 		x = e.x;
 		y = e.y
