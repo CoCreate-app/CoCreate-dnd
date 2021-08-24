@@ -18,14 +18,14 @@ export default function virtualDnd(beforeDndSuccess) {
 		evnt.on.apply(evnt, arguments);
 	};
 
-	this.dragStart = (e, el, id, ref, dropType) => {
+	this.dragStart = (e, el, id, wnd, dropType) => {
 		this.id = id;
 		this.dropType = dropType;
 		this.dragedEl = el;
-		evnt.dispatch("dragStart", { e, el, ref });
+		evnt.dispatch("dragStart", { e, el, wnd });
 	};
 
-	this.dragEnd = (e, ref) => {
+	this.dragEnd = (e, wnd) => {
 		try {
 			if(this.dragedEl) this.dragedEl.removeAttribute("CoC-dragging");
 			if(this.position) {
@@ -88,11 +88,11 @@ export default function virtualDnd(beforeDndSuccess) {
 				this.position = null;
 				// console.log("dnd completed", "type:", this.type, "position:", this.position);
 			}
-			evnt.dispatch("dragEnd", { e, ref });
+			evnt.dispatch("dragEnd", { e, wnd });
 		}
 	};
 
-	this.dragOver = (e, el, ref) => {
+	this.dragOver = (e, el, wnd) => {
 		// el is the element hovered
 		if(this.dragedEl) this.dragedEl.setAttribute("CoC-dragging", true);
 		if(el.children.length === 0) {
@@ -104,7 +104,7 @@ export default function virtualDnd(beforeDndSuccess) {
 				closestEl,
 				orientation,
 				hasChild: true,
-				ref,
+				wnd,
 			});
 
 			this.position = topleft.includes(orientation) ?
@@ -133,7 +133,7 @@ export default function virtualDnd(beforeDndSuccess) {
 				closestEl,
 				orientation,
 				hasChild: false,
-				ref,
+				wnd,
 			});
 
 			this.position = topleft.includes(orientation) ?

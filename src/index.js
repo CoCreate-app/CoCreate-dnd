@@ -385,7 +385,7 @@ dnd.on("dragStart", (data) => {
 
 dnd.on("dragEnd", (data) => {
 	myDropMarker.hide();
-	if(ghost) ghost.hide(data.ref);
+	if(ghost) ghost.hide(data.wnd);
 });
 dnd.on("dragOver", (data) => {
 	// it will always run when mouse or touch moves
@@ -393,7 +393,7 @@ dnd.on("dragOver", (data) => {
 		data.el,
 		data.closestEl,
 		data.orientation, !!data.hasChild,
-		data.ref
+		data.wnd
 	);
 });
 
