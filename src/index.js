@@ -260,10 +260,23 @@ dnd.on("dragOver", (data) => {
 let startGroup;
 let isDraging = false;
 
+function checkDnd(el) {
+	if (el.hasAttribute('cloneable') || el.getAttribute('cloneable') != 'false' || el.dnd.cloneable) {
+		return 'cloneable';
+	}	
+	if (el.hasAttribute('draggable') || el.getAttribute('draggable') != 'false' || el.dnd.draggable == 'draggable', true) {
+		return 'draggable';
+	}
+}
+
 function startDnd(e) {
 	let wnd = e.view
 	let r = getCocs(e.target, [vars.draggable, vars.cloneable, vars.handleable]);
-		
+	// let el = e.target;
+	// let att = checkDnd(el)
+	// if (!att) {
+	// 	if (this.checkInitFunction(el, [vars.draggable, vars.cloneable, vars.handleable])) return el;
+	// }
 	if(!Array.isArray(r)) return;
 	let [el, att] = r;
 
@@ -344,7 +357,15 @@ function move(e, stopScroll) {
 	if(!target) return; // it's out of iframe if this is multi frame
 
 	let el = getCoc(target, vars.droppable);
-
+	// let el;
+	// if (target.hasAttribute('droppable') || target.getAttribute('droppable') != 'false' || target.dnd.droppable == 'droppable', true) {
+	// 	el = target;
+	// }
+	
+	// if(!el) {
+	// 	el = target.closest('.sortable') || target.closest('[droppable]:not([droppable="false"])');
+	// }
+	
 	if(!el) return;
 
 	if(!stopScroll) {
