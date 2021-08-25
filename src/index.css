@@ -35,3 +35,7 @@
   z-index: 100000;
   border: 1px solid grey;
 }
+
+	  /*[draggable="true"], [cloneable="true"]  {*/
+	  /*  touch-action: none;*/
+	  /*}*/

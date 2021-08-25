@@ -1,7 +1,5 @@
 import observer from '@cocreate/observer';
 import "./collaboration.js";
-import { getCoc, getCocs, initFunctionState }
-from "./util/common";
 import VirtualDnd from "./virtualDnd";
 import * as vars from "./util/variables.js";
 import {dropMarker} from "./util/dropMarker.js";
@@ -9,12 +7,12 @@ import {ghostEffect} from "./util/ghostEffect.js";
 import {autoScroll} from "./util/autoScroll.js";
 import './index.css';
 
-import domReader from './util/domReader';
 import text from '@cocreate/text';
 
 let windows = new Map();
 let dragTimeout;
 let beforeDndSuccessCallback;
+let initFunctionState = [];
 
 function initDnd() {
 	if(window.parent !== window) return;
@@ -53,12 +51,12 @@ function initElement({
 	group,
 	exclude,
 }) {
-	if(group) target.setHiddenAttribute(vars.group_name, group);
+	if(group) target.dnd = {groupName: group};
 	if(exclude) {
 		try {
 			let excludeEls = target.querySelectorAll(exclude);
 			excludeEls.forEach((el) => {
-				el.setHiddenAttribute(vars.exclude, "true");
+				el.dnd = {exclude: true};
 			});
 		}
 		catch(err) {
@@ -93,26 +91,22 @@ function initElement({
 		addNestedAttribute(target, cloneable);
 	}
 	else {
-		target.setHiddenAttribute(vars.droppable, "true");
+		target.dnd = {droppable: true};
 		console.log('dnd loaded target child', target.children)
 		if(target.children.length)
 			Array.from(target.children).forEach((el) => {
 				if(cloneable) {
 					el.dnd = {cloneable: true};
-					el.setHiddenAttribute(vars.cloneable, "true");
 				}
 				else {
-					el.dnd = {draggble: true};
-					el.setHiddenAttribute(vars.draggable, "true");
+					el.dnd = {draggable: true};
 				}
 				try {
 					let handleEls = el.querySelectorAll(handle);
 					if(handle && handleEls.length) {
-						el.dnd = {draggble: true, handle: handleEls};
-						el.setHiddenAttribute(vars.draggable, "true");
+						el.dnd = {draggable: true, handle: handleEls};
 						handleEls.forEach((el) => {
-							el.dnd = {draggble: true};
-							el.setHiddenAttribute(vars.draggable, "true");
+							el.dnd = {draggable: true};
 						});
 					}
 				}
@@ -133,32 +127,16 @@ function addNestedAttribute(el, cloneable) {
 	if(!el.children.length) return;
 	Array.from(el.children).forEach((el) => {
 		addNestedAttribute(el);
-		el.setHiddenAttribute(vars.exclude, "true");
-		el.setHiddenAttribute(vars.draggable, "true");
-		el.dnd = {draggble: true, exclude: true};
+		el.dnd = {draggable: true, exclude: true};
 		if(cloneable){
 			el.dnd = {cloneable: true};
-			el.setHiddenAttribute(vars.cloneable, "true");	
 		} 
 	});
 }
 
 function initWindow(wnd){
 	if(!windows.has(wnd.window)) {
-		domReader.register(wnd.window);
 		if(wnd.CoCreateDnd && wnd.CoCreateDnd.hasInit) return;
-	
-		if(!wnd.document.querySelector("#dnd-style")) {
-			
-			let dndStyle = wnd.document.createElement("style");
-			dndStyle.id = "dnd-style";
-			dndStyle.innerHTML = `    /* dnd specic */
-	  [draggable="true"], [cloneable="true"]  {
-	    touch-action: none;
-	  }
-	  /* dnd specic */`;
-			wnd.document.head.append(dndStyle);
-		}
 		initEvents(wnd);
     	windows.set(wnd);
 	}
@@ -216,25 +194,48 @@ function hasSelection(el) {
 let startGroup;
 let isDraging = false;
 
-function checkDnd(el) {
-	if (el.hasAttribute('cloneable') || el.getAttribute('cloneable') != 'false' || el.dnd.cloneable) {
-		return 'cloneable';
-	}	
-	if (el.hasAttribute('draggable') || el.getAttribute('draggable') != 'false' || el.dnd.draggable == 'draggable', true) {
-		return 'draggable';
-	}
+function checkDnd(el, att ) {
+    do {
+		let element, isDraggable, isCloneable, isDroppable;
+		if (el.dnd) {
+	    	isCloneable = (el.dnd.cloneable)
+	    	isDraggable = (el.dnd.draggable)
+	    	isDroppable = (el.dnd.droppable)
+    	}
+    	if (att == 'droppable'){
+			if ((el.hasAttribute('droppable') && el.getAttribute('droppable') != 'false') || (isDroppable)) {
+				return [el, 'droppable'];
+			}	
+			element = checkInitFunction(el, [vars.droppable]);
+    	}
+    	else {
+			if ((el.hasAttribute('cloneable') && el.getAttribute('cloneable') != 'false') || (isCloneable)) {
+				return [el, 'cloneable'];
+			}
+			if ((el.hasAttribute('draggable') && el.getAttribute('draggable') != 'false') || (isDraggable)) {
+				return [el, 'draggable'];
+			}
+			element = checkInitFunction(el, [vars.draggable, vars.cloneable, vars.handleable]);
+    	}
+    	if(element)
+    		console.log('checkDnd: ', element);
+			if (Array.isArray(element)) return element;
+    	el = el.parentElement;
+    } while (el);
+}
+
+function checkInitFunction(element, request) {
+    for (let state of initFunctionState) {
+      if (state.target.contains(element)) {
+        let r = state.onDnd(element, request);
+        if (Array.isArray(r)) return r;
+      }
+    }
 }
 
 function startDnd(e) {
 	let wnd = e.view
-	let r = getCocs(e.target, [vars.draggable, vars.cloneable, vars.handleable]);
-	// let el = e.target;
-	// let att = checkDnd(el)
-	// if (!att) {
-	// 	if (this.checkInitFunction(el, [vars.draggable, vars.cloneable, vars.handleable])) return el;
-	// }
-	if(!Array.isArray(r)) return;
-	let [el, att] = r;
+	let	[el, att] = checkDnd(e.target);
 
 	switch(att) {
 		case vars.cloneable:
@@ -246,12 +247,13 @@ function startDnd(e) {
 			else el = el.cloneNode(true);
 			break;
 		case vars.draggable:
-			let hasHandle = el.getAnyAttribute(vars.handleable);
+			let hasHandle = false;
 			if(hasHandle) return;
 			break;
 
 		default:
-			el = getCoc(el, vars.draggable);
+			// el = getCoc(el, vars.draggable);
+			[el, att] = checkDnd(e.target, vars.draggable);
 	}
 
 	// get group
@@ -315,17 +317,10 @@ function move(e, stopScroll) {
 
 	if(!target) return; // it's out of iframe if this is multi frame
 
-	let el = getCoc(target, vars.droppable);
-	// let el;
-	// if (target.hasAttribute('droppable') || target.getAttribute('droppable') != 'false' || target.dnd.droppable == 'droppable', true) {
-	// 	el = target;
-	// }
-	
-	// if(!el) {
-	// 	el = target.closest('.sortable') || target.closest('[droppable]:not([droppable="false"])');
-	// }
-	
-	if(!el) return;
+	// let el = getCoc(target, vars.droppable);
+	let element = checkDnd(target, vars.droppable);
+	if (!element) return
+	let el = element[0];
 
 	if(!stopScroll) {
 		scroller.calculateScroll({
@@ -401,6 +396,9 @@ function getGroupName(el) {
   if (!el.tagName) el = el.parentElement;
   do {
     let groupName = el.getAttribute(vars.group_name);
+    if (!groupName && el.dnd) {
+    	groupName = el.dnd.groupName;
+    }
     if (groupName) return [el, groupName];
     el = el.parentElement;
     if (!el) return [null, undefined];
@@ -426,7 +424,7 @@ let exp = {
 initDnd();
 
 observer.init({
-	name: "dnd-config",
+	name: "dndClasses",
 	observe: ['addedNodes'],
 	target: '.sortable, .cloneable',
 	callback: mutation => {
@@ -434,13 +432,24 @@ observer.init({
 	},
 });
 
-// observer.init({
-// 	name: "dnd-iframe",
-// 	observe: ['addedNodes'],
-// 	target: 'iframe',
-// 	callback: mutation => {
-//     	initIframe({isIframe: true, iframe: mutation.target});
-// 	},
-// });
+observer.init({
+	name: "dndAttributes",
+	observe: ['addedNodes'],
+	target: '[sortable], [droppable], [cloneable]',
+	callback: mutation => {
+		initWindow(window);
+	},
+});
+
+observer.init({
+	name: "dndIframe",
+	observe: ['addedNodes'],
+	target: 'iframe',
+	callback: mutation => {
+	    setTimeout(() => {
+	    	initIframe(mutation.target);
+	    }, 2000);
+	},
+});
 
 export default { init, initIframe};

@@ -1,35 +1,3 @@
-import domContext, { initFunctionState } from "./domContext";
-
-//find the global context
-let parentWindow = window;
-while (parentWindow !== window.parent) parentWindow = window.parent;
-let dndContext;
-if (!parentWindow.dndContext) {
-  dndContext = new domContext();
-  parentWindow.dndContext = dndContext;
-} else dndContext = parentWindow.dndContext;
-
-export { dndContext, initFunctionState };
-
-export function getCoc(el, att) {
-  if (!el.tagName) el = el.parentElement;
-  return dndContext.getContext(el, att);
-}
-
-export function getCocs(el, attList) {
-  if (!el.tagName) el = el.parentElement;
-  return dndContext.getContexts(el, attList);
-}
-
-export function computeStyles(el, properties) {
-  let computed = window.getComputedStyle(el);
-  let result = {};
-  properties.forEach((property) => {
-    result[property] = parseInt(computed[property]);
-  });
-  return result;
-}
-
 export function pDistance(x, y, x1, y1, x2, y2) {
   var A = x - x1;
   var B = y - y1;
