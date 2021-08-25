@@ -1,9 +1,3 @@
-/*global dom*/
-/*global CoCreate*/
-/*global DOMParser*/
-/*global domEditor*/
-/*global CoCreate.socket*/
-
 import utils from '@cocreate/utils';
 import message from '@cocreate/message-client';
 import uuid from '@cocreate/uuid';
@@ -56,7 +50,7 @@ function wrapper() {
 				data.value[1] = utils.parseTextToHtml(data.value[1]);
 				if(data.hiddenAttribute) {
 					for(let [key, value] of Object.entries(data.hiddenAttribute)) {
-						data.value[1].setHiddenAttribute(key, value);
+						data.value[1].dnd(key, value);
 					}
 				}
 
@@ -83,7 +77,7 @@ function wrapper() {
 		dropedEl = dropedEl.getAttribute("element_id");
 
 		if(dropType === "cloneable") {
-			let hiddenAttribute = dragedEl.getAllHiddenAttribute();
+			let hiddenAttribute = dragedEl.dnd;
 
 			dragedEl = dragedEl.outerHTML;
 

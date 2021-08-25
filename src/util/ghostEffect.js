@@ -1,6 +1,6 @@
 export function ghostEffect(elementEvent, el, wnd) {
   this.effectCb;
-  el.removeAttribute("CoC-dragging");
+  el.removeAttribute("dragging");
   this.start = () => {
     this.cloneEl = el.cloneNode(true);
     let { width, height } = wnd.window.getComputedStyle(el);

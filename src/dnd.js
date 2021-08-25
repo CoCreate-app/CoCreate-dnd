@@ -1,5 +1,5 @@
-import eventUtil from "./eventUtil";
-import { pDistance } from "./util/common";
+import eventUtil from "./util/customEvents";
+// import { pDistance } from "./util/common";
 import { exclude } from "./util/variables";
 import utils from '@cocreate/utils';
 
@@ -27,7 +27,7 @@ export default function virtualDnd(beforeDndSuccess) {
 
 	this.dragEnd = (e, wnd) => {
 		try {
-			if(this.dragedEl) this.dragedEl.removeAttribute("CoC-dragging");
+			if(this.dragedEl) this.dragedEl.removeAttribute("dragging");
 			if(this.position) {
 				if(this.dropedEl === this.dragedEl)
 					throw "dnd cancelled. you can't dnd on the same element.";
@@ -36,21 +36,6 @@ export default function virtualDnd(beforeDndSuccess) {
 					throw "dnd cancelled, you can't dnd from parent to its children.";
 
 				let path = utils.getElementPath(this.dropedEl);
-				// get iframe path
-				// let path = [];
-				//   const {cssPath, findIframeFromElement, getTopMostWindow} = window.cc;
-				//   let topWindow = getTopMostWindow()
-				//   let iframeElement = findIframeFromElement(topWindow, this.dropedEl)
-				//   let p = cssPath(iframeElement);
-				//   if(p)
-				//   path.unshift(p)
-
-				//todo: support for nested iframe
-				// while(iframeElement !== findIframeFromElement(topWindow,iframeElement))
-				// {
-				//   iframeElement = findIframeFromElement(topWindow,iframeElement);
-				//   path.unshift(cssPath(iframeElement))
-				// }
 
 				let detail = {
 					position: this.position,
@@ -63,7 +48,6 @@ export default function virtualDnd(beforeDndSuccess) {
 				if(beforeDndSuccess) result = beforeDndSuccess(detail);
 				Object.assign(detail, result);
 
-				// dispatch global events
 				const event = new CustomEvent("dndsuccess", {
 					bubbles: false,
 					detail,
@@ -94,7 +78,7 @@ export default function virtualDnd(beforeDndSuccess) {
 
 	this.dragOver = (e, el, wnd) => {
 		// el is the element hovered
-		if(this.dragedEl) this.dragedEl.setAttribute("CoC-dragging", true);
+		if(this.dragedEl) this.dragedEl.setAttribute("dragging", true);
 		if(el.children.length === 0) {
 			// place top or bottom inside the element
 			let [orientation, closestEl] = closestChild([e.x, e.y], [el]);
@@ -187,4 +171,35 @@ function distanceToChild(p, child) {
     }
   });
   return [orientation, closestDistance];
+}
+
+export function pDistance(x, y, x1, y1, x2, y2) {
+  var A = x - x1;
+  var B = y - y1;
+  var C = x2 - x1;
+  var D = y2 - y1;
+
+  var dot = A * C + B * D;
+  var len_sq = C * C + D * D;
+  var param = -1;
+  if (len_sq != 0)
+    //in case of 0 length line
+    param = dot / len_sq;
+
+  var xx, yy;
+
+  if (param < 0) {
+    xx = x1;
+    yy = y1;
+  } else if (param > 1) {
+    xx = x2;
+    yy = y2;
+  } else {
+    xx = x1 + param * C;
+    yy = y1 + param * D;
+  }
+
+  var dx = x - xx;
+  var dy = y - yy;
+  return Math.sqrt(dx * dx + dy * dy);
 }

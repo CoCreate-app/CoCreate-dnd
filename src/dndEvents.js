@@ -1,4 +1,4 @@
-import VirtualDnd from "./virtualDnd";
+import VirtualDnd from "./dnd";
 import * as vars from "./util/variables.js";
 import {dropMarker} from "./util/dropMarker.js";
 import {ghostEffect} from "./util/ghostEffect.js";
@@ -6,9 +6,7 @@ import {autoScroll} from "./util/autoScroll.js";
 import text from '@cocreate/text';
 import {beforeDndSuccessCallback} from './index';
 
-
 let dragTimeout;
-// let beforeDndSuccessCallback;
 let initFunctionState = [];
 
 function initEvents(wnd){
@@ -39,7 +37,7 @@ function startEvent(e) {
 
 function moveEvent(e) {
 	if(e.which > 1) return;
-	if (e.target.getAttribute('coc-dragging') == 'true')
+	if (e.target.getAttribute('dragging') == 'true')
 		e.preventDefault();
 	// e.target.ownerDocument.body.style.touchAction = "none"
 	move(e);
@@ -63,7 +61,7 @@ function hasSelection(el) {
 let startGroup;
 let isDraging = false;
 
-function checkDnd(el, att ) {
+function isDnd(el, att ) {
     do {
 		let element, isDraggable, isCloneable, isDroppable;
 		if (el.dnd) {
@@ -72,22 +70,21 @@ function checkDnd(el, att ) {
 	    	isDroppable = (el.dnd.droppable)
     	}
     	if (att == 'droppable'){
-			if ((el.hasAttribute('droppable') && el.getAttribute('droppable') != 'false') || (isDroppable)) {
+			if ((el.hasAttribute(vars.droppable) && el.getAttribute(vars.droppable) != 'false') || (isDroppable)) {
 				return [el, 'droppable'];
 			}	
 			element = checkInitFunction(el, [vars.droppable]);
     	}
     	else {
-			if ((el.hasAttribute('cloneable') && el.getAttribute('cloneable') != 'false') || (isCloneable)) {
-				return [el, 'cloneable'];
+			if ((el.hasAttribute(vars.cloneable) && el.getAttribute(vars.cloneable) != 'false') || (isCloneable)) {
+				return [el, vars.cloneable];
 			}
-			if ((el.hasAttribute('draggable') && el.getAttribute('draggable') != 'false') || (isDraggable)) {
-				return [el, 'draggable'];
+			if ((el.hasAttribute(vars.draggable) && el.getAttribute(vars.draggable) != 'false') || (isDraggable)) {
+				return [el, vars.draggable];
 			}
-			element = checkInitFunction(el, [vars.draggable, vars.cloneable, vars.handleable]);
+			element = checkInitFunction(el, [vars.draggable, vars.cloneable, vars.dragHandle]);
     	}
     	if(element)
-    		console.log('checkDnd: ', element);
 			if (Array.isArray(element)) return element;
     	el = el.parentElement;
     } while (el);
@@ -104,11 +101,11 @@ function checkInitFunction(element, request) {
 
 function startDnd(e) {
 	let wnd = e.view
-	let	[el, att] = checkDnd(e.target);
+	let	[el, att] = isDnd(e.target);
 
 	switch(att) {
 		case vars.cloneable:
-			let html = el.getAttribute(vars.data_insert_html);
+			let html = el.getAttribute(vars.cloneableHtml);
 			if(html) {
 				el = parse(html);
 				if(!el) return;
@@ -122,7 +119,7 @@ function startDnd(e) {
 
 		default:
 			// el = getCoc(el, vars.draggable);
-			[el, att] = checkDnd(e.target, vars.draggable);
+			[el, att] = isDnd(e.target, vars.draggable);
 	}
 
 	// get group
@@ -184,10 +181,9 @@ function move(e, stopScroll) {
 		if(ghost) ghost.hide();
 	}
 
-	if(!target) return; // it's out of iframe if this is multi frame
+	if(!target) return;
 
-	// let el = getCoc(target, vars.droppable);
-	let element = checkDnd(target, vars.droppable);
+	let element = isDnd(target, vars.droppable);
 	if (!element) return;
 	let el = element[0];
 
@@ -249,7 +245,7 @@ dnd.on("dragOver", (data) => {
 function getGroupName(el) {
   if (!el.tagName) el = el.parentElement;
   do {
-    let groupName = el.getAttribute(vars.group_name);
+    let groupName = el.getAttribute(vars.groupName);
     if (!groupName && el.dnd) {
     	groupName = el.dnd.groupName;
     }

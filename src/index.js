@@ -1,11 +1,6 @@
 import observer from '@cocreate/observer';
-import "./collaboration.js";
 import {initEvents, initFunctionState} from "./dndEvents";
-import VirtualDnd from "./virtualDnd";
-// import * as vars from "./util/variables.js";
-import {dropMarker} from "./util/dropMarker.js";
-import {ghostEffect} from "./util/ghostEffect.js";
-import {autoScroll} from "./util/autoScroll.js";
+import "./collaboration.js";
 import './index.css';
 
 
@@ -43,6 +38,8 @@ function initElements(elements, cloneable) {
 
 function initElement({
 	target,
+	draggable,
+	droppable = true,
 	cloneable = false,
 	nested = false,
 	handle,
@@ -84,52 +81,44 @@ function initElement({
 		console.error(error);
 		throw error;
 	}
-
-	if(nested) {
-		addNestedAttribute(target, cloneable);
-	}
-	else {
-		target.dnd = {droppable: true};
-		console.log('dnd loaded target child', target.children)
-		if(target.children.length)
-			Array.from(target.children).forEach((el) => {
-				if(cloneable) {
-					el.dnd = {cloneable: true};
+	
+	target.dnd = {droppable: droppable};
+	console.log('dnd loaded target child', target.children)
+	if(target.children.length)
+		Array.from(target.children).forEach((el) => {
+			if(cloneable) {
+				el.dnd = {cloneable: cloneable};
+			}
+			else if (draggable != false){
+				el.dnd = {draggable: true};
+			}
+			try {
+				let handleEls = el.querySelectorAll(handle);
+				if(handle && handleEls.length) {
+					el.dnd = {draggable: true, handle: handleEls};
+					handleEls.forEach((el) => {
+						el.dnd = {draggable: true};
+					});
 				}
-				else {
-					el.dnd = {draggable: true};
+			}
+			catch(err) {
+				if(err instanceof DOMException) {
+					let error = "Dnd Sortable: handle must be a valid selector";
+					console.error(error);
+					throw error;
 				}
-				try {
-					let handleEls = el.querySelectorAll(handle);
-					if(handle && handleEls.length) {
-						el.dnd = {draggable: true, handle: handleEls};
-						handleEls.forEach((el) => {
-							el.dnd = {draggable: true};
-						});
-					}
+				else throw err;
+			}
+			if(nested) {
+				if (el.children.length) {
+					el.dnd = {droppable: droppable};
+					Array.from(el.children).forEach((el) => {
+					initElement(el, draggable, droppable, cloneable, nested, handle, group, exclude);
+					});
 				}
-				catch(err) {
-					if(err instanceof DOMException) {
-						let error = "Dnd Sortable: handle must be a valid selector";
-						console.error(error);
-						throw error;
-					}
-					else throw err;
-				}
-			});
-	}
+			}
+		});
 	initWindow(window);
-}
-
-function addNestedAttribute(el, cloneable) {
-	if(!el.children.length) return;
-	Array.from(el.children).forEach((el) => {
-		addNestedAttribute(el);
-		el.dnd = {draggable: true, exclude: true};
-		if(cloneable){
-			el.dnd = {cloneable: true};
-		} 
-	});
 }
 
 function initWindow(wnd){

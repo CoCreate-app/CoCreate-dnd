@@ -10,7 +10,7 @@
   outline: 1px dashed gray;
 }
 
-[coc-dragging="true"] {
+[dragging="true"] {
   height:0px;
   overflow:hidden;
   cursor: move; /* fallback if grab cursor is unsupported */

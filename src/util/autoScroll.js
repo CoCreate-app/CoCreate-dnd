@@ -1,4 +1,4 @@
-import { pDistance } from "./common";
+import { pDistance } from "../dnd";
 
 export function autoScroll({ speed, threshold }) {
   this.lastScrollingElement;
