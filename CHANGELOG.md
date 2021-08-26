@@ -1,3 +1,23 @@
+# [0.14.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.13.6...v0.14.0) (2021-08-26)
+
+
+### Bug Fixes
+
+* dropmarker position when iframe in iframe ([8ccae2e](https://github.com/CoCreate-app/CoCreate-dnd/commit/8ccae2ec113498dd613434fe75d0d8a99a9acc4f))
+* marker and ghost position when top window is not dnd ([870f02f](https://github.com/CoCreate-app/CoCreate-dnd/commit/870f02f2549f91cb1cd459794719f5e43a15954f))
+* ondndSuccess ([0937710](https://github.com/CoCreate-app/CoCreate-dnd/commit/0937710ae2c90c5780430c35fc8483b24e867c67))
+* preventdefault for touch event ([ce13d50](https://github.com/CoCreate-app/CoCreate-dnd/commit/ce13d5030931b38586aea05c9622c5868dcb8f16))
+* refactor init ([766dba1](https://github.com/CoCreate-app/CoCreate-dnd/commit/766dba1aab33d8ca65a68280d557b9ddd7579179))
+* removed domContext and domReader ([2917379](https://github.com/CoCreate-app/CoCreate-dnd/commit/2917379494077125a2bb92f6c5ee8b6049b8f62a))
+* removed unused files and archive folder ([4f63669](https://github.com/CoCreate-app/CoCreate-dnd/commit/4f63669f08e3dc518391c3f33f9906db078bc9db))
+* replace gethiddenAttributes with el.dnd ([80ec519](https://github.com/CoCreate-app/CoCreate-dnd/commit/80ec519b152c08051f4d5516f13df60340ceb251))
+
+
+### Features
+
+* Drag and Drop support betweeen iframes ([f79a6e8](https://github.com/CoCreate-app/CoCreate-dnd/commit/f79a6e828ca4c54b18094c4a887cc85ac2c693e9))
+* iframe in iframe dnd support ([ca01225](https://github.com/CoCreate-app/CoCreate-dnd/commit/ca01225c2e352b5e98271a61e622474c3c8acec6))
+
 ## [0.13.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.13.5...v0.13.6) (2021-08-23)
 
 
