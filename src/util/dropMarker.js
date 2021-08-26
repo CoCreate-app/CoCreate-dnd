@@ -44,12 +44,15 @@ export function dropMarker(options) {
 		if(wnd.frameElement) {
 			frameRect = wnd.frameElement.getBoundingClientRect();
 			if(wnd.parent.frameElement) {
-				let frameFrameRect = wnd.parent.frameElement.getBoundingClientRect();
-				let topRect = frameRect.top;
-				let leftRect = frameRect.left;
-				topRect += frameFrameRect.top;
-				leftRect += frameFrameRect.left;
-				frameRect = { top: topRect, left: leftRect };
+				let isTopWndDnd = wnd.top.document.getElementById('dropMarker'); 
+				if(isTopWndDnd) {
+					let frameFrameRect = wnd.parent.frameElement.getBoundingClientRect();
+					let topRect = frameRect.top;
+					let leftRect = frameRect.left;
+					topRect += frameFrameRect.top;
+					leftRect += frameFrameRect.left;
+					frameRect = { top: topRect, left: leftRect };
+				}
 			}
 		}
 		else frameRect = { top: 0, left: 0 };

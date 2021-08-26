@@ -113,7 +113,7 @@ function initElement({
 				if (el.children.length) {
 					el.dnd = {droppable: droppable};
 					Array.from(el.children).forEach((el) => {
-					initElement(el, draggable, droppable, cloneable, nested, handle, group, exclude);
+						initElement(el, draggable, droppable, cloneable, nested, handle, group, exclude);
 					});
 				}
 			}
@@ -122,8 +122,11 @@ function initElement({
 }
 
 function initWindow(wnd){
+	// console.log('wnd: ', wnd);
+	// console.log('wnd.top: ', wnd.top);
+	// console.log('window.top: ', window.top);
 	if(!windows.has(wnd.window)) {
-		if(wnd.CoCreateDnd && wnd.CoCreateDnd.hasInit) return;
+		// if(wnd.CoCreate.dnd && wnd.CoCreate.dnd.hasInit) return;
 		initEvents(wnd);
     	windows.set(wnd);
 	}

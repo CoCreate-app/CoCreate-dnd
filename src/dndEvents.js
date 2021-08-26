@@ -8,6 +8,7 @@ import {beforeDndSuccessCallback} from './index';
 
 let dragTimeout;
 let initFunctionState = [];
+// const controller = new AbortController();
 
 function initEvents(wnd){
 	wnd.document.addEventListener("dragstart", (e) => {
@@ -23,24 +24,72 @@ function initEvents(wnd){
 	wnd.document.addEventListener("mouseup", endEvent);
 }
 
+// function startEvent(e) {
+// 	if(e.detail.hasSelection != false){
+// 	if(e.which > 1) return;
+// 	    dragTimeout = setTimeout(() => {
+// 			if(hasSelection(e.target)) {
+// 				return;
+// 			}
+// 			else {
+// 				let wnd = e.view;
+// 		    	// let customMouseup = new CustomEvent('mouseup', { bubbles: true });
+// 		    	// Object.defineProperty(customMouseup, 'view', { writable: false, value: e.view });
+// 		     //   wnd.document.dispatchEvent(customMouseup);
+		        
+// 				// const controller = new AbortController();
+// 				// wnd.document.addEventListener('event-type', handler, { signal: controller.signal });
+// 				// controller.abort();		        
+// 				let hasSelection = {hasSelection: false};
+// 		        let newDndEvent = new CustomEvent('mousedown', { bubbles: true });
+// 				// let merged = {...startDndEvent, ...eventObject}
+				
+// 				// for(const [key, value] of Object.entries(eventObject)) {
+// 				// 	if (key == 'isTrusted') continue;
+// 				// 	Object.defineProperty(startDndEvent, `'${key}'`, { writable: false, value: value });
+// 				// }
+// 				Object.defineProperty(newDndEvent, 'target', { writable: false, value: e.target });
+// 				Object.defineProperty(newDndEvent, 'ClientX', { writable: false, value: e.ClientX });
+// 				Object.defineProperty(newDndEvent, 'ClientY', { writable: false, value: e.ClientY });
+// 				Object.defineProperty(newDndEvent, 'path', { writable: false, value: e.path });
+// 				Object.defineProperty(newDndEvent, 'view', { writable: false, value: e.view });
+// 				Object.defineProperty(newDndEvent, 'offsetX', { writable: false, value: e.offsetX });
+// 				Object.defineProperty(newDndEvent, 'offsetY', { writable: false, value: e.offsetY });
+// 				Object.defineProperty(newDndEvent, 'x', { writable: false, value: e.x });
+// 				Object.defineProperty(newDndEvent, 'y', { writable: false, value: e.y });
+// 		        Object.defineProperty(newDndEvent, 'detail', { writable: false, value: hasSelection });
+// 		        wnd.document.addEventListener("mousedown", startDndEvent);
+//  				wnd.document.removeEventListener("mousedown", startEvent);
+// 		        wnd.document.dispatchEvent(newDndEvent);
+// 		    	// startDnd(e);
+// 			}
+// 	    }, 200);
+// 	}
+//     // If preventDefault textselection does not work... If no preventDefault Iframe to Iframe does not work
+//   	e.preventDefault();
+// }
+
+// 
 function startEvent(e) {
 	if(e.which > 1) return;
     dragTimeout = setTimeout(() => {
 		if(hasSelection(e.target)) {
 			return;
-		} 
-		else startDnd(e);
+		}
+		else 
+	    	startDnd(e);
     }, 200);
     // If preventDefault textselection does not work... If no preventDefault Iframe to Iframe does not work
-   	e.preventDefault();
+   	// e.preventDefault();
 }
 
 function moveEvent(e) {
-	if(e.which > 1) return;
+	// if(e.which > 1) return;
 	if (e.target.getAttribute('dragging') == 'true')
-		e.preventDefault();
 	// e.target.ownerDocument.body.style.touchAction = "none"
+		e.preventDefault();
 	move(e);
+
 }
 
 function endEvent(e) {
