@@ -1,3 +1,10 @@
+## [0.14.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.14.1...v0.14.2) (2021-08-27)
+
+
+### Bug Fixes
+
+* add missing globals ([3053e1e](https://github.com/CoCreate-app/CoCreate-dnd/commit/3053e1eac80a7b2808eebf1bd281ba8428e75822))
+
 ## [0.14.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.14.0...v0.14.1) (2021-08-26)
 
 
