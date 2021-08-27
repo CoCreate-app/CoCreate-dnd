@@ -68,9 +68,9 @@ function isDnd(el, att ) {
     do {
 		let element, isDraggable, isCloneable, isDroppable;
 		if (el.dnd) {
-	    	isCloneable = (el.dnd.cloneable)
-	    	isDraggable = (el.dnd.draggable)
-	    	isDroppable = (el.dnd.droppable)
+	    	isCloneable = (el.dnd.cloneable);
+	    	isDraggable = (el.dnd.draggable);
+	    	isDroppable = (el.dnd.droppable);
     	}
     	if (att == 'droppable'){
 			if ((el.hasAttribute(vars.droppable) && el.getAttribute(vars.droppable) != 'false') || (isDroppable)) {
@@ -103,8 +103,10 @@ function checkInitFunction(element, request) {
 }
 
 function startDnd(e) {
-	let wnd = e.view
-	let	[el, att] = isDnd(e.target);
+	let wnd = e.view;
+	let element = isDnd(e.target);
+	if (!element) return;
+	let	[el, att] = element;
 
 	switch(att) {
 		case vars.cloneable:
@@ -136,7 +138,7 @@ function startDnd(e) {
 }
 
 function move(e, stopScroll) {
-	let	wnd = e.view
+	let	wnd = e.view;
 	let x, y, target;
 	if (e.touches){
 		let touch = e.touches[0];
@@ -256,6 +258,7 @@ function getGroupName(el) {
   } while (true);
 }
 
+/*global DOMParser*/
 function parse(text) {
   let doc = new DOMParser().parseFromString(text, "text/html");
   if (doc.head.children[0]) return doc.head.children[0];

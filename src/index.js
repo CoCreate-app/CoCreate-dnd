@@ -1,3 +1,5 @@
+/*global DOMException*/
+
 import observer from '@cocreate/observer';
 import {initEvents, initFunctionState} from "./dndEvents";
 import "./collaboration.js";
@@ -83,7 +85,6 @@ function initElement({
 	}
 	
 	target.dnd = {droppable: droppable};
-	console.log('dnd loaded target child', target.children)
 	if(target.children.length)
 		Array.from(target.children).forEach((el) => {
 			if(cloneable) {
