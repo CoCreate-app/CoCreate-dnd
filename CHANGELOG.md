@@ -1,3 +1,10 @@
+## [0.14.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.14.3...v0.14.4) (2021-08-27)
+
+
+### Bug Fixes
+
+* beforeDndSucess function improved. initFunctions improved ([fbb771c](https://github.com/CoCreate-app/CoCreate-dnd/commit/fbb771c194f2e47b241770557f4542920690ec0d))
+
 ## [0.14.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.14.2...v0.14.3) (2021-08-27)
 
 
