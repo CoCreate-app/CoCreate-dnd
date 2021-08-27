@@ -4,10 +4,9 @@ import {dropMarker} from "./util/dropMarker.js";
 import {ghostEffect} from "./util/ghostEffect.js";
 import {autoScroll} from "./util/autoScroll.js";
 import text from '@cocreate/text';
-import {beforeDndSuccessCallback} from './index';
-
+// 
 let dragTimeout;
-let initFunctionState = [];
+let initFunctions = [];
 
 function initEvents(wnd){
 	wnd.document.addEventListener("dragstart", (e) => {
@@ -76,7 +75,7 @@ function isDnd(el, att ) {
 			if ((el.hasAttribute(vars.droppable) && el.getAttribute(vars.droppable) != 'false') || (isDroppable)) {
 				return [el, 'droppable'];
 			}	
-			element = checkInitFunction(el, [vars.droppable]);
+			element = checkInitFunctions(el, [vars.droppable]);
     	}
     	else {
 			if ((el.hasAttribute(vars.cloneable) && el.getAttribute(vars.cloneable) != 'false') || (isCloneable)) {
@@ -85,7 +84,7 @@ function isDnd(el, att ) {
 			if ((el.hasAttribute(vars.draggable) && el.getAttribute(vars.draggable) != 'false') || (isDraggable)) {
 				return [el, vars.draggable];
 			}
-			element = checkInitFunction(el, [vars.draggable, vars.cloneable, vars.dragHandle]);
+			element = checkInitFunctions(el, [vars.draggable, vars.cloneable, vars.dragHandle]);
     	}
     	if(element)
 			if (Array.isArray(element)) return element;
@@ -93,10 +92,10 @@ function isDnd(el, att ) {
     } while (el);
 }
 
-function checkInitFunction(element, request) {
-    for (let state of initFunctionState) {
-      if (state.target.contains(element)) {
-        let r = state.onDnd(element, request);
+function checkInitFunctions(element, request) {
+    for (let func of initFunctions) {
+      if (func.target.contains(element)) {
+        let r = func.onDrag(element, request);
         if (Array.isArray(r)) return r;
       }
     }
@@ -210,11 +209,21 @@ function endDnd(e) {
 	scroller.deactivateScroll();
 }
 
-function beforeDndSuccess() {
-	if(beforeDndSuccessCallback)
-		return beforeDndSuccessCallback.apply(null, arguments);
-	return {};
-}
+// function beforeDndSuccess() {
+// 	if(beforeDndSuccessCallback)
+// 		return beforeDndSuccessCallback.apply(null, arguments);
+// 	return {};
+// }
+
+// function beforeDndSuccess(detail) {
+//     for (let state of initFunctionState) {
+// 		// if(state.target.contains(element)) {
+// 			let result = state.onDndSuccess(detail);
+// 			return result;
+// 		// }
+//     }
+// }
+
 
 let options = {
 	scroller: new autoScroll({ speed: 4, threshold: 3 }),
@@ -222,7 +231,7 @@ let options = {
 };
 let { myDropMarker, scroller } = options;
 
-let dnd = new VirtualDnd(beforeDndSuccess);
+let dnd = new VirtualDnd();
 let ghost;
 
 dnd.on("dragStart", (data) => {
@@ -265,4 +274,4 @@ function parse(text) {
   else return doc.body.children[0];
 }
 
-export { initEvents, initFunctionState};
+export { initEvents, initFunctions};

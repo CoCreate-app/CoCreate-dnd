@@ -1,13 +1,12 @@
 /*global DOMException*/
 
 import observer from '@cocreate/observer';
-import {initEvents, initFunctionState} from "./dndEvents";
+import {initEvents, initFunctions} from "./dndEvents";
 import "./collaboration.js";
 import './index.css';
 
 
 let windows = new Map();
-let beforeDndSuccessCallback;
 
 function initDnd() {
 	if(window.parent !== window) return;
@@ -29,13 +28,13 @@ function initIframe(iframe) {
 	let wnd = iframe.contentWindow;
 	initWindow(wnd);
 	
-	let iframes = wnd.document.querySelectorAll("iframe")
+	let iframes = wnd.document.querySelectorAll("iframe");
 	if (iframes) initIframes(iframes);
 }
 
 function initElements(elements, cloneable) {
   for (let el of elements)
-    initElement({target: el, cloneable})
+    initElement({target: el, cloneable});
 }
 
 function initElement({
@@ -142,10 +141,8 @@ function init(params) {
 	exp[funcName].apply(null, [params]);
 }
 
-const initFunction = function({ target, onDnd, onDndSuccess }) {
-	if(typeof onDndSuccess == "function")
-		beforeDndSuccessCallback = onDndSuccess;
-	initFunctionState.push({ target, onDnd });
+const initFunction = function({ target, onDrag, onDrop }) {
+	initFunctions.push({ target, onDrag, onDrop });
 };
 
 export {
@@ -187,4 +184,4 @@ observer.init({
 	},
 });
 
-export default { init, initIframe, beforeDndSuccessCallback};
+export default { init, initIframe};
