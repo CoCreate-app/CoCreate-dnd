@@ -15,7 +15,7 @@ function initDnd() {
 	let sortables = document.querySelectorAll(".sortable");
 	initElements(sortables);
 	let cloneables = document.querySelectorAll(".cloneable");
-	initElements(cloneables, true)
+	initElements(cloneables, true);
 }
 
 
@@ -122,9 +122,6 @@ function initElement({
 }
 
 function initWindow(wnd){
-	// console.log('wnd: ', wnd);
-	// console.log('wnd.top: ', wnd.top);
-	// console.log('window.top: ', window.top);
 	if(!windows.has(wnd.window)) {
 		// if(wnd.CoCreate.dnd && wnd.CoCreate.dnd.hasInit) return;
 		initEvents(wnd);
@@ -133,25 +130,9 @@ function initWindow(wnd){
 }
 
 function init(params) {
-	let { mode } = params;
-	delete params.mode;
-	if(!['function', 'element', 'container'].includes(mode))
-		throw new Error('invalid mode provided');
-	let funcName = 'init' + mode.charAt(0).toUpperCase() + mode.slice(1);
-	exp[funcName].apply(null, [params]);
+	if (params.onDrag || params.onDrop)
+		initFunctions.push(params);
 }
-
-const initFunction = function({ target, onDrag, onDrop }) {
-	initFunctions.push({ target, onDrag, onDrop });
-};
-
-export {
-	initFunction,
-};
-
-let exp = {
-	initFunction,
-};
 
 initDnd();
 
