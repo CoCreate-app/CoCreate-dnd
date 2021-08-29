@@ -94,7 +94,7 @@ function isDnd(el, att ) {
 
 function checkInitFunctions(element, request) {
     for (let func of initFunctions) {
-      if (func.target.contains(element)) {
+      if (func.targetDocument.contains(element)) {
         let r = func.onDrag(element, request);
         if (Array.isArray(r)) return r;
       }

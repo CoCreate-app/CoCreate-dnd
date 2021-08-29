@@ -208,7 +208,7 @@ export function pDistance(x, y, x1, y1, x2, y2) {
 
 function beforeDndSuccess(targetDocument, detail) {
 	for(let func of initFunctions) {
-		if(func.target.contains(targetDocument)) {
+		if(func.targetDocument.contains(targetDocument)) {
 			func.onDrop(detail);
 		}
 	}

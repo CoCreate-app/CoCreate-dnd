@@ -39,6 +39,7 @@ function initElements(elements, cloneable) {
 
 function initElement({
 	target,
+	targetDocument,
 	draggable,
 	droppable = true,
 	cloneable = false,
@@ -130,6 +131,7 @@ function initWindow(wnd){
 }
 
 function init(params) {
+	if (params.target) initElement(params);
 	if (params.onDrag || params.onDrop)
 		initFunctions.push(params);
 }
@@ -148,7 +150,7 @@ observer.init({
 observer.init({
 	name: "dndAttributes",
 	observe: ['addedNodes'],
-	target: '[sortable], [droppable], [cloneable]',
+	target: '[draggable], [droppable], [cloneable]',
 	callback: mutation => {
 		initWindow(window);
 	},
