@@ -1,3 +1,12 @@
+## [0.14.5](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.14.4...v0.14.5) (2021-08-31)
+
+
+### Bug Fixes
+
+* autoscroll update ([cc78894](https://github.com/CoCreate-app/CoCreate-dnd/commit/cc7889452284880ba94d59dbf7f60c39db8c3c24))
+* init by target ([1cd7d18](https://github.com/CoCreate-app/CoCreate-dnd/commit/1cd7d18f611ad6da2ca6d7f27edffbba3fd8ecb4))
+* simplified initFunctions ([c4b863b](https://github.com/CoCreate-app/CoCreate-dnd/commit/c4b863b59855129acc4072a0f8e29a6a95d3865b))
+
 ## [0.14.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.14.3...v0.14.4) (2021-08-27)
 
 
