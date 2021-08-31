@@ -25,7 +25,7 @@ function initEvents(wnd){
 function startEvent(e) {
 	if(e.which > 1) return;
     dragTimeout = setTimeout(() => {
-		if(hasSelection(e.target)) {
+		if(text.hasSelection(e.target)) {
 			return;
 		}
 		else 
@@ -51,13 +51,6 @@ function endEvent(e) {
 	endDnd(e);
 	clearTimeout(dragTimeout);
 	// e.preventDefault();
-}
-
-function hasSelection(el) {
-	let { start, end } = text.getSelections(el);
-	if(start != end) {
-		return true;
-	}
 }
 
 let startGroup;
