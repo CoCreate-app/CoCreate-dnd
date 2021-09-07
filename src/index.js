@@ -49,6 +49,11 @@ function initElement({
 	exclude,
 }) {
 	if(group) target.dnd = {groupName: group};
+	let isNested = target.getAttribute('nested');
+	if(isNested) {
+		nested = true;
+		target.dnd = {nested: true};
+	}
 	if(exclude) {
 		try {
 			let excludeEls = target.querySelectorAll(exclude);
