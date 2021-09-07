@@ -1,3 +1,10 @@
+# [0.15.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.14.6...v0.15.0) (2021-09-07)
+
+
+### Features
+
+* attribute: nested to use with sortable class ([e447e30](https://github.com/CoCreate-app/CoCreate-dnd/commit/e447e3088a3d4b160a896637d1e60cdabbaf3090))
+
 ## [0.14.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.14.5...v0.14.6) (2021-09-04)
 
 
