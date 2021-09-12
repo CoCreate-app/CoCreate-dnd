@@ -1,3 +1,10 @@
+## [0.15.5](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.4...v0.15.5) (2021-09-12)
+
+
+### Bug Fixes
+
+* update sidenav to use resize and toggle ([fa41608](https://github.com/CoCreate-app/CoCreate-dnd/commit/fa416081622fdfa535724602e476080a684ee038))
+
 ## [0.15.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.3...v0.15.4) (2021-09-09)
 
 
