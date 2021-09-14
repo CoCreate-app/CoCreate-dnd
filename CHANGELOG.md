@@ -1,3 +1,10 @@
+## [0.15.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.6...v0.15.7) (2021-09-14)
+
+
+### Bug Fixes
+
+* add cocreate.app to domains ([9980981](https://github.com/CoCreate-app/CoCreate-dnd/commit/9980981f20ee7d441af171e4a5895cc516af9ff5))
+
 ## [0.15.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.5...v0.15.6) (2021-09-13)
 
 
