@@ -1,3 +1,10 @@
+## [0.15.8](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.7...v0.15.8) (2021-09-15)
+
+
+### Bug Fixes
+
+* dnd.init targetDocument ([3454568](https://github.com/CoCreate-app/CoCreate-dnd/commit/3454568ea465949c4cdf1b347fc8890e881190a2))
+
 ## [0.15.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.6...v0.15.7) (2021-09-14)
 
 
