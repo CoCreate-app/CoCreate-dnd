@@ -135,8 +135,13 @@ function initWindow(wnd){
 	}
 }
 
-function init(params) {
-	if (params.target) initElement(params);
+function init(params){
+	if (params.target){
+		initElement(params)
+	}
+	else if (params.targetDocument){
+		initWindow(params.targetDocument.defaultView)
+	}
 	if (params.onDrag || params.onDrop)
 		initFunctions.push(params);
 }
