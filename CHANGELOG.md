@@ -1,3 +1,10 @@
+## [0.15.13](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.12...v0.15.13) (2021-10-02)
+
+
+### Bug Fixes
+
+* find path of iframe ([4a93932](https://github.com/CoCreate-app/CoCreate-dnd/commit/4a939326881797c0652d268430795fab81d7fd60))
+
 ## [0.15.12](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.11...v0.15.12) (2021-10-01)
 
 
