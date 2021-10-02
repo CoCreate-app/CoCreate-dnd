@@ -36,8 +36,8 @@ function wrapper() {
 			// );
 
 			try {
-				if(data.path.length) {
-					let iframe = document.querySelector(data.path[0]);
+				if(data.path) {
+					let iframe = document.querySelector(data.path);
 					let context = iframe.contentWindow.document || iframe.contentDocument;
 					data.target = context.querySelector(`[element_id=${data.target}]`);
 				}

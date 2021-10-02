@@ -35,8 +35,10 @@ export default function virtualDnd() {
 				if(this.dragedEl.contains(this.dropedEl))
 					throw "dnd cancelled, you can't dnd from parent to its children.";
 
-				let path = utils.getElementPath(this.dropedEl);
-
+				// let path = utils.getElementPath(this.dropedEl);
+				let iframe = this.dropedEl.ownerDocument.defaultView.frameElement;
+				let path = utils.cssPath(iframe);
+				
 				let detail = {
 					position: this.position,
 					dragedEl: this.dragedEl,
