@@ -48,6 +48,11 @@ function initElement({
 	group,
 	exclude,
 }) {
+	if(target.tagName == 'IFRAME') {
+		initWindow(target.contentDocument.defaultView);
+		return;
+	}
+		
 	if(group) target.dnd = {groupName: group};
 	let isNested = target.getAttribute('nested');
 	if(isNested) {

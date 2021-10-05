@@ -1,5 +1,6 @@
 import eventUtil from "./util/customEvents";
 import utils from '@cocreate/utils';
+import uuid from '@cocreate/uuid';
 import { initFunctions } from "./dndEvents";
 
 
@@ -35,7 +36,6 @@ export default function virtualDnd() {
 				if(this.dragedEl.contains(this.dropedEl))
 					throw "dnd cancelled, you can't dnd from parent to its children.";
 
-				// let path = utils.getElementPath(this.dropedEl);
 				let iframe = this.dropedEl.ownerDocument.defaultView.frameElement;
 				let path = utils.cssPath(iframe);
 				
@@ -55,14 +55,25 @@ export default function virtualDnd() {
 					detail,
 				});
 
-				let broadcast = {
-					target: detail.dropedEl,
-					method: "insertAdjacentElement",
-					value: [detail.position, detail.dragedEl],
-				};
-
-
-				this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
+				let domTextEditor = this.dropedEl.closest('[contenteditable]');
+				if (domTextEditor){
+				if(!this.dragedEl.getAttribute("element_id"))
+					this.dragedEl.setAttribute("element_id", uuid.generate(6));
+				let elementValue;
+				if(this.dropType == 'cloneabe')
+					elementValue = this.dragedEl.outerHTML;
+				
+				CoCreate.text.insertAdjacentElement({
+						domTextEditor,
+						position: this.position,
+						target: this.dropedEl.getAttribute("element_id"),
+						element: this.dragedEl.getAttribute("element_id"),
+						elementValue
+					});
+				}
+				else
+					this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
+					
 				window.dispatchEvent(event, { bubbles: false });
 			}
 		}
@@ -210,8 +221,9 @@ export function pDistance(x, y, x1, y1, x2, y2) {
 
 function beforeDndSuccess(targetDocument, detail) {
 	for(let func of initFunctions) {
-		if(func.targetDocument.contains(targetDocument)) {
-			func.onDrop(detail);
+		if(func.onDrop) {
+			if(func.targetDocument.contains(targetDocument))
+				func.onDrop(detail);
 		}
 	}
 }

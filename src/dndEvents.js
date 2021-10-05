@@ -4,7 +4,8 @@ import {dropMarker} from "./util/dropMarker.js";
 import {ghostEffect} from "./util/ghostEffect.js";
 import {autoScroll} from "./util/autoScroll.js";
 import text from '@cocreate/text';
-// 
+import {checkElementConfig} from '@cocreate/element-config';
+
 let dragTimeout;
 let initFunctions = [];
 
@@ -56,28 +57,24 @@ function endEvent(e) {
 let startGroup;
 let isDraging = false;
 
-function isDnd(el, att ) {
+function isDnd(el, options) {
     do {
-		let element, isDraggable, isCloneable, isDroppable;
-		if (el.dnd) {
-	    	isCloneable = (el.dnd.cloneable);
-	    	isDraggable = (el.dnd.draggable);
-	    	isDroppable = (el.dnd.droppable);
+		let element;
+
+    	if (!options){
+    		options = [vars.draggable, vars.cloneable, vars.dragHandle]
     	}
-    	if (att == 'droppable'){
-			if ((el.hasAttribute(vars.droppable) && el.getAttribute(vars.droppable) != 'false') || (isDroppable)) {
-				return [el, 'droppable'];
-			}	
-			element = checkInitFunctions(el, [vars.droppable]);
-    	}
-    	else {
-			if ((el.hasAttribute(vars.cloneable) && el.getAttribute(vars.cloneable) != 'false') || (isCloneable)) {
-				return [el, vars.cloneable];
+    	else options = [options]
+    	for (let option of options) {
+			let isOption;
+			if (el.dnd) isOption = el.dnd[option];
+			if ((el.hasAttribute(option) && el.getAttribute(option) != 'false') || isOption) {
+				return [el, option];
 			}
-			if ((el.hasAttribute(vars.draggable) && el.getAttribute(vars.draggable) != 'false') || (isDraggable)) {
-				return [el, vars.draggable];
+			if (checkElementConfig(el, [option])) {
+				return [el, option];
 			}
-			element = checkInitFunctions(el, [vars.draggable, vars.cloneable, vars.dragHandle]);
+			element = checkInitFunctions(el, [option]);
     	}
     	if(element)
 			if (Array.isArray(element)) return element;
@@ -87,9 +84,11 @@ function isDnd(el, att ) {
 
 function checkInitFunctions(element, request) {
     for (let func of initFunctions) {
-      if (func.targetDocument.contains(element)) {
-        let r = func.onDrag(element, request);
-        if (Array.isArray(r)) return r;
+      if (func.onDrag) {
+	      if (func.targetDocument.contains(element)) {
+	        let r = func.onDrag(element, request);
+	        if (Array.isArray(r)) return r;
+	      }
       }
     }
 }
