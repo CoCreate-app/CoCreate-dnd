@@ -9,7 +9,7 @@ import './index.css';
 let windows = new Map();
 
 function initDnd() {
-	if(window.parent !== window) return;
+	// if(window.parent !== window) return;
 	let iframes = document.querySelectorAll("iframe");
 	initIframes(iframes);
 	let sortables = document.querySelectorAll(".sortable");
@@ -133,6 +133,7 @@ function initElement({
 }
 
 function initWindow(wnd){
+	var topWindow = window.top;
 	if(!windows.has(wnd.window)) {
 		// if(wnd.CoCreate.dnd && wnd.CoCreate.dnd.hasInit) return;
 		initEvents(wnd);

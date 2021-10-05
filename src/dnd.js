@@ -59,8 +59,9 @@ export default function virtualDnd() {
 				if (domTextEditor){
 				if(!this.dragedEl.getAttribute("element_id"))
 					this.dragedEl.setAttribute("element_id", uuid.generate(6));
+				
 				let elementValue;
-				if(this.dropType == 'cloneabe')
+				if(this.dropType == 'cloneable')
 					elementValue = this.dragedEl.outerHTML;
 				
 				CoCreate.text.insertAdjacentElement({
@@ -68,7 +69,7 @@ export default function virtualDnd() {
 						position: this.position,
 						target: this.dropedEl.getAttribute("element_id"),
 						element: this.dragedEl.getAttribute("element_id"),
-						elementValue
+						elementValue: elementValue
 					});
 				}
 				else
