@@ -1,3 +1,16 @@
+# [0.16.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.15...v0.16.0) (2021-10-05)
+
+
+### Bug Fixes
+
+* dnd end cloneable typo ([aa78335](https://github.com/CoCreate-app/CoCreate-dnd/commit/aa7833593445a24cf6e19b7517f9aa8d32fd274a))
+* website_id in CoCreate.config ([09d4eec](https://github.com/CoCreate-app/CoCreate-dnd/commit/09d4eec4c01aadd3be9558aca3650a996d2984d8))
+
+
+### Features
+
+* will use domTextEditor if parent is contenteditable and support for element-config ([0dac2dc](https://github.com/CoCreate-app/CoCreate-dnd/commit/0dac2dc6478405dea01cab5e1b91842b64547364))
+
 ## [0.15.15](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.14...v0.15.15) (2021-10-04)
 
 
