@@ -1,3 +1,10 @@
+## [0.16.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.16.0...v0.16.1) (2021-10-06)
+
+
+### Bug Fixes
+
+* add @cocreate/selection ([12c5826](https://github.com/CoCreate-app/CoCreate-dnd/commit/12c5826d9a60bf0eed711b5171584eb3a7dfd1f8))
+
 # [0.16.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.15.15...v0.16.0) (2021-10-05)
 
 
