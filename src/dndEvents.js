@@ -3,7 +3,7 @@ import * as vars from "./util/variables.js";
 import {dropMarker} from "./util/dropMarker.js";
 import {ghostEffect} from "./util/ghostEffect.js";
 import {autoScroll} from "./util/autoScroll.js";
-import text from '@cocreate/text';
+import {hasSelection} from '@cocreate/selection';
 import {checkElementConfig} from '@cocreate/element-config';
 
 let dragTimeout;
@@ -26,7 +26,7 @@ function initEvents(wnd){
 function startEvent(e) {
 	if(e.which > 1) return;
     dragTimeout = setTimeout(() => {
-		if(text.hasSelection(e.target)) {
+		if(hasSelection(e.target)) {
 			return;
 		}
 		else 

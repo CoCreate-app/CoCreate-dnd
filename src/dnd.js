@@ -57,14 +57,14 @@ export default function virtualDnd() {
 
 				let domTextEditor = this.dropedEl.closest('[contenteditable]');
 				if (domTextEditor){
-				if(!this.dragedEl.getAttribute("element_id"))
-					this.dragedEl.setAttribute("element_id", uuid.generate(6));
+					if(!this.dragedEl.getAttribute("element_id"))
+						this.dragedEl.setAttribute("element_id", uuid.generate(6));
+					
+					let elementValue;
+					if(this.dropType == 'cloneable')
+						elementValue = this.dragedEl.outerHTML;
 				
-				let elementValue;
-				if(this.dropType == 'cloneable')
-					elementValue = this.dragedEl.outerHTML;
-				
-				CoCreate.text.insertAdjacentElement({
+					CoCreate.text.insertAdjacentElement({
 						domTextEditor,
 						position: this.position,
 						target: this.dropedEl.getAttribute("element_id"),
