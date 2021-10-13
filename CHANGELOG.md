@@ -1,3 +1,10 @@
+## [0.16.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.16.2...v0.16.3) (2021-10-13)
+
+
+### Bug Fixes
+
+* update packages ([a7c833e](https://github.com/CoCreate-app/CoCreate-dnd/commit/a7c833ed70f725067dbc6887874893c53d94ea9d))
+
 ## [0.16.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.16.1...v0.16.2) (2021-10-06)
 
 
