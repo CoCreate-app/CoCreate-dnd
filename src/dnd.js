@@ -64,8 +64,8 @@ export default function virtualDnd() {
 					CoCreate.text.insertAdjacentElement({
 						domTextEditor,
 						position: this.position,
-						target: cssPath(this.dropedEl),
-						element: cssPath(this.dragedEl),
+						target: this.dropedEl,
+						element: this.dragedEl,
 						elementValue: elementValue
 					});
 				}
