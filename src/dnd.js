@@ -1,6 +1,5 @@
 import eventUtil from "./util/customEvents";
-import utils from '@cocreate/utils';
-import uuid from '@cocreate/uuid';
+import {cssPath} from '@cocreate/utils';
 import { initFunctions } from "./dndEvents";
 
 
@@ -37,7 +36,7 @@ export default function virtualDnd() {
 					throw "dnd cancelled, you can't dnd from parent to its children.";
 
 				let iframe = this.dropedEl.ownerDocument.defaultView.frameElement;
-				let path = utils.cssPath(iframe);
+				let path = cssPath(iframe);
 				
 				let detail = {
 					position: this.position,
@@ -57,9 +56,7 @@ export default function virtualDnd() {
 
 				let domTextEditor = this.dropedEl.closest('[contenteditable]');
 				if (domTextEditor){
-					if(!this.dragedEl.getAttribute("element_id"))
-						this.dragedEl.setAttribute("element_id", uuid.generate(6));
-					
+
 					let elementValue;
 					if(this.dropType == 'cloneable')
 						elementValue = this.dragedEl.outerHTML;
@@ -67,8 +64,8 @@ export default function virtualDnd() {
 					CoCreate.text.insertAdjacentElement({
 						domTextEditor,
 						position: this.position,
-						target: this.dropedEl.getAttribute("element_id"),
-						element: this.dragedEl.getAttribute("element_id"),
+						target: cssPath(this.dropedEl),
+						element: cssPath(this.dragedEl),
 						elementValue: elementValue
 					});
 				}

@@ -1,6 +1,5 @@
-import utils from '@cocreate/utils';
+import {cssPath, parseTextToHtml} from '@cocreate/utils';
 import message from '@cocreate/message-client';
-import uuid from '@cocreate/uuid';
 
 function wrapper() {
 
@@ -11,12 +10,11 @@ function wrapper() {
 	window.addEventListener("load", () => {
 		message.listen('domEditor', function(data) {
 			// console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
-			// resolving the element_id to real element in the clinet
 			if(data.target) {
-				data.target = document.querySelector(`[element_id="${data.target}"]`);
+				data.target = document.querySelector(data.target);
 			}
 			if(data.value[1]) {
-				data.value[1] = document.querySelector(`[element_id="${data.value[1]}"]`);
+				data.value[1] = document.querySelector(data.value[1]);
 			}
 			if(!data.target)
 				return console.log('dnd error: draggble is null')
@@ -38,16 +36,14 @@ function wrapper() {
 			try {
 				if(data.path) {
 					let iframe = document.querySelector(data.path);
-					let context = iframe.contentWindow.document || iframe.contentDocument;
-					data.target = context.querySelector(`[element_id=${data.target}]`);
+					let frame = iframe.contentWindow.document || iframe.contentDocument;
+					data.target = frame.querySelector(data.target);
 				}
 				else {
-					data.target = document.querySelector(
-						`[element_id=${data.target}]`
-					);
+					data.target = document.querySelector(data.target);
 				}
 
-				data.value[1] = utils.parseTextToHtml(data.value[1]);
+				data.value[1] = parseTextToHtml(data.value[1]);
 				if(data.hiddenAttribute) {
 					for(let [key, value] of Object.entries(data.hiddenAttribute)) {
 						data.value[1].dnd(key, value);
@@ -71,10 +67,7 @@ function wrapper() {
 			window.iframes.guests.canvas.window.CoCreate :
 			window.CoCreate;
 
-		if(!dropedEl.getAttribute("element_id"))
-			dropedEl.setAttribute("element_id", uuid.generate(6));
-
-		dropedEl = dropedEl.getAttribute("element_id");
+		dropedEl = cssPath(dropedEl);
 
 		if(dropType === "cloneable") {
 			let hiddenAttribute = dragedEl.dnd;
@@ -97,11 +90,7 @@ function wrapper() {
 			});
 		}
 		else {
-			if(!dragedEl.getAttribute("element_id"))
-				dragedEl.setAttribute("element_id", uuid.generate(6));
-
-			dragedEl = dragedEl.getAttribute("element_id");
-
+			dragedEl = cssPath(dropedEl);
 			message.send({
 				broadcast_sender: true,
 				rooms: "",
