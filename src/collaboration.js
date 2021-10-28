@@ -90,7 +90,7 @@ function wrapper() {
 			});
 		}
 		else {
-			dragedEl = cssPath(dropedEl);
+			dragedEl = cssPath(dragedEl);
 			message.send({
 				broadcast_sender: true,
 				rooms: "",
