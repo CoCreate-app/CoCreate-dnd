@@ -1,3 +1,16 @@
+# [0.17.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.16.9...v0.17.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* use element instead of a selector string in text.insertAdjacentElement ([1bf6109](https://github.com/CoCreate-app/CoCreate-dnd/commit/1bf61094e4a6580356f778e23073dc0c239fe83a))
+
+
+### Features
+
+* removed the need for element_id, uses cssPath instead ([a3801b9](https://github.com/CoCreate-app/CoCreate-dnd/commit/a3801b969499e4593cf419415a618a42e831d16e))
+* replaced element_id to cssPath ([7df7dd1](https://github.com/CoCreate-app/CoCreate-dnd/commit/7df7dd1af85178cab29142bbb9a7bf516db9b420))
+
 ## [0.16.9](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.16.8...v0.16.9) (2021-10-17)
 
 
