@@ -1,3 +1,10 @@
+## [0.17.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.1...v0.17.2) (2021-10-30)
+
+
+### Bug Fixes
+
+* passive bugs related to collaboration ([b615e72](https://github.com/CoCreate-app/CoCreate-dnd/commit/b615e72eb99c31a1bd4b23b128367e5751b61659))
+
 ## [0.17.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.0...v0.17.1) (2021-10-29)
 
 
