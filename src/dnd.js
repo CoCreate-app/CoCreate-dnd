@@ -48,11 +48,6 @@ export default function virtualDnd() {
 
 				beforeDndSuccess(e.currentTarget, detail);
 				
-				/*global CustomEvent*/
-				const event = new CustomEvent("dndsuccess", {
-					bubbles: false,
-					detail,
-				});
 
 				let domTextEditor = this.dropedEl.closest('[contenteditable]');
 				if (domTextEditor){
@@ -69,9 +64,15 @@ export default function virtualDnd() {
 						elementValue: elementValue
 					});
 				}
-				else
+				else {
 					this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
-					
+				}
+				
+				/*global CustomEvent*/
+				const event = new CustomEvent("dndsuccess", {
+					bubbles: false,
+					detail,
+				});
 				window.dispatchEvent(event, { bubbles: false });
 			}
 		}

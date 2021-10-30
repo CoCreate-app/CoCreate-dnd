@@ -67,7 +67,7 @@ export function autoScroll({ speed, threshold }) {
           this.__activateScroll(element, orientation, onMouseScrollMove);
         }
       } else if (this.isActive) {
-        console.log("no", orientation, element);
+        // console.log("no", orientation, element);
         this.isActive = false;
         this.deactivateScroll(element);
       }

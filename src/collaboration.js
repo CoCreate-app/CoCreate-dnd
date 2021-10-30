@@ -64,7 +64,7 @@ function wrapper() {
 		let { dropedEl, dragedEl, position, dropType, path } = e.detail;
 		let CoCreate =
 			dragedEl.ownerDocument !== dropedEl.ownerDocument ?
-			window.iframes.guests.canvas.window.CoCreate :
+			window.iframes.canvas.window.CoCreate :
 			window.CoCreate;
 
 		dropedEl = cssPath(dropedEl);
