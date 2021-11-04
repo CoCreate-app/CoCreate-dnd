@@ -121,7 +121,7 @@ function startDnd(e) {
 	let groupResult = getGroupName(el);
 	startGroup = groupResult[1];
 
-	wnd.document.body.style.cursor = "crosshair !important";
+	wnd.document.body.style.cursor = "grabbing";
 
 	isDraging = true;
 

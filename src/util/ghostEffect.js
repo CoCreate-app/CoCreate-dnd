@@ -18,25 +18,21 @@ export function ghostEffect(elementEvent, el, wnd) {
 
 	this.draw = (e, wnd) => {
 		this.wrapper.style.display = "block";
-
-		let frameRect;
+		let frameRect = { top: 0, left: 0 };
 		if(wnd.frameElement) {
-			frameRect = wnd.frameElement.getBoundingClientRect();
-			if(wnd.parent.frameElement) {
-				let isTopWndDnd = wnd.top.document.getElementById('dropMarker'); 
-				if(isTopWndDnd) {
-					let frameFrameRect = wnd.parent.frameElement.getBoundingClientRect();
-					let topRect = frameRect.top;
-					let leftRect = frameRect.left;
-					topRect += frameFrameRect.top;
-					leftRect += frameFrameRect.left;
-					frameRect = { top: topRect, left: leftRect };
+			let frameElement = wnd.frameElement;
+			do {
+				let isFrameDnd = frameElement.ownerDocument.getElementById('dropMarker'); 
+				if (isFrameDnd) {
+					let frameFrameRect = frameElement.getBoundingClientRect();
+					frameRect.top += frameFrameRect.top;
+					frameRect.left += frameFrameRect.left;
+					frameElement = frameElement.ownerDocument.defaultView.parent.frameElement;
 				}
-			}
+				else frameElement = "";
+			} while (frameElement);
 		}
-		else frameRect = { top: 0, left: 0 };
-
-		this.wrapper.style.top = frameRect.top + e.y - elementEvent.offsetY + "px";
+		this.wrapper.style.top = e.y + frameRect.top  + "px";
 		this.wrapper.style.left =
 			frameRect.left + e.x - elementEvent.offsetX + "px";
 	};
