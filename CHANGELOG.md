@@ -1,3 +1,11 @@
+## [0.17.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.6...v0.17.7) (2021-11-05)
+
+
+### Bug Fixes
+
+* dnd ghostEffect when nested iframes ([851fcca](https://github.com/CoCreate-app/CoCreate-dnd/commit/851fccaa88489b2cdcb8192ea87e7b32d2dd9298))
+* grabbing cursor  when dnd isDragging ([1a88e69](https://github.com/CoCreate-app/CoCreate-dnd/commit/1a88e6971b6e30718d7d3a8e42bfdd02e19ae577))
+
 ## [0.17.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.5...v0.17.6) (2021-11-04)
 
 
