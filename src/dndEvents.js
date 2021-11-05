@@ -121,7 +121,7 @@ function startDnd(e) {
 	let groupResult = getGroupName(el);
 	startGroup = groupResult[1];
 
-	wnd.document.body.style.cursor = "grabbing";
+	wnd.document.body.setAttribute('isdragging', '');
 
 	isDraging = true;
 
@@ -144,12 +144,16 @@ function move(e, stopScroll) {
 		target = e.target;
 	}
 	
-	if(!isDraging) return;
+	if(!isDraging) {
+		wnd.document.body.removeAttribute('isdragging', '');
+		return;
+	}
 	var selection = wnd.document.getSelection();
 	selection.removeAllRanges();
 	if(ghost) ghost.draw({ x, y }, wnd);
 	scroller.update(x, y);
 	if(isDraging) {
+		wnd.document.body.setAttribute('isdragging', '');
 		// skip group names
 		let [groupEl, groupname] = getGroupName(target);
 		if(startGroup && groupname) {
@@ -194,7 +198,7 @@ function move(e, stopScroll) {
 
 function endDnd(e) {
 	let wnd = e.view;
-	wnd.document.body.style.cursor = "";
+	wnd.document.body.removeAttribute('isdragging');
 	isDraging = false;
 	dnd.dragEnd(e);
 	myDropMarker.hide();

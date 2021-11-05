@@ -1,3 +1,9 @@
+body[isdragging] * {
+  cursor: grabbing!important;
+  cursor: -moz-grabbing!important;
+  cursor: -webkit-grabbing!important;
+}
+
 [cloneable],
 [draggable] {
   cursor: grab;
@@ -5,17 +11,16 @@
 
 [cloneable],
 [draggable],
-[droppable],
-[hoverable] {
+[droppable]{
   outline: 1px dashed gray;
 }
 
 [dragging="true"] {
   height:0px;
   overflow:hidden;
-  cursor: grabing;
-  cursor: -moz-grabing;
-  cursor: -webkit-grabing;
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }
 
 #dropMarker{
@@ -33,9 +38,9 @@
   position: fixed;
   z-index: 100000;
   border: 1px solid grey;
-  cursor: grabing;
-  cursor: -moz-grabing;
-  cursor: -webkit-grabing;
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }
 
 	  /*[draggable="true"], [cloneable="true"]  {*/
