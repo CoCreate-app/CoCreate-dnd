@@ -1,3 +1,10 @@
+## [0.17.16](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.15...v0.17.16) (2021-11-26)
+
+
+### Bug Fixes
+
+* docs sidenav width ([11331b7](https://github.com/CoCreate-app/CoCreate-dnd/commit/11331b7cbf5aabb6b7decc25ee4c602ad16f55ff))
+
 ## [0.17.15](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.14...v0.17.15) (2021-11-26)
 
 
