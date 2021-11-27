@@ -1,3 +1,10 @@
+## [0.17.17](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.16...v0.17.17) (2021-11-27)
+
+
+### Bug Fixes
+
+* update docs api and cocreateJS script ([c8e6782](https://github.com/CoCreate-app/CoCreate-dnd/commit/c8e67827458ae983941dd820f32735c2cb2dfda3))
+
 ## [0.17.16](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.15...v0.17.16) (2021-11-26)
 
 
