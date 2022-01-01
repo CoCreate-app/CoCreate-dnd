@@ -1,3 +1,10 @@
+## [0.17.22](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.21...v0.17.22) (2022-01-01)
+
+
+### Bug Fixes
+
+* removed data- from attributes ([f2f7883](https://github.com/CoCreate-app/CoCreate-dnd/commit/f2f788302373dfd08d7891648c178927b03a55f2))
+
 ## [0.17.21](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.20...v0.17.21) (2021-12-15)
 
 
