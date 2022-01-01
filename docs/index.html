@@ -78,7 +78,7 @@
                        <h4 id="dnd-sortable" hover="display:block" hover-target="" class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">sortable</h4>
                        <a class="display:none" href="#dnd-sortable"><i class="fas fa-link"></i></a>
                     </div>
-                    <p class="padding:10px_0px line-height:1.5"><code class="language-js">class="sortable"</code> is an alias for <code class="language-js">data-droppable="true"</code> with all direct children as <code class="language-js">data-draggable="true"</code></p>
+                    <p class="padding:10px_0px line-height:1.5"><code class="language-js">class="sortable"</code> is an alias for <code class="language-js">droppable="true"</code> with all direct children as <code class="language-js">draggable="true"</code></p>
                     <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
                         <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" show="preview" hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px hidden" id="code" show="code" hide="preview"><i class="fas fa-code"></i></a>
                             <!--<a class="margin-right:10px"><i class="far fa-window-maximize"></i></a>--><a target="modal" href="module_activity_datatable.html" pass-collection="modules" pass-document_id="" pass-fetch_value="" pass-prefix="" pass_to="render" modal-width="600px" modal-height="400px"
@@ -108,7 +108,7 @@
                        <h4 id="dnd-cloneable" hover="display:block" hover-target="" class="border-bottom:1px_solid_lightgrey margin-top:40px padding:5px_0px">cloneable</h4>
                        <a class="display:none" href="#dnd-cloneable"><i class="fas fa-link"></i></a>
                     </div>
-                    <p class="padding:10px_0px line-height:1.5"><code class="language-js">class="cloneable"</code> is an alias for <code class="language-js">cloneable="true"</code> with all direct children as <code class="language-js">data-draggable="true"</code></p>
+                    <p class="padding:10px_0px line-height:1.5"><code class="language-js">class="cloneable"</code> is an alias for <code class="language-js">cloneable="true"</code> with all direct children as <code class="language-js">draggable="true"</code></p>
                     <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
                         <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" show="preview" hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px hidden" id="code" show="code" hide="preview"><i class="fas fa-code"></i></a>
                             <!--<a class="margin-right:10px"><i class="far fa-window-maximize"></i></a>--><a target="modal" href="module_activity_datatable.html" pass-collection="modules" pass-document_id="" pass-fetch_value="" pass-prefix="" pass_to="render" modal-width="600px" modal-height="400px"
@@ -182,7 +182,7 @@
                        <a class="display:none" href="#dnd-initElement"><i class="fas fa-link"></i></a>
                     </div>
                     <div class="">
-                        <p class="padding:10px_0px line-height:1.5">a low level initiator that make an element and all decendent dnd candidate based on selector params. For ease of use right out of the box we have defined a few defualts: <span class="cocreate-badge success">data-droppable</span> <span class="cocreate-badge success">data-draggable</span> <span class="cocreate-badge success">data-exclude</span> <span class="cocreate-badge success">cloneable</span></p>
+                        <p class="padding:10px_0px line-height:1.5">a low level initiator that make an element and all decendent dnd candidate based on selector params. For ease of use right out of the box we have defined a few defualts: <span class="cocreate-badge success">droppable</span> <span class="cocreate-badge success">draggable</span> <span class="cocreate-badge success">data-exclude</span> <span class="cocreate-badge success">cloneable</span></p>
                     </div>
                     
                     <h4 class="margin-top:20px padding:5px_0px">Drag and Drop Attributtes</h4>
@@ -205,15 +205,15 @@
                     </div>
     <div class="margin-top:10px">
                         <pre><code class="language-html">
-    &lt;div data-droppable=&quot;true&quot;&gt;
-        &lt;h1 data-draggable=&quot;true&quot;&gt;some context 1&lt;/h1&gt;
-        &lt;h1 data-cloenable=&quot;true&quot;&gt;this element will be cloned when dragging&lt;/h1&gt;
-        &lt;h1 data-draggable=&quot;true&quot; data-insert-html=&quot;&lt;p&gt;hello&lt;/p&gt;&quot;&gt;this element will not be cloned but the value of data-insert-html&lt;/h1&gt;
+    &lt;div droppable=&quot;true&quot;&gt;
+        &lt;h1 draggable=&quot;true&quot;&gt;some context 1&lt;/h1&gt;
+        &lt;h1 cloneable=&quot;true&quot;&gt;this element will be cloned when dragging&lt;/h1&gt;
+        &lt;h1 draggable=&quot;true&quot; cloneable-html=&quot;&lt;p&gt;hello&lt;/p&gt;&quot;&gt;this element will not be cloned but the value of cloneable-html&lt;/h1&gt;
     &lt;/div&gt;
                     </code></pre> </div>
     
                     <h4 class="margin-top:40px padding:5px_0px">Cloneable Attributes</h4>
-                    <p class="padding:10px_0px line-height:1.5">sometimes we don't want to just move the element but making an element exactly like the element we have, or, even create a new element compeletely different from what we have in the page. in this example we use data-clonable and data-insert-html
+                    <p class="padding:10px_0px line-height:1.5">sometimes we don't want to just move the element but making an element exactly like the element we have, or, even create a new element compeletely different from what we have in the page. in this example we use data-clonable and cloneable-html
                         to do that</p>
     
                     <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
@@ -237,8 +237,8 @@
                     <pre><code class="language-html">
     &lt;div&gt;
         &lt;h1 cloneable=&quot;true&quot;&gt;some context 1&lt;/h1&gt;
-        &lt;h1 data-cloenable=&quot;true&quot;&gt;this element will be cloned when dragging&lt;/h1&gt;
-        &lt;h1 cloneable=&quot;true&quot; data-insert-html=&quot;&lt;p&gt;hello&lt;/p&gt;&quot;&gt;this element will not be cloned but the value of data-insert-html&lt;/h1&gt;
+        &lt;h1 cloneable=&quot;true&quot;&gt;this element will be cloned when dragging&lt;/h1&gt;
+        &lt;h1 cloneable=&quot;true&quot; cloneable-html=&quot;&lt;p&gt;hello&lt;/p&gt;&quot;&gt;this element will not be cloned but the value of cloneable-html&lt;/h1&gt;
     &lt;/div&gt;
                     </code></pre>
     
@@ -262,7 +262,7 @@
                         </li>
                         <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
                             <h4><span>insert_html</span><span class="cocreate-badge success"> </span> </h4>
-                            <p>if the element define as cloneable has a data-insert_html with value of valid HTML, it will be used to create an element and to be dropped as a clone.</p>
+                            <p>if the element define as cloneable has a cloneable-html with value of valid HTML, it will be used to create an element and to be dropped as a clone.</p>
                         </li>
                     </ul>
     
