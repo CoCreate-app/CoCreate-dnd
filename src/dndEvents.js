@@ -58,13 +58,14 @@ let startGroup;
 let isDraging = false;
 
 function isDnd(el, options) {
+	if (!options){
+		options = [vars.draggable, vars.cloneable, vars.dragHandle];
+	}
+	else 
+		options = [options];
+		
     do {
 		let element;
-
-    	if (!options){
-    		options = [vars.draggable, vars.cloneable, vars.dragHandle]
-    	}
-    	else options = [options]
     	for (let option of options) {
 			let isOption;
 			if (el.dnd) isOption = el.dnd[option];
