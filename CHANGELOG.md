@@ -1,3 +1,10 @@
+# [0.18.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.23...v0.18.0) (2022-01-25)
+
+
+### Features
+
+* finds closest draggable and droppable element ([1b2dba2](https://github.com/CoCreate-app/CoCreate-dnd/commit/1b2dba2685cf1e00a61e694dba4b2bf357663833))
+
 ## [0.17.23](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.17.22...v0.17.23) (2022-01-01)
 
 
