@@ -1,3 +1,10 @@
+## [0.18.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.18.1...v0.18.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* replaced show and hide class hidden with attribute hidden ([3366162](https://github.com/CoCreate-app/CoCreate-dnd/commit/3366162b0128defd86bb80b5b7018e0c8280e339))
+
 ## [0.18.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.18.0...v0.18.1) (2022-02-01)
 
 
