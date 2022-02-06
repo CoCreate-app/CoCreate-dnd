@@ -9,9 +9,11 @@ body[isdragging] * {
   cursor: grab;
 }
 
-[cloneable],
-[draggable],
-[droppable]{
+[draggable="false"] {
+  cursor: auto;
+}
+
+body[isdragging] [droppable]{
   outline: 1px dashed gray;
 }
 
