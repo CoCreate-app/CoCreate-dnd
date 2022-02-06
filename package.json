@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/dnd",
-  "version": "0.18.2",
+  "version": "0.18.3",
   "description": "A collaborative js drag and drop component with iframe support. Great for sorting, cloning etc. Customizable using HTML5 attributes and/or JavaScript API.",
   "keywords": [
     "dnd",

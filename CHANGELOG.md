@@ -1,3 +1,10 @@
+## [0.18.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.18.2...v0.18.3) (2022-02-06)
+
+
+### Bug Fixes
+
+* only show dashed outline of drappable elements when an item is being dragged. if an element is set to draggable false cusor is set to auto ([eb2b333](https://github.com/CoCreate-app/CoCreate-dnd/commit/eb2b3335f404ca812e40e5db217e03b2ce76cf23))
+
 ## [0.18.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.18.1...v0.18.2) (2022-02-03)
 
 
