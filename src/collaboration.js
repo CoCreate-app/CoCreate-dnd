@@ -61,14 +61,8 @@ function wrapper() {
 	});
 
 	window.addEventListener("dndsuccess", (e) => {
-		let { dropedEl, dragedEl, position, dropType, path } = e.detail;
-		let CoCreate =
-			dragedEl.ownerDocument !== dropedEl.ownerDocument ?
-			window.iframes.canvas.window.CoCreate :
-			window.CoCreate;
-
-		dropedEl = cssPath(dropedEl);
-
+		let { dropedElCSSPath, dragedEl, position, dropType, path } = e.detail;
+ 
 		if(dropType === "cloneable") {
 			let hiddenAttribute = dragedEl.dnd;
 
@@ -80,7 +74,7 @@ function wrapper() {
 				emit: {
 					message: "dndNewElement",
 					data: {
-						target: dropedEl,
+						target: dropedElCSSPath,
 						method: "insertAdjacentElement",
 						value: [position, dragedEl],
 						path,
@@ -92,12 +86,12 @@ function wrapper() {
 		else {
 			dragedEl = cssPath(dragedEl);
 			message.send({
-				broadcast_sender: true,
+				broadcast_sender: false,
 				rooms: "",
 				emit: {
 					message: "domEditor",
 					data: {
-						target: dropedEl,
+						target: dropedElCSSPath,
 						method: "insertAdjacentElement",
 						value: [position, dragedEl],
 					},

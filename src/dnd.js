@@ -42,6 +42,7 @@ export default function virtualDnd() {
 					position: this.position,
 					dragedEl: this.dragedEl,
 					dropedEl: this.dropedEl,
+					dropedElCSSPath: cssPath(this.dropedEl),
 					dropType: this.dropType,
 					path,
 				};
