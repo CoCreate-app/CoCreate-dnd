@@ -1,3 +1,10 @@
+# [0.19.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.18.3...v0.19.0) (2022-02-07)
+
+
+### Features
+
+* add dropElCSSPath to dndsuccess. broadcast_sender false when using sendMessage ([4bcf546](https://github.com/CoCreate-app/CoCreate-dnd/commit/4bcf546ddace061a27957563259f5e4ce9bfb283))
+
 ## [0.18.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.18.2...v0.18.3) (2022-02-06)
 
 
