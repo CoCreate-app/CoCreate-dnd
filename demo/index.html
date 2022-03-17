@@ -6,31 +6,9 @@
 		<link rel="stylesheet" href="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.css" type="text/css" />
 
 		<style>
-			.sortable-item {
-				background-color: white;
-				border-bottom: 1px solid gray;
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: space-between;
-				padding: 2px 10px;
-				cursor: pointer;
-			}
-
-			.sortable-item .fa-arrows-alt {
-				cursor: all-scroll;
-			}
-
-			.sortable-item.layer-hidden {
-				opacity: .5;
-			}
-
-			.myinline {
+			.inline {
 				display: inline-block;
 			}
-
-			/*general*/
-
 			.block {
 				border: 1px solid blue;
 				padding: 5px;
@@ -69,38 +47,38 @@
 			</li>
 		</ul>
 		<div class="display:flex margin:50px">
-			<iframe src="iframe.1.html" id="client2" frameborder="1" width="100%" height="300px" class="margin:10px"></iframe>
-			<iframe src="iframe.html" id="client3" frameborder="1" width="100%" height="300px" class="margin:10px"></iframe>
+			<iframe src="iframe.html" id="client2" frameborder="1" width="100%" height="300px" class="margin:10px"></iframe>
+			<iframe src="iframe.1.html" id="client3" frameborder="1" width="100%" height="300px" class="margin:10px"></iframe>
 		</div>
 
 		<div class="display:flex margin:50px">
-			<div class="sortable width:50%">
-				<div eid="sortable1" class="block myinline">sortable example block 1</div>
-				<div eid="sortable2" class="block myinline">sortable example block 2</div>
-				<div eid="sortable3" class="block myinline">sortable example block 3</div>
+			<div class=" width:50%" sortable>
+				<div eid="sortable1" class="block inline">sortable example block 1</div>
+				<div eid="sortable2" class="block inline">sortable example block 2</div>
+				<div eid="sortable3" class="block inline">sortable example block 3</div>
 				<div eid="sortable4" class="block">sortable example block 4</div>
 				<div eid="sortable5" class="block">sortable example block 5</div>
 				<div eid="sortable6" class="block">sortable example block 6</div>
-				<div eid="sortable7" class="block myinline">sortable example block 7</div>
-				<div eid="sortable8" class="block myinline">sortable example block 8</div>
-				<div eid="sortable9" class="block myinline">sortable example block 9</div>
+				<div eid="sortable7" class="block inline">sortable example block 7</div>
+				<div eid="sortable8" class="block inline">sortable example block 8</div>
+				<div eid="sortable9" class="block inline">sortable example block 9</div>
 			</div>
 
 			<div class="width:50%" eid="id1" droppable="true">
-				<div eid="id2" draggable="true" class="block myinline">draggable example block 1</div>
-				<div draggable="true" class="block myinline">draggable example block 2</div>
-				<div draggable="true" class="block myinline">draggable example block 3</div>
+				<div eid="id2" draggable="true" class="block inline">draggable example block 1</div>
+				<div draggable="true" class="block inline">draggable example block 2</div>
+				<div draggable="true" class="block inline">draggable example block 3</div>
 				<div draggable="true" class="block">draggable example block 4</div>
 				<div eid="id6" draggable="true" class="block">draggable example block 5</div>
 				<div eid="id7" draggable="true" class="block">draggable example block 6</div>
-				<div eid="id8" draggable="true" class="block myinline">draggable example block 7</div>
-				<div eid="id9" draggable="true" class="block myinline">draggable example block 8</div>
-				<div eid="id10" draggable="true" class="block myinline">draggable example block 9</div>
+				<div eid="id8" draggable="true" class="block inline">draggable example block 7</div>
+				<div eid="id9" draggable="true" class="block inline">draggable example block 8</div>
+				<div eid="id10" draggable="true" class="block inline">draggable example block 9</div>
 			</div>
 		</div>
 
 		<!--<script src="../dist/CoCreate-dnd.js" ></script>-->
-		<script src="../../../CoCreateJS/dist/CoCreate.js"></script>
+		<script src="http://127.0.0.1:4000/CoCreateJS/dist/CoCreate.js" ></script>
 
 	</body>
 

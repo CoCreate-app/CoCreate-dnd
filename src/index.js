@@ -12,7 +12,7 @@ function initDnd() {
 	// if(window.parent !== window) return;
 	let iframes = document.querySelectorAll("iframe");
 	initIframes(iframes);
-	let sortables = document.querySelectorAll(".sortable");
+	let sortables = document.querySelectorAll(".sortable, [sortable]");
 	initElements(sortables);
 	let cloneables = document.querySelectorAll(".cloneable");
 	initElements(cloneables, true);
@@ -166,7 +166,7 @@ observer.init({
 observer.init({
 	name: "dndAttributes",
 	observe: ['addedNodes'],
-	target: '[draggable], [droppable], [cloneable]',
+	target: '[draggable], [droppable], [cloneable], [sortable]',
 	callback: mutation => {
 		initWindow(window);
 	},
