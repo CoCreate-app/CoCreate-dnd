@@ -79,7 +79,7 @@ function isDnd(el, options) {
     	}
     	if(element)
 			if (Array.isArray(element)) return element;
-    	el = el.parentElement;
+			el = el.parentElement;
     } while (el);
 }
 
