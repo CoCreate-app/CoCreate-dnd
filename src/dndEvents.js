@@ -41,6 +41,7 @@ function moveEvent(e) {
 	// if(e.which > 1) return;
 	if (e.target.getAttribute('dragging') == 'true')
 	// e.target.ownerDocument.body.style.touchAction = "none"
+	console.log(e.taget)
 		e.preventDefault();
 	move(e);
 
