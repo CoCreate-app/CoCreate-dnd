@@ -34,14 +34,14 @@ function startEvent(e) {
     }, 200);
     
     // If preventDefault textselection does not work... If no preventDefault Iframe to Iframe does not work
-   	// e.preventDefault();
+   	e.preventDefault();
 }
 
 function moveEvent(e) {
 	// if(e.which > 1) return;
 	if (e.target.getAttribute('dragging') == 'true')
 	// e.target.ownerDocument.body.style.touchAction = "none"
-	console.log(e.taget)
+	console.log(e.target)
 		e.preventDefault();
 	move(e);
 
