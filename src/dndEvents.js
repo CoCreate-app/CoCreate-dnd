@@ -19,7 +19,7 @@ function initEvents(wnd){
 	wnd.document.addEventListener("touchmove", moveEvent, { passive: false });
 	wnd.document.addEventListener("touchend", endEvent, { passive: false });
  	wnd.document.addEventListener("mousedown", startEvent);
-	wnd.document.addEventListener("mousemove", moveEvent);
+	// wnd.document.addEventListener("mousemove", moveEvent);
 	wnd.document.addEventListener("mouseup", endEvent);
 }
 
@@ -29,19 +29,20 @@ function startEvent(e) {
 		if(hasSelection(e.target)) {
 			return;
 		}
-		else 
+		else {
+			wnd.document.addEventListener("mousemove", moveEvent);
 	    	startDnd(e);
+		}
     }, 200);
     
     // If preventDefault textselection does not work... If no preventDefault Iframe to Iframe does not work
-   	e.preventDefault();
+   	// e.preventDefault();
 }
 
 function moveEvent(e) {
 	// if(e.which > 1) return;
 	if (e.target.getAttribute('dragging') == 'true')
 	// e.target.ownerDocument.body.style.touchAction = "none"
-	console.log(e.target)
 		e.preventDefault();
 	move(e);
 
@@ -52,6 +53,8 @@ function endEvent(e) {
 	// e.target.ownerDocument.body.style.touchAction = "auto"
 	endDnd(e);
 	clearTimeout(dragTimeout);
+	wnd.document.removeEventListener("mousemove", moveEvent);
+
 	// e.preventDefault();
 }
 

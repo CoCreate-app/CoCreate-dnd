@@ -54,8 +54,9 @@ function initElement({
 
 	if (target.tagName == 'IFRAME') {
 		initWindow(target.contentWindow);
-		if (init || target.classList.contains('cloneable') || target.hasAttribute('sortable'))
-			target = target.contentDocument.documentElement
+		if (init || target.classList.contains('cloneable') || target.hasAttribute('sortable')) {
+			target = target.contentDocument.documentElement;
+		}
 		else return
 	}
 
@@ -137,21 +138,15 @@ initDnd();
 observer.init({
 	name: "dndClasses",
 	observe: ['addedNodes'],
-	target: 'iframe, .cloneable, [sortable]',
+	target: '.cloneable, [sortable]',
 	callback: mutation => {
-		initElement({target: mutation.target});
+		if (mutation.target.tagName == 'IFRAME')
+			setTimeout(() => {
+				initElement({target: mutation.target});
+			}, 2000);
+		else
+			initElement({target: mutation.target});
 	}
 });
-
-// observer.init({
-// 	name: "dndIframe",
-// 	observe: ['addedNodes'],
-// 	target: 'iframe',
-// 	callback: mutation => {
-// 	    setTimeout(() => {
-// 	    	initWindow(mutation.target.contentWindow);
-// 	    }, 2000);
-// 	},
-// });
 
 export default { init };
