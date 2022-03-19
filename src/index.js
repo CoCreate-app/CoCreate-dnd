@@ -31,36 +31,70 @@ function initElements(elements) {
 function initElement({
 	target,
 	draggable,
-	droppable = true,
-	cloneable = false,
-	nested = false,
+	droppable,
+	cloneable,
+	nested,
 	handle,
 	group,
 	exclude,
 	init
 }) {
+
 	if (!target.tagName) {
 		let error = "Dnd Sortable: Please provide a valid element";
 		console.error(error);
 		throw error;
 	}
 
-	if (target.hasAttribute('cloneables'))
-		cloneable = true
+	if (!draggable) {
+		let isDraggable = target.getAttribute('draggable');
+		if (isDraggable != 'false')
+		draggable = true;
+	}
 
-	let isNested = target.getAttribute('nested');
-	if (isNested != 'false' || isNested != undefined)
-		nested = true;
+	if (!droppable) {
+		let isDroppable = target.getAttribute('droppable');
+		if (isDroppable != 'false')
+			droppable = true;
+	}
+
+	if (!cloneable) {
+		let isCloneable = target.getAttribute('cloneables');
+		if (isCloneable != 'false' && isCloneable != null && isCloneable != undefined)
+			cloneable = true;
+	}
+
+	if (!nested) {
+		let isNested = target.getAttribute('nested');
+		if (isNested != 'false' && isNested != null && isNested != undefined)
+			nested = true;
+	}
+
+	if (!handle)
+		handle = target.getAttribute('drag-handle');
+
+	if (!group)
+		group = target.getAttribute('dnd-group-name');
+
+	if (!exclude)
+		exclude = target.getAttribute('dnd-exclude');
+
 
 	if (target.tagName == 'IFRAME') {
 		initWindow(target.contentWindow);
-		if (init || target.hasAttribute('cloneables') || target.hasAttribute('sortable')) {
+		let sortable = target.hasAttribute('sortable')
+		let cloneables = target.hasAttribute('cloneables')
+		if (init || sortable || cloneables) {
 			target = target.contentDocument.documentElement;
+			if (sortable)
+				target.setAttribute('sortable', target.getAttribute('sortable') || '')
+			if (cloneables)
+				target.setAttribute('cloneables', target.getAttribute('cloneables') || '')
 		}
 		else return
 	}
 
-	target.dnd = {droppable: droppable};
+	target.dnd = {droppable};
 
 	if (group) 
 		target.dnd['groupName'] = group;
@@ -89,11 +123,11 @@ function initElement({
 				el.dnd['cloneable'] = cloneable;
 			}
 			else if (draggable != false){
-				el.dnd['draggable'] = true;
+				el.dnd['draggable'] = draggable;
 			}
 			try {
-				let handleEls = el.querySelectorAll(handle);
-				if(handle && handleEls.length) {
+				if (handle) {
+					let handleEls = el.querySelectorAll(handle);
 					el.dnd['draggable'] = true
 					el.dnd['handle'] = handleEls;
 					handleEls.forEach((el) => {
@@ -136,7 +170,7 @@ function init(params){
 initDnd();
 
 observer.init({
-	name: "dndClasses",
+	name: "dndAddedNodes",
 	observe: ['addedNodes'],
 	target: '[cloneables], [sortable]',
 	callback: mutation => {
@@ -148,5 +182,19 @@ observer.init({
 			initElement({target: mutation.target});
 	}
 });
+
+// observer.init({
+// 	name: "dndAttributes",
+// 	observe: ['attributes'],
+// 	attributeName: ['cloneables', 'sortable'],
+// 	callback: mutation => {
+// 		if (mutation.target.tagName == 'IFRAME')
+// 			setTimeout(() => {
+// 				initElement({target: mutation.target});
+// 			}, 2000);
+// 		else
+// 			initElement({target: mutation.target});
+// 	}
+// });
 
 export default { init };
