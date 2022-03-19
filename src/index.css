@@ -4,14 +4,21 @@ body[isdragging] * {
   cursor: -webkit-grabbing!important;
 }
 
-[cloneable],
-[draggable],
-[sortable] {
+[cloneables] > *,
+[sortable] > * {
   cursor: grab;
 }
 
-[draggable="false"] {
+[cloneable="false"],
+[cloneables="false"] > *,
+[draggable="false"],
+[sortable="false"] > * {
   cursor: auto;
+}
+
+[cloneable],
+[draggable] {
+  cursor: grab;
 }
 
 body[isdragging] [droppable]{

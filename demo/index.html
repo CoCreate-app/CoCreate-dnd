@@ -3,7 +3,6 @@
 
 	<head>
 		<title>DND | CoCreateJS</title>
-		<link rel="stylesheet" href="https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.css" type="text/css" />
 
 		<style>
 			.inline {
@@ -18,61 +17,61 @@
 	</head>
 
 	<body >
+		<h1 cloneable>This is a H1</h1>
 
-		<!-- Container and elements intialized with cloneable class and cloneable attribute -->
-		<ul class="margin:50px" cloneables dnd-group-name="canvas">
-			<li cloneable-html='<h1>This is a Header</h1>'>
-				<p>Header</p>
+		<!-- Container and elements intialized as cloneables -->
+		<ul class="margin:50px" cloneables droppable="false">
+			<li cloneable-html='<h2>This is a H2</h2>'>
+				<p>Heading 2</p>
 			</li>
-			<li id="span" cloneable-html='<span droppable="true" class="CoC-droppable">This is an Span</span>"><i class="fa fa-header'>
-				</i>
+			<li id="span" cloneable-html='<span>This is an Span</span>'>
 				<p>Span</p>
 			</li>
-			<li id="li" cloneable="true" cloneable-html='<li droppable="true" class="CoC-droppable">this is a Li</li>"><i class="fa fa-header'>
-				</i>
+			<li id="li" cloneable-html='<li droppable="true">this is a Li</li>'></li>
 				<p>Li</p>
 			</li>
-			<li id="chart-image" cloneable="true" cloneable-html="<img droppable='true' class='CoC-droppable' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
+			<li id="chart-image" cloneable-html="<img droppable='true' src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>">
 				<i class="fa fa-bar-chart"></i>
 				<p>Chart Image</p>
 			</li>
-			<li id="login-from" cloneable="true" cloneable-html='<div droppable="true" class="CoC-droppable" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
+			<li id="login-from" cloneable-html='<div droppable="true" class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'>
 				<i class="fa fa-sign-in"></i>
 				<p>Login Form</p>
 			</li>
-			<li id="login-from" cloneable="true">
+			<li id="login-from">
 				<i class="fa fa-sign-in"></i>
 				<p>it will be cloned and droped as itself because it doesn't have cloneable-html </p>
 			</li>
 		</ul>
+
 		<div class="display:flex margin:50px">
 			<iframe src="iframe.html" sortable nested="true" id="client2" frameborder="1" width="100%" height="300px" class="margin:10px"></iframe>
 			<iframe src="iframe.1.html" id="client3" frameborder="1" width="100%" height="300px" class="margin:10px"></iframe>
 		</div>
 
 		<div class="display:flex margin:50px">
-			<div class=" width:50%" sortable>
-				<div eid="sortable1" class="block inline">sortable example block 1</div>
-				<div eid="sortable2" class="block inline">sortable example block 2</div>
-				<div eid="sortable3" class="block inline">sortable example block 3</div>
-				<div eid="sortable4" class="block">sortable example block 4</div>
-				<div eid="sortable5" class="block">sortable example block 5</div>
-				<div eid="sortable6" class="block">sortable example block 6</div>
-				<div eid="sortable7" class="block inline">sortable example block 7</div>
-				<div eid="sortable8" class="block inline">sortable example block 8</div>
-				<div eid="sortable9" class="block inline">sortable example block 9</div>
+			<div class="width:50%" sortable>
+				<div class="block inline">sortable example block 1</div>
+				<div class="block inline">sortable example block 2</div>
+				<div class="block inline">sortable example block 3</div>
+				<div class="block">sortable example block 4</div>
+				<div class="block">sortable example block 5</div>
+				<div class="block">sortable example block 6</div>
+				<div class="block inline">sortable example block 7</div>
+				<div class="block inline">sortable example block 8</div>
+				<div class="block inline">sortable example block 9</div>
 			</div>
 
-			<div class="width:50%" eid="id1" droppable="true">
-				<div eid="id2" draggable="true" class="block inline">draggable example block 1</div>
+			<div class="width:50%" droppable="true">
+				<div draggable="true" class="block inline">draggable example block 1</div>
 				<div draggable="true" class="block inline">draggable example block 2</div>
 				<div draggable="true" class="block inline">draggable example block 3</div>
 				<div draggable="true" class="block">draggable example block 4</div>
-				<div eid="id6" draggable="true" class="block">draggable example block 5</div>
-				<div eid="id7" draggable="true" class="block">draggable example block 6</div>
-				<div eid="id8" draggable="true" class="block inline">draggable example block 7</div>
-				<div eid="id9" draggable="true" class="block inline">draggable example block 8</div>
-				<div eid="id10" draggable="true" class="block inline">draggable example block 9</div>
+				<div draggable="true" class="block">draggable example block 5</div>
+				<div draggable="true" class="block">draggable example block 6</div>
+				<div draggable="true" class="block inline">draggable example block 7</div>
+				<div draggable="true" class="block inline">draggable example block 8</div>
+				<div draggable="true" class="block inline">draggable example block 9</div>
 			</div>
 		</div>
 
