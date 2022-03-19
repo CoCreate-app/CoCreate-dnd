@@ -18,7 +18,7 @@ function initWindow(wnd){
 		windows.set(wnd);
 		initEvents(wnd);
 
-		let elements = wnd.document.querySelectorAll("iframe, [sortable], .cloneable");
+		let elements = wnd.document.querySelectorAll("iframe, [sortable], [cloneables]");
 		initElements(elements);
 	}
 }
@@ -45,7 +45,7 @@ function initElement({
 		throw error;
 	}
 
-	if (target.classList.contains('cloneable'))
+	if (target.hasAttribute('cloneables'))
 		cloneable = true
 
 	let isNested = target.getAttribute('nested');
@@ -54,7 +54,7 @@ function initElement({
 
 	if (target.tagName == 'IFRAME') {
 		initWindow(target.contentWindow);
-		if (init || target.classList.contains('cloneable') || target.hasAttribute('sortable')) {
+		if (init || target.hasAttribute('cloneables') || target.hasAttribute('sortable')) {
 			target = target.contentDocument.documentElement;
 		}
 		else return
@@ -138,7 +138,7 @@ initDnd();
 observer.init({
 	name: "dndClasses",
 	observe: ['addedNodes'],
-	target: '.cloneable, [sortable]',
+	target: '[cloneables], [sortable]',
 	callback: mutation => {
 		if (mutation.target.tagName == 'IFRAME')
 			setTimeout(() => {

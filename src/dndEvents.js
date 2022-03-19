@@ -10,17 +10,16 @@ let dragTimeout;
 let initFunctions = [];
 
 function initEvents(wnd){
-	wnd.document.addEventListener("dragstart", (e) => {
+	wnd.addEventListener("dragstart", (e) => {
 		e.preventDefault();
-		return false;
 	});
 
-	wnd.document.addEventListener("touchstart", startEvent, { passive: false });
-	wnd.document.addEventListener("touchmove", moveEvent, { passive: false });
-	wnd.document.addEventListener("touchend", endEvent, { passive: false });
- 	wnd.document.addEventListener("mousedown", startEvent);
-	// wnd.document.addEventListener("mousemove", moveEvent);
-	wnd.document.addEventListener("mouseup", endEvent);
+	wnd.addEventListener("touchstart", startEvent, { passive: false });
+	wnd.addEventListener("touchmove", moveEvent, { passive: false });
+	wnd.addEventListener("touchend", endEvent, { passive: false });
+ 	wnd.addEventListener("mousedown", startEvent);
+	wnd.addEventListener("mousemove", moveEvent);
+	wnd.addEventListener("mouseup", endEvent);
 }
 
 function startEvent(e) {
@@ -29,10 +28,8 @@ function startEvent(e) {
 		if(hasSelection(e.target)) {
 			return;
 		}
-		else {
-			wnd.document.addEventListener("mousemove", moveEvent);
+		else 
 	    	startDnd(e);
-		}
     }, 200);
     
     // If preventDefault textselection does not work... If no preventDefault Iframe to Iframe does not work
@@ -42,7 +39,6 @@ function startEvent(e) {
 function moveEvent(e) {
 	// if(e.which > 1) return;
 	if (e.target.getAttribute('dragging') == 'true')
-	// e.target.ownerDocument.body.style.touchAction = "none"
 		e.preventDefault();
 	move(e);
 
@@ -50,11 +46,8 @@ function moveEvent(e) {
 
 function endEvent(e) {
 	if(e.which > 1) return;
-	// e.target.ownerDocument.body.style.touchAction = "auto"
 	endDnd(e);
 	clearTimeout(dragTimeout);
-	wnd.document.removeEventListener("mousemove", moveEvent);
-
 	// e.preventDefault();
 }
 
@@ -111,7 +104,8 @@ function startDnd(e) {
 				el = parse(html);
 				if(!el) return;
 			}
-			else el = el.cloneNode(true);
+			else 
+				el = el.cloneNode(true);
 			break;
 		case vars.draggable:
 			let hasHandle = false;
