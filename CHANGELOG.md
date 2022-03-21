@@ -1,3 +1,22 @@
+# [0.20.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.19.4...v0.20.0) (2022-03-21)
+
+
+### Bug Fixes
+
+* ability to add sortable, clonable, nested, etc, to iframe elements and target the iframes content. query all irame s and thier nested iframes and initialize dnd eventListeners ([9abcf43](https://github.com/CoCreate-app/CoCreate-dnd/commit/9abcf43ec71216e96e08091b120851ab0b2b79ab))
+* due to elements changinging when dnd used in iframe, elementConfig is applied rather then adding dnd params to elements object ([af1a57f](https://github.com/CoCreate-app/CoCreate-dnd/commit/af1a57f693a58d3be71e702240b1ce26b4e138d7))
+* if iframe add sortable or clobneable to documentElement ([0f2d26e](https://github.com/CoCreate-app/CoCreate-dnd/commit/0f2d26e031b73cbdb508caf89a1ae660f4814892))
+* if iframe add sortable or clobneable to documentElement ([84f20ac](https://github.com/CoCreate-app/CoCreate-dnd/commit/84f20ac99dcd45c9ef767d23735cafc4b207cd25))
+* query for attribute sortable ([340f796](https://github.com/CoCreate-app/CoCreate-dnd/commit/340f796ff5e36a358cb3fdba898fd819e105bfd6))
+* update class sortable to attribute sortable ([7fa68cc](https://github.com/CoCreate-app/CoCreate-dnd/commit/7fa68cc3936efa6c54bf2145b7f87b94b1aa0cc8))
+* update class sortable to attribute sortable ([5e4952c](https://github.com/CoCreate-app/CoCreate-dnd/commit/5e4952c694d9788c1f1c05ec78902dca53489052))
+* update class sortable to attribute sortable ([112f9a5](https://github.com/CoCreate-app/CoCreate-dnd/commit/112f9a56ca19d742719e8bd3b7912ac9f2a7cc2b))
+
+
+### Features
+
+* define attribute cloneables to a container to make all children cloneable ([e914d8b](https://github.com/CoCreate-app/CoCreate-dnd/commit/e914d8b8e7291b1454100c799a3b7bbee7e1e286))
+
 ## [0.19.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.19.3...v0.19.4) (2022-02-24)
 
 
