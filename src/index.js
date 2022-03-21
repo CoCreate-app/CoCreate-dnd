@@ -90,6 +90,16 @@ function initElement({
 				target.setAttribute('sortable', target.getAttribute('sortable') || '')
 			if (cloneables)
 				target.setAttribute('cloneables', target.getAttribute('cloneables') || '')
+			if (nested) {
+				target.elementConfig = [{
+					selector: "*",
+					draggable: true,
+					droppable: true,
+					selectable: true,
+					hoverable: true,
+				  }]
+				target.setAttribute('nested', target.getAttribute('nested') || '')
+			}
 		}
 		else return
 	}
