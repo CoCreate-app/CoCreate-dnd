@@ -8,8 +8,9 @@ function wrapper() {
 
 
 	window.addEventListener("load", () => {
-		message.listen('domEditor', function(data) {
+		message.listen('domEditor', function(response) {
 			// console.log('raw object recieved: ', data.target, data.value[1], window.location.pathname)
+			let data = response.data;
 			if(data.target) {
 				data.target = document.querySelector(data.target);
 			}
@@ -25,14 +26,14 @@ function wrapper() {
 		})
 
 
-		message.listen("dndNewElement", function(data) {
+		message.listen("dndNewElement", function(response) {
 			// console.log(
 			//   "raw object recieved: ",
 			//   data.target,
 			//   data.value[1],
 			//   window.location.pathname
 			// );
-
+			let data = response.data;
 			try {
 				if(data.path) {
 					let iframe = document.querySelector(data.path);
@@ -71,16 +72,14 @@ function wrapper() {
 			message.send({
 				broadcast_sender: false,
 				rooms: "",
-				emit: {
-					message: "dndNewElement",
-					data: {
-						target: dropedElCSSPath,
-						method: "insertAdjacentElement",
-						value: [position, dragedEl],
-						path,
-						hiddenAttribute,
-					},
-				},
+				message: "dndNewElement",
+				data: {
+					target: dropedElCSSPath,
+					method: "insertAdjacentElement",
+					value: [position, dragedEl],
+					path,
+					hiddenAttribute,
+				}
 			});
 		}
 		else {
@@ -88,14 +87,12 @@ function wrapper() {
 			message.send({
 				broadcast_sender: false,
 				rooms: "",
-				emit: {
-					message: "domEditor",
-					data: {
-						target: dropedElCSSPath,
-						method: "insertAdjacentElement",
-						value: [position, dragedEl],
-					},
-				},
+				message: "domEditor",
+				data: {
+					target: dropedElCSSPath,
+					method: "insertAdjacentElement",
+					value: [position, dragedEl]
+				}
 			});
 		}
 	});
