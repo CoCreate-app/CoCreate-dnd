@@ -1,3 +1,10 @@
+## [0.20.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.0...v0.20.1) (2022-03-22)
+
+
+### Bug Fixes
+
+* removed emit from message.send and message.listen ([84c3016](https://github.com/CoCreate-app/CoCreate-dnd/commit/84c30169998344d9175ef0a6eaaa102363491af9))
+
 # [0.20.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.19.4...v0.20.0) (2022-03-21)
 
 
