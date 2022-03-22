@@ -52,16 +52,16 @@ function initElement({
 		draggable = true;
 	}
 
-	if (!droppable) {
-		let isDroppable = target.getAttribute('droppable');
-		if (isDroppable != 'false')
-			droppable = true;
-	}
-
 	if (!cloneable) {
 		let isCloneable = target.getAttribute('cloneables');
 		if (isCloneable != 'false' && isCloneable != null && isCloneable != undefined)
 			cloneable = true;
+	}
+
+	if (!droppable) {
+		let isDroppable = target.getAttribute('droppable');
+		if (isDroppable != 'false' && !cloneable || cloneable && isDroppable != 'false' && isDroppable != null && isDroppable != undefined)
+			droppable = true;
 	}
 
 	if (!nested) {
