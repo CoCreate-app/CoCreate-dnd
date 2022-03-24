@@ -1,3 +1,10 @@
+## [0.20.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.1...v0.20.2) (2022-03-24)
+
+
+### Bug Fixes
+
+* if cloneables container not droppable unless droppable is defined ([8deb201](https://github.com/CoCreate-app/CoCreate-dnd/commit/8deb20114a9404056242b83036ecf3e0b9a2350f))
+
 ## [0.20.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.0...v0.20.1) (2022-03-22)
 
 
