@@ -1,3 +1,10 @@
+## [0.20.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.2...v0.20.3) (2022-04-11)
+
+
+### Bug Fixes
+
+* Store map of windows intialized to window.top to prevent duplicate initializations when iframes are used ([03ee26c](https://github.com/CoCreate-app/CoCreate-dnd/commit/03ee26c57a96ffc7e817501e728862ae0c349036))
+
 ## [0.20.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.1...v0.20.2) (2022-03-24)
 
 
