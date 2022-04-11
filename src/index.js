@@ -6,7 +6,12 @@ import "./collaboration.js";
 import './index.css';
 
 
-let windows = new Map();
+// let windows = new Map();
+let windows = window.top.dnd;
+if (!windows) {
+	window.top.dnd = new Map();
+	windows = window.top.dnd
+}
 
 function initDnd() {
 	initWindow(window);
