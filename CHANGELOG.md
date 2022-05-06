@@ -1,3 +1,10 @@
+## [0.20.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.3...v0.20.4) (2022-05-06)
+
+
+### Bug Fixes
+
+* update config organization_Id to organization_id ([0d50049](https://github.com/CoCreate-app/CoCreate-dnd/commit/0d50049d1acec3c0067673577251591f8136b918))
+
 ## [0.20.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.2...v0.20.3) (2022-04-11)
 
 
