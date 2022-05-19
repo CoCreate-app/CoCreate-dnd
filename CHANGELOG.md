@@ -1,3 +1,10 @@
+## [0.20.5](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.4...v0.20.5) (2022-05-19)
+
+
+### Bug Fixes
+
+* update document_id on link index.css ([8be50e1](https://github.com/CoCreate-app/CoCreate-dnd/commit/8be50e1d854caf28d1eb43b36442c141fe8ed5a4))
+
 ## [0.20.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.3...v0.20.4) (2022-05-06)
 
 
