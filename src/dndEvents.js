@@ -25,7 +25,7 @@ function initEvents(wnd){
 function startEvent(e) {
 	if(e.which > 1) return;
     dragTimeout = setTimeout(() => {
-		if(hasSelection(e.target)) {
+		if(hasSelection(e.target) || e.target.hasAttribute('dnd-exclude')) {
 			return;
 		}
 		else 
