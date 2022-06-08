@@ -1,3 +1,10 @@
+## [0.20.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.6...v0.20.7) (2022-06-08)
+
+
+### Bug Fixes
+
+* if elementhasAttribute dnd-exclude return ([60bca34](https://github.com/CoCreate-app/CoCreate-dnd/commit/60bca343ed920bc1be8c999fae9712e5c2ab07d3))
+
 ## [0.20.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.5...v0.20.6) (2022-05-23)
 
 
