@@ -44,7 +44,7 @@ function initElement({
 	exclude,
 	init
 }) {
-
+	let draggableType;
 	if (!target.tagName) {
 		let error = "Dnd Sortable: Please provide a valid element";
 		console.error(error);
@@ -54,7 +54,9 @@ function initElement({
 	if (!draggable) {
 		let isDraggable = target.getAttribute('draggable');
 		if (isDraggable != 'false')
-		draggable = true;
+			draggable = true;
+		if (isDraggable == 'absolute' || isDraggable == 'fixed')
+			draggableType = isDraggable;
 	}
 
 	if (!cloneable) {
@@ -111,6 +113,9 @@ function initElement({
 
 	target.dnd = {droppable};
 
+	if (draggableType) 
+		target.dnd['draggableType'] = draggableType;
+		
 	if (group) 
 		target.dnd['groupName'] = group;
 
@@ -139,6 +144,8 @@ function initElement({
 			}
 			else if (draggable != false){
 				el.dnd['draggable'] = draggable;
+				if (draggableType) 
+					target.dnd['draggableType'] = draggableType;		
 			}
 			try {
 				if (handle) {
@@ -147,6 +154,8 @@ function initElement({
 					el.dnd['handle'] = handleEls;
 					handleEls.forEach((el) => {
 						el.dnd['draggable'] = true;
+						if (draggableType) 
+							target.dnd['draggableType'] = draggableType;
 					});
 				}
 			}

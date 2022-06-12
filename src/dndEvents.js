@@ -239,6 +239,7 @@ dnd.on("dragEnd", (data) => {
 	myDropMarker.hide();
 	if(ghost) ghost.hide(data.wnd);
 });
+
 dnd.on("dragOver", (data) => {
 	// it will always run when mouse or touch moves
 	myDropMarker.draw(
