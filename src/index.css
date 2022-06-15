@@ -25,13 +25,17 @@ body[isdragging] [droppable]{
   outline: 1px dashed gray;
 }
 
-[dragging="true"] {
-  height:0px;
+/* [dragging="true"] {
+  height: 0px;
+  width: 0px;
+  padding: 0px;
+  margin: 0px;
+  border-width: 0px;
   overflow:hidden;
   cursor: grabbing;
   cursor: -moz-grabbing;
   cursor: -webkit-grabbing;
-}
+} */
 
 #dropMarker{
   background-color:green;

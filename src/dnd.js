@@ -18,11 +18,12 @@ export default function virtualDnd() {
 		evnt.on.apply(evnt, arguments);
 	};
 
-	this.dragStart = (e, el, id, wnd, dropType) => {
+	this.dragStart = (e, el, id, wnd, dropType, dragType) => {
 		this.id = id;
 		this.dropType = dropType;
+		this.dragType = dragType;
 		this.dragedEl = el;
-		evnt.dispatch("dragStart", { e, el, wnd });
+		evnt.dispatch("dragStart", { e, el, wnd, dropType, dragType });
 	};
 
 	this.dragEnd = (e, wnd) => {
@@ -56,16 +57,33 @@ export default function virtualDnd() {
 					let elementValue;
 					if(this.dropType == 'cloneable')
 						elementValue = this.dragedEl.outerHTML;
-				
-					CoCreate.text.insertAdjacentElement({
-						domTextEditor,
-						position: this.position,
-						target: this.dropedEl,
-						element: this.dragedEl,
-						elementValue: elementValue
-					});
+
+					if (this.dragType === 'absolute' || this.dragType === 'fixed') {
+						CoCreate.text.setStyle({ 
+							domTextEditor, target: this.dragedEl, property: 'top', value: this.y + 'px' 
+						})
+						CoCreate.text.setStyle({ 
+							domTextEditor, target: this.dragedEl, property: 'left', value: this.x + 'px' 
+						})
+						CoCreate.text.setStyle({ 
+							domTextEditor, target: this.dragedEl, property: 'position', value: this.dragType 
+						})
+						if (this.dragType === 'absolute') {
+							CoCreate.text.setStyle({ 
+								domTextEditor, target: this.dragedEl.parentElement, property: 'position', value: 'relative' 
+							})
+						}
+					} else {
+						CoCreate.text.insertAdjacentElement({
+							domTextEditor,
+							position: this.position,
+							target: this.dropedEl,
+							element: this.dragedEl,
+							elementValue: elementValue
+						});
+					}
 				}
-				else {
+				else if (this.dragType !== 'absolute' && this.dragType !== 'fixed'){
 					this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
 				}
 				
@@ -102,6 +120,8 @@ export default function virtualDnd() {
 				orientation,
 				hasChild: true,
 				wnd,
+				dragType: this.dragType,
+				dragedEl: this.dragedEl
 			});
 
 			this.position = topleft.includes(orientation) ?
@@ -109,6 +129,8 @@ export default function virtualDnd() {
 				"beforeend";
 			this.dropedEl = el;
 			this.type = "normal";
+			this.y = e.y
+			this.x = e.x
 		}
 		else {
 			// find closest child and put outside the child element on top or bottom relating to that child,
@@ -131,6 +153,8 @@ export default function virtualDnd() {
 				orientation,
 				hasChild: false,
 				wnd,
+				dragType: this.dragType,
+				dragedEl: this.dragedEl
 			});
 
 			this.position = topleft.includes(orientation) ?
@@ -138,6 +162,8 @@ export default function virtualDnd() {
 				"afterend";
 
 			this.type = "children";
+			this.y = e.y
+			this.x = e.x
 		}
 	};
 }

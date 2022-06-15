@@ -5,6 +5,7 @@ import {ghostEffect} from "./util/ghostEffect.js";
 import {autoScroll} from "./util/autoScroll.js";
 import {hasSelection} from '@cocreate/selection';
 import {checkElementConfig} from '@cocreate/element-config';
+import {setPosition} from './util/position.js';
 
 let dragTimeout;
 let initFunctions = [];
@@ -124,7 +125,12 @@ function startDnd(e) {
 
 	isDraging = true;
 
-	dnd.dragStart(e, el, null, wnd, att);
+	let dragType = el.getAttribute('draggable');
+	if (!dragType && el.dnd) {
+    	dragType = el.dnd.draggableType;
+    }
+
+	dnd.dragStart(e, el, null, wnd, att, dragType);
 }
 
 function move(e, stopScroll) {
@@ -149,7 +155,9 @@ function move(e, stopScroll) {
 	}
 	var selection = wnd.document.getSelection();
 	selection.removeAllRanges();
-	if(ghost) ghost.draw({ x, y }, wnd);
+	if (ghost)
+		ghost.draw({ x, y }, wnd);
+
 	scroller.update(x, y);
 	if(isDraging) {
 		wnd.document.body.setAttribute('isdragging', '');
@@ -192,7 +200,7 @@ function move(e, stopScroll) {
 			onMouseScrollMove: (e) => move(e, wnd, true),
 		});
 	}
-	dnd.dragOver({ x, y, target: el }, el, wnd);
+	dnd.dragOver({ x, y, target: el, e }, el, wnd);
 }
 
 function endDnd(e) {
@@ -231,8 +239,10 @@ let ghost;
 
 dnd.on("dragStart", (data) => {
 	myDropMarker.hide();
-	ghost = new ghostEffect(data.e, data.el, { window, document });
-	ghost.start();
+	if (data.dragType !== 'absolute' && data.dragType !== 'fixed') {
+		ghost = new ghostEffect(data.e, data.el, { window, document });
+		ghost.start();
+	}
 });
 
 dnd.on("dragEnd", (data) => {
@@ -242,12 +252,17 @@ dnd.on("dragEnd", (data) => {
 
 dnd.on("dragOver", (data) => {
 	// it will always run when mouse or touch moves
-	myDropMarker.draw(
-		data.el,
-		data.closestEl,
-		data.orientation, !!data.hasChild,
-		data.wnd
-	);
+	if (data.dragType == 'absolute' || data.dragType == 'fixed') {
+		setPosition(data.dragedEl, data.wnd, data.e.e, data.dragType);
+	}
+	else {
+		myDropMarker.draw(
+			data.el,
+			data.closestEl,
+			data.orientation, !!data.hasChild,
+			data.wnd
+		);
+	}
 });
 
 function getGroupName(el) {
