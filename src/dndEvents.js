@@ -127,7 +127,7 @@ function startDnd(e) {
 
 	let dragType = el.getAttribute('draggable');
 	if (!dragType && el.dnd) {
-    	dragType = el.dnd.draggableType;
+    	dragType = el.dnd.dragType;
     }
 
 	dnd.dragStart(e, el, null, wnd, att, dragType);
@@ -212,22 +212,6 @@ function endDnd(e) {
 	scroller.deactivateScroll();
 }
 
-// function beforeDndSuccess() {
-// 	if(beforeDndSuccessCallback)
-// 		return beforeDndSuccessCallback.apply(null, arguments);
-// 	return {};
-// }
-
-// function beforeDndSuccess(detail) {
-//     for (let state of initFunctionState) {
-// 		// if(state.target.contains(element)) {
-// 			let result = state.onDndSuccess(detail);
-// 			return result;
-// 		// }
-//     }
-// }
-
-
 let options = {
 	scroller: new autoScroll({ speed: 4, threshold: 3 }),
 	myDropMarker: new dropMarker(),
@@ -245,11 +229,6 @@ dnd.on("dragStart", (data) => {
 	}
 });
 
-dnd.on("dragEnd", (data) => {
-	myDropMarker.hide();
-	if(ghost) ghost.hide(data.wnd);
-});
-
 dnd.on("dragOver", (data) => {
 	// it will always run when mouse or touch moves
 	if (data.dragType == 'absolute' || data.dragType == 'fixed') {
@@ -263,6 +242,11 @@ dnd.on("dragOver", (data) => {
 			data.wnd
 		);
 	}
+});
+
+dnd.on("dragEnd", (data) => {
+	myDropMarker.hide();
+	if(ghost) ghost.hide(data.wnd);
 });
 
 function getGroupName(el) {

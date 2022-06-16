@@ -26,90 +26,11 @@ export default function virtualDnd() {
 		evnt.dispatch("dragStart", { e, el, wnd, dropType, dragType });
 	};
 
-	this.dragEnd = (e, wnd) => {
-		try {
-			if(this.dragedEl) this.dragedEl.removeAttribute("dragging");
-			if(this.position) {
-				if(this.dropedEl === this.dragedEl)
-					throw "dnd cancelled. you can't dnd on the same element.";
-
-				if(this.dragedEl.contains(this.dropedEl))
-					throw "dnd cancelled, you can't dnd from parent to its children.";
-
-				let iframe = this.dropedEl.ownerDocument.defaultView.frameElement;
-				let path = cssPath(iframe);
-				
-				let detail = {
-					position: this.position,
-					dragedEl: this.dragedEl,
-					dropedEl: this.dropedEl,
-					dropedElCSSPath: cssPath(this.dropedEl),
-					dropType: this.dropType,
-					path,
-				};
-
-				beforeDndSuccess(e.currentTarget, detail);
-				
-
-				let domTextEditor = this.dropedEl.closest('[contenteditable]');
-				if (domTextEditor){
-
-					let elementValue;
-					if(this.dropType == 'cloneable')
-						elementValue = this.dragedEl.outerHTML;
-
-					if (this.dragType === 'absolute' || this.dragType === 'fixed') {
-						CoCreate.text.setStyle({ 
-							domTextEditor, target: this.dragedEl, property: 'top', value: this.y + 'px' 
-						})
-						CoCreate.text.setStyle({ 
-							domTextEditor, target: this.dragedEl, property: 'left', value: this.x + 'px' 
-						})
-						CoCreate.text.setStyle({ 
-							domTextEditor, target: this.dragedEl, property: 'position', value: this.dragType 
-						})
-						if (this.dragType === 'absolute') {
-							CoCreate.text.setStyle({ 
-								domTextEditor, target: this.dragedEl.parentElement, property: 'position', value: 'relative' 
-							})
-						}
-					} else {
-						CoCreate.text.insertAdjacentElement({
-							domTextEditor,
-							position: this.position,
-							target: this.dropedEl,
-							element: this.dragedEl,
-							elementValue: elementValue
-						});
-					}
-				}
-				else if (this.dragType !== 'absolute' && this.dragType !== 'fixed'){
-					this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
-				}
-				
-				/*global CustomEvent*/
-				const event = new CustomEvent("dndsuccess", {
-					bubbles: false,
-					detail,
-				});
-				window.dispatchEvent(event, { bubbles: false });
-			}
-		}
-		catch(e) {
-			console.error(e);
-		}
-		finally {
-			if(this.type) {
-				this.position = null;
-				// console.log("dnd completed", "type:", this.type, "position:", this.position);
-			}
-			evnt.dispatch("dragEnd", { e, wnd });
-		}
-	};
-
 	this.dragOver = (e, el, wnd) => {
+		if(this.dragedEl) 
+			this.dragedEl.setAttribute("dragging", this.dragType);
+
 		// el is the element hovered
-		if(this.dragedEl) this.dragedEl.setAttribute("dragging", true);
 		if(el.children.length === 0) {
 			// place top or bottom inside the element
 			let [orientation, closestEl] = closestChild([e.x, e.y], [el]);
@@ -166,6 +87,88 @@ export default function virtualDnd() {
 			this.x = e.x
 		}
 	};
+
+	this.dragEnd = (e, wnd) => {
+		try {
+			if(this.dragedEl) this.dragedEl.removeAttribute("dragging");
+			if(this.position) {
+				if(this.dropedEl === this.dragedEl)
+					throw "dnd cancelled. you can't dnd on the same element.";
+	
+				if(this.dragedEl.contains(this.dropedEl))
+					throw "dnd cancelled, you can't dnd from parent to its children.";
+	
+				let iframe = this.dropedEl.ownerDocument.defaultView.frameElement;
+				let path = cssPath(iframe);
+				
+				let detail = {
+					position: this.position,
+					dragedEl: this.dragedEl,
+					dropedEl: this.dropedEl,
+					dropedElCSSPath: cssPath(this.dropedEl),
+					dropType: this.dropType,
+					path,
+				};
+	
+				beforeDndSuccess(e.currentTarget, detail);
+				
+	
+				let domTextEditor = this.dropedEl.closest('[contenteditable]');
+				if (domTextEditor){
+	
+					let elementValue;
+					if(this.dropType == 'cloneable')
+						elementValue = this.dragedEl.outerHTML;
+	
+					if (this.dragType === 'absolute' || this.dragType === 'fixed') {
+						CoCreate.text.setStyle({ 
+							domTextEditor, target: this.dragedEl, property: 'top', value: this.y + 'px' 
+						})
+						CoCreate.text.setStyle({ 
+							domTextEditor, target: this.dragedEl, property: 'left', value: this.x + 'px' 
+						})
+						CoCreate.text.setStyle({ 
+							domTextEditor, target: this.dragedEl, property: 'position', value: this.dragType 
+						})
+						if (this.dragType === 'absolute') {
+							CoCreate.text.setStyle({ 
+								domTextEditor, target: this.dragedEl.parentElement, property: 'position', value: 'relative' 
+							})
+						}
+					} else {
+						CoCreate.text.insertAdjacentElement({
+							domTextEditor,
+							position: this.position,
+							target: this.dropedEl,
+							element: this.dragedEl,
+							elementValue: elementValue
+						});
+					}
+				}
+				else if (this.dragType !== 'absolute' && this.dragType !== 'fixed'){
+					this.dropedEl.insertAdjacentElement(this.position, this.dragedEl);
+				}
+				
+				/*global CustomEvent*/
+				const event = new CustomEvent("dndsuccess", {
+					bubbles: false,
+					detail,
+				});
+				window.dispatchEvent(event, { bubbles: false });
+			}
+		}
+		catch(e) {
+			console.error(e);
+		}
+		finally {
+			if(this.type) {
+				this.position = null;
+				// console.log("dnd completed", "type:", this.type, "position:", this.position);
+			}
+			evnt.dispatch("dragEnd", { e, wnd });
+		}
+	};
+	
 }
 
 
