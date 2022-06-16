@@ -104,9 +104,14 @@ function startDnd(e) {
 			if(html) {
 				el = parse(html);
 				if(!el) return;
+			} else {
+				let clonableEl = el.querySelector('cloneable-html')
+				if (clonableEl)
+					el = el.firstElementChild.cloneNode(true)
+				else 
+					el = el.cloneNode(true);
 			}
-			else 
-				el = el.cloneNode(true);
+		
 			break;
 		case vars.draggable:
 			let hasHandle = false;

@@ -63,6 +63,9 @@ body[isdragging] [droppable]{
   cursor: -webkit-grabbing;
 }
 
+cloneable-html {
+  display:none;
+}
 	  /*[draggable="true"], [cloneable="true"]  {*/
 	  /*  touch-action: none;*/
 	  /*}*/
