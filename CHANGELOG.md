@@ -1,3 +1,17 @@
+# [0.21.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.8...v0.21.0) (2022-06-16)
+
+
+### Bug Fixes
+
+* css cursor to grab when dragType is absolute or fixed ([e4b2dc4](https://github.com/CoCreate-app/CoCreate-dnd/commit/e4b2dc48b2f747c52d3df4cbc8bf1ed678fea036))
+* update docs css document_id ([ab7e7f8](https://github.com/CoCreate-app/CoCreate-dnd/commit/ab7e7f858ed805ad536fdced9c96cb5488cd18cb))
+
+
+### Features
+
+* if cloneable-html element clone firstChildElement as cloned value ([a50b156](https://github.com/CoCreate-app/CoCreate-dnd/commit/a50b156309c33d81672fa5a8cbac953cc093305c))
+* support for absolute and fixed dragging position ([85bfc3c](https://github.com/CoCreate-app/CoCreate-dnd/commit/85bfc3c322219c994b9a4bf1fd36a7946d100298))
+
 ## [0.20.8](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.7...v0.20.8) (2022-06-12)
 
 
