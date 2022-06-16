@@ -1,3 +1,10 @@
+## [0.21.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.0...v0.21.1) (2022-06-16)
+
+
+### Bug Fixes
+
+* when getting conable-html from tagname need to g fiirstChildELement from the coneable-html element ([efa8e79](https://github.com/CoCreate-app/CoCreate-dnd/commit/efa8e7946a78bb81a97aafd56f85243dcd502288))
+
 # [0.21.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.20.8...v0.21.0) (2022-06-16)
 
 
