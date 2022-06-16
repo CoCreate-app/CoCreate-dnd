@@ -107,7 +107,7 @@ function startDnd(e) {
 			} else {
 				let clonableEl = el.querySelector('cloneable-html')
 				if (clonableEl)
-					el = el.firstElementChild.cloneNode(true)
+					el = clonableEl.firstElementChild.cloneNode(true)
 				else 
 					el = el.cloneNode(true);
 			}
