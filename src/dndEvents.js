@@ -134,6 +134,16 @@ function startDnd(e) {
 	if (!dragType && el.dnd) {
     	dragType = el.dnd.dragType;
     }
+	let computed = getComputedStyle(el);
+	let x = parseInt(computed['border-left-width']) + parseInt(computed['marginLeft'])
+	let y = parseInt(computed['border-top-width']) + parseInt(computed['marginTop'])
+
+	if (el.dnd) {
+		el.dnd['offsetX'] = e.offsetX + x;
+		el.dnd['offsetY'] = e.offsetY + y;
+	} else {
+		el.dnd = {offsetX: e.offsetX + x, offsetY: e.offsetY + y}
+	}
 
 	dnd.dragStart(e, el, null, wnd, att, dragType);
 }
