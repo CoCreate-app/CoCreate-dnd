@@ -1,3 +1,10 @@
+## [0.21.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.2...v0.21.3) (2022-06-25)
+
+
+### Bug Fixes
+
+* absolute and fixed draggable elements need to account for margin and border ([4c9a7ab](https://github.com/CoCreate-app/CoCreate-dnd/commit/4c9a7ab6a252aacfe65d4324cbd53b01d815be26))
+
 ## [0.21.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.1...v0.21.2) (2022-06-18)
 
 
