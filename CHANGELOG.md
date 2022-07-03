@@ -1,3 +1,10 @@
+## [0.21.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.3...v0.21.4) (2022-07-03)
+
+
+### Bug Fixes
+
+* update pass-fetch and pass-filter attributes ([f0a5a54](https://github.com/CoCreate-app/CoCreate-dnd/commit/f0a5a54d88675c0f567478b43deeb8e89373ad5a))
+
 ## [0.21.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.2...v0.21.3) (2022-06-25)
 
 
