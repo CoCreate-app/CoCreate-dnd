@@ -70,7 +70,7 @@ function wrapper() {
 			dragedEl = dragedEl.outerHTML;
 
 			message.send({
-				broadcast_sender: false,
+				broadcastSender: false,
 				rooms: "",
 				message: "dndNewElement",
 				data: {
@@ -85,7 +85,7 @@ function wrapper() {
 		else {
 			dragedEl = cssPath(dragedEl);
 			message.send({
-				broadcast_sender: false,
+				broadcastSender: false,
 				rooms: "",
 				message: "domEditor",
 				data: {
