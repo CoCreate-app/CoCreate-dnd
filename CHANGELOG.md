@@ -1,3 +1,10 @@
+## [0.21.11](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.10...v0.21.11) (2022-09-30)
+
+
+### Bug Fixes
+
+* bump [@cocreate](https://github.com/cocreate) dependencies ([58058e8](https://github.com/CoCreate-app/CoCreate-dnd/commit/58058e8de4ba1aa716df6754997808371b40083a))
+
 ## [0.21.10](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.9...v0.21.10) (2022-09-30)
 
 
