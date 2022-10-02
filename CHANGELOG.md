@@ -1,3 +1,10 @@
+## [0.21.13](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.12...v0.21.13) (2022-10-02)
+
+
+### Bug Fixes
+
+* bump @cocreate/hosting and @cocreate/socket-client ([48a2cae](https://github.com/CoCreate-app/CoCreate-dnd/commit/48a2cae3cda62345cbd7fd820c99f3f68b25cff8))
+
 ## [0.21.12](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.11...v0.21.12) (2022-10-01)
 
 
