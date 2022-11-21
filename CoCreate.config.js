@@ -10,7 +10,7 @@ module.exports = {
             "collection": "files",
             "document_id": "6019ee724eea0817df303b14",
             "key": "src",
-            "data":{
+            "document": {
                 "name": "index.html",
                 "path": "/docs/dnd/index.html",
                 "domains": [
