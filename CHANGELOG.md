@@ -1,3 +1,10 @@
+## [0.21.17](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.16...v0.21.17) (2022-11-21)
+
+
+### Bug Fixes
+
+* replaced document_id with document._id ([735d569](https://github.com/CoCreate-app/CoCreate-dnd/commit/735d569476b9cf5c8d9439ed02c4160dffb6bc82))
+
 ## [0.21.16](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.15...v0.21.16) (2022-11-21)
 
 
