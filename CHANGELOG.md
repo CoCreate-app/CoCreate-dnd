@@ -1,3 +1,10 @@
+## [0.21.19](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.18...v0.21.19) (2022-11-22)
+
+
+### Bug Fixes
+
+* apply src: {{source}} to CoCreate.config ([93cef0c](https://github.com/CoCreate-app/CoCreate-dnd/commit/93cef0ccb9819cf97d71f3640610bd1cca1a8785))
+
 ## [0.21.18](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.17...v0.21.18) (2022-11-21)
 
 
