@@ -19,7 +19,7 @@ export function ghostEffect(elementEvent, el, wnd) {
 	this.draw = (e, wnd) => {
 		this.wrapper.style.display = "block";
 		let frameRect = { top: 0, left: 0 };
-		if(wnd.frameElement) {
+		if (wnd.frameElement) {
 			let frameElement = wnd.frameElement;
 			do {
 				let isFrameDnd = frameElement.ownerDocument.getElementById('dropMarker'); 

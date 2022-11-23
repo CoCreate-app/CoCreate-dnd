@@ -24,9 +24,9 @@ function initEvents(wnd){
 }
 
 function startEvent(e) {
-	if(e.which > 1) return;
+	if (e.which > 1) return;
     dragTimeout = setTimeout(() => {
-		if(hasSelection(e.target) || e.target.hasAttribute('dnd-exclude')) {
+		if (hasSelection(e.target) || e.target.hasAttribute('dnd-exclude')) {
 			return;
 		}
 		else 
@@ -38,7 +38,7 @@ function startEvent(e) {
 }
 
 function moveEvent(e) {
-	// if(e.which > 1) return;
+	// if (e.which > 1) return;
 	if (e.target.getAttribute('dragging') == 'true')
 		e.preventDefault();
 	move(e);
@@ -46,7 +46,7 @@ function moveEvent(e) {
 }
 
 function endEvent(e) {
-	if(e.which > 1) return;
+	if (e.which > 1) return;
 	endDnd(e);
 	clearTimeout(dragTimeout);
 	// e.preventDefault();
@@ -75,7 +75,7 @@ function isDnd(el, options) {
 			}
 			element = checkInitFunctions(el, [option]);
     	}
-    	if(element)
+    	if (element)
 			if (Array.isArray(element)) return element;
 			el = el.parentElement;
     } while (el);
@@ -101,9 +101,9 @@ function startDnd(e) {
 	switch(att) {
 		case vars.cloneable:
 			let html = el.getAttribute(vars.cloneableHtml);
-			if(html) {
+			if (html) {
 				el = parse(html);
-				if(!el) return;
+				if (!el) return;
 			} else {
 				let clonableEl = el.querySelector('cloneable-html')
 				if (clonableEl)
@@ -115,7 +115,7 @@ function startDnd(e) {
 			break;
 		case vars.draggable:
 			let hasHandle = false;
-			if(hasHandle) return;
+			if (hasHandle) return;
 			break;
 
 		default:
@@ -164,7 +164,7 @@ function move(e, stopScroll) {
 		target = e.target;
 	}
 	
-	if(!isDraging) {
+	if (!isDraging) {
 		wnd.document.body.removeAttribute('isdragging', '');
 		return;
 	}
@@ -174,18 +174,18 @@ function move(e, stopScroll) {
 		ghost.draw({ x, y }, wnd);
 
 	scroller.update(x, y);
-	if(isDraging) {
+	if (isDraging) {
 		wnd.document.body.setAttribute('isdragging', '');
 		// skip group names
 		let [groupEl, groupname] = getGroupName(target);
-		if(startGroup && groupname) {
-			if(startGroup !== groupname) {
+		if (startGroup && groupname) {
+			if (startGroup !== groupname) {
 				do {
 					let groupResult = getGroupName(groupEl);
-					if(!groupResult[0]) return; // or return
+					if (!groupResult[0]) return; // or return
 					groupEl = groupResult[0].parentElement;
 					groupname = groupResult[1];
-					if(startGroup === groupname) {
+					if (startGroup === groupname) {
 						target = groupResult[0];
 						break;
 					}
@@ -194,20 +194,20 @@ function move(e, stopScroll) {
 			}
 
 		}
-		else if(startGroup !== groupname)
+		else if (startGroup !== groupname)
 			return;
 	}
 	else {
-		if(ghost) ghost.hide();
+		if (ghost) ghost.hide();
 	}
 
-	if(!target) return;
+	if (!target) return;
 
 	let element = isDnd(target, vars.droppable);
 	if (!element) return;
 	let el = element[0];
 
-	if(!stopScroll) {
+	if (!stopScroll) {
 		scroller.calculateScroll({
 			x,
 			y,
@@ -261,7 +261,7 @@ dnd.on("dragOver", (data) => {
 
 dnd.on("dragEnd", (data) => {
 	myDropMarker.hide();
-	if(ghost) ghost.hide(data.wnd);
+	if (ghost) ghost.hide(data.wnd);
 });
 
 function getGroupName(el) {

@@ -19,7 +19,7 @@ function initDnd() {
 
 function initWindow(wnd){
 	const topWindow = window.top;
-	if(!windows.has(wnd.window)) {
+	if (!windows.has(wnd.window)) {
 		windows.set(wnd);
 		initEvents(wnd);
 
@@ -130,7 +130,7 @@ function initElement({
 			});
 		}
 		catch(err) {
-			if(err instanceof DOMException) {
+			if (err instanceof DOMException) {
 				let error = "Dnd Sortable: exclude must be valid selector";
 				console.error(error);
 				throw error;
@@ -163,7 +163,7 @@ function initElement({
 				}
 			}
 			catch (err) {
-				if(err instanceof DOMException) {
+				if (err instanceof DOMException) {
 					let error = "Dnd Sortable: handle must be a valid selector";
 					console.error(error);
 					throw error;

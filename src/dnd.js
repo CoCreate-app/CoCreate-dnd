@@ -27,11 +27,11 @@ export default function virtualDnd() {
 	};
 
 	this.dragOver = (e, el, wnd) => {
-		if(this.dragedEl) 
+		if (this.dragedEl) 
 			this.dragedEl.setAttribute("dragging", this.dragType);
 
 		// el is the element hovered
-		if(el.children.length === 0) {
+		if (el.children.length === 0) {
 			// place top or bottom inside the element
 			let [orientation, closestEl] = closestChild([e.x, e.y], [el]);
 			evnt.dispatch("dragOver", {
@@ -57,7 +57,7 @@ export default function virtualDnd() {
 			// find closest child and put outside the child element on top or bottom relating to that child,
 			let [orientation, closestEl] = closestChild([e.x, e.y], el.children);
 
-			if(closestEl.getAttribute("dnd-exclude") == "true") {
+			if (closestEl.getAttribute("dnd-exclude") == "true") {
 				this.dropedEl = closestEl.parentElement;
 				// only to get orientation
 				let [orientation2] = closestChild(
@@ -90,12 +90,12 @@ export default function virtualDnd() {
 
 	this.dragEnd = (e, wnd) => {
 		try {
-			if(this.dragedEl) this.dragedEl.removeAttribute("dragging");
-			if(this.position) {
-				if(this.dropedEl === this.dragedEl)
+			if (this.dragedEl) this.dragedEl.removeAttribute("dragging");
+			if (this.position) {
+				if (this.dropedEl === this.dragedEl)
 					throw "dnd cancelled. you can't dnd on the same element.";
 	
-				if(this.dragedEl.contains(this.dropedEl))
+				if (this.dragedEl.contains(this.dropedEl))
 					throw "dnd cancelled, you can't dnd from parent to its children.";
 	
 				let iframe = this.dropedEl.ownerDocument.defaultView.frameElement;
@@ -117,7 +117,7 @@ export default function virtualDnd() {
 				if (domTextEditor){
 	
 					let elementValue;
-					if(this.dropType == 'cloneable')
+					if (this.dropType == 'cloneable')
 						elementValue = this.dragedEl.outerHTML;
 	
 					if (this.dragType === 'absolute' || this.dragType === 'fixed') {
@@ -161,7 +161,7 @@ export default function virtualDnd() {
 			console.error(e);
 		}
 		finally {
-			if(this.type) {
+			if (this.type) {
 				this.position = null;
 				// console.log("dnd completed", "type:", this.type, "position:", this.position);
 			}
@@ -177,9 +177,9 @@ function closestChild(p, children) {
 	let closestchild;
 	let topOrientation;
 	for(let child of children) {
-		if(child.classList.contains("hidden")) continue;
+		if (child.classList.contains("hidden")) continue;
 		let [orientation, distance] = distanceToChild(p, child);
-		if(distance < closestDistance) {
+		if (distance < closestDistance) {
 			closestDistance = distance;
 			closestchild = child;
 			topOrientation = orientation;
@@ -207,7 +207,7 @@ function distanceToChild(p, child) {
 	let orientation;
 	let closestDistance = Infinity;
 	distances.forEach((distance, i) => {
-		if(distance < closestDistance) {
+		if (distance < closestDistance) {
 			closestDistance = distance;
 			orientation = orientations[i];
 		}
@@ -224,17 +224,17 @@ export function pDistance(x, y, x1, y1, x2, y2) {
 	var dot = A * C + B * D;
 	var len_sq = C * C + D * D;
 	var param = -1;
-	if(len_sq != 0)
+	if (len_sq != 0)
 		//in case of 0 length line
 		param = dot / len_sq;
 
 	var xx, yy;
 
-	if(param < 0) {
+	if (param < 0) {
 		xx = x1;
 		yy = y1;
 	}
-	else if(param > 1) {
+	else if (param > 1) {
 		xx = x2;
 		yy = y2;
 	}
@@ -250,8 +250,8 @@ export function pDistance(x, y, x1, y1, x2, y2) {
 
 function beforeDndSuccess(targetDocument, detail) {
 	for(let func of initFunctions) {
-		if(func.onDrop) {
-			if(func.targetDocument.contains(targetDocument))
+		if (func.onDrop) {
+			if (func.targetDocument.contains(targetDocument))
 				func.onDrop(detail);
 		}
 	}

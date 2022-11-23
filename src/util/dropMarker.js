@@ -13,7 +13,7 @@ export function dropMarker(options) {
 		marker.style.display = "block";
 
 		let rect = el.getBoundingClientRect();
-		if(!rect.width && !rect.height) {
+		if (!rect.width && !rect.height) {
 			rect = parent.getBoundingClientRect();
 			orientation = "top";
 		}
@@ -33,19 +33,19 @@ export function dropMarker(options) {
 				throw new Error("one type of orientation must be specified");
 		}
 
-		if(parent != el) {
+		if (parent != el) {
 			let prect = parent.getBoundingClientRect();
 			let parentSize = prect[orientation];
 			let childSize = rect[orientation];
-			if(Math.abs(parentSize - childSize) < options.dropMarkerMargin * 2)
+			if (Math.abs(parentSize - childSize) < options.dropMarkerMargin * 2)
 				isInside = true;
 		}
 		let frameRect;
-		if(wnd.frameElement) {
+		if (wnd.frameElement) {
 			frameRect = wnd.frameElement.getBoundingClientRect();
-			if(wnd.parent.frameElement) {
+			if (wnd.parent.frameElement) {
 				let isTopWndDnd = wnd.top.document.getElementById('dropMarker'); 
-				if(isTopWndDnd) {
+				if (isTopWndDnd) {
 					let frameFrameRect = wnd.parent.frameElement.getBoundingClientRect();
 					let topRect = frameRect.top;
 					let leftRect = frameRect.left;
