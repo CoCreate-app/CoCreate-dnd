@@ -1,3 +1,10 @@
+## [0.21.38](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.37...v0.21.38) (2022-12-15)
+
+
+### Bug Fixes
+
+* add missing dev dependency style-loader ([121e06f](https://github.com/CoCreate-app/CoCreate-dnd/commit/121e06f957679f0e4e3690801e657a4d5500bac0))
+
 ## [0.21.37](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.36...v0.21.37) (2022-12-13)
 
 
