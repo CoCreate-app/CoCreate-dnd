@@ -79,22 +79,28 @@
                        <a class="display:none" href="#dnd-" sortable><i class="fas fa-link"></i></a>
                     </div>
                     <p class="padding:10px_0px line-height:1.5"><code class="language-js">sortable</code> is an alias for <code class="language-js">droppable="true"</code> with all direct children as <code class="language-js">draggable="true"</code></p>
-                    <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
-                        <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" show="preview" hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px" id="code" show="code" hide="preview" hidden><i class="fas fa-code"></i></a>
-                            <!--<a class="margin-right:10px"><i class="far fa-window-maximize"></i></a>--><a target="modal" href="module_activity_datatable.html" pass-collection="modules" pass-document_id="" pass-filter-value="" pass-prefix="" pass_to="render" modal-width="600px" modal-height="400px"
-                                modal-color="#229954" modal-header="false" class="margin-right:10px">
-    				  	    <i class="fas fa-external-link-alt"></i>
-    				     </a> <a class="margin-right:5px" fullscreen target="#sandbox"><i class="fas fa-expand"></i></a> </div>
-                        <div class="svRow">
-                            <div class="svColumn">
-                                <div class="svPanel">
-                                    <div realtime="false" collection="modules" document_id="5eefe30952c6e94c75fb5e3f" name="html" id="2" class="codemirror height:100% min-width:300px"> </div>
-                                </div>
-                                <div class="svSplitter svHorizontal"> </div>
-                                <div class="svPanel"> <iframe get-value="#2" frameBorder="0" height="100%" width="100%" class="min-width:300px"></iframe> </div>
+                        <!-- SandBox -->
+                        <div class="position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px" id="playground">
+                            
+                            <div id="demo-code" resizable class="position:relative height:50%">
+                                <textarea type="code" lang="html" collection="demos" document_id="" name="demo" save="false" id="demo" class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
+                                <div resize="bottom" class="background:lightgrey"></div>
                             </div>
+        
+                            <div id="demo-preview" class="position:relative display:flex height:100% background-color:white">
+                                <div get-value="#demo" class="padding:20px"></div>
+                            </div>
+                            
+                            <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
+                                <a class="margin-right:10px" id="eye" show="#eye-slash" hide="#eye, #demo-preview" toggle="code-height" toggle-target="#demo-code"><i class="far fa-eye"></i></a>
+                                <a class="margin-right:10px" hidden id="eye-slash" show="#eye, #demo-preview" hide="#eye-slash" toggle="code-height" toggle-target="#demo-code"><i class="fas fa-eye-slash"></i></a>
+                                <a class="margin-right:10px" id="code" show="#code-slash" hide="#code, #demo-code"><i class="fa fa-code"></i></a>
+                                <a class="margin-right:10px" hidden id="code-slash" show="#code, #demo-code" hide="#code-slash"><i class="fas fa-code"></i></a>
+                                <a class="margin-right:5px" fullscreen target="#playground"><i class="fas fa-expand"></i></a>
+                            </div>
+        
                         </div>
-                    </div>
+                        <!-- End SandBox -->
     <div class="margin-top:10px">
                         <pre><code class="language-html">
     &lt;div class=&quot;sortable&quot;&gt;
@@ -109,22 +115,28 @@
                        <a class="display:none" href="#dnd-cloneable"><i class="fas fa-link"></i></a>
                     </div>
                     <p class="padding:10px_0px line-height:1.5"><code class="language-js">cloneables</code> is an alias for <code class="language-js">cloneable="true"</code> with all direct children as <code class="language-js">draggable="true"</code></p>
-                    <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
-                        <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" show="preview" hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px" id="code" show="code" hide="preview" hidden><i class="fas fa-code"></i></a>
-                            <!--<a class="margin-right:10px"><i class="far fa-window-maximize"></i></a>--><a target="modal" href="module_activity_datatable.html" pass-collection="modules" pass-document_id="" pass-filter-value="" pass-prefix="" pass_to="render" modal-width="600px" modal-height="400px"
-                                modal-color="#229954" modal-header="false" class="margin-right:10px">
-    				  	    <i class="fas fa-external-link-alt"></i>
-    				     </a> <a class="margin-right:5px" fullscreen target="#sandbox"><i class="fas fa-expand"></i></a> </div>
-                        <div class="svRow">
-                            <div class="svColumn">
-                                <div class="svPanel">
-                                    <div realtime="false" collection="modules" document_id="5eefe30952c6e94c75fb5e3f" name="html" id="3" class="codemirror height:100% min-width:300px"> </div>
-                                </div>
-                                <div class="svSplitter svHorizontal"> </div>
-                                <div class="svPanel"> <iframe get-value="#3" frameBorder="0" height="100%" width="100%" class="min-width:300px"></iframe> </div>
+                        <!-- SandBox -->
+                        <div class="position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px" id="playground">
+                            
+                            <div id="demo-code" resizable class="position:relative height:50%">
+                                <textarea type="code" lang="html" collection="demos" document_id="" name="demo" save="false" id="demo" class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
+                                <div resize="bottom" class="background:lightgrey"></div>
                             </div>
+        
+                            <div id="demo-preview" class="position:relative display:flex height:100% background-color:white">
+                                <div get-value="#demo" class="padding:20px"></div>
+                            </div>
+                            
+                            <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
+                                <a class="margin-right:10px" id="eye" show="#eye-slash" hide="#eye, #demo-preview" toggle="code-height" toggle-target="#demo-code"><i class="far fa-eye"></i></a>
+                                <a class="margin-right:10px" hidden id="eye-slash" show="#eye, #demo-preview" hide="#eye-slash" toggle="code-height" toggle-target="#demo-code"><i class="fas fa-eye-slash"></i></a>
+                                <a class="margin-right:10px" id="code" show="#code-slash" hide="#code, #demo-code"><i class="fa fa-code"></i></a>
+                                <a class="margin-right:10px" hidden id="code-slash" show="#code, #demo-code" hide="#code-slash"><i class="fas fa-code"></i></a>
+                                <a class="margin-right:5px" fullscreen target="#playground"><i class="fas fa-expand"></i></a>
+                            </div>
+        
                         </div>
-                    </div>
+                        <!-- End SandBox -->
     
     
                     <pre><code class="language-html">
@@ -187,22 +199,28 @@
                     
                     <h4 class="margin-top:20px padding:5px_0px">Drag and Drop Attributtes</h4>
                     <p class="padding:10px_0px line-height:1.5">Every draggable element can be moved inside that parent, remember draggable element can only be added to droppable element</p>
-                    <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
-                        <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" show="preview" hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px" id="code" show="code" hide="preview" hidden><i class="fas fa-code"></i></a>
-                            <!--<a class="margin-right:10px"><i class="far fa-window-maximize"></i></a>--><a target="modal" href="module_activity_datatable.html" pass-collection="modules" pass-document_id="" pass-filter-value="" pass-prefix="" pass_to="render" modal-width="600px" modal-height="400px"
-                                modal-color="#229954" modal-header="false" class="margin-right:10px">
-    				  	    <i class="fas fa-external-link-alt"></i>
-    				     </a> <a class="margin-right:5px" fullscreen target="#sandbox"><i class="fas fa-expand"></i></a> </div>
-                        <div class="svRow">
-                            <div class="svColumn">
-                                <div class="svPanel">
-                                    <div realtime="false" collection="modules" document_id="5eefe30952c6e94c75fb5e3f" name="html" id="2" class="codemirror height:100% min-width:300px"> </div>
-                                </div>
-                                <div class="svSplitter svHorizontal"> </div>
-                                <div class="svPanel"> <iframe get-value="#2" frameBorder="0" height="100%" width="100%" class="min-width:300px"></iframe> </div>
+                        <!-- SandBox -->
+                        <div class="position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px" id="playground">
+                            
+                            <div id="demo-code" resizable class="position:relative height:50%">
+                                <textarea type="code" lang="html" collection="demos" document_id="" name="demo" save="false" id="demo" class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
+                                <div resize="bottom" class="background:lightgrey"></div>
                             </div>
+        
+                            <div id="demo-preview" class="position:relative display:flex height:100% background-color:white">
+                                <div get-value="#demo" class="padding:20px"></div>
+                            </div>
+                            
+                            <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
+                                <a class="margin-right:10px" id="eye" show="#eye-slash" hide="#eye, #demo-preview" toggle="code-height" toggle-target="#demo-code"><i class="far fa-eye"></i></a>
+                                <a class="margin-right:10px" hidden id="eye-slash" show="#eye, #demo-preview" hide="#eye-slash" toggle="code-height" toggle-target="#demo-code"><i class="fas fa-eye-slash"></i></a>
+                                <a class="margin-right:10px" id="code" show="#code-slash" hide="#code, #demo-code"><i class="fa fa-code"></i></a>
+                                <a class="margin-right:10px" hidden id="code-slash" show="#code, #demo-code" hide="#code-slash"><i class="fas fa-code"></i></a>
+                                <a class="margin-right:5px" fullscreen target="#playground"><i class="fas fa-expand"></i></a>
+                            </div>
+        
                         </div>
-                    </div>
+                        <!-- End SandBox -->
     <div class="margin-top:10px">
                         <pre><code class="language-html">
     &lt;div droppable=&quot;true&quot;&gt;
@@ -216,22 +234,28 @@
                     <p class="padding:10px_0px line-height:1.5">sometimes we don't want to just move the element but making an element exactly like the element we have, or, even create a new element compeletely different from what we have in the page. in this example we use data-clonable and cloneable-html
                         to do that</p>
     
-                    <div class="container svColumn overflow:hidden card border-radius:2px width:auto height:300px" id="sandbox">
-                        <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6 z-index:7"> <a class="margin-right:10px" id="preview" show="preview" hide="code"><i class="far fa-eye"></i></a> <a class="margin-right:10px" id="code" show="code" hide="preview" hidden><i class="fas fa-code"></i></a>
-                            <!--<a class="margin-right:10px"><i class="far fa-window-maximize"></i></a>--><a target="modal" href="module_activity_datatable.html" pass-collection="modules" pass-document_id="" pass-filter-value="" pass-prefix="" pass_to="render" modal-width="600px" modal-height="400px"
-                                modal-color="#229954" modal-header="false" class="margin-right:10px">
-    				  	    <i class="fas fa-external-link-alt"></i>
-    				     </a> <a class="margin-right:5px" fullscreen target="#sandbox"><i class="fas fa-expand"></i></a> </div>
-                        <div class="svRow">
-                            <div class="svColumn">
-                                <div class="svPanel">
-                                    <div realtime="false" collection="modules" document_id="5eefe30952c6e94c75fb5e3f" name="html" id="3" class="codemirror height:100% min-width:300px"> </div>
-                                </div>
-                                <div class="svSplitter svHorizontal"> </div>
-                                <div class="svPanel"> <iframe get-value="#3" frameBorder="0" height="100%" width="100%" class="min-width:300px"></iframe> </div>
+                        <!-- SandBox -->
+                        <div class="position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px" id="playground">
+                            
+                            <div id="demo-code" resizable class="position:relative height:50%">
+                                <textarea type="code" lang="html" collection="demos" document_id="" name="demo" save="false" id="demo" class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
+                                <div resize="bottom" class="background:lightgrey"></div>
                             </div>
+        
+                            <div id="demo-preview" class="position:relative display:flex height:100% background-color:white">
+                                <div get-value="#demo" class="padding:20px"></div>
+                            </div>
+                            
+                            <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
+                                <a class="margin-right:10px" id="eye" show="#eye-slash" hide="#eye, #demo-preview" toggle="code-height" toggle-target="#demo-code"><i class="far fa-eye"></i></a>
+                                <a class="margin-right:10px" hidden id="eye-slash" show="#eye, #demo-preview" hide="#eye-slash" toggle="code-height" toggle-target="#demo-code"><i class="fas fa-eye-slash"></i></a>
+                                <a class="margin-right:10px" id="code" show="#code-slash" hide="#code, #demo-code"><i class="fa fa-code"></i></a>
+                                <a class="margin-right:10px" hidden id="code-slash" show="#code, #demo-code" hide="#code-slash"><i class="fas fa-code"></i></a>
+                                <a class="margin-right:5px" fullscreen target="#playground"><i class="fas fa-expand"></i></a>
+                            </div>
+        
                         </div>
-                    </div>
+                        <!-- End SandBox -->
     
     
                     <pre><code class="language-html">
@@ -387,30 +411,28 @@
                         </span>
                     </div>
                     <div class="position:sticky top:0 padding:15px_0px height:100vh">
-						<!-- SandBox -->
-						<div class="container svColumn overflow:hidden card position:relative border-radius:2px width:auto height:100%" id="sandbox">
-							<div class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
-								<a class="margin-right:10px" id="code" show="#preview" hide="#code, #view"><i class="far fa-eye"></i></a>
-								<a class="margin-right:10px" id="preview" show="#code, #view" hide="#preview" hidden><i class="fas fa-code"></i></a>
-								<a class="margin-right:5px" fullscreen target="#playground"><i class="fas fa-expand"></i></a>
-							</div>
-							<div class="svRow">
-	
-								<div class="svColumn">
-	
-									<div class="svPanel" id="view">
-										<textarea collection="demos" document_id="" name="demo" save="false" id="demo" class="height:100% width:100% border:none resize:none padding:5px"></textarea>
-									</div>
-									<div class="svSplitter svHorizontal"> </div>
-	
-									<div class="svPanel">
-										<iframe get-value="#demo" frameBorder="0" height="100%" width="100%" class="min-width:300px"></iframe>
-									</div>
-	
-								</div>
-							</div>
-						</div>
-						<!-- End SandBox -->
+                        <!-- SandBox -->
+                        <div class="position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px" id="playground">
+                            
+                            <div id="demo-code" resizable class="position:relative height:50%">
+                                <textarea type="code" lang="html" collection="demos" document_id="" name="demo" save="false" id="demo" class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
+                                <div resize="bottom" class="background:lightgrey"></div>
+                            </div>
+        
+                            <div id="demo-preview" class="position:relative display:flex height:100% background-color:white">
+                                <div get-value="#demo" class="padding:20px"></div>
+                            </div>
+                            
+                            <div class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
+                                <a class="margin-right:10px" id="eye" show="#eye-slash" hide="#eye, #demo-preview" toggle="code-height" toggle-target="#demo-code"><i class="far fa-eye"></i></a>
+                                <a class="margin-right:10px" hidden id="eye-slash" show="#eye, #demo-preview" hide="#eye-slash" toggle="code-height" toggle-target="#demo-code"><i class="fas fa-eye-slash"></i></a>
+                                <a class="margin-right:10px" id="code" show="#code-slash" hide="#code, #demo-code"><i class="fa fa-code"></i></a>
+                                <a class="margin-right:10px" hidden id="code-slash" show="#code, #demo-code" hide="#code-slash"><i class="fas fa-code"></i></a>
+                                <a class="margin-right:5px" fullscreen target="#playground"><i class="fas fa-expand"></i></a>
+                            </div>
+        
+                        </div>
+                        <!-- End SandBox -->
                     </div>
                 </div>
             </div>
