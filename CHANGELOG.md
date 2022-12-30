@@ -1,3 +1,10 @@
+## [0.21.47](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.46...v0.21.47) (2022-12-30)
+
+
+### Bug Fixes
+
+* update config sources to use template  braces with entry on src ([319c76f](https://github.com/CoCreate-app/CoCreate-dnd/commit/319c76f4389cac69305e33b5e7ea5e4747067539))
+
 ## [0.21.46](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.45...v0.21.46) (2022-12-29)
 
 
