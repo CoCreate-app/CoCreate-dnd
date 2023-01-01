@@ -1,3 +1,10 @@
+## [0.21.49](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.48...v0.21.49) (2023-01-01)
+
+
+### Bug Fixes
+
+* docs sanbox overflow ([9222e86](https://github.com/CoCreate-app/CoCreate-dnd/commit/9222e86c1fbae3ccd09417ebe3c220f61a08f695))
+
 ## [0.21.48](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.47...v0.21.48) (2022-12-31)
 
 
