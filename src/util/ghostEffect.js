@@ -1,23 +1,26 @@
 export function ghostEffect(elementEvent, el, wnd) {
-	this.effectCb;
-	el.removeAttribute("dragging");
+	// el.removeAttribute("dragging");
 	this.start = () => {
-		this.cloneEl = el.cloneNode(true);
+		// this.cloneEl = el.cloneNode(true);
 		let { width, height } = wnd.window.getComputedStyle(el);
-		this.wrapper = document.createElement("div");
+		// this.element = document.createElement("div");
+		
+		this.element = el;
+		this.previousStyle = el.getAttribute('style')
+		this.element.setAttribute("ghostEffect", '');
+		this.element.style.height = height;
+		this.element.style.width = width;
+		// this.element.style.display = "none";
+		this.element.style.position = "fix";
+		this.element.style.pointerEvents = "none";
+		
+		// this.element.append(this.cloneEl);
+		// wnd.document.body.append(this.element);
 
-		this.wrapper.style.height = height;
-		this.wrapper.style.width = width;
-		this.wrapper.append(this.cloneEl);
-		this.wrapper.style.display = "none";
-		wnd.document.body.append(this.wrapper);
-
-		this.wrapper.style.pointerEvents = "none";
-		this.wrapper.id = "ghostEffect";
 	};
 
 	this.draw = (e, wnd) => {
-		this.wrapper.style.display = "block";
+		// this.element.style.display = "block";
 		let frameRect = { top: 0, left: 0 };
 		if (wnd.frameElement) {
 			let frameElement = wnd.frameElement;
@@ -32,12 +35,19 @@ export function ghostEffect(elementEvent, el, wnd) {
 				else frameElement = "";
 			} while (frameElement);
 		}
-		this.wrapper.style.top = e.y + frameRect.top  + "px";
-		this.wrapper.style.left =
+		this.element.style.position = "fixed";
+		this.element.style.top = e.y + frameRect.top  + "px";
+		this.element.style.left =
 			frameRect.left + e.x - elementEvent.offsetX + "px";
 	};
 
 	this.hide = () => {
-		this.wrapper.remove();
+		// this.element.remove();
+		this.element.removeAttribute("ghostEffect");
+		if (this.previousStyle)
+			this.element.setAttribute("style", this.previousStyle);
+		else
+			this.element.removeAttribute("style");
+
 	};
 }

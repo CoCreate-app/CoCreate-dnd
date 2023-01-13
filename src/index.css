@@ -31,18 +31,6 @@ body[isdragging] [droppable]{
   cursor: -webkit-grabbing;
 }
 
-[dragging="true"] {
-  height: 0px;
-  width: 0px;
-  padding: 0px;
-  margin: 0px;
-  border-width: 0px;
-  overflow:hidden;
-  /* cursor: grabbing;
-  cursor: -moz-grabbing;
-  cursor: -webkit-grabbing; */
-}
-
 #dropMarker{
   background-color:green;
   position :absolute;
@@ -50,22 +38,12 @@ body[isdragging] [droppable]{
   z-index:100000;
 }
 
-#ghostEffect{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  whiteSpace: nowrap;
+[ghosteffect]{
   opacity: 0.5;
-  position: fixed;
   z-index: 100000;
   border: 1px solid grey;
-  cursor: grabbing;
-  cursor: -moz-grabbing;
-  cursor: -webkit-grabbing;
 }
 
 cloneable-html {
   display:none;
 }
-	  /*[draggable="true"], [cloneable="true"]  {*/
-	  /*  touch-action: none;*/
-	  /*}*/

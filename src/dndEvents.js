@@ -247,7 +247,7 @@ dnd.on("dragStart", (data) => {
 dnd.on("dragOver", (data) => {
 	// it will always run when mouse or touch moves
 	if (data.dragType == 'absolute' || data.dragType == 'fixed') {
-		setPosition(data.dragedEl, data.wnd, data.e.e, data.dragType);
+		setPosition(data.draggedEl, data.wnd, data.e.e, data.dragType);
 	}
 	else {
 		myDropMarker.draw(
