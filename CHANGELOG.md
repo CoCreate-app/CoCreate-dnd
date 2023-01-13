@@ -1,3 +1,15 @@
+# [0.22.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.53...v0.22.0) (2023-01-13)
+
+
+### Bug Fixes
+
+* bump dependencies ([8e4c382](https://github.com/CoCreate-app/CoCreate-dnd/commit/8e4c3820b73443ba0a7b8cea8f15b3abd0837e2e))
+
+
+### Features
+
+* if fetch component dispatch dndsuccess event without insertingAdjacent. as fetch component will handle reorder ([0e5fc72](https://github.com/CoCreate-app/CoCreate-dnd/commit/0e5fc724d58d804b32211dc35bd7109dbffc0511))
+
 ## [0.21.53](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.21.52...v0.21.53) (2023-01-10)
 
 
