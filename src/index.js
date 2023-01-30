@@ -7,10 +7,25 @@ import './index.css';
 
 
 // let windows = new Map();
-let windows = window.top.dnd;
-if (!windows) {
-	window.top.dnd = new Map();
-	windows = window.top.dnd
+// let windows = window.top.dnd;
+// if (!windows) {
+// 	window.top.dnd = new Map();
+// 	windows = window.top.dnd
+// }
+let windows;
+try {
+	windows = window.top.dnd;
+} catch(e) {
+	console.log('cross-origin failed')
+}
+
+if (!windows){
+	windows = new Map();
+	try {
+		window.top.dnd = windows;  
+	} catch(e) {
+		console.log('cross-origin failed')
+	}
 }
 
 function initDnd() {
@@ -18,7 +33,7 @@ function initDnd() {
 }
 
 function initWindow(wnd){
-	const topWindow = window.top;
+	// const topWindow = window.top;
 	if (!windows.has(wnd.window)) {
 		windows.set(wnd);
 		initEvents(wnd);
