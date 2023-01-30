@@ -1,3 +1,10 @@
+## [0.22.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.22.3...v0.22.4) (2023-01-30)
+
+
+### Bug Fixes
+
+* catch cross-origin error when accessing window.top ([2fe8009](https://github.com/CoCreate-app/CoCreate-dnd/commit/2fe8009389bf1c11db141e808a0ec4391755e035))
+
 ## [0.22.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.22.2...v0.22.3) (2023-01-29)
 
 
