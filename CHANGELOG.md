@@ -1,3 +1,10 @@
+# [0.23.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.22.7...v0.23.0) (2023-03-16)
+
+
+### Features
+
+* replaced get-value and set-value with a super charged version of CoCreate-events ([fd098eb](https://github.com/CoCreate-app/CoCreate-dnd/commit/fd098ebebbf00bf9d0300a4f83ff69dba6c233c6))
+
 ## [0.22.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.22.6...v0.22.7) (2023-02-01)
 
 
