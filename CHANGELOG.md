@@ -1,3 +1,10 @@
+## [0.23.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.23.3...v0.23.4) (2023-04-11)
+
+
+### Bug Fixes
+
+* renamed domains to hosts ([4ed8d8f](https://github.com/CoCreate-app/CoCreate-dnd/commit/4ed8d8fb2825ecface83b1373e73ae2bf9c86371))
+
 ## [0.23.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.23.2...v0.23.3) (2023-03-30)
 
 
