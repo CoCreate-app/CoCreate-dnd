@@ -1,3 +1,10 @@
+## [0.23.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.23.6...v0.23.7) (2023-04-13)
+
+
+### Bug Fixes
+
+* replaced object.entries with Object.keys ([1371c8a](https://github.com/CoCreate-app/CoCreate-dnd/commit/1371c8a687dd671c5f1b94741ea503781d6fae13))
+
 ## [0.23.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.23.5...v0.23.6) (2023-04-11)
 
 
