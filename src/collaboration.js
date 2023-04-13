@@ -22,8 +22,8 @@ function wrapper() {
 				if (data.dropType == 'cloneable') {
 					data.value[1] = parseTextToHtml(data.value[1]);
 					if (data.hiddenAttribute) {
-						for(let [key, value] of Object.entries(data.hiddenAttribute)) {
-							data.value[1].dnd[key] = value;
+						for(const key of Object.keys(data.hiddenAttribute)) {
+							data.value[1].dnd[key] = data.hiddenAttribute[key];
 						}
 					}
 				} else {
