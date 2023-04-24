@@ -1,3 +1,10 @@
+## [0.24.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.0...v0.24.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* removed uglifyjs-webpack-plugin ([e0a0e58](https://github.com/CoCreate-app/CoCreate-dnd/commit/e0a0e585efca6de3e132176ef055a675ec8da9e0))
+
 # [0.24.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.23.7...v0.24.0) (2023-04-24)
 
 
