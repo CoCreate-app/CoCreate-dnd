@@ -1,3 +1,10 @@
+## [0.24.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.3...v0.24.4) (2023-04-24)
+
+
+### Bug Fixes
+
+* updated worrkflows to v3 and node version 16 ([a4d7d84](https://github.com/CoCreate-app/CoCreate-dnd/commit/a4d7d846308dc8b0fd7838a640d56a9f06db42b0))
+
 ## [0.24.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.2...v0.24.3) (2023-04-24)
 
 
