@@ -1,3 +1,10 @@
+## [0.24.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.2...v0.24.3) (2023-04-24)
+
+
+### Bug Fixes
+
+* workflow node version updated  16 ([37867c3](https://github.com/CoCreate-app/CoCreate-dnd/commit/37867c3cab1b7f2203bdee3c152cc64cc35d34d9))
+
 ## [0.24.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.1...v0.24.2) (2023-04-24)
 
 
