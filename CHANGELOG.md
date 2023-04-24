@@ -1,3 +1,10 @@
+# [0.24.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.23.7...v0.24.0) (2023-04-24)
+
+
+### Features
+
+* added pwa manifest ([65b4324](https://github.com/CoCreate-app/CoCreate-dnd/commit/65b43248c0cb96c990962ea6c9bf75f474e2d49c))
+
 ## [0.23.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.23.6...v0.23.7) (2023-04-13)
 
 
