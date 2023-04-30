@@ -1,3 +1,12 @@
+## [0.24.5](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.4...v0.24.5) (2023-04-30)
+
+
+### Bug Fixes
+
+* fullscreen target updated to fullscreen fullscreen-target ([dbe5a2f](https://github.com/CoCreate-app/CoCreate-dnd/commit/dbe5a2f173668b014d703c7654906a9954b65ff9))
+* package-lock.json and pnpm-lock.yaml added to .gitignore ([c5d6121](https://github.com/CoCreate-app/CoCreate-dnd/commit/c5d61216657b5f8660adf3f9582eb9d4bd435553))
+* removed toogle fullscreen icons. now using css content ([b4b290b](https://github.com/CoCreate-app/CoCreate-dnd/commit/b4b290b1861124f0955e88aed8af150d84828c73))
+
 ## [0.24.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.3...v0.24.4) (2023-04-24)
 
 
