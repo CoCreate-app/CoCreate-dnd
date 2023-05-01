@@ -1,3 +1,10 @@
+## [0.24.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.5...v0.24.6) (2023-05-01)
+
+
+### Bug Fixes
+
+* replace fontawesome with svg ([594ec1d](https://github.com/CoCreate-app/CoCreate-dnd/commit/594ec1d4aa7c03e53312eebe36897450e68d45f1))
+
 ## [0.24.5](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.4...v0.24.5) (2023-04-30)
 
 
