@@ -1,3 +1,10 @@
+## [0.24.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.6...v0.24.7) (2023-05-01)
+
+
+### Bug Fixes
+
+* update manifest.json to manifest.webmanifest ([be14533](https://github.com/CoCreate-app/CoCreate-dnd/commit/be1453311519e27196e73e7bff4b614c493709d8))
+
 ## [0.24.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.5...v0.24.6) (2023-05-01)
 
 
