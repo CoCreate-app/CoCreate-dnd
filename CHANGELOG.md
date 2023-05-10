@@ -1,3 +1,10 @@
+## [0.24.9](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.8...v0.24.9) (2023-05-10)
+
+
+### Bug Fixes
+
+* apikey renamed to key ([2fe7ba6](https://github.com/CoCreate-app/CoCreate-dnd/commit/2fe7ba67ce9fd84e44cb62f0af167a5c6f322a1a))
+
 ## [0.24.8](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.7...v0.24.8) (2023-05-06)
 
 
