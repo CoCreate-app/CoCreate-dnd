@@ -83,8 +83,8 @@ export function autoScroll({ speed, threshold }) {
   // }
 
   this.__activateScroll = function (element, orientation, callback) {
-    // todo: when interval timeout is low and speed is hight scrollBy doesn't act
-    // retodo: give time to scrollBy equal to speed * 0.25 * timeout
+    // TODO: when interval timeout is low and speed is hight scrollBy doesn't act
+    // reTODO: give time to scrollBy equal to speed * 0.25 * timeout
     // element.style.scrollBehavior = "auto";
     this.lastScrollingElement = element;
     this.interval = setInterval(() => {
