@@ -1,3 +1,10 @@
+## [0.24.10](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.9...v0.24.10) (2023-05-19)
+
+
+### Bug Fixes
+
+* update packages to latest version. This commit updates various packages in the dependencies section of the package.json file to their latest published versions, thereby fixing multiple bugs and improving overall performance. ([979c9d8](https://github.com/CoCreate-app/CoCreate-dnd/commit/979c9d8365250079c5b7d6c7024a2b31daddf7d2))
+
 ## [0.24.9](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.8...v0.24.9) (2023-05-10)
 
 
