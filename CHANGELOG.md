@@ -1,3 +1,10 @@
+## [0.24.13](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.12...v0.24.13) (2023-06-04)
+
+
+### Bug Fixes
+
+* **semantic-release:** worklow error solved by running node version 14 ([3dd69f4](https://github.com/CoCreate-app/CoCreate-dnd/commit/3dd69f4faa833b68cd757e1bab4dc5448fe7c09c))
+
 ## [0.24.12](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.11...v0.24.12) (2023-06-02)
 
 
