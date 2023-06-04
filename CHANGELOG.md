@@ -1,3 +1,10 @@
+## [0.24.15](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.14...v0.24.15) (2023-06-04)
+
+
+### Bug Fixes
+
+* Refactor CoCreate.config.js to remove hard-coded credentials ([11a7016](https://github.com/CoCreate-app/CoCreate-dnd/commit/11a7016f53808f80a098cdcdcc275784a266034e))
+
 ## [0.24.14](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.13...v0.24.14) (2023-06-04)
 
 
