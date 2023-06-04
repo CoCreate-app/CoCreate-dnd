@@ -1,3 +1,11 @@
+## [0.24.14](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.13...v0.24.14) (2023-06-04)
+
+
+### Bug Fixes
+
+* replaced secert GITHUB_TOKEN with GITHUB ([9af7de3](https://github.com/CoCreate-app/CoCreate-dnd/commit/9af7de34841c7cdc2fc11313c14450c9afa1a2dc))
+* Update dependencies versions for [@cocreate](https://github.com/cocreate) libraries ([a050a82](https://github.com/CoCreate-app/CoCreate-dnd/commit/a050a82a46907bf3c2f44fc2f6974aebc02f723e))
+
 ## [0.24.13](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.12...v0.24.13) (2023-06-04)
 
 
