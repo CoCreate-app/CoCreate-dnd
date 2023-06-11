@@ -1,3 +1,10 @@
+## [0.24.21](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.20...v0.24.21) (2023-06-11)
+
+
+### Bug Fixes
+
+* postintall error ([81f66ba](https://github.com/CoCreate-app/CoCreate-dnd/commit/81f66ba61df8716061cea1a31c17aace1cb40560))
+
 ## [0.24.20](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.19...v0.24.20) (2023-06-11)
 
 
