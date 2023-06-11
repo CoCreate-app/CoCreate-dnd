@@ -1,3 +1,10 @@
+## [0.24.18](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.17...v0.24.18) (2023-06-11)
+
+
+### Bug Fixes
+
+* renamed hosts to host. the value can be a string or an array of strings ([67e62a4](https://github.com/CoCreate-app/CoCreate-dnd/commit/67e62a4ee63765126a3c5ffb2c53efa89dac820f))
+
 ## [0.24.17](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.16...v0.24.17) (2023-06-10)
 
 
