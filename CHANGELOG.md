@@ -1,3 +1,11 @@
+## [0.24.24](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.23...v0.24.24) (2023-06-11)
+
+
+### Bug Fixes
+
+* testing workflow ([3d128a0](https://github.com/CoCreate-app/CoCreate-dnd/commit/3d128a01e24024e42ec77852515cd23e9849ff16))
+* testing workflow ([8286e2f](https://github.com/CoCreate-app/CoCreate-dnd/commit/8286e2fd8eb856331ac08a93aa5b6bce52f983c0))
+
 ## [0.24.23](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.22...v0.24.23) (2023-06-11)
 
 
