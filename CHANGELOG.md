@@ -1,3 +1,10 @@
+## [0.24.20](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.19...v0.24.20) (2023-06-11)
+
+
+### Bug Fixes
+
+* @cocreate/cli moved to dependencies ([9ef50e8](https://github.com/CoCreate-app/CoCreate-dnd/commit/9ef50e84e2254cf93a333d4c69666d8e4220da07))
+
 ## [0.24.19](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.18...v0.24.19) (2023-06-11)
 
 
