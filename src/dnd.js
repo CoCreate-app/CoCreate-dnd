@@ -104,7 +104,9 @@ export default function virtualDnd() {
                 let detail = {
                     position: this.position,
                     draggedEl: this.draggedEl,
+                    draggedFrom: this.draggedEl.parentElement,
                     droppedEl: this.droppedEl,
+                    droppedIn: this.droppedEl.parentElement,
                     droppedElCSSPath: cssPath(this.droppedEl),
                     dropType: this.dropType,
                     path
