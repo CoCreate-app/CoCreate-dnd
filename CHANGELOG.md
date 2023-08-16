@@ -1,3 +1,18 @@
+# [0.25.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.29...v0.25.0) (2023-08-16)
+
+
+### Bug Fixes
+
+* crud attributes renamed ([4d9b0f7](https://github.com/CoCreate-app/CoCreate-dnd/commit/4d9b0f7a7ef5faec2f2b65dcf695a22e71518215))
+* replace -target -selector ([470355d](https://github.com/CoCreate-app/CoCreate-dnd/commit/470355d73d09c53b8e9c22e12530c8dd510875fe))
+* webpack.config and package.json make use of mode=production instead of process.env ([5eebaa4](https://github.com/CoCreate-app/CoCreate-dnd/commit/5eebaa4fbfac1b5e55b786d3af2d94738288d587))
+
+
+### Features
+
+* Add draggedFrom and droppedIn to details of dnd event ([dedfaea](https://github.com/CoCreate-app/CoCreate-dnd/commit/dedfaeaf6c9eac489a84e794c3689685f986eed7))
+* name attribute and variable renamed to key ([dda7700](https://github.com/CoCreate-app/CoCreate-dnd/commit/dda770055a8a715f020061cd8ca3782d21176a9b))
+
 ## [0.24.29](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.24.28...v0.24.29) (2023-06-14)
 
 
