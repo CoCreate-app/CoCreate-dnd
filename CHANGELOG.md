@@ -1,3 +1,12 @@
+## [0.26.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.26.0...v0.26.1) (2023-08-21)
+
+
+### Bug Fixes
+
+* /dist/CoCreate.js updated to https://CoCreate.app/dist/CoCreate.js ([d7d229a](https://github.com/CoCreate-app/CoCreate-dnd/commit/d7d229ada10abd21672bf49ddf262ffdc0104a64))
+* replace cdn with /dist ([7688b0c](https://github.com/CoCreate-app/CoCreate-dnd/commit/7688b0c61fa1e8ddd5a4b0b946c9b2a4e928d2af))
+* update file uploader ([9c9b2b7](https://github.com/CoCreate-app/CoCreate-dnd/commit/9c9b2b7c43ae110b385eef08025a218730545099))
+
 # [0.26.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.25.0...v0.26.0) (2023-08-17)
 
 
