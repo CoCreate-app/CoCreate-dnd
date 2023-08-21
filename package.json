@@ -58,11 +58,11 @@
     "webpack-log": "^3.0.1"
   },
   "dependencies": {
-    "@cocreate/element-config": "^1.6.0",
-    "@cocreate/message-client": "^1.4.0",
-    "@cocreate/observer": "^1.9.0",
-    "@cocreate/selection": "^1.7.0",
-    "@cocreate/utils": "^1.22.0",
-    "@cocreate/uuid": "^1.5.0"
+    "@cocreate/element-config": "^1.7.1",
+    "@cocreate/message-client": "^1.5.1",
+    "@cocreate/observer": "^1.10.1",
+    "@cocreate/selection": "^1.8.1",
+    "@cocreate/utils": "^1.23.1",
+    "@cocreate/uuid": "^1.6.1"
   }
 }
