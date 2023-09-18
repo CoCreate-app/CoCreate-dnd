@@ -1,3 +1,11 @@
+## [0.27.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.27.1...v0.27.2) (2023-09-18)
+
+
+### Bug Fixes
+
+*  Add path and pathname ([a06ffe7](https://github.com/CoCreate-app/CoCreate-dnd/commit/a06ffe7d772f8c6283d455ffdf8d376449c91c00))
+* Update CoCreate depndencies to latest versions ([1b2fced](https://github.com/CoCreate-app/CoCreate-dnd/commit/1b2fcedd94bb1df2afc87586e7ddf2706ee5d224))
+
 ## [0.27.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.27.0...v0.27.1) (2023-08-21)
 
 
