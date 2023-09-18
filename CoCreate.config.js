@@ -8,17 +8,16 @@ module.exports = {
             "object": {
                 "_id": "6019ee724eea0817df303b14",
                 "name": "index.html",
-                "path": "/docs/dnd/index.html",
+                "path": "/docs/dnd",
+                "pathname": "/docs/dnd/index.html",
                 "src": "{{./docs/index.html}}",
                 "host": [
                     "*",
                     "general.cocreate.app"
                 ],
-                "directory": "/docs/dnd",
-                "parentDirectory": "{{parentDirectory}}",
+                "directory": "dnd",
                 "content-type": "{{content-type}}",
-                "public": "true",
-                "website_id": "644d4bff8036fb9d1d1fd69c"
+                "public": "true"
             }
         }
     ]
