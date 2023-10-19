@@ -1,3 +1,10 @@
+## [0.28.5](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.28.4...v0.28.5) (2023-10-19)
+
+
+### Bug Fixes
+
+* removed @cocreate/message-client ([128997d](https://github.com/CoCreate-app/CoCreate-dnd/commit/128997d88b21558da6612b14b6fc9ce4dd761b34))
+
 ## [0.28.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.28.3...v0.28.4) (2023-10-14)
 
 
