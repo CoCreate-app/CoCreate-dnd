@@ -1,3 +1,11 @@
+## [0.28.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.28.6...v0.28.7) (2023-11-03)
+
+
+### Bug Fixes
+
+* favicon.ico path ([570bfff](https://github.com/CoCreate-app/CoCreate-dnd/commit/570bfffc29824049aa794b9a1f609998d0681f84))
+* update dependencies to the lates versions ([5c1cb29](https://github.com/CoCreate-app/CoCreate-dnd/commit/5c1cb2975ccbf17a1410a7cb004e51e3c23859d3))
+
 ## [0.28.6](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.28.5...v0.28.6) (2023-10-25)
 
 
