@@ -1,3 +1,11 @@
+## [0.28.8](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.28.7...v0.28.8) (2023-11-09)
+
+
+### Bug Fixes
+
+* meta name typo ([3525f1b](https://github.com/CoCreate-app/CoCreate-dnd/commit/3525f1b76b1d2fe3cfcf8adaacb6f2460a17ce60))
+* update host ([bf16ca4](https://github.com/CoCreate-app/CoCreate-dnd/commit/bf16ca4c33fc4f24d882ce5817e44737ba74d307))
+
 ## [0.28.7](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.28.6...v0.28.7) (2023-11-03)
 
 
