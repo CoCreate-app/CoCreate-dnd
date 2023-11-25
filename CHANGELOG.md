@@ -1,3 +1,15 @@
+# [0.30.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.29.0...v0.30.0) (2023-11-25)
+
+
+### Bug Fixes
+
+* update nav, edit button and css path ([fe2788c](https://github.com/CoCreate-app/CoCreate-dnd/commit/fe2788cde5a1334789308cc0f90fc5fdc0fca515))
+
+
+### Features
+
+* upgrade dependencies for latest features and fixes ([f5b08cf](https://github.com/CoCreate-app/CoCreate-dnd/commit/f5b08cff2ae3c1223b0d9f10c7ead6ec34a2d722))
+
 # [0.29.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.28.9...v0.29.0) (2023-11-19)
 
 
