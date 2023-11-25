@@ -1,3 +1,15 @@
+# [0.31.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.30.0...v0.31.0) (2023-11-25)
+
+
+### Bug Fixes
+
+* update licensing details ([b44a87a](https://github.com/CoCreate-app/CoCreate-dnd/commit/b44a87ac54497c1296585631f748a3f246047d6d))
+
+
+### Features
+
+* upgrade dependencies for latest features and fixes ([6957ee9](https://github.com/CoCreate-app/CoCreate-dnd/commit/6957ee9fa36e8468d9e87deb936b8d44c0010e48))
+
 # [0.30.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.29.0...v0.30.0) (2023-11-25)
 
 
