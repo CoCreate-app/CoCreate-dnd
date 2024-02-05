@@ -1,3 +1,10 @@
+## [0.31.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.31.0...v0.31.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* Removed https://cdn.cocreate.app/latest/CoCreate.min.css ([269cecc](https://github.com/CoCreate-app/CoCreate-dnd/commit/269ceccce099369cece2484db7d01726021e279a))
+
 # [0.31.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.30.0...v0.31.0) (2023-11-25)
 
 
