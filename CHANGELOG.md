@@ -1,3 +1,11 @@
+## [0.31.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.31.2...v0.31.3) (2024-06-12)
+
+
+### Bug Fixes
+
+* bump cocreate dependencies ([5d1a203](https://github.com/CoCreate-app/CoCreate-dnd/commit/5d1a203b79d9217a4f6e1a926864d56db96985f2))
+* svg icon class ([df4c634](https://github.com/CoCreate-app/CoCreate-dnd/commit/df4c6345d73db60560a78834219a39bc636e6f30))
+
 ## [0.31.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.31.1...v0.31.2) (2024-04-29)
 
 
