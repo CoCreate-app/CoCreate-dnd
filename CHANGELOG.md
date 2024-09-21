@@ -1,3 +1,11 @@
+## [0.31.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.31.3...v0.31.4) (2024-09-21)
+
+
+### Bug Fixes
+
+* CoCreateJS script paths ([38c622b](https://github.com/CoCreate-app/CoCreate-dnd/commit/38c622b14bd3439564635bf5df71fb0d2eb57190))
+* CoCreateJS script paths ([461f8bd](https://github.com/CoCreate-app/CoCreate-dnd/commit/461f8bd9dc22809da04a74f9d2c6d3676d6a1d2a))
+
 ## [0.31.3](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.31.2...v0.31.3) (2024-06-12)
 
 
