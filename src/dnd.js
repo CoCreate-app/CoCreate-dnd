@@ -120,8 +120,12 @@ export default function virtualDnd() {
                 if (domTextEditor) {
 
                     let elementValue;
-                    if (this.dropType == 'cloneable')
+                    if (this.dropType == 'cloneable') {
                         elementValue = this.draggedEl.outerHTML;
+                        if (this.draggedEl) {
+                            this.draggedEl.remove();
+                        }
+                    }
 
                     if (this.dragType === 'absolute' || this.dragType === 'fixed') {
                         CoCreate.text.setStyle({
