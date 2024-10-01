@@ -23,7 +23,8 @@ function wrapper() {
                     data.value[1] = parseTextToHtml(data.value[1]);
                     if (data.hiddenAttribute) {
                         for (const key of Object.keys(data.hiddenAttribute)) {
-                            data.value[1].dnd[key] = data.hiddenAttribute[key];
+                            if (data.value[1].dnd)
+                                data.value[1].dnd[key] = data.hiddenAttribute[key];
                         }
                     }
                 } else {
