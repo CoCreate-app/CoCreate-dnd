@@ -26,9 +26,8 @@ function initEvents(wnd) {
 function startEvent(e) {
     if (e.which > 1) return;
     dragTimeout = setTimeout(() => {
-        if (hasSelection(e.target) || e.target.hasAttribute('dnd-exclude')) {
+        if (hasSelection(e.target) || e.target.hasAttribute('dnd-exclude'))
             return;
-        }
         else
             startDnd(e);
     }, 200);
@@ -87,7 +86,6 @@ function isDnd(el, options) {
         // else
         //     el = ''
 
-        console.log(el)
     } while (el);
 }
 
@@ -113,7 +111,8 @@ function startDnd(e) {
             let html = el.getAttribute(vars.cloneableHtml);
             if (html) {
                 el = parse(html);
-                if (!el) return;
+                if (!el)
+                    return;
             } else {
                 let clonableEl = el.querySelector('cloneable-html')
 
@@ -162,6 +161,7 @@ function startDnd(e) {
     if (!dragType && el.dnd) {
         dragType = el.dnd.dragType;
     }
+
     let computed = getComputedStyle(el);
     let x = parseInt(computed['border-left-width']) + parseInt(computed['marginLeft'])
     let y = parseInt(computed['border-top-width']) + parseInt(computed['marginTop'])
@@ -244,6 +244,7 @@ function move(e, stopScroll) {
             onMouseScrollMove: (e) => move(e, wnd, true),
         });
     }
+
     dnd.dragOver({ x, y, target: el, e }, el, wnd);
 }
 
@@ -291,27 +292,32 @@ dnd.on("dragOver", (data) => {
 
 dnd.on("dragEnd", (data) => {
     myDropMarker.hide();
-    if (ghost) ghost.hide(data.wnd);
+    if (ghost)
+        ghost.hide(data.wnd);
 });
 
 function getGroupName(el) {
     if (!el.tagName) el = el.parentElement;
     do {
         let groupName = el.getAttribute(vars.groupName);
-        if (!groupName && el.dnd) {
+        if (!groupName && el.dnd)
             groupName = el.dnd.groupName;
-        }
-        if (groupName) return [el, groupName];
+        if (groupName)
+            return [el, groupName];
+
         el = el.parentElement;
-        if (!el) return [null, undefined];
+        if (!el)
+            return [null, undefined];
     } while (true);
 }
 
 /*global DOMParser*/
 function parse(text) {
     let doc = new DOMParser().parseFromString(text, "text/html");
-    if (doc.head.children[0]) return doc.head.children[0];
-    else return doc.body.children[0];
+    if (doc.head.children[0])
+        return doc.head.children[0];
+    else
+        return doc.body.children[0];
 }
 
 export { initEvents, initFunctions };
