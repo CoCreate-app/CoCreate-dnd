@@ -1,21 +1,16 @@
 export function ghostEffect(elementEvent, el, wnd) {
     // el.removeAttribute("dragging");
     this.start = () => {
-        // this.cloneEl = el.cloneNode(true);
         let { width, height } = wnd.window.getComputedStyle(el);
-        // this.element = document.createElement("div");
 
-        this.element = el;
-        this.previousStyle = el.getAttribute('style')
+        this.element = el.cloneNode(true);
         this.element.setAttribute("ghostEffect", '');
         this.element.style.height = height;
         this.element.style.width = width;
-        // this.element.style.display = "none";
         this.element.style.position = "fix";
         this.element.style.pointerEvents = "none";
 
-        // this.element.append(this.cloneEl);
-        // wnd.document.body.append(this.element);
+        wnd.document.body.append(this.element);
 
     };
 
@@ -51,12 +46,6 @@ export function ghostEffect(elementEvent, el, wnd) {
     };
 
     this.hide = () => {
-        // this.element.remove();
-        this.element.removeAttribute("ghostEffect");
-        if (this.previousStyle)
-            this.element.setAttribute("style", this.previousStyle);
-        else
-            this.element.removeAttribute("style");
-
+        this.element.remove();
     };
 }
