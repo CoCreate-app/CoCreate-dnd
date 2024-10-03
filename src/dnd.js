@@ -52,8 +52,7 @@ export default function virtualDnd() {
             this.type = "normal";
             this.y = e.y
             this.x = e.x
-        }
-        else {
+        } else {
             // find closest child and put outside the child element on top or bottom relating to that child,
             let [orientation, closestEl] = closestChild([e.x, e.y], el.children);
 
@@ -64,8 +63,7 @@ export default function virtualDnd() {
                     [e.x, e.y], [this.droppedEl]
                 );
                 orientation = orientation2;
-            }
-            else this.droppedEl = closestEl;
+            } else this.droppedEl = closestEl;
 
             evnt.dispatch("dragOver", {
                 e,
@@ -114,19 +112,9 @@ export default function virtualDnd() {
 
                 beforeDndSuccess(e.currentTarget, detail);
 
-
                 let filterElement = this.droppedEl.closest('render-selector');
                 let domTextEditor = this.droppedEl.closest('[contenteditable]');
                 if (domTextEditor) {
-
-                    let elementValue;
-                    if (this.dropType == 'cloneable') {
-                        elementValue = this.draggedEl.outerHTML;
-                        if (this.draggedEl) {
-                            this.draggedEl.remove();
-                        }
-                    }
-
                     if (this.dragType === 'absolute' || this.dragType === 'fixed') {
                         CoCreate.text.setStyle({
                             domTextEditor, target: this.draggedEl, property: 'top', value: this.y + 'px'
@@ -143,6 +131,14 @@ export default function virtualDnd() {
                             })
                         }
                     } else {
+                        let elementValue;
+                        if (this.dropType == 'cloneable') {
+                            elementValue = this.draggedEl.outerHTML;
+                            if (this.draggedEl) {
+                                this.draggedEl.remove();
+                            }
+                        }
+
                         CoCreate.text.insertAdjacentElement({
                             domTextEditor,
                             position: this.position,
@@ -151,12 +147,10 @@ export default function virtualDnd() {
                             elementValue: elementValue
                         });
                     }
-                }
-                else if (filterElement && filterElement.getFilter) {
+                } else if (filterElement && filterElement.getFilter) {
                     // this.droppedEl.insertAdjacentElement(this.position, this.draggedEl);
                     console.log('dnd filterElement', filterElement)
-                }
-                else if (this.dragType !== 'absolute' && this.dragType !== 'fixed') {
+                } else if (this.dragType !== 'absolute' && this.dragType !== 'fixed') {
                     this.droppedEl.insertAdjacentElement(this.position, this.draggedEl);
                 }
 
@@ -167,11 +161,9 @@ export default function virtualDnd() {
                 });
                 window.dispatchEvent(event, { bubbles: false });
             }
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e);
-        }
-        finally {
+        } finally {
             if (this.type) {
                 this.position = null;
                 // console.log("dnd completed", "type:", this.type, "position:", this.position);
@@ -244,12 +236,10 @@ export function pDistance(x, y, x1, y1, x2, y2) {
     if (param < 0) {
         xx = x1;
         yy = y1;
-    }
-    else if (param > 1) {
+    } else if (param > 1) {
         xx = x2;
         yy = y2;
-    }
-    else {
+    } else {
         xx = x1 + param * C;
         yy = y1 + param * D;
     }
