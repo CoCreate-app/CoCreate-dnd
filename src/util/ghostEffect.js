@@ -7,7 +7,7 @@ export function ghostEffect(elementEvent, el, wnd) {
         this.element.setAttribute("ghostEffect", '');
         this.element.style.height = height;
         this.element.style.width = width;
-        this.element.style.position = "fix";
+        this.element.style.position = "fixed";
         this.element.style.pointerEvents = "none";
 
         wnd.document.body.append(this.element);
