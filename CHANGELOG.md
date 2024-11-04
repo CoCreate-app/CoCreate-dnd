@@ -1,3 +1,27 @@
+# [0.32.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.31.4...v0.32.0) (2024-11-04)
+
+
+### Bug Fixes
+
+* check if document is not equal,  deduct offseY ([c27722e](https://github.com/CoCreate-app/CoCreate-dnd/commit/c27722ec3b9fecd1c1cd65f590ae3e250d671f3b))
+* formating ([a5776df](https://github.com/CoCreate-app/CoCreate-dnd/commit/a5776df2913ada6da45de1c427903a71b2ed49d5))
+* if condition for hiddenAttribute ([0b8aa6a](https://github.com/CoCreate-app/CoCreate-dnd/commit/0b8aa6a0d75086f373345e726479a0c9b9c34c6e))
+* impoved ghost handling ([53c7495](https://github.com/CoCreate-app/CoCreate-dnd/commit/53c74954988c46706fe7a6f69470f1b053012a52))
+* improved handling of cloneable-html element ([566c673](https://github.com/CoCreate-app/CoCreate-dnd/commit/566c6732cf6330b54584387facd29384857ef159))
+* move elementValue handling in else condition ([64e2dcd](https://github.com/CoCreate-app/CoCreate-dnd/commit/64e2dcde1bba21a9a818c153be22f2916f331cf8))
+* observer taget has been renamed to selector ([460f5da](https://github.com/CoCreate-app/CoCreate-dnd/commit/460f5da73a09fc457df5cd73359e56cf611c0e37))
+* pretier.config.js and file formating ([7a7016b](https://github.com/CoCreate-app/CoCreate-dnd/commit/7a7016b29e71ca5b56dcb2a9bad6ac4d249a0d5f))
+* remove draggable el if cloned ([8ae45dd](https://github.com/CoCreate-app/CoCreate-dnd/commit/8ae45dd512d667cfa0f512e2e1fbe4987228ab62))
+* remove quill example ([045665e](https://github.com/CoCreate-app/CoCreate-dnd/commit/045665ec5fde145c4f3bb6e0fd7d7b3449c5849b))
+* removed testing log ([1497b51](https://github.com/CoCreate-app/CoCreate-dnd/commit/1497b51e524270dd1df74cd02c6944270e6534b0))
+* typo on style  fix to fixed ([ff66523](https://github.com/CoCreate-app/CoCreate-dnd/commit/ff66523e45fafb2aa5fdfa5ec27c2f6fdf7c787c))
+
+
+### Features
+
+* add prettier.config.js and format files ([37afc47](https://github.com/CoCreate-app/CoCreate-dnd/commit/37afc47f085a942476567bf550b1a03764d2bb73))
+* add prettier.config.js and format files ([f11367c](https://github.com/CoCreate-app/CoCreate-dnd/commit/f11367c317b77f23659b9b60efc5b80499a924b1))
+
 ## [0.31.4](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.31.3...v0.31.4) (2024-09-21)
 
 
