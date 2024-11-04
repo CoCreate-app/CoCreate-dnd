@@ -1,411 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>CoCreate-dnd Documentation | CoCreateJS</title>
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="https://cocreate.app/images/favicon.ico" />
-        <meta
-            name="description"
-            content="A collaborative js drag and drop component with iframe support. Great for sorting, cloning etc. Customizable using HTML5 attributes and/or JavaScript API." />
-        <meta
-            name="keywords"
-            content="drag and drop, colaboration, dnd utility, drag and drop utility" />
-        <meta name="robots" content="index,follow" />
-        <meta
-            property="og:image"
-            content="https://cdn.cocreate.app/docs/dnd.png" />
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoCreate-dnd Documentation | CoCreateJS</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://cocreate.app/images/favicon.ico"
+    />
+    <meta
+      name="description"
+      content="A collaborative js drag and drop component with iframe support. Great for sorting, cloning etc. Customizable using HTML5 attributes and/or JavaScript API."
+    />
+    <meta
+      name="keywords"
+      content="drag and drop, colaboration, dnd utility, drag and drop utility"
+    />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:image" content="https://cdn.cocreate.app/docs/dnd.png" />
 
-        <link
-            rel="stylesheet"
-            href="../index.css"
-            array="files"
-            object="60888216117c640e7596303f"
-            key="src"
-            type="text/css"
-            save="true" />
-        <link rel="manifest" href="/manifest.webmanifest" />
-    </head>
+    <link
+      rel="stylesheet"
+      href="../index.css"
+      array="files"
+      object="60888216117c640e7596303f"
+      key="src"
+      type="text/css"
+      save="true"
+    />
+    <link rel="manifest" href="/manifest.webmanifest" />
+  </head>
 
-    <body>
-        <!-- Navbar  -->
-        <nav
-            class="width:100% display:flex align-items:center background:transparent padding-top:10px padding-bottom:10px"
-            content_id="content"
-            scroll="sticky-nav,"
-            scroll-up="5"
-            scroll-down="5"
-            path="../"
-            src="../components/navbar.html"></nav>
-        <sidenav
-            id="menuL"
-            class="position:fixed top:0px left:0px overflow:hidden background:whitesmoke height:100vh width:0px width:300px@xl"
-            resizable
-            resize-selector="[content_id='content']"
-            resize-property="margin-left"
-            resize-value="width">
-            <menu
-                array="files"
-                object="603717b07de7fb350ae9fec8"
-                key="src"></menu>
-            <div resize="right"></div>
-        </sidenav>
-        <main
-            class="padding-top:15px padding:15px@lg@xl"
-            content_id="content"
-            id="cocreate-dnd">
-            <div
-                class="display:flex flex-wrap:wrap justify-content:space-between position:relative margin:10px">
-                <div class="display:flex align-items:center">
-                    <h2>CoCreate-dnd</h2>
-                </div>
-                <div
-                    class="display:flex align-items:center font-size:20px position:absolute right:0 padding:5px background:white">
-                    <div
-                        class="display:flex align-items:center transition:0.3s padding-left:10px"
-                        share-network="true"
-                        share-text="Enter decription here"
-                        share-title="testing im a title"
-                        share-height="600"
-                        share-width="700"
-                        share-media="https://cdn.cocreate.app/docs/dnd.png"
-                        hover="display:block!important"
-                        hover-selector=".social-networks">
-                        <div class="display:none social-networks">
-                            <a
-                                class="margin-right:15px"
-                                share-network="twitter"
-                                title="Share on twitter"
-                                ><i src="/assets/svg/twitter.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:15px"
-                                share-network="facebook"
-                                title="Share on Facebook"
-                                ><i src="/assets/svg/facebook.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:15px"
-                                share-network="instagram"
-                                title="Share on instagram"
-                                ><i src="/assets/svg/instagram.svg"></i
-                            ></a>
-                        </div>
-                        <a
-                            class="margin-right:15px"
-                            share-network="share"
-                            title="Share on share"
-                            ><i src="/assets/svg/share-alt.svg"></i
-                        ></a>
-                    </div>
-                    <a
-                        href="https://github.com/CoCreate-app/CoCreate-dnd"
-                        target="_blank"
-                        class=""
-                        ><i src="/assets/svg/github.svg"></i
-                    ></a>
-                </div>
+  <body>
+    <!-- Navbar  -->
+    <nav
+      class="width:100% display:flex align-items:center background:transparent padding-top:10px padding-bottom:10px"
+      content_id="content"
+      scroll="sticky-nav,"
+      scroll-up="5"
+      scroll-down="5"
+      path="../"
+      src="../components/navbar.html"
+    ></nav>
+    <sidenav
+      id="menuL"
+      class="position:fixed top:0px left:0px overflow:hidden background:whitesmoke height:100vh width:0px width:300px@xl"
+      resizable
+      resize-selector="[content_id='content']"
+      resize-property="margin-left"
+      resize-value="width"
+    >
+      <menu array="files" object="603717b07de7fb350ae9fec8" key="src"></menu>
+      <div resize="right"></div>
+    </sidenav>
+    <main
+      class="padding-top:15px padding:15px@lg@xl"
+      content_id="content"
+      id="cocreate-dnd"
+    >
+      <div
+        class="display:flex flex-wrap:wrap justify-content:space-between position:relative margin:10px"
+      >
+        <div class="display:flex align-items:center">
+          <h2>CoCreate-dnd</h2>
+        </div>
+        <div
+          class="display:flex align-items:center font-size:20px position:absolute right:0 padding:5px background:white"
+        >
+          <div
+            class="display:flex align-items:center transition:0.3s padding-left:10px"
+            share-network="true"
+            share-text="Enter decription here"
+            share-title="testing im a title"
+            share-height="600"
+            share-width="700"
+            share-media="https://cdn.cocreate.app/docs/dnd.png"
+            hover="display:block!important"
+            hover-selector=".social-networks"
+          >
+            <div class="display:none social-networks">
+              <a
+                class="margin-right:15px"
+                share-network="twitter"
+                title="Share on twitter"
+                ><i src="/assets/svg/twitter.svg"></i
+              ></a>
+              <a
+                class="margin-right:15px"
+                share-network="facebook"
+                title="Share on Facebook"
+                ><i src="/assets/svg/facebook.svg"></i
+              ></a>
+              <a
+                class="margin-right:15px"
+                share-network="instagram"
+                title="Share on instagram"
+                ><i src="/assets/svg/instagram.svg"></i
+              ></a>
             </div>
-            <p class="max-width:500px margin:20px_10px line-height:1.5">
-                A collaborative js drag and drop component with iframe support.
-                Great for sorting, cloning etc. Customizable using HTML5
-                attributes and/or JavaScript API
+            <a
+              class="margin-right:15px"
+              share-network="share"
+              title="Share on share"
+              ><i src="/assets/svg/share-alt.svg"></i
+            ></a>
+          </div>
+          <a
+            href="https://github.com/CoCreate-app/CoCreate-dnd"
+            target="_blank"
+            class=""
+            ><i src="/assets/svg/github.svg"></i
+          ></a>
+        </div>
+      </div>
+      <p class="max-width:500px margin:20px_10px line-height:1.5">
+        A collaborative js drag and drop component with iframe support. Great
+        for sorting, cloning etc. Customizable using HTML5 attributes and/or
+        JavaScript API
+      </p>
+      <div id="dnd-section" class="display:flex flex-wrap:wrap">
+        <div
+          class="flex-grow:1 width:400px width:300px@xs padding:0px_10px margin-top:60px"
+        >
+          <div
+            id="dnd-install"
+            class="border-bottom:1px_solid_lightgrey"
+            scroll
+            scroll-intersect="color:dodgerblue"
+            scroll-selector="#dnd-install-section"
+          >
+            <span
+              class="display:flex align-items:center width:fit-content"
+              hover="display:block!important"
+              hover-selector="[href='#dnd-install']"
+            >
+              <h2 class="padding:5px_0px">Install</h2>
+              <a class="margin-left:10px display:none" href="#dnd-install"
+                ><i src="/assets/svg/link.svg"></i
+              ></a>
+            </span>
+          </div>
+          <pre><code class="language-bash">npm i @cocreate/cocreate-dnd</code></pre>
+          <p class="padding:10px_0px line-height:1.5">
+            Or you can use cdn link:
+          </p>
+          <pre><code class="language-html">&lt;script&gt;https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.js&lt;/script&gt;</code></pre>
+          <p class="padding:10px_0px line-height:1.5">
+            for styling please refer to #id-style
+          </p>
+
+          <div
+            id="dnd-usage"
+            class="margin-top:80px border-bottom:1px_solid_lightgrey"
+            scroll
+            scroll-intersect="color:dodgerblue"
+            scroll-selector="#dnd-usage-section"
+          >
+            <span
+              class="display:flex align-items:center width:fit-content"
+              hover="display:block!important"
+              hover-selector="[href='#dnd-usage']"
+            >
+              <h2 class="padding:5px_0px">Usage</h2>
+              <a class="margin-left:10px display:none" href="#dnd-usage"
+                ><i src="/assets/svg/link.svg"></i
+              ></a>
+            </span>
+          </div>
+          <p class="padding:10px_0px line-height:1.5">
+            Dnd has high level initiator as well as a low level initiator, the
+            concept of low level initializer is that any element can have some
+            attributes to define the granular level of drag-and-drop, for
+            example let's say we have a parent div and inside this div we have a
+            few h1 tag, if we want to make all h1 tags to be drag-and-dropable
+            in the div element we have to make the div element a droppable
+            element:
+          </p>
+
+          <div>
+            <h3
+              id="dnd-initContainer"
+              hover="display:block"
+              hover-selector=""
+              class="border-bottom:1px_solid_lightgrey margin-top:40px padding:5px_0px"
+            >
+              initContainer
+            </h3>
+            <a class="display:none" href="#dnd-initContainer"
+              ><i src="/assets/svg/link.svg"></i
+            ></a>
+          </div>
+          <div class="">
+            <p class="padding:10px_0px line-height:1.5">
+              a high level initiator that make an element and its direct
+              children draggable. For ease of use right out of the box we have
+              defined a few defualts:
+              <span class="cocreate-badge success">sortable</span>
+              <span class="cocreate-badge success">cloneable</span>
             </p>
-            <div id="dnd-section" class="display:flex flex-wrap:wrap">
-                <div
-                    class="flex-grow:1 width:400px width:300px@xs padding:0px_10px margin-top:60px">
-                    <div
-                        id="dnd-install"
-                        class="border-bottom:1px_solid_lightgrey"
-                        scroll
-                        scroll-intersect="color:dodgerblue"
-                        scroll-selector="#dnd-install-section">
-                        <span
-                            class="display:flex align-items:center width:fit-content"
-                            hover="display:block!important"
-                            hover-selector="[href='#dnd-install']">
-                            <h2 class="padding:5px_0px">Install</h2>
-                            <a
-                                class="margin-left:10px display:none"
-                                href="#dnd-install"
-                                ><i src="/assets/svg/link.svg"></i
-                            ></a>
-                        </span>
-                    </div>
-                    <pre><code class="language-bash">npm i @cocreate/cocreate-dnd</code></pre>
-                    <p class="padding:10px_0px line-height:1.5">
-                        Or you can use cdn link:
-                    </p>
-                    <pre><code class="language-html">&lt;script&gt;https://cdn.cocreate.app/dnd/latest/CoCreate-dnd.min.js&lt;/script&gt;</code></pre>
-                    <p class="padding:10px_0px line-height:1.5">
-                        for styling please refer to #id-style
-                    </p>
+          </div>
 
-                    <div
-                        id="dnd-usage"
-                        class="margin-top:80px border-bottom:1px_solid_lightgrey"
-                        scroll
-                        scroll-intersect="color:dodgerblue"
-                        scroll-selector="#dnd-usage-section">
-                        <span
-                            class="display:flex align-items:center width:fit-content"
-                            hover="display:block!important"
-                            hover-selector="[href='#dnd-usage']">
-                            <h2 class="padding:5px_0px">Usage</h2>
-                            <a
-                                class="margin-left:10px display:none"
-                                href="#dnd-usage"
-                                ><i src="/assets/svg/link.svg"></i
-                            ></a>
-                        </span>
-                    </div>
-                    <p class="padding:10px_0px line-height:1.5">
-                        Dnd has high level initiator as well as a low level
-                        initiator, the concept of low level initializer is that
-                        any element can have some attributes to define the
-                        granular level of drag-and-drop, for example let's say
-                        we have a parent div and inside this div we have a few
-                        h1 tag, if we want to make all h1 tags to be
-                        drag-and-dropable in the div element we have to make the
-                        div element a droppable element:
-                    </p>
+          <div>
+            <h4
+              id="dnd-"
+              sortable
+              hover="display:block"
+              hover-selector=""
+              class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px"
+            >
+              sortable
+            </h4>
+            <a class="display:none" href="#dnd-" sortable
+              ><i src="/assets/svg/link.svg"></i
+            ></a>
+          </div>
+          <p class="padding:10px_0px line-height:1.5">
+            <code class="language-js">sortable</code> is an alias for
+            <code class="language-js">droppable="true"</code> with all direct
+            children as
+            <code class="language-js">draggable="true"</code>
+          </p>
+          <!-- SandBox -->
+          <div
+            class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
+            id="playground"
+          >
+            <div id="demo-code" resizable class="position:relative height:50%">
+              <textarea
+                type="code"
+                lang="html"
+                array="demos"
+                object=""
+                key="demo"
+                save="false"
+                id="demo"
+                input-selector=".dnd-demo"
+                input-attribute="value"
+                input-events="input, onload"
+                class="height:100% width:100% outline:none border:none resize:none padding:5px"
+              ></textarea>
+              <div resize="bottom" class="background:lightgrey"></div>
+            </div>
 
-                    <div>
-                        <h3
-                            id="dnd-initContainer"
-                            hover="display:block"
-                            hover-selector=""
-                            class="border-bottom:1px_solid_lightgrey margin-top:40px padding:5px_0px">
-                            initContainer
-                        </h3>
-                        <a class="display:none" href="#dnd-initContainer"
-                            ><i src="/assets/svg/link.svg"></i
-                        ></a>
-                    </div>
-                    <div class="">
-                        <p class="padding:10px_0px line-height:1.5">
-                            a high level initiator that make an element and its
-                            direct children draggable. For ease of use right out
-                            of the box we have defined a few defualts:
-                            <span class="cocreate-badge success">sortable</span>
-                            <span class="cocreate-badge success"
-                                >cloneable</span
-                            >
-                        </p>
-                    </div>
+            <div
+              id="demo-preview"
+              class="position:relative overflow:auto background-color:white"
+            >
+              <div class="dnd-demo padding:20px"></div>
+            </div>
 
-                    <div>
-                        <h4
-                            id="dnd-"
-                            sortable
-                            hover="display:block"
-                            hover-selector=""
-                            class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">
-                            sortable
-                        </h4>
-                        <a class="display:none" href="#dnd-" sortable
-                            ><i src="/assets/svg/link.svg"></i
-                        ></a>
-                    </div>
-                    <p class="padding:10px_0px line-height:1.5">
-                        <code class="language-js">sortable</code> is an alias
-                        for
-                        <code class="language-js">droppable="true"</code> with
-                        all direct children as
-                        <code class="language-js">draggable="true"</code>
-                    </p>
-                    <!-- SandBox -->
-                    <div
-                        class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
-                        id="playground">
-                        <div
-                            id="demo-code"
-                            resizable
-                            class="position:relative height:50%">
-                            <textarea
-                                type="code"
-                                lang="html"
-                                array="demos"
-                                object=""
-                                key="demo"
-                                save="false"
-                                id="demo"
-                                input-selector=".dnd-demo"
-                                input-attribute="value"
-                                input-events="input, onload"
-                                class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
-                            <div
-                                resize="bottom"
-                                class="background:lightgrey"></div>
-                        </div>
-
-                        <div
-                            id="demo-preview"
-                            class="position:relative overflow:auto background-color:white">
-                            <div class="dnd-demo padding:20px"></div>
-                        </div>
-
-                        <div
-                            class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
-                            <a
-                                class="margin-right:10px"
-                                id="eye"
-                                show="#eye-slash"
-                                hide="#eye, #demo-preview"
-                                toggle="code-height"
-                                toggle-selector="#demo-code"
-                                ><i
-                                    class="height:18px"
-                                    src="/assets/svg/eye.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                hidden
-                                id="eye-slash"
-                                show="#eye, #demo-preview"
-                                hide="#eye-slash"
-                                toggle="code-height"
-                                toggle-selector="#demo-code"
-                                ><i src="/assets/svg/eye-slash.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                id="code"
-                                show="#code-slash"
-                                hide="#code, #demo-code"
-                                ><i src="/assets/svg/code.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                hidden
-                                id="code-slash"
-                                show="#code, #demo-code"
-                                hide="#code-slash"
-                                ><i
-                                    class="height:18px"
-                                    src="/assets/svg/code.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:5px"
-                                fullscreen
-                                fullscreen-selector="#playground"></a>
-                        </div>
-                    </div>
-                    <!-- End SandBox -->
-                    <div class="margin-top:10px">
-                        <pre><code class="language-html">
+            <div
+              class="font-size:20px position:absolute top:10px right:10px opacity:0.6"
+            >
+              <a
+                class="margin-right:10px"
+                id="eye"
+                show="#eye-slash"
+                hide="#eye, #demo-preview"
+                toggle="code-height"
+                toggle-selector="#demo-code"
+                ><i class="height:18px" src="/assets/svg/eye.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                hidden
+                id="eye-slash"
+                show="#eye, #demo-preview"
+                hide="#eye-slash"
+                toggle="code-height"
+                toggle-selector="#demo-code"
+                ><i src="/assets/svg/eye-slash.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                id="code"
+                show="#code-slash"
+                hide="#code, #demo-code"
+                ><i src="/assets/svg/code.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                hidden
+                id="code-slash"
+                show="#code, #demo-code"
+                hide="#code-slash"
+                ><i class="height:18px" src="/assets/svg/code.svg"></i
+              ></a>
+              <a
+                class="margin-right:5px"
+                fullscreen
+                fullscreen-selector="#playground"
+              ></a>
+            </div>
+          </div>
+          <!-- End SandBox -->
+          <div class="margin-top:10px">
+            <pre><code class="language-html">
     &lt;div class=&quot;sortable&quot;&gt;
         &lt;h3 &gt;some context 1&lt;/h3&gt;
         &lt;h3 &gt;some context 2&lt;/h3&gt;
         &lt;h3 &gt;some context 3&lt;/h3&gt;
     &lt;/div&gt;
                     </code></pre>
-                    </div>
+          </div>
 
-                    <div>
-                        <h4
-                            id="dnd-cloneable"
-                            hover="display:block"
-                            hover-selector=""
-                            class="border-bottom:1px_solid_lightgrey margin-top:40px padding:5px_0px">
-                            cloneable
-                        </h4>
-                        <a class="display:none" href="#dnd-cloneable"
-                            ><i src="/assets/svg/link.svg"></i
-                        ></a>
-                    </div>
-                    <p class="padding:10px_0px line-height:1.5">
-                        <code class="language-js">cloneables</code> is an alias
-                        for
-                        <code class="language-js">cloneable="true"</code> with
-                        all direct children as
-                        <code class="language-js">draggable="true"</code>
-                    </p>
-                    <!-- SandBox -->
-                    <div
-                        class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
-                        id="playground1">
-                        <div
-                            id="demo-code1"
-                            resizable
-                            class="position:relative height:50%">
-                            <textarea
-                                type="code"
-                                lang="html"
-                                array="demos"
-                                object=""
-                                key="demo"
-                                save="false"
-                                id="demo1"
-                                input-selector=".cloneable-demo"
-                                input-attribute="value"
-                                input-events="input, onload"
-                                class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
-                            <div
-                                resize="bottom"
-                                class="background:lightgrey"></div>
-                        </div>
+          <div>
+            <h4
+              id="dnd-cloneable"
+              hover="display:block"
+              hover-selector=""
+              class="border-bottom:1px_solid_lightgrey margin-top:40px padding:5px_0px"
+            >
+              cloneable
+            </h4>
+            <a class="display:none" href="#dnd-cloneable"
+              ><i src="/assets/svg/link.svg"></i
+            ></a>
+          </div>
+          <p class="padding:10px_0px line-height:1.5">
+            <code class="language-js">cloneables</code> is an alias for
+            <code class="language-js">cloneable="true"</code> with all direct
+            children as
+            <code class="language-js">draggable="true"</code>
+          </p>
+          <!-- SandBox -->
+          <div
+            class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
+            id="playground1"
+          >
+            <div id="demo-code1" resizable class="position:relative height:50%">
+              <textarea
+                type="code"
+                lang="html"
+                array="demos"
+                object=""
+                key="demo"
+                save="false"
+                id="demo1"
+                input-selector=".cloneable-demo"
+                input-attribute="value"
+                input-events="input, onload"
+                class="height:100% width:100% outline:none border:none resize:none padding:5px"
+              ></textarea>
+              <div resize="bottom" class="background:lightgrey"></div>
+            </div>
 
-                        <div
-                            id="demo-preview1"
-                            class="position:relative overflow:auto background-color:white">
-                            <div class="cloneable-demo padding:20px"></div>
-                        </div>
+            <div
+              id="demo-preview1"
+              class="position:relative overflow:auto background-color:white"
+            >
+              <div class="cloneable-demo padding:20px"></div>
+            </div>
 
-                        <div
-                            class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
-                            <a
-                                class="margin-right:10px"
-                                id="eye1"
-                                show="#eye-slash"
-                                hide="#eye1, #demo-preview1"
-                                toggle="code-height"
-                                toggle-selector="#demo-code1"
-                                ><i
-                                    class="height:18px"
-                                    src="/assets/svg/eye.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                hidden
-                                id="eye-slash1"
-                                show="#eye1, #demo-preview1"
-                                hide="#eye-slash1"
-                                toggle="code-height"
-                                toggle-selector="#demo-code1"
-                                ><i src="/assets/svg/eye-slash.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                id="code1"
-                                show="#code-slash1"
-                                hide="#code1, #demo-code1"
-                                ><i src="/assets/svg/code.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                hidden
-                                id="code-slash1"
-                                show="#code1, #demo-code1"
-                                hide="#code-slash1"
-                                ><i
-                                    class="height:18px"
-                                    src="/assets/svg/code.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:5px"
-                                fullscreen
-                                fullscreen-selector="#playground1"></a>
-                        </div>
-                    </div>
-                    <!-- End SandBox -->
+            <div
+              class="font-size:20px position:absolute top:10px right:10px opacity:0.6"
+            >
+              <a
+                class="margin-right:10px"
+                id="eye1"
+                show="#eye-slash"
+                hide="#eye1, #demo-preview1"
+                toggle="code-height"
+                toggle-selector="#demo-code1"
+                ><i class="height:18px" src="/assets/svg/eye.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                hidden
+                id="eye-slash1"
+                show="#eye1, #demo-preview1"
+                hide="#eye-slash1"
+                toggle="code-height"
+                toggle-selector="#demo-code1"
+                ><i src="/assets/svg/eye-slash.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                id="code1"
+                show="#code-slash1"
+                hide="#code1, #demo-code1"
+                ><i src="/assets/svg/code.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                hidden
+                id="code-slash1"
+                show="#code1, #demo-code1"
+                hide="#code-slash1"
+                ><i class="height:18px" src="/assets/svg/code.svg"></i
+              ></a>
+              <a
+                class="margin-right:5px"
+                fullscreen
+                fullscreen-selector="#playground1"
+              ></a>
+            </div>
+          </div>
+          <!-- End SandBox -->
 
-                    <pre><code class="language-html">
+          <pre><code class="language-html">
     &lt;div class=&quot;cloneable&quot;&gt;
         &lt;h3 &gt;some context 1&lt;/h3&gt;
         &lt;h3 &gt;some context 2&lt;/h3&gt;
@@ -413,13 +409,11 @@
     &lt;/div&gt;
                     </code></pre>
 
-                    <h4 class="margin-top:40px padding:5px_0px">
-                        Custom initContainer
-                    </h4>
-                    <p class="padding:10px_0px line-height:1.5">
-                        Create your own initContainer to fit your usecase.
-                    </p>
-                    <pre><code class="language-javascript">
+          <h4 class="margin-top:40px padding:5px_0px">Custom initContainer</h4>
+          <p class="padding:10px_0px line-height:1.5">
+            Create your own initContainer to fit your usecase.
+          </p>
+          <pre><code class="language-javascript">
     inintContainer({ 
         target:, 
         cloneable:, 
@@ -428,335 +422,284 @@
         exclude: 
     })
                     </code></pre>
-                    <div>
-                        <h4
-                            id="dnd-properties"
-                            hover="display:block"
-                            hover-selector=""
-                            class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">
-                            Properties
-                        </h4>
-                        <a class="display:none" href="#dnd-properties"
-                            ><i src="/assets/svg/link.svg"></i
-                        ></a>
-                    </div>
-                    <ul class="list-style-type:none">
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>target</span>
-                                <span class="cocreate-badge success"
-                                    >Element</span
-                                >
-                                <span class="cocreate-badge danger"
-                                    >required</span
-                                >
-                            </h4>
-                            <p>droppable element</p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>cloneable</span>
-                                <span class="cocreate-badge success"
-                                    >Boolean</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                ><span class="cocreate-badge"
-                                    >Default: False</span
-                                >
-                            </h4>
-                            <p>
-                                if true, the direct children of droppale element
-                                will be cloneable instead of draggable
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>nested</span>
-                                <span class="cocreate-badge success"
-                                    >Boolean</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                ><span class="cocreate-badge"
-                                    >Default: False</span
-                                >
-                            </h4>
-                            <p>
-                                if true, all the descendent in
-                                <i>target</i> will be draggable and droppable
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>handle</span>
-                                <span class="cocreate-badge success"
-                                    >String</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>
-                                a valid css selector as a candidate for dragging
-                                or cloning instead of element itself
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>group</span>
-                                <span class="cocreate-badge success"
-                                    >String</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>
-                                sets group name, different group names can not
-                                drag or clone into each other
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>exclude</span>
-                                <span class="cocreate-badge success"
-                                    >String</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>no description</p>
-                        </li>
-                    </ul>
+          <div>
+            <h4
+              id="dnd-properties"
+              hover="display:block"
+              hover-selector=""
+              class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px"
+            >
+              Properties
+            </h4>
+            <a class="display:none" href="#dnd-properties"
+              ><i src="/assets/svg/link.svg"></i
+            ></a>
+          </div>
+          <ul class="list-style-type:none">
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>target</span>
+                <span class="cocreate-badge success">Element</span>
+                <span class="cocreate-badge danger">required</span>
+              </h4>
+              <p>droppable element</p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>cloneable</span>
+                <span class="cocreate-badge success">Boolean</span>
+                <span class="cocreate-badge warning">optional</span
+                ><span class="cocreate-badge">Default: False</span>
+              </h4>
+              <p>
+                if true, the direct children of droppale element will be
+                cloneable instead of draggable
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>nested</span>
+                <span class="cocreate-badge success">Boolean</span>
+                <span class="cocreate-badge warning">optional</span
+                ><span class="cocreate-badge">Default: False</span>
+              </h4>
+              <p>
+                if true, all the descendent in
+                <i>target</i> will be draggable and droppable
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>handle</span>
+                <span class="cocreate-badge success">String</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>
+                a valid css selector as a candidate for dragging or cloning
+                instead of element itself
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>group</span>
+                <span class="cocreate-badge success">String</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>
+                sets group name, different group names can not drag or clone
+                into each other
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>exclude</span>
+                <span class="cocreate-badge success">String</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>no description</p>
+            </li>
+          </ul>
 
-                    <div>
-                        <h3
-                            id="dnd-initElement"
-                            hover="display:block"
-                            hover-selector=""
-                            class="border-bottom:1px_solid_lightgrey margin-top:80px padding:5px_0px">
-                            initElement
-                        </h3>
-                        <a class="display:none" href="#dnd-initElement"
-                            ><i src="/assets/svg/link.svg"></i
-                        ></a>
-                    </div>
-                    <div class="">
-                        <p class="padding:10px_0px line-height:1.5">
-                            a low level initiator that make an element and all
-                            decendent dnd candidate based on selector params.
-                            For ease of use right out of the box we have defined
-                            a few defualts:
-                            <span class="cocreate-badge success"
-                                >droppable</span
-                            >
-                            <span class="cocreate-badge success"
-                                >draggable</span
-                            >
-                            <span class="cocreate-badge success"
-                                >data-exclude</span
-                            >
-                            <span class="cocreate-badge success"
-                                >cloneable</span
-                            >
-                        </p>
-                    </div>
+          <div>
+            <h3
+              id="dnd-initElement"
+              hover="display:block"
+              hover-selector=""
+              class="border-bottom:1px_solid_lightgrey margin-top:80px padding:5px_0px"
+            >
+              initElement
+            </h3>
+            <a class="display:none" href="#dnd-initElement"
+              ><i src="/assets/svg/link.svg"></i
+            ></a>
+          </div>
+          <div class="">
+            <p class="padding:10px_0px line-height:1.5">
+              a low level initiator that make an element and all decendent dnd
+              candidate based on selector params. For ease of use right out of
+              the box we have defined a few defualts:
+              <span class="cocreate-badge success">droppable</span>
+              <span class="cocreate-badge success">draggable</span>
+              <span class="cocreate-badge success">data-exclude</span>
+              <span class="cocreate-badge success">cloneable</span>
+            </p>
+          </div>
 
-                    <h4 class="margin-top:20px padding:5px_0px">
-                        Drag and Drop Attributtes
-                    </h4>
-                    <p class="padding:10px_0px line-height:1.5">
-                        Every draggable element can be moved inside that parent,
-                        remember draggable element can only be added to
-                        droppable element
-                    </p>
-                    <!-- SandBox -->
-                    <div
-                        class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
-                        id="playground2">
-                        <div
-                            id="demo-code2"
-                            resizable
-                            class="position:relative height:50%">
-                            <textarea
-                                type="code"
-                                lang="html"
-                                array="demos"
-                                object=""
-                                key="demo"
-                                save="false"
-                                id="demo2"
-                                input-selector=".dnd-demo"
-                                input-attribute="value"
-                                input-events="input, onload"
-                                class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
-                            <div
-                                resize="bottom"
-                                class="background:lightgrey"></div>
-                        </div>
+          <h4 class="margin-top:20px padding:5px_0px">
+            Drag and Drop Attributtes
+          </h4>
+          <p class="padding:10px_0px line-height:1.5">
+            Every draggable element can be moved inside that parent, remember
+            draggable element can only be added to droppable element
+          </p>
+          <!-- SandBox -->
+          <div
+            class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
+            id="playground2"
+          >
+            <div id="demo-code2" resizable class="position:relative height:50%">
+              <textarea
+                type="code"
+                lang="html"
+                array="demos"
+                object=""
+                key="demo"
+                save="false"
+                id="demo2"
+                input-selector=".dnd-demo"
+                input-attribute="value"
+                input-events="input, onload"
+                class="height:100% width:100% outline:none border:none resize:none padding:5px"
+              ></textarea>
+              <div resize="bottom" class="background:lightgrey"></div>
+            </div>
 
-                        <div
-                            id="demo-preview2"
-                            class="position:relative overflow:auto background-color:white">
-                            <div class="dnd-demo padding:20px"></div>
-                        </div>
+            <div
+              id="demo-preview2"
+              class="position:relative overflow:auto background-color:white"
+            >
+              <div class="dnd-demo padding:20px"></div>
+            </div>
 
-                        <div
-                            class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
-                            <a
-                                class="margin-right:10px"
-                                id="eye2"
-                                show="#eye-slash2"
-                                hide="#ey2e, #demo-preview2"
-                                toggle="code-height"
-                                toggle-selector="#demo-code2"
-                                ><i
-                                    class="height:18px"
-                                    src="/assets/svg/eye.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                hidden
-                                id="eye-slash2"
-                                show="#eye2, #demo-preview2"
-                                hide="#eye-slash2"
-                                toggle="code-height2"
-                                toggle-selector="#demo-code2"
-                                ><i src="/assets/svg/eye-slash.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                id="code2"
-                                show="#code-slash2"
-                                hide="#code2, #demo-code2"
-                                ><i src="/assets/svg/code.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                hidden
-                                id="code-slash2"
-                                show="#code2, #demo-code2"
-                                hide="#code-slash2"
-                                ><i
-                                    class="height:18px"
-                                    src="/assets/svg/code.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:5px"
-                                fullscreen
-                                fullscreen-selector="#playground2"></a>
-                        </div>
-                    </div>
-                    <!-- End SandBox -->
-                    <div class="margin-top:10px">
-                        <pre><code class="language-html">
+            <div
+              class="font-size:20px position:absolute top:10px right:10px opacity:0.6"
+            >
+              <a
+                class="margin-right:10px"
+                id="eye2"
+                show="#eye-slash2"
+                hide="#ey2e, #demo-preview2"
+                toggle="code-height"
+                toggle-selector="#demo-code2"
+                ><i class="height:18px" src="/assets/svg/eye.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                hidden
+                id="eye-slash2"
+                show="#eye2, #demo-preview2"
+                hide="#eye-slash2"
+                toggle="code-height2"
+                toggle-selector="#demo-code2"
+                ><i src="/assets/svg/eye-slash.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                id="code2"
+                show="#code-slash2"
+                hide="#code2, #demo-code2"
+                ><i src="/assets/svg/code.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                hidden
+                id="code-slash2"
+                show="#code2, #demo-code2"
+                hide="#code-slash2"
+                ><i class="height:18px" src="/assets/svg/code.svg"></i
+              ></a>
+              <a
+                class="margin-right:5px"
+                fullscreen
+                fullscreen-selector="#playground2"
+              ></a>
+            </div>
+          </div>
+          <!-- End SandBox -->
+          <div class="margin-top:10px">
+            <pre><code class="language-html">
     &lt;div droppable=&quot;true&quot;&gt;
         &lt;h1 draggable=&quot;true&quot;&gt;some context 1&lt;/h1&gt;
         &lt;h1 cloneable=&quot;true&quot;&gt;this element will be cloned when dragging&lt;/h1&gt;
         &lt;h1 draggable=&quot;true&quot; cloneable-html=&quot;&lt;p&gt;hello&lt;/p&gt;&quot;&gt;this element will not be cloned but the value of cloneable-html&lt;/h1&gt;
     &lt;/div&gt;
                     </code></pre>
-                    </div>
+          </div>
 
-                    <h4 class="margin-top:40px padding:5px_0px">
-                        Cloneable Attributes
-                    </h4>
-                    <p class="padding:10px_0px line-height:1.5">
-                        sometimes we don't want to just move the element but
-                        making an element exactly like the element we have, or,
-                        even create a new element compeletely different from
-                        what we have in the page. in this example we use
-                        data-clonable and cloneable-html to do that
-                    </p>
+          <h4 class="margin-top:40px padding:5px_0px">Cloneable Attributes</h4>
+          <p class="padding:10px_0px line-height:1.5">
+            sometimes we don't want to just move the element but making an
+            element exactly like the element we have, or, even create a new
+            element compeletely different from what we have in the page. in this
+            example we use data-clonable and cloneable-html to do that
+          </p>
 
-                    <!-- SandBox -->
-                    <div
-                        class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
-                        id="playground3">
-                        <div
-                            id="demo-code3"
-                            resizable
-                            class="position:relative height:50%">
-                            <textarea
-                                type="code"
-                                lang="html"
-                                array="demos"
-                                object=""
-                                key="demo"
-                                save="false"
-                                id="demo3"
-                                input-selector=".clone-att-demo"
-                                input-attribute="value"
-                                input-events="input, onload"
-                                class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
-                            <div
-                                resize="bottom"
-                                class="background:lightgrey"></div>
-                        </div>
+          <!-- SandBox -->
+          <div
+            class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
+            id="playground3"
+          >
+            <div id="demo-code3" resizable class="position:relative height:50%">
+              <textarea
+                type="code"
+                lang="html"
+                array="demos"
+                object=""
+                key="demo"
+                save="false"
+                id="demo3"
+                input-selector=".clone-att-demo"
+                input-attribute="value"
+                input-events="input, onload"
+                class="height:100% width:100% outline:none border:none resize:none padding:5px"
+              ></textarea>
+              <div resize="bottom" class="background:lightgrey"></div>
+            </div>
 
-                        <div
-                            id="demo-preview3"
-                            class="position:relative overflow:auto background-color:white">
-                            <div class="clone-att-demo padding:20px"></div>
-                        </div>
+            <div
+              id="demo-preview3"
+              class="position:relative overflow:auto background-color:white"
+            >
+              <div class="clone-att-demo padding:20px"></div>
+            </div>
 
-                        <div
-                            class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
-                            <a
-                                class="margin-right:10px"
-                                id="eye3"
-                                show="#eye-slash3"
-                                hide="#eye3, #demo-preview3"
-                                toggle="code-height"
-                                toggle-selector="#demo-code3"
-                                ><i
-                                    class="height:18px"
-                                    src="/assets/svg/eye.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                hidden
-                                id="eye-slash3"
-                                show="#eye3, #demo-preview3"
-                                hide="#eye-slash3"
-                                toggle="code-height"
-                                toggle-selector="#demo-code3"
-                                ><i src="/assets/svg/eye-slash.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                id="code3"
-                                show="#code-slash3"
-                                hide="#code3, #demo-code3"
-                                ><i src="/assets/svg/code.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:10px"
-                                hidden
-                                id="code-slash3"
-                                show="#code3, #demo-code3"
-                                hide="#code-slash3"
-                                ><i
-                                    class="height:18px"
-                                    src="/assets/svg/code.svg"></i
-                            ></a>
-                            <a
-                                class="margin-right:5px"
-                                fullscreen
-                                fullscreen-selector="#playground3"></a>
-                        </div>
-                    </div>
-                    <!-- End SandBox -->
+            <div
+              class="font-size:20px position:absolute top:10px right:10px opacity:0.6"
+            >
+              <a
+                class="margin-right:10px"
+                id="eye3"
+                show="#eye-slash3"
+                hide="#eye3, #demo-preview3"
+                toggle="code-height"
+                toggle-selector="#demo-code3"
+                ><i class="height:18px" src="/assets/svg/eye.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                hidden
+                id="eye-slash3"
+                show="#eye3, #demo-preview3"
+                hide="#eye-slash3"
+                toggle="code-height"
+                toggle-selector="#demo-code3"
+                ><i src="/assets/svg/eye-slash.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                id="code3"
+                show="#code-slash3"
+                hide="#code3, #demo-code3"
+                ><i src="/assets/svg/code.svg"></i
+              ></a>
+              <a
+                class="margin-right:10px"
+                hidden
+                id="code-slash3"
+                show="#code3, #demo-code3"
+                hide="#code-slash3"
+                ><i class="height:18px" src="/assets/svg/code.svg"></i
+              ></a>
+              <a
+                class="margin-right:5px"
+                fullscreen
+                fullscreen-selector="#playground3"
+              ></a>
+            </div>
+          </div>
+          <!-- End SandBox -->
 
-                    <pre><code class="language-html">
+          <pre><code class="language-html">
     &lt;div&gt;
         &lt;h1 cloneable=&quot;true&quot;&gt;some context 1&lt;/h1&gt;
         &lt;h1 cloneable=&quot;true&quot;&gt;this element will be cloned when dragging&lt;/h1&gt;
@@ -764,75 +707,67 @@
     &lt;/div&gt;
                     </code></pre>
 
-                    <h4
-                        class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">
-                        Default Attributes
-                    </h4>
-                    <ul class="list-style-type:none">
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>droppable="true"</span
-                                ><span class="cocreate-badge success"> </span>
-                            </h4>
-                            <p>
-                                makes an element droppable, any draggable or
-                                cloneable element can be dropped into this
-                                draggable to the nearsest children of the
-                                droppable element
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>draggable="true"</span
-                                ><span class="cocreate-badge success"> </span>
-                            </h4>
-                            <p>makes an element ability to be draggable</p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>cloneable="true"</span
-                                ><span class="cocreate-badge success"> </span>
-                            </h4>
-                            <p>makes an element ability to be cloneable</p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>group_name</span
-                                ><span class="cocreate-badge success"> </span>
-                            </h4>
-                            <p>
-                                by default all draggable, droppabble and
-                                cloneable can happen anywhere on the frame. to
-                                limit on this you can constraint define
-                                <code class="language-js">data-group_name</code>
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>insert_html</span
-                                ><span class="cocreate-badge success"> </span>
-                            </h4>
-                            <p>
-                                if the element define as cloneable has a
-                                cloneable-html with value of valid HTML, it will
-                                be used to create an element and to be dropped
-                                as a clone.
-                            </p>
-                        </li>
-                    </ul>
+          <h4
+            class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px"
+          >
+            Default Attributes
+          </h4>
+          <ul class="list-style-type:none">
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>droppable="true"</span
+                ><span class="cocreate-badge success"> </span>
+              </h4>
+              <p>
+                makes an element droppable, any draggable or cloneable element
+                can be dropped into this draggable to the nearsest children of
+                the droppable element
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>draggable="true"</span
+                ><span class="cocreate-badge success"> </span>
+              </h4>
+              <p>makes an element ability to be draggable</p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>cloneable="true"</span
+                ><span class="cocreate-badge success"> </span>
+              </h4>
+              <p>makes an element ability to be cloneable</p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>group_name</span
+                ><span class="cocreate-badge success"> </span>
+              </h4>
+              <p>
+                by default all draggable, droppabble and cloneable can happen
+                anywhere on the frame. to limit on this you can constraint
+                define
+                <code class="language-js">data-group_name</code>
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>insert_html</span
+                ><span class="cocreate-badge success"> </span>
+              </h4>
+              <p>
+                if the element define as cloneable has a cloneable-html with
+                value of valid HTML, it will be used to create an element and to
+                be dropped as a clone.
+              </p>
+            </li>
+          </ul>
 
-                    <h4 class="margin-top:40px padding:5px_0px">
-                        Custom initElement
-                    </h4>
-                    <p class="padding:10px_0px line-height:1.5">
-                        Create your own initElement to fit your usecase.
-                    </p>
-                    <pre><code class="language-javascript">
+          <h4 class="margin-top:40px padding:5px_0px">Custom initElement</h4>
+          <p class="padding:10px_0px line-height:1.5">
+            Create your own initElement to fit your usecase.
+          </p>
+          <pre><code class="language-javascript">
     dndElement({ 
         target:, 
         cloneable:, 
@@ -842,403 +777,345 @@
     })
                     </code></pre>
 
-                    <h4
-                        class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">
-                        Properties
-                    </h4>
-                    <ul class="list-style-type:none">
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>target</span>
-                                <span class="cocreate-badge success"
-                                    >Element</span
-                                >
-                                <span class="cocreate-badge danger"
-                                    >required</span
-                                >
-                            </h4>
-                            <p>droppable element</p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>droppable</span>
-                                <span class="cocreate-badge success"
-                                    >Boolean</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>
-                                all elements in the page with matching selector
-                                will be droppable
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>draggable</span>
-                                <span class="cocreate-badge success"
-                                    >Boolean</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>
-                                all elements in the page with matching selector
-                                will be draggable
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>cloneable</span>
-                                <span class="cocreate-badge success"
-                                    >String</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>
-                                all elements in the page with matching selector
-                                will be cloneable
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>handle</span>
-                                <span class="cocreate-badge success"
-                                    >String</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>
-                                a valid css selector as a candidate for dragging
-                                or cloning instead of element itself
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>group</span>
-                                <span class="cocreate-badge success"
-                                    >String</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>
-                                sets group name, different group names can not
-                                drag or clone into each other
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>exclude</span>
-                                <span class="cocreate-badge success"
-                                    >String</span
-                                >
-                                <span class="cocreate-badge warning"
-                                    >optional</span
-                                >
-                            </h4>
-                            <p>no description</p>
-                        </li>
-                    </ul>
+          <h4
+            class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px"
+          >
+            Properties
+          </h4>
+          <ul class="list-style-type:none">
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>target</span>
+                <span class="cocreate-badge success">Element</span>
+                <span class="cocreate-badge danger">required</span>
+              </h4>
+              <p>droppable element</p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>droppable</span>
+                <span class="cocreate-badge success">Boolean</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>
+                all elements in the page with matching selector will be
+                droppable
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>draggable</span>
+                <span class="cocreate-badge success">Boolean</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>
+                all elements in the page with matching selector will be
+                draggable
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>cloneable</span>
+                <span class="cocreate-badge success">String</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>
+                all elements in the page with matching selector will be
+                cloneable
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>handle</span>
+                <span class="cocreate-badge success">String</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>
+                a valid css selector as a candidate for dragging or cloning
+                instead of element itself
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>group</span>
+                <span class="cocreate-badge success">String</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>
+                sets group name, different group names can not drag or clone
+                into each other
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>exclude</span>
+                <span class="cocreate-badge success">String</span>
+                <span class="cocreate-badge warning">optional</span>
+              </h4>
+              <p>no description</p>
+            </li>
+          </ul>
 
-                    <h2
-                        class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">
-                        How Does It Works
-                    </h2>
-                    <p>
-                        CoCreate-dnd works by hierarchical system, as dom is a
-                        hirearchical tree, when deciding to find an specific
-                        attribute, dnd goes up from the leaves of dom until it
-                        reach to the searching attribute. the leaf element is
-                        required to be on top of the page
-                    </p>
+          <h2
+            class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px"
+          >
+            How Does It Works
+          </h2>
+          <p>
+            CoCreate-dnd works by hierarchical system, as dom is a hirearchical
+            tree, when deciding to find an specific attribute, dnd goes up from
+            the leaves of dom until it reach to the searching attribute. the
+            leaf element is required to be on top of the page
+          </p>
 
-                    <p>
-                        to prevent dnd from going up the dom tree you can use
-                        css
-                        <code class="language-js">pointer-event: none;</code>.
-                        it will
-                    </p>
-                    <p class="padding:10px_0px line-height:1.5">
-                        when deciding where to drop a draggable or cloneable
-                        element, CoCreate-dnd searching dom by going up in the
-                        tree to find a droppable element. if a droppable element
-                        found it will be selected as droppable element and the
-                        next phase will be ran, otherwise dropping element won't
-                        occur.
-                    </p>
-                    <p class="padding:10px_0px line-height:1.5">
-                        when found, all the direct children of the droppable
-                        will be searched and the nearest element with the
-                        nearest angle to the mouse pointer will be selected as a
-                        drop possition.
-                    </p>
-                    <div>
-                        <h2
-                            id="dnd-effect-and-style"
-                            hover="display:block"
-                            hover-selector=""
-                            class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">
-                            Effects and Styles
-                        </h2>
-                        <a class="display:none" href="#dnd-effect-and-style"
-                            ><i src="/assets/svg/link.svg"></i
-                        ></a>
-                    </div>
+          <p>
+            to prevent dnd from going up the dom tree you can use css
+            <code class="language-js">pointer-event: none;</code>. it will
+          </p>
+          <p class="padding:10px_0px line-height:1.5">
+            when deciding where to drop a draggable or cloneable element,
+            CoCreate-dnd searching dom by going up in the tree to find a
+            droppable element. if a droppable element found it will be selected
+            as droppable element and the next phase will be ran, otherwise
+            dropping element won't occur.
+          </p>
+          <p class="padding:10px_0px line-height:1.5">
+            when found, all the direct children of the droppable will be
+            searched and the nearest element with the nearest angle to the mouse
+            pointer will be selected as a drop possition.
+          </p>
+          <div>
+            <h2
+              id="dnd-effect-and-style"
+              hover="display:block"
+              hover-selector=""
+              class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px"
+            >
+              Effects and Styles
+            </h2>
+            <a class="display:none" href="#dnd-effect-and-style"
+              ><i src="/assets/svg/link.svg"></i
+            ></a>
+          </div>
 
-                    <p>
-                        UNAVAILABLE right now: CoCreate-dnd is packed with
-                        effects such as dropMarker and ghostEffect, to uses this
-                        effects, you can either define them in tag attributes or
-                        import them and use them as initiators
-                    </p>
-                    <p>
-                        some of them enabled by default, you can enable or
-                        disable them by choice and even create a new customized
-                        one
-                    </p>
+          <p>
+            UNAVAILABLE right now: CoCreate-dnd is packed with effects such as
+            dropMarker and ghostEffect, to uses this effects, you can either
+            define them in tag attributes or import them and use them as
+            initiators
+          </p>
+          <p>
+            some of them enabled by default, you can enable or disable them by
+            choice and even create a new customized one
+          </p>
 
-                    <ul class="list-style-type:none">
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>dropMarker</span>
-                                <span class="cocreate-badge success"
-                                    >Styling Selector: #marker</span
-                                >
-                                <span class="cocreate-badge danger"
-                                    >Config: dropMarkerConfig Object</span
-                                >
-                            </h4>
-                            <p>
-                                drop marker is line that appears between element
-                                during drag and drop
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>boxMarker</span>
-                                <span class="cocreate-badge success"
-                                    >Styling Selector:
-                                </span>
-                                <span class="cocreate-badge danger"
-                                    >Config:</span
-                                >
-                            </h4>
-                            <p>
-                                box markers used to hightlight an element by
-                                wrapping a border around the element. there are
-                                3 types of boxMarkers, option, hoverable and the
-                                dragging element
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>ghostEffect</span>
-                                <span class="cocreate-badge success"
-                                    >Styling Selector: #ghost-effect</span
-                                >
-                                <span class="cocreate-badge danger"
-                                    >Config:</span
-                                >
-                            </h4>
-                            <p>
-                                ghostEffects are dimmed effect that appears
-                                during drag and drop
-                            </p>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>moveEffect</span>
-                                <span class="cocreate-badge success"
-                                    >Styling Selector:
-                                </span>
-                                <span class="cocreate-badge danger"
-                                    >Config:</span
-                                >
-                            </h4>
-                            <td>not working</td>
-                        </li>
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>scrollEffect</span>
-                                <span class="cocreate-badge success"
-                                    >Styling Selector:
-                                </span>
-                                <span class="cocreate-badge danger"
-                                    >Config:</span
-                                >
-                            </h4>
-                            <p>
-                                during darg and drop, the dragged element can
-                                move over element by moving mouse
-                            </p>
-                        </li>
-                    </ul>
+          <ul class="list-style-type:none">
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>dropMarker</span>
+                <span class="cocreate-badge success"
+                  >Styling Selector: #marker</span
+                >
+                <span class="cocreate-badge danger"
+                  >Config: dropMarkerConfig Object</span
+                >
+              </h4>
+              <p>
+                drop marker is line that appears between element during drag and
+                drop
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>boxMarker</span>
+                <span class="cocreate-badge success">Styling Selector: </span>
+                <span class="cocreate-badge danger">Config:</span>
+              </h4>
+              <p>
+                box markers used to hightlight an element by wrapping a border
+                around the element. there are 3 types of boxMarkers, option,
+                hoverable and the dragging element
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>ghostEffect</span>
+                <span class="cocreate-badge success"
+                  >Styling Selector: #ghost-effect</span
+                >
+                <span class="cocreate-badge danger">Config:</span>
+              </h4>
+              <p>
+                ghostEffects are dimmed effect that appears during drag and drop
+              </p>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>moveEffect</span>
+                <span class="cocreate-badge success">Styling Selector: </span>
+                <span class="cocreate-badge danger">Config:</span>
+              </h4>
+              <td>not working</td>
+            </li>
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>scrollEffect</span>
+                <span class="cocreate-badge success">Styling Selector: </span>
+                <span class="cocreate-badge danger">Config:</span>
+              </h4>
+              <p>
+                during darg and drop, the dragged element can move over element
+                by moving mouse
+              </p>
+            </li>
+          </ul>
 
-                    <div>
-                        <h2
-                            id="dnd-events"
-                            hover="display:block"
-                            hover-selector=""
-                            class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px">
-                            Events
-                        </h2>
-                        <a class="display:none" href="#dnd-events"
-                            ><i src="/assets/svg/link.svg"></i
-                        ></a>
-                    </div>
+          <div>
+            <h2
+              id="dnd-events"
+              hover="display:block"
+              hover-selector=""
+              class="border-bottom:1px_solid_lightgrey margin-top:20px padding:5px_0px"
+            >
+              Events
+            </h2>
+            <a class="display:none" href="#dnd-events"
+              ><i src="/assets/svg/link.svg"></i
+            ></a>
+          </div>
 
-                    <ul class="list-style-type:none">
-                        <li
-                            class="padding:15px_0px border-bottom:1px_solid_lightgrey">
-                            <h4>
-                                <span>dndsuccess</span
-                                ><span class="cocreate-badge success"></span>
-                            </h4>
-                            <p>
-                                dndsuccess fired on new dnd success it will
-                                contain 3 properties:
-                            </p>
-                            <ul>
-                                <li>draggedEl</li>
-                                <li>droppedEl</li>
-                                <li>possition</li>
-                                <li>dropType</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div
-                    class="flex-grow:1 width:300px padding:0px_10px margin-top:60px border-bottom:1px_solid_lightgrey">
-                    <!-- SandBox -->
-                    <div
-                        id="dnd-demo"
-                        class="border-bottom:1px_solid_lightgrey"
-                        scroll
-                        scroll-intersect="color:dodgerblue"
-                        scroll-selector="#dnd-demo-section">
-                        <span
-                            class="display:flex align-items:center width:fit-content"
-                            hover="display:block!important"
-                            hover-selector="[href='#dnd-demo']">
-                            <h2 class="padding:5px_0px">Demo</h2>
-                            <a
-                                class="margin-left:10px display:none"
-                                href="#dnd-demo"
-                                ><i src="/assets/svg/link.svg"></i
-                            ></a>
-                        </span>
-                    </div>
-                    <div
-                        class="position:sticky top:0 padding:15px_0px height:100vh">
-                        <!-- SandBox -->
-                        <div
-                            class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
-                            id="playground4">
-                            <div
-                                id="demo-code4"
-                                resizable
-                                class="position:relative height:50%">
-                                <textarea
-                                    type="code"
-                                    lang="html"
-                                    array="demos"
-                                    object=""
-                                    key="demo"
-                                    save="false"
-                                    id="demo4"
-                                    input-selector=".demopreview"
-                                    input-attribute="value"
-                                    input-events="input, onload"
-                                    class="height:100% width:100% outline:none border:none resize:none padding:5px"></textarea>
-                                <div
-                                    resize="bottom"
-                                    class="background:lightgrey"></div>
-                            </div>
+          <ul class="list-style-type:none">
+            <li class="padding:15px_0px border-bottom:1px_solid_lightgrey">
+              <h4>
+                <span>dndsuccess</span
+                ><span class="cocreate-badge success"></span>
+              </h4>
+              <p>
+                dndsuccess fired on new dnd success it will contain 3
+                properties:
+              </p>
+              <ul>
+                <li>draggedEl</li>
+                <li>droppedEl</li>
+                <li>possition</li>
+                <li>dropType</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="flex-grow:1 width:300px padding:0px_10px margin-top:60px border-bottom:1px_solid_lightgrey"
+        >
+          <!-- SandBox -->
+          <div
+            id="dnd-demo"
+            class="border-bottom:1px_solid_lightgrey"
+            scroll
+            scroll-intersect="color:dodgerblue"
+            scroll-selector="#dnd-demo-section"
+          >
+            <span
+              class="display:flex align-items:center width:fit-content"
+              hover="display:block!important"
+              hover-selector="[href='#dnd-demo']"
+            >
+              <h2 class="padding:5px_0px">Demo</h2>
+              <a class="margin-left:10px display:none" href="#dnd-demo"
+                ><i src="/assets/svg/link.svg"></i
+              ></a>
+            </span>
+          </div>
+          <div class="position:sticky top:0 padding:15px_0px height:100vh">
+            <!-- SandBox -->
+            <div
+              class="display:flex flex-direction:column position:relative overflow:hidden card border-radius:2px width:auto height:600px margin-top:20px"
+              id="playground4"
+            >
+              <div
+                id="demo-code4"
+                resizable
+                class="position:relative height:50%"
+              >
+                <textarea
+                  type="code"
+                  lang="html"
+                  array="demos"
+                  object=""
+                  key="demo"
+                  save="false"
+                  id="demo4"
+                  input-selector=".demopreview"
+                  input-attribute="value"
+                  input-events="input, onload"
+                  class="height:100% width:100% outline:none border:none resize:none padding:5px"
+                ></textarea>
+                <div resize="bottom" class="background:lightgrey"></div>
+              </div>
 
-                            <div
-                                id="demo-preview4"
-                                class="position:relative overflow:auto background-color:white">
-                                <div class="demopreview padding:20px"></div>
-                            </div>
+              <div
+                id="demo-preview4"
+                class="position:relative overflow:auto background-color:white"
+              >
+                <div class="demopreview padding:20px"></div>
+              </div>
 
-                            <div
-                                class="font-size:20px position:absolute top:10px right:10px opacity:0.6">
-                                <a
-                                    class="margin-right:10px"
-                                    id="eye4"
-                                    show="#eye-slash4"
-                                    hide="#eye4, #demo-preview4"
-                                    toggle="code-height"
-                                    toggle-selector="#demo-code4"
-                                    ><i
-                                        class="height:18px"
-                                        src="/assets/svg/eye.svg"></i
-                                ></a>
-                                <a
-                                    class="margin-right:10px"
-                                    hidden
-                                    id="eye-slash4"
-                                    show="#eye4, #demo-preview4"
-                                    hide="#eye-slash4"
-                                    toggle="code-height"
-                                    toggle-selector="#demo-code4"
-                                    ><i src="/assets/svg/eye-slash.svg"></i
-                                ></a>
-                                <a
-                                    class="margin-right:10px"
-                                    id="code4"
-                                    show="#code-slash4"
-                                    hide="#code4, #demo-code4"
-                                    ><i src="/assets/svg/code.svg"></i
-                                ></a>
-                                <a
-                                    class="margin-right:10px"
-                                    hidden
-                                    id="code-slash4"
-                                    show="#code4, #demo-code4"
-                                    hide="#code-slash4"
-                                    ><i
-                                        class="height:18px"
-                                        src="/assets/svg/code.svg"></i
-                                ></a>
-                                <a
-                                    class="margin-right:5px"
-                                    fullscreen
-                                    fullscreen-selector="#playground4"></a>
-                            </div>
-                        </div>
-                        <!-- End SandBox -->
-                    </div>
-                </div>
+              <div
+                class="font-size:20px position:absolute top:10px right:10px opacity:0.6"
+              >
+                <a
+                  class="margin-right:10px"
+                  id="eye4"
+                  show="#eye-slash4"
+                  hide="#eye4, #demo-preview4"
+                  toggle="code-height"
+                  toggle-selector="#demo-code4"
+                  ><i class="height:18px" src="/assets/svg/eye.svg"></i
+                ></a>
+                <a
+                  class="margin-right:10px"
+                  hidden
+                  id="eye-slash4"
+                  show="#eye4, #demo-preview4"
+                  hide="#eye-slash4"
+                  toggle="code-height"
+                  toggle-selector="#demo-code4"
+                  ><i src="/assets/svg/eye-slash.svg"></i
+                ></a>
+                <a
+                  class="margin-right:10px"
+                  id="code4"
+                  show="#code-slash4"
+                  hide="#code4, #demo-code4"
+                  ><i src="/assets/svg/code.svg"></i
+                ></a>
+                <a
+                  class="margin-right:10px"
+                  hidden
+                  id="code-slash4"
+                  show="#code4, #demo-code4"
+                  hide="#code-slash4"
+                  ><i class="height:18px" src="/assets/svg/code.svg"></i
+                ></a>
+                <a
+                  class="margin-right:5px"
+                  fullscreen
+                  fullscreen-selector="#playground4"
+                ></a>
+              </div>
             </div>
-            <button
-                href="https://github.com/CoCreate-app/CoCreate-dnd/tree/master/docs/index.html?message=docs%3A%20describe%20your%20change..."
-                target="_blank"
-                class="display:flex justify-content:center align-items:center position:fixed bottom:15px right:15px height:50px width:50px border-radius:50% box-shadow:0px_2px_10px_0px_rgba(0,_0,_0,_0.4)">
-                <i class="height:20px" src="../assets/svg/pencil-alt.svg"></i>
-            </button>
-        </main>
+            <!-- End SandBox -->
+          </div>
+        </div>
+      </div>
+      <button
+        href="https://github.com/CoCreate-app/CoCreate-dnd/tree/master/docs/index.html?message=docs%3A%20describe%20your%20change..."
+        target="_blank"
+        class="display:flex justify-content:center align-items:center position:fixed bottom:15px right:15px height:50px width:50px border-radius:50% box-shadow:0px_2px_10px_0px_rgba(0,_0,_0,_0.4)"
+      >
+        <i src="../assets/svg/pencil-alt.svg"></i>
+      </button>
+    </main>
 
-        <script src="https://CoCreate.app/dist/CoCreate.js"></script>
-    </body>
+    <script src="https://CoCreate.app/dist/CoCreate.js"></script>
+  </body>
 </html>
