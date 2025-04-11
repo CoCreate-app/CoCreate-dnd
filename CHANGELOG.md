@@ -1,3 +1,10 @@
+## [0.32.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.32.0...v0.32.1) (2025-04-11)
+
+
+### Bug Fixes
+
+* update observer observe param to type and and attributeName to attributeFilter ([73d9c58](https://github.com/CoCreate-app/CoCreate-dnd/commit/73d9c5804bdcc5dbccf25535f04c450e45033774))
+
 # [0.32.0](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.31.4...v0.32.0) (2024-11-04)
 
 
