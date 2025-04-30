@@ -1,3 +1,13 @@
+## [0.32.2](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.32.1...v0.32.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* added css-loader ([9d02bb5](https://github.com/CoCreate-app/CoCreate-dnd/commit/9d02bb579b8b8f4cd1f3358b73cdfa21558f253c))
+* update query attributes ([b5a2c85](https://github.com/CoCreate-app/CoCreate-dnd/commit/b5a2c852aa5be15158505a7f849090296df580fc))
+* updated cocreate modules versions ([6998f81](https://github.com/CoCreate-app/CoCreate-dnd/commit/6998f8154d7d81e80dcf7185a3327e9b8988dfeb))
+* webpack.config and devdependencies ([e7d9211](https://github.com/CoCreate-app/CoCreate-dnd/commit/e7d92115ace1875499f4cfea3a2ba2e42583cd29))
+
 ## [0.32.1](https://github.com/CoCreate-app/CoCreate-dnd/compare/v0.32.0...v0.32.1) (2025-04-11)
 
 
